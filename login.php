@@ -3,7 +3,7 @@
 <style>
 .bg {
   background-image: url("img/bluegradient.jpg");
-  height: 100%;
+  height: auto;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -58,6 +58,15 @@
     color:#fff;
     font-weight:600;
 }
+.button{
+    background-color: #0902d6;
+    border:1px solid #0902d6;
+    width: 100%;
+    color:#fff;
+    font-weight:600;
+    border-radius:5px;
+    height: 35px;
+}
 .last-part a{
     text-decoration: none;
     color:#0902d6;
@@ -69,6 +78,7 @@
   <title>Login Page</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset = "UTF-8" />
 
 </head>
 <body>
@@ -80,7 +90,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-2 login-image-main text-center">
+        <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2 login-image-main text-center">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 user-image-section">
               <img src="img/kvpjb.jpg">
@@ -89,19 +99,21 @@
                       <div class="img-container"> <!-- Block parent element -->
                     <label for="ic"><b>Username:</b></label>
                   </div>
-                        <input type="text" class="form-control" placeholder="Enter IC" name="ic" required>
+                  <form>
+                        <input type="text" class="form-control" placeholder="Enter IC" name="ic" required/>
                     </div>
                     <div class="form-group">
                       <div class="img-container"> <!-- Block parent element -->
                     <label for="pwd"><b>Password:</b></label>
                   </div>
-                        <input type="text" class="form-control" placeholder="Password" name="pwd" required>
+                        <input type="text" class="form-control" placeholder="Password" name="pwd" required/>
                     </div>
                     <div class="img-container"> <!-- Block parent element -->
                     <p ><input type="checkbox" checked="checked" name="remember"> Remember me<br></p>
-                  </div>
-                  
-                    <a href="#" class="btn btn-default">Login</a>
+                  </div><br><br>
+            
+                    <button type="submit" class="button">Login</a>
+                    </form>
                   </div>
               <div class="col-md-12 col-sm-12 col-xs-12 last-part">
                 <p><a href="#"> Forget Password?</a></p>
