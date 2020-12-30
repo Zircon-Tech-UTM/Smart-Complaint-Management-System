@@ -36,7 +36,7 @@ CREATE TABLE `assets` (
   `cost` decimal(6,2) DEFAULT NULL,
   `amount` int(5) DEFAULT NULL,
   `conditions` varchar(2) DEFAULT NULL CHECK (`conditions` in ('1','2')),
-  `date_puechased` datetime DEFAULT NULL,
+  `date_purchased` datetime DEFAULT NULL,
   `a_img_path` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
