@@ -1,5 +1,5 @@
 <?php
-    require_once("../CRUDusers/UsersBack/dbconfigUser");
+    require_once("../CRUDusers/UsersBack/dbconfigUser.php");
 
     if(isset($_GET['id']))
     {
