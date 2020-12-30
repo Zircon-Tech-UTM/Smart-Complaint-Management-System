@@ -3,7 +3,7 @@
 session_start();
 
 //connect DB connection
-include ("../CRUDusers/UsersBack/dbconfigUser");
+include ("../CRUDusers/UsersBack/dbconfigUser.php");
 
 //Retrieve data from login form
 $fid = $_POST['ic'];
