@@ -1,5 +1,5 @@
 <?php
-    include("../CRUDusers/UsersBack/dbconfigUser");
+    include("../CRUDusers/UsersBack/dbconfigUser.php");
 
     $password = $_POST['password'];
     
