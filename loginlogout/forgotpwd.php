@@ -70,7 +70,7 @@ span.pwd {
 
 <h1 style="text-align:center">Check IC</h1>
 
-<form action="forgotpwdprocess.php" method="post">
+<form action="forgotpwdprocess.php" method="POST">
   <div class="imgcontainer">
     <img src="../img/kvpjb.jpg" alt="KVPJB" class="avatar">
   </div>
@@ -78,7 +78,7 @@ span.pwd {
   <div class="container">
 
     <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter IC" name="ic" required>
+    <input type="text" placeholder="Enter IC" id="fic" name="ic" required>
 
     <button type="submit">Check</button>
     <label>
