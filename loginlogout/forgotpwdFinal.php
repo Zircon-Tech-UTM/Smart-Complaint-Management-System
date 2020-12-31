@@ -1,5 +1,5 @@
 <?php
-    require_once("../CRUDusers/UsersBack/dbconfigUser.php");
+    include("..\CRUDusers\UsersBack\dbconfigUser.php");
 
     if(isset($_GET['id']))
     {
@@ -8,9 +8,11 @@
 
         $result = mysqli_query($conn, $sql);
 
-        if (!$result){echo "ERROR:  $conn->error";
+        if (!$result)
+        {
+          echo "ERROR:  $conn->error";
+          exit();
         } 
-
         $row = mysqli_fetch_array($result);
     
 ?>
@@ -30,7 +32,20 @@
 
         <form action="forgotpwdFinalprocess.php" method="POST">
         <h2>Reset Password: </h2>
-        
+       <div class ="row">
+
+            <div class="col-6">
+                <label for="fname" class="form-label">Full Name:</label>
+                <input type="text" name="name" id="fname" class="form-control form-control" placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>" readonly/>
+            </div>
+
+            <div class="col-6">
+                <label for="fic" class="form-label">IC number:</label>
+                <input type="text" name="IC" id="fic" class="form-control form-control" placeholder="Enter IC Number" value="<?php echo $row["u_userIC"]; ?>" readonly/>
+            </div>
+
+        </div><br>    
+
             <script>
                 var check = function() {
                   if (document.getElementById('password').value ==
@@ -44,24 +59,17 @@
                 }
             </script>
 
-            <?php
-                  echo"<tr>";
-                  echo "<th>".$row["name"]."</th>";
-                  echo "<th>".$row["u_userIC"]."</th>";
-                  echo "</tr>";
-              ?>
-
             <div class ="row">
                 <div class="col-6">
                     <label for="pwd" class="form-label">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control form-control" placeholder="Enter password" value="<?php echo $row["pwd"]; ?>" required>
+                    <input type="password" name="password" id="password" class="form-control form-control" placeholder="Enter password" required>
                 </div>
                 <div class="col-6">
                     <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                   <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();' value="<?php echo $row["pwd"]; ?>" required/>  
+                   <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();' required/>  
                 </div>
             </div><br>
-                <input type="submit" text-align:center name="submit" class="btn btn-primary" value="Edit"/>
+                <input type="submit" name="submit" class="btn btn-primary" value="Save"/>
               <input type="reset" name="clear" value="Clear"class="btn btn-warning">
             
         </form>
