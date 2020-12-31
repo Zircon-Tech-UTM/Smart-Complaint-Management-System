@@ -16,7 +16,7 @@
 
     if($result)
     {
-        header("location: ../otherUser.php");
+        header("location: otherUser.php");
         exit();
     } 
     else
