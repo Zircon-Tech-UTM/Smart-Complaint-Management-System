@@ -5,10 +5,8 @@ session_start();
 //connect DB connection
 include ("../CRUDusers/UsersBack/dbconfigUser.php");
 
-//Retrieve data from login form
 $fid = $_POST['ic'];
 
-//Get user based on login credentials
 $sql = "SELECT * FROM users
     WHERE u_userIC = '$fid'";
 
@@ -38,4 +36,15 @@ else             //User not found
   //header('location: login.php');
 }
 mysqli_close($conn);
+
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Complaints Inventory System</title>
+</head>
+	<body>
+		<br><a href ="login.php">Back To Login Page</a>
+	</body>
+</html>
