@@ -1,5 +1,14 @@
 <?php
     require_once("UsersBack\dbconfigUser.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../loginlogout/login.php');
+    }
 
     if(isset($_GET['id'])){
         $id = $_GET['id'];
@@ -39,8 +48,6 @@
         <h2>User Contact Section:</h2>
         <p>Contact: <?php echo $row["contact"];?></p>
         <p>Email Addrses: <?php echo $row["email"];?></p>
-        <h2>Admin Section:</h2>
-        <p>Admin Registered: <?php echo $row["registered_by"];?></p>
 
         <a href="updateUser.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm">Edit</a>
         <a href="deleteUser.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm">Delete</a>

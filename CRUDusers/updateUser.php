@@ -1,5 +1,14 @@
 <?php
     require_once("UsersBack\dbconfigUser.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../loginlogout/login.php');
+    }
 
     if(isset($_GET['id']))
     {
@@ -173,19 +182,8 @@
                 <input type="text" name="femail" id="femail" class="form-control form-control" placeholder="Enter email address"value="<?php echo $row["email"]; ?>">
               </div>
             </div>
-            <div class="row">
-                <h2><br>Admin Section:</h2>
-                <div class="col-6">
-                <label for="admin" class="form-label">Admin In Charge:</label>
-                <input type="text" name="fAname" id="fAname" class="form-control form-control" placeholder="Enter Admin Name"value="<?php echo $row["registered_by"]; ?>">
-                </div>
-                <div class="col-6">
-                <label for="RegisteredDate" class="form-label">Registered Date:</label><br>
-                <?php $rdate= date('Y-m-d',strtotime($row["dateRegistered"]));?>
-                <input type="date" name="rdate" id="rdate" value="<?php echo $rdate;?>">
-                </div>
-            </div><br><br>
-            <input type="submit" text-align:center name="submit" class="btn btn-primary" value="Edit"/>
+            
+            <input type="submit" name="submit" class="btn btn-primary" value="Save"/>
             <input type="reset" name="clear" value="Clear"class="btn btn-warning">
         </form>
     </div>

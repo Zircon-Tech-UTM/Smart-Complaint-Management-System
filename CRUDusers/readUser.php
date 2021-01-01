@@ -1,4 +1,14 @@
 <?php 
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../loginlogout/login.php');
+    }
+
     require_once("UsersBack/dbconfigUser.php");
 
     $sql = "SELECT * FROM users ORDER BY u_userIC ASC;";
@@ -53,7 +63,7 @@
                     <th>
                         <a href="detailUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm">VIEW</a>
                         <a href="updateUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm">EDIT</a>
-                        <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm"><strong>X</strong></a>
+                        <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item')"><strong>X</strong></a>
                     </th>
                 <?php
                         echo"</tr>";
@@ -61,6 +71,7 @@
 
                     mysqli_close($conn);
                 ?>
+
             </thead>
         </table>
     </div>

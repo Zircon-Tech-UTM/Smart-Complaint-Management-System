@@ -1,4 +1,13 @@
 <?php
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../loginlogout/login.php');
+    }
     include("dbconfigUser.php");
 
     $room=$image=$positionBM=$email=$userType="";

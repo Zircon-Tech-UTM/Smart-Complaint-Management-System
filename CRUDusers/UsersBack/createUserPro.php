@@ -1,11 +1,9 @@
 <?php
+    
+    session_start();
     include("dbconfigUser.php");
 
-    $room=$image=$positionBM=$email=$userType="";
-    $no_aduan=0;
-
     $username = $_POST['name'];
-    $adminname = $_POST['fAname'];
     $IC = $_POST['IC'];
     $password = $_POST['password'];
     $addr = $_POST['faddr'];
@@ -13,9 +11,33 @@
     $contact = $_POST['fcontactnum'];
     $room = $_POST['room'];
     $email= $_POST['femail'];
-    $rdate = $_POST['rdate'];
 
-    $sql = "INSERT INTO users (u_userIC, registered_by, pwd, name, postBI, postBM, address, email, contact, dateRegistered,no_aduan, u_img_path,userType ) VALUES('".$IC."', '".$adminname."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$rdate."', ".$no_aduan.",'".$image."', '".$userType."')";
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $rdate= date('Y-m-d H:i:s');  
+
+    if($positionBI=="Admin")
+    {
+        $userType="1";
+        $positionBM="Pentadbir";
+    }
+    else if($positionBI=="PIC Of Room")
+    {
+        $userType="2";
+        $positionBM="PIC Makmal";
+    }
+    else if($positionBI=="Assistant Computer Technician")
+    {
+        $userType="3";
+        $positionBM="Penolong Juruteknik Komputer";
+    }
+    else
+    {
+        $userType="4";
+        $positionBM="Penolong Jurutera";
+    }
+
+
+    $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."')";
 
     echo '\n';
     echo $sql;
