@@ -1,5 +1,5 @@
 <?php
-    include("..\CRUDusers\UsersBack\dbconfigUser.php");
+    include("../CRUDusers/UsersBack/dbconfigUser.php");
 
     if(isset($_GET['id']))
     {

@@ -41,7 +41,7 @@ button:hover {
 }
 
 img.avatar {
-  width: 20%;
+  width: 15%;
   /*border-radius: 50%;*/
 }
 
@@ -55,7 +55,7 @@ span.pwd {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 3px) {
+@media screen and (max-width: 300px) {
   span.pwd {
      display: block;
      float: none;
@@ -76,13 +76,12 @@ span.pwd {
   </div>
 
   <div class="container">
-
+    <div class="form-group">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter IC" id="fic" name="ic" required>
-
+    </div>
     <button type="submit">Check</button>
     <label>
-     
   </div>
 
   <div class="container" style="background-color:#f1f1f1">

@@ -21,14 +21,14 @@ $row = mysqli_fetch_array($result);
 $count = mysqli_num_rows($result);
 
 
-//Check login 
+//Check ic 
 if($count == 1)  //User found
 {
   //Set session 
   $_SESSION['u_userIC'] = session_id();// set session id
   $_SESSION['ic'] = $fid;
 
-  header('location: forgotpwdFinal.php?id="$fid"');
+  header('location: forgotpwdFinal.php?id=" $fid"');
 }
 else             //User not found
 {

@@ -5,6 +5,38 @@ session_start();
 //connect DB connection
 include ("../CRUDusers/UsersBack/dbconfigUser.php");
 
+  if (isset($_POST["login"])) {
+    $sql="SELECT * from users 
+          where (u_userIC = '".$_POST["ic"]."'
+          and pwd = '".$_POST["pwd"]."')";
+    $result= mysqli_query($conn, $sql);
+
+    $user=mysqli_fetch_array($result);
+
+    if($user)
+    {
+        if(!empty($_POST["remember"]))
+        {
+          setcookie("member_ic",$_POST["ic"], time()+(10*365*24*60*60));
+          setcookie("member_pwd",$_POST["pwd"], time()+(10*365*24*60*60));
+        }
+        else
+        {
+          if (isset($_COOKIE["member_ic"])) {
+            setcookie("member_ic","");
+          }
+          if (isset($_COOKIE["member_pwd"])) {
+            setcookie("member_pwd","");
+          }
+        }
+        header("location: login.php");
+    }
+    else
+    {
+      $message="Invalid Login";
+    }
+  }
+
 //Retrieve data from login form
 $fid = $_POST['ic'];
 $fpwd = $_POST['pwd'];
@@ -37,13 +69,13 @@ if($count == 1)  //User found
 	}
 	else                    //OtherUsers
 	{
-		header('location: otherUser.php');
+		header('location: ../profilesOtherUsers/landingotherUser.php?id=$row["u_userIC"];');
 	}
 }
 else             //User not found
 {
 	echo'User not found';
-	//header('location: login.php');
+	header("refresh: 6; location: login.php");
 }
 mysqli_close($conn);
 ?>
