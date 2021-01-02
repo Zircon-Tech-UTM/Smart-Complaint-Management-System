@@ -10,22 +10,40 @@
     }
     include("dbconfigUser.php");
 
-    $room=$image=$positionBM=$email=$userType="";
-    $no_aduan=0;
-
     $username = $_POST['name'];
-    $adminname = $_POST['fAname'];
     $IC = $_POST['IC'];
     $password = $_POST['password'];
     $addr = $_POST['faddr'];
     $positionBI = $_POST['position'];
     $contact = $_POST['fcontactnum'];
-    $room = $_POST['room'];
     $email= $_POST['femail'];
-    $rdate = $_POST['rdate'];
+
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $rdate= date('Y-m-d H:i:s');  
+
+    if($positionBI=="Admin")
+    {
+        $userType="1";
+        $positionBM="Pentadbir";
+    }
+    else if($positionBI=="PIC Of Room")
+    {
+        $userType="2";
+        $positionBM="PIC Makmal";
+    }
+    else if($positionBI=="Assistant Computer Technician")
+    {
+        $userType="3";
+        $positionBM="Penolong Juruteknik Komputer";
+    }
+    else
+    {
+        $userType="4";
+        $positionBM="Penolong Jurutera";
+    }
 
     $sql = "UPDATE users
-            SET registered_by='$adminname', pwd='$password', name='$username', postBI='$positionBI', address='$addr', email='$email', contact= '$contact', dateRegistered='$rdate',no_aduan='$no_aduan'
+            SET  pwd='".$password."', name='".$username."', postBI='".$positionBI."',postBM='".$positionBM."', address='".$addr."', email='".$email."', contact= '".$contact."', dateRegistered='".$rdate."', userType='".$userType."'
             WHERE u_userIC='$IC'";
 
     echo '\n';

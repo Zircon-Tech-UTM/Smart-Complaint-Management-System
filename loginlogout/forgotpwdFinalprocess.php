@@ -2,11 +2,12 @@
     include("../CRUDusers/UsersBack/dbconfigUser.php");
 
     $password = $_POST['password'];
+    $IC = $_POST['ic'];
     
 
     $sql = "UPDATE users
-            SET  pwd='$password'
-            WHERE u_userIC='$IC'";
+            SET  pwd='".$password."'
+            WHERE u_userIC=".$IC."";
 
     echo '\n';
     echo $sql;
@@ -16,7 +17,7 @@
 
     if($result)
     {
-        header("location: otherUser.php");
+        header("location: login.php");
         exit();
     } 
     else

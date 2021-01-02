@@ -28,7 +28,7 @@ if($count == 1)  //User found
   $_SESSION['u_userIC'] = session_id();// set session id
   $_SESSION['ic'] = $fid;
 
-  header('location: forgotpwdFinal.php?id=" $fid"');
+  header("location: forgotpwdFinal.php?id=".$fid."");
 }
 else             //User not found
 {

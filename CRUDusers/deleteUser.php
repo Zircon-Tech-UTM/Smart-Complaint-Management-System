@@ -28,4 +28,6 @@
         echo "ERROR Occur! Will direct back to the same page in 5 seconds";
         header("refresh: 6; location: readUser.php");
     }
+    echo "The account is successfully deleted.";
 ?>
+

@@ -65,11 +65,11 @@ if($count == 1)  //User found
 
 	if($row['userType']=='1') //Admin
 	{
-		header('location: ../CRUDusers/landingUser.php');
+		header("location: ../CRUDusers/landingUser.php");
 	}
 	else                    //OtherUsers
 	{
-		header('location: ../profilesOtherUsers/landingotherUser.php?id=$row["u_userIC"];');
+		header("location: ../profilesOtherUsers/landingotherUser.php?id=".$fid."");
 	}
 }
 else             //User not found

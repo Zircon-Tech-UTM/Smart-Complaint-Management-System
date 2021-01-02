@@ -1,81 +1,3 @@
-<?php
-// define variables and set to empty values
-    $username = "";
-    $IC = "";
-    $password = "";
-    $addr = "";
-    $positionBI = "";
-    $contact = "";
-    $room = "";
-    $email= "";
-
-    $usernameErr = "";
-    $ICErr = "";
-    $passwordErr = "";
-    $addrErr = "";
-    $positionBIErr = "";
-    $contactErr = "";
-    $roomErr = "";
-    $emailErr= "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
-  if (empty($_POST["name"])) {
-    $usernameErr = "Name is required";
-  } else {
-    $username = test_input($_POST["name"]);
-    // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$username)) {
-      $usernameErr = "Only letters and white space allowed";
-    }
-  }
-  
-  if (empty($_POST["femail"])) {
-    $emailErr = "Email is required";
-  } else {
-    $email = test_input($_POST["femail"]);
-    // check if e-mail address is well-formed
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Invalid email format";
-    }
-  }
-
-  if (empty($_POST["fcontactnum"])) {
-    $contactErr = "Contact number is required";
-  } else {
-    $contact = test_input($_POST["fcontactnum"]);
-    // check if contact is well-formed
-    if (!preg_match('/^[0-9]{3}-[0-9]{7,8}$/',$contact)) {
-      $contactErr = "Correct Format in Digit: XXX-XXXXXXXX";
-    }
-  }
-
-  if (empty($_POST["ic"])) {
-    $ICErr = "IC number is required";
-  } else {
-    $IC = test_input($_POST["ic"]);
-    // check if contact is well-formed
-    if (!preg_match('/^[0-9]{6}-[0-9]{2}-[0-9]{4}$/',$IC)) {
-      $ICErr = "Correct Format in Digit: XXXXXX-XX-XXXX";
-    }
-  }
-
-   if (empty($_POST["password"])) {
-    $passwordErr = "Password is required";
-  } else {
-    $password = test_input($_POST["password"]);
-    // check if contact is well-formed
-    $uppercase = preg_match('@[A-Z]@', $password);
-    $lowercase = preg_match('@[a-z]@', $password);
-    $number    = preg_match('@[0-9]@', $password);
-    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-      $passwordErr = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.";
-    }
-  }
-
-} 
- 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,8 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h1>Create Account</h1><hr>
-        <p><span class="error">* required field</span></p>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
         <form action="UsersBack\createUserPro.php" method="POST">
         <h2>User Information: </h2>
         <div class ="row">
@@ -151,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     document.getElementById('message').innerHTML = '  (not matching)';
                   }
                 }
-
 
             </script>
             <div class ="row">
@@ -346,3 +265,4 @@ myInput.onkeyup = function() {
 
 </body>
 </html>
+

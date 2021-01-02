@@ -62,8 +62,8 @@
                     ?>
                     <th>
                         <a href="detailUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm">VIEW</a>
-                        <a href="updateUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm">EDIT</a>
-                        <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item')"><strong>X</strong></a>
+                        <a href="updateUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to edit this account')">EDIT</a>
+                        <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this account')"><strong>X</strong></a>
                     </th>
                 <?php
                         echo"</tr>";
