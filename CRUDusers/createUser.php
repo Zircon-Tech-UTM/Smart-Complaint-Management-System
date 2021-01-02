@@ -53,11 +53,13 @@
         <div class ="row">
             <div class="col-6">
                 <label for="fname" class="form-label">Full Name:</label>
-                <input type="text" name="name" id="fname" class="form-control form-control" placeholder="Enter Full Name" required/>
+                <input type="text" name="name" id="fname" class="form-control form-control <?php echo (!empty($name_err)) ? 'is invalid' : ''; ?>" placeholder="Enter Full Name" required>
+                <span class="invalid-feedback"><?php echo $usernameErr;?></span>
             </div>
             <div class="col-6">
-                <label for="fic" class="form-label">IC number:</label>
-                <input type="text" name="IC" id="fic" class="form-control form-control" placeholder="Enter IC Number"required/>
+                <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is invalid' : ''; ?>">IC number:</label>
+                <input type="text" name="IC" id="fic" class="form-control form-control <?php echo (!empty($ICErr)) ? 'is invalid' : ''; ?>" placeholder="Enter IC Number" required>
+                 <span class="invalid-feedback"><?php echo $ICErr;?></span>
             </div>
         </div><br>    
             <script>
@@ -74,25 +76,26 @@
 
             </script>
             <div class ="row">
-                <div class="col-6">
-                    <label for="pwd" class="form-label">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control form-control" placeholder="Enter password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <div class="col-6 needs-validation">
+                    <label for="pwd" class="form-label ">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control form-control <?php echo (!empty($passwordErr)) ? 'is invalid' : ''; ?>" placeholder="Enter password"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                    <span class="invalid-feedback"><?php echo $passwordErr;?></span>
                 </div>
                 <div class="col-6">
                     <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                   <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();' required/>  
+                   <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();'required>  
                 </div>
             </div><br>
 
             <div class="mb-3">
                 <label for="faddr" class="form-label">Home Address:</label>
-                <input type="text" name="faddr" id="faddr" class="form-control form-control" placeholder="Enter Home Address"required/>
+                <input type="text" name="faddr" id="faddr" class="form-control form-control" placeholder="Enter Home Address">
             </div>
 
         <div class ="row">
             <div class="col-6">
                 <label for="position" class="form-label">Position Assigned:</label>
-                <select name="position" id="position" class="form-select form-select mb-3" aria-label="form-select example" required/>
+                <select name="position" id="position" class="form-select form-select mb-3" aria-label="form-select example">
                     <option value="" selected>Choose a position</option>
                     <option value="Admin">Admin</option>
                     <option value="PIC Of Room">PIC Of Room</option> 
@@ -182,11 +185,13 @@
                 <h2><br>User Contact Information:</h2>
               <div class="col-6">
                 <label for="fcontactnum" class="form-label">Contact Number:</label>
-                <input type="text" name="fcontactnum" id="fcontactnum" class="form-control" placeholder="Enter contact number" pattern="^(\+?6?01)[0|1|2|3|4|6|7|8|9]-*[0-9]{7,8}$" required/>
+                <input type="text" name="fcontactnum" id="fcontactnum" class="form-control  <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter contact number" required>
+                <span class="invalid-feedback"><?php echo $contactErr;?></span>
               </div>
               <div class="col-6">
                 <label for="femail" class="form-label">Email Address:</label>
-                <input type="text" name="femail" id="femail" class="form-control form-control" placeholder="Enter email address">
+                <input type="text" name="femail" id="femail" class="form-control form-control  <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter email address" required>
+                <span class="invalid-feedback"><?php echo $contactErr;?></span>
               </div>
             </div>
             

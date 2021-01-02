@@ -1,22 +1,17 @@
 <?php
-    
+     session_start();
+    include("dbconfigUser.php");
     // define variables and set to empty values
     $username = "";
     $IC = "";
     $password = "";
-    $addr = "";
-    $positionBI = "";
     $contact = "";
-    $room = "";
     $email= "";
 
     $usernameErr = "";
     $ICErr = "";
     $passwordErr = "";
-    $addrErr = "";
-    $positionBIErr = "";
     $contactErr = "";
-    $roomErr = "";
     $emailErr= "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $contact = trim($_POST["fcontactnum"]);
     // check if contact is well-formed
-    if (!preg_match('/^[0-9]{3}-[0-9]{7,8}$/',$contact)) {
-      $contactErr = "Correct Format in Digit: XXX-XXXXXXXX";
+    if (!preg_match('/^[0-9]{10,11}$/',$contact)) {
+      $contactErr = "Please enter correct format in digit without -";
     }
   }
 
@@ -56,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $IC = trim($_POST["ic"]);
     // check if contact is well-formed
-    if (!preg_match('/^[0-9]{6}-[0-9]{2}-[0-9]{4}$/',$IC)) {
-      $ICErr = "Correct Format in Digit: XXXXXX-XX-XXXX";
+    if (!preg_match('/^[0-9]{12}/',$IC)) {
+      $ICErr = "Correct Format in Digit without - ";
     }
   }
 
@@ -75,9 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
 } 
- 
-    session_start();
-    include("dbconfigUser.php");
 
     $username = $_POST['name'];
     $IC = $_POST['IC'];
