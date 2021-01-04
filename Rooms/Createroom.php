@@ -16,7 +16,6 @@ include ('dbconnect.php');
 </head>
 <body>
     <h1>Create a new Room</h1>
-        <a href = 'Createroom.php?' class = 'btn btn-warning'>Create</a>
     <div class="container">
         <form method="POST" action="createroomprocess.php">
             <div class="form-group">
