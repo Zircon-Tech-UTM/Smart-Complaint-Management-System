@@ -1,17 +1,32 @@
 <?php
-    require_once("complaintsBack\dbconfig.php");
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $sql = "SELECT * FROM complaints WHERE complaintsID=".$id.";";
+        $sql = "SELECT * FROM complaints, rooms, blocks 
+                WHERE complaints.c_roomID = rooms.r_roomID 
+                AND rooms.blok = blocks.block_no  
+                AND compID=".$id.";";
 
         $result = mysqli_query($conn, $sql);
 
         if (!$result){echo "ERROR:  $conn->error";
-            header("refresh: 6; location: readComplaint.php");
+            header("refresh: 5; location: readComplaint.php");
         } 
 
         $row = mysqli_fetch_array($result);
+
+        $sql2 = "SELECT * FROM blocks;";
+        $result2 = mysqli_query($conn, $sql2);
     
 ?>
 
@@ -29,124 +44,153 @@
     <div class="container">
 
         <form action="complaintsBack\modifyPro.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+
+            <input type="hidden" name="u_userIC" id="complainantName" class="form-control form-control-lg" value="<?php echo $row['u_userIC']; ?>">
+
+            <?php
+                $datetime = strtotime($row['proposedDate']);
+                $new_date = date('Y-m-d', $datetime);
+            ?>
+
             <div class="mb-3">
-                <label for="complainantName" class="form-label">Name:</label>
-                <input type="text" name="name" id="complainantName" class="form-control form-control-lg" placeholder="complainant's name" value="dummy">
+                <label for="proposedDate" class="form-label">Date:</label>
+                <input type="date" name="date" id="proposedDate" class="form-control form-control-lg" value="<?php echo $new_date; ?>">
             </div>
 
             <div>
-                <label for="proposeDate" class="form-label">Proposed Date:</label>
-                <input type="date" name="pdate" id="proposeDate" value="<?php echo $row["pDate"]; ?>">
-            </div><br>
-
-            <div>
-                <label for="settledDate" class="form-label">Settled Date:</label>
-                <input type="date" name="sdate" id="settledDate" value="<?php echo $row["sDate"]; ?>">
-            </div><br>
-
-            <div>
-                <label for="radio" class="form-label">Buildings Category</label><br>
-                <?php 
-                    $temps = ["Asrama", "Kolej"];
-                    $i = 1;
-                    foreach($temps as $temp){
-                        echo "<div class='form-check form-check-inline'>";
-
-                        $str = "radio.$i";
-                        if ($row["buildingID"] == $i){
-                            echo "<input type='radio' value=".$i." class='form-check-input' id='$str' name='building' checked>";
-                            echo "<label for='$str' class='form-check-label'>$temp</label>";
-                        } else {
-                            echo "<input type='radio' value=".$i." class='form-check-input' id='$str' name='building'>";
-                            echo "<label for='$str' class='form-check-label'>$temp</label>";
-                        }
-                        echo "</div>";
-                        $i++;
-                    }
-                ?>
-            </div><br>
-
-            <div>
-                <label for="check" class="form-label">Location</label>
-                <select name="location" id="check" class="form-select form-select-lg mb-3" aria-label="form-select-lg example">
-                <option value="">Choose an option</option>
-                <?php 
-                    $temps = ["Block A", "Block B", "Block C", "Block M", "Block N", "Block R", "Block S", "Main Hall", "Others"];
-                    $i = 1;
-                    foreach($temps as $temp){
-                        if ($row["roomID"] == $i){
-                            echo "<option value='$i' selected>$temp</option> ";
-                        } else {
-                            echo "<option value='$i'>$temp</option> ";
-                        }
-                        $i++;
-                    }
-                ?>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="roomtName" class="form-label">Room Name:</label>
-                <input type="text" name="room" id="roomName" class="form-control form-control-lg" placeholder="Name of the Room" value="dummy">
-            </div>
-
-            <div class="mb-3">
-                <label for="check2" class="form-label">Type of Damage</label>
-                <select name="damage" id="check2" class="form-select form-select-lg mb-3" aria-label="form-select-lg example">
-                    <option value="" selected>Choose an option</option>
-                    <?php 
-                        $temps = ["Door", "Glass", "Light", "Fan", "Toilet"];
-                        $i = 1;
-                        foreach($temps as $temp){
-                            if ($row["damage"] == $i){
-                                echo "<option value='$i' selected>$temp</option> ";
-                            } else {
-                                echo "<option value='$i'>$temp</option> ";
+                <label for="blocks" class="form-label">Blocks</label><br>
+                <select class="form-select" aria-label="Default select example" id="blocks" name="blocks">
+                    <option>Open this select menu</option>
+                    <?php
+                        while ($row2 = mysqli_fetch_array($result2)){
+                            if ($row2['block_no'] == $row['blok']){
+                    ?>
+                            <option selected value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_nameBI']; ?></option>
+                    <?php
+                            }else{
+                    ?>
+                            <option value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_nameBI']; ?></option>
+                    <?php            
                             }
-                            $i++;
                         }
                     ?>
-                    <!-- type of damages -->
                 </select>
-            </div>
+            </div><br>
 
             <div>
-                <label for="totalDamage" class="form-label">Total</label>
-                <input type="text" name="total" id="totalDamage" class="form-control" placeholder="Total Number of Damages" value="<?php echo $row["total"]; ?>">
+                <label for="rooms" class="form-label">Rooms</label><br>
+                <select class="form-select" aria-label="Default select example" id="rooms" name="rooms">
+                    <option>Open this select menu</option>
+                    <?php
+                    $sql3 = "SELECT * FROM rooms WHERE blok = '".$row['blok']."';";
+                    $result3 = mysqli_query($conn, $sql3);
+                        while ($row3 = mysqli_fetch_array($result3)){
+                            if ($row3['blok'] == $row['blok']){
+                    ?>
+                            <option selected value="<?php echo $row3['r_roomID']; ?>"><?php echo $row3['r_nameBI']; ?></option>
+                    <?php
+                            }else{
+                    ?>
+                            <option value="<?php echo $row3['r_roomID']; ?>"><?php echo $row3['r_nameBI']; ?></option>
+                    <?php            
+                            }
+                        }
+                    ?>
+                </select>
             </div><br>
+
+            <div>
+                <label for="assets" class="form-label">Assets</label><br>
+                <select class="form-select" aria-label="Default select example" id="assets"  name="assets">
+                <option>Open this select menu</option>
+                    <?php
+                    $sql4 = "SELECT * FROM assets WHERE a_roomID = '".$row['r_roomID']."';";
+                    $result4 = mysqli_query($conn, $sql4);
+                        while ($row4 = mysqli_fetch_array($result4)){
+                            if ($row4['a_assetID'] == $row['c_assetID']){
+                    ?>
+                            <option selected value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_nameBI']; ?></option>
+                    <?php
+                            }else{
+                    ?>
+                            <option value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_nameBI']; ?></option>
+                    <?php            
+                            }
+                        }
+                    ?>
+                </select>
+            </div><br>
+
+            <script type="text/javascript">
+                document.getElementById('blocks').addEventListener('change', loadRooms);
+                document.getElementById('rooms').addEventListener('change', loadAssets);
+
+                function loadRooms(){
+                    let block = document.getElementById('blocks').value;
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', `complaintsBack/rooms.php?blocks=${block}`, true);
+                    
+                    xhr.onreadystatechange = function(){
+                        if (this.status === 200 && this.readyState === 4){
+                            let rooms = JSON.parse(this.responseText);
+
+                            output = '';
+
+                            output+= `<option selected>Open this select menu</option>`;
+                            for (var i in rooms){
+                                output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                            }
+
+                            document.getElementById('rooms').innerHTML = output;
+                            loadAssets();
+                        }else if(this.status == 404){
+                            console.log('Fail');
+                        }
+                    }
+                    xhr.send();
+                }
+
+                function loadAssets(){
+                    let room = document.getElementById('rooms').value;
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', `complaintsBack/assets.php?rooms=${room}`, true);
+                    
+                    xhr.onreadystatechange = function(){
+                        if (this.status === 200 && this.readyState === 4){
+                            let result = JSON.parse(this.responseText);
+                            console.log(result);
+
+                            output = '';
+
+                            output+= `<option selected>Open this select menu</option>`;
+                            for (var i in result){
+                                output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
+                            }
+
+                            document.getElementById('assets').innerHTML = output;
+                        }else if(this.status == 404){
+                            console.log('Fail');
+                        }
+                    }
+                    xhr.send();
+                }
+            </script>
 
             <div class="mb-3">
                 <label for="complainantDetail" class="form-label">Detail:</label>
-                <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg" placeholder="complainant's detail" value="<?php echo $row["detail"]; ?>">
+                <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg" placeholder="complainant's detail" value="<?php echo $row['detail']; ?>">
             </div>
-            
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-            <div class="mb-3">
-                <label for="check3" class="form-label">Status</label>
-                <select name="status" id="check3" class="form-select form-select-lg mb-3" aria-label="form-select-lg example">
-                    <option value="" selected>Choose an option</option>
-                    <?php 
-                        $temps = [0, 1, 2];
-                        $i = 0;
-                        foreach($temps as $temp){
-                            if ($row["status"] == $i){
-                                echo "<option value='$i' selected>$temp</option> ";
-                            } else {
-                                echo "<option value='$i'>$temp</option> ";
-                            }
-                            $i++;
-                        }
-                    ?>
-                    <!-- type of damages -->
-                </select>
-            </div>
+
 
             <!-- <div class="input-group">
                 <input type="file" class="form-control" id="imageDamage" name="image" aria-describedby="inputGroupFile" aria-label="Upload">
             </div> -->
-            <input type="submit" class="btn btn-primary" value="Save Changes">
-            <a href="readComplaint.php" class="btn btn-primary">Cancel</a>
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <a href="landing.php" class="btn btn-primary">Cancel</a>
         </form>
     </div>
 </body>

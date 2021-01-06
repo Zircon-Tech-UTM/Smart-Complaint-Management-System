@@ -1,27 +1,32 @@
 <?php
-    require_once("dbconfig.php");
+    require_once("../../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../../login/login.php');
+    }
 
     $name = $date = $building = $location = $damage = $detail = $id = "";
     // $image = "";
-    $total = 0;
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (isset($_POST["id"])){
-            $name = trim($_POST['name']);
-            $pdate = $_POST['pdate'];
-            $sdate = $_POST['sdate'];
-            $building = $_POST['building'];
-            $location = $_POST['location'];
-            $damage = $_POST['damage'];
+            $u_userIC = trim($_POST['u_userIC']);
+            $date = $_POST['date'];
+            $blocks = $_POST['blocks'];
+            $rooms = $_POST['rooms'];
+            $assets = $_POST['assets'];
             // $image = $_POST['image'];
             $detail = trim($_POST['detail']);
-            $total = $_POST['total'];
-            $status = $_POST['status'];
 
             $id = $_POST["id"];
 
-            $sql = "UPDATE complaints SET buildingID=$building, roomID=$location, pDate='$pdate', sDate='$sdate', damage=$damage, detail='$detail', total=$total, status=$status WHERE complaintsID=$id;";
+            $sql = "UPDATE complaints SET c_assetID='$assets', c_roomID='$rooms', proposedDate='$date', detail='$detail' WHERE compID='$id';";
 
             echo $sql;
 

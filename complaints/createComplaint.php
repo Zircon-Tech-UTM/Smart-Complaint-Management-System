@@ -1,3 +1,24 @@
+<?php 
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
+
+    $sql1 = "SELECT * FROM users WHERE u_userIC = '".$_SESSION['ic']."'";
+    $result1 = mysqli_query($conn, $sql1);
+    $row1 = mysqli_fetch_array($result1);
+
+    $sql2 = "SELECT * FROM blocks";
+    $result2 = mysqli_query($conn, $sql2);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,74 +31,105 @@
 </head>
 <body>
     <div class="container">
-
+        <h1>Complaint Form</h1>
         <form action="complaintsBack\createPro.php" method="POST">
+            
+            <input type="hidden" name="u_userIC" id="complainantName" class="form-control form-control-lg" value="<?php echo $row1['u_userIC']; ?>">
+
             <div class="mb-3">
-                <label for="complainantName" class="form-label">Name:</label>
-                <input type="text" name="name" id="complainantName" class="form-control form-control-lg" placeholder="complainant's name">
+                <label for="proposedDate" class="form-label">Date:</label>
+                <input type="date" name="date" id="proposedDate" class="form-control form-control-lg">
             </div>
 
             <div>
-                <label for="complaintDate" class="form-label">Date:</label>
-                <input type="date" name="date" id="complaintDate" value="">
-            </div><br>
-
-            <div>
-                <label for="radio" class="form-label">Buildings Category</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" value="1" class="form-check-input" id="radio1" name="building">
-                    <label for="radio1" class="form-check-label">Asrama</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" value="2" class="form-check-input" id="radio2" name="building">
-                    <label for="radio2" class="form-check-label">Kolej</label>
-                </div>
-            </div><br>
-
-            <div>
-                <label for="check" class="form-label">Location</label>
-                <select name="location" id="check" class="form-select form-select-lg mb-3" aria-label="form-select-lg example">
-                    <option value="" selected>Choose an option</option>
-                    <option value="1">Block A</option>  <!-- Block A -->
-                    <option value="2">Block B</option>  <!-- Block B -->
-                    <option value="3">Block C</option>  <!-- Block C -->
-                    <option value="4">Block M</option>  <!-- Block D -->
-                    <option value="5">Block N</option>  <!-- Block E -->
-                    <option value="6">Block R</option>  <!-- Block F -->
-                    <option value="7">Block S</option>  <!-- SURAU -->
-                    <option value="8">Main Hall</option>  <!-- Dinig Hall (1st Floor) -->
-                    <option value="9">Others</option>  <!-- Dinig Hall (Ground Floor) -->
-                    <!-- others -->
+                <label for="blocks" class="form-label">Blocks</label><br>
+                <select class="form-select" aria-label="Default select example" id="blocks" name="blocks">
+                    <option selected>Open this select menu</option>
+                    <?php
+                        while ($row2 = mysqli_fetch_array($result2)){
+                    ?>
+                            <option value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_nameBI']; ?></option>
+                    <?php
+                        }
+                    ?>
                 </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="roomtName" class="form-label">Room Name:</label>
-                <input type="text" name="room" id="roomName" class="form-control form-control-lg" placeholder="Name of the Room">
-            </div>
-
-            <div class="mb-3">
-                <label for="check2" class="form-label">Type of Damage</label>
-                <select name="damage" id="check2" class="form-select form-select-lg mb-3" aria-label="form-select-lg example">
-                    <option value="" selected>Choose an option</option>
-                    <option value="1">Door</option>  
-                    <option value="2">Glass</option> 
-                    <option value="3">Light</option>  
-                    <option value="4">Fan</option>  
-                    <option value="5">Toilet</option> 
-                    <!-- type of damages -->
-                </select>
-            </div>
+            </div><br>
 
             <div>
-                <label for="totalDamage" class="form-label">Total</label>
-                <input type="text" name="total" id="totalDamage" class="form-control" placeholder="Total Number of Damages">
+                <label for="rooms" class="form-label">Rooms</label><br>
+                <select class="form-select" aria-label="Default select example" id="rooms" name="rooms">
+                    <option selected>Please Choose A Block</option>
+                </select>
             </div><br>
+
+            <div>
+                <label for="assets" class="form-label">Assets</label><br>
+                <select class="form-select" aria-label="Default select example" id="assets" name="assets">
+                    <option selected>Please Choose A Room</option>
+                </select>
+            </div><br>
+
+            <script type="text/javascript">
+                document.getElementById('blocks').addEventListener('change', loadRooms);
+                document.getElementById('rooms').addEventListener('change', loadAssets);
+
+                function loadRooms(){
+                    let block = document.getElementById('blocks').value;
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', `complaintsBack/rooms.php?blocks=${block}`, true);
+                    
+                    xhr.onreadystatechange = function(){
+                        if (this.status === 200 && this.readyState === 4){
+                            let rooms = JSON.parse(this.responseText);
+
+                            output = '';
+
+                            output+= `<option selected>Open this select menu</option>`;
+                            for (var i in rooms){
+                                output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                            }
+
+                            document.getElementById('rooms').innerHTML = output;
+                        }else if(this.status == 404){
+                            console.log('Fail');
+                        }
+                    }
+                    xhr.send();
+                }
+
+                function loadAssets(){
+                    let room = document.getElementById('rooms').value;
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', `complaintsBack/assets.php?rooms=${room}`, true);
+                    
+                    xhr.onreadystatechange = function(){
+                        if (this.status === 200 && this.readyState === 4){
+                            let result = JSON.parse(this.responseText);
+                            console.log(result);
+
+                            output = '';
+
+                            output+= `<option selected>Open this select menu</option>`;
+                            for (var i in result){
+                                output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
+                            }
+
+                            document.getElementById('assets').innerHTML = output;
+                        }else if(this.status == 404){
+                            console.log('Fail');
+                        }
+                    }
+                    xhr.send();
+                }
+            </script>
 
             <div class="mb-3">
                 <label for="complainantDetail" class="form-label">Detail:</label>
                 <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg" placeholder="complainant's detail">
             </div>
+
             
 
             <!-- <div class="input-group">
@@ -89,16 +141,3 @@
     </div>
 </body>
 </html>
-
-<!-- 
-userID
-buildings ID
-roomID
-pDate
-sDate
-Type of damage
-Total
-detail
-status
-img path
--->

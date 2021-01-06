@@ -1,5 +1,6 @@
 <?php
-    require_once("../dbconfig.php");
+    include("../dbconfig.php");
+
     if(!session_id())//if session_id is not found
     {
         session_start();
@@ -10,21 +11,28 @@
         header('location: ../login/login.php');
     }
 
-    if(isset($_GET['id'])){
+    if(isset($_GET['id']))
+    {
         $id = $_GET['id'];
-        $sql = "DELETE FROM complaints WHERE compID=".$id.";";
+        $sql = "DELETE FROM users WHERE u_userIC='".$id."';";
 
         $result = mysqli_query($conn, $sql);
 
-        if ($result){
-            header("location: readComplaint.php");
-        } else{
+        if ($result)
+        {
+            header("location: readUser.php");
+        } 
+        else
+        {
             echo "ERROR:  $conn->error";
-            header("refresh: 5; location: readComplaint.php");
+            header("refresh: 5; location: readUser.php");
         }
 
-    } else {
+    } 
+    else 
+    {
         echo "ERROR Occur! Will direct back to the same page in 5 seconds";
-        header("refresh: 5; location: readComplaint.php");
+        header("refresh: 5; location: readUser.php");
     }
 ?>
+

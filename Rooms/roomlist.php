@@ -1,12 +1,21 @@
 <?php
-include ('dbconnect.php');
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 
-$sqlr = "SELECT * FROM rooms
-        JOIN blocks
-        ON rooms.blok = blocks.block_no
-        JOIN users
-        ON PIC = u_userIC";
-$result = mysqli_query($conn, $sqlr);
+    $sqlr = "SELECT * FROM rooms
+            JOIN blocks
+            ON rooms.blok = blocks.block_no
+            JOIN users
+            ON PIC = u_userIC";
+    $result = mysqli_query($conn, $sqlr);
 
 ?>
 
@@ -69,14 +78,14 @@ $result = mysqli_query($conn, $sqlr);
                             echo "</td>";
                             echo "</tr>";                            
                     }
-                 ?>                            
+                ?>                            
                 <!-- <td>
                 <a href= 'roommodify.php?id=<?php echo $row['r_roomID'];?>' class='btn btn-warning'>Modify</a>
                 <a href= "deleteUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item')"><strong>X</strong></a>  
                 <a href= "roomcancel.php?id=<?php echo $row['r_roomID'];?>" class='btn btn-primary btn-sm' onclick="return confirm('Are you sure you want to delete this item')"><strong>Delete</strong></a>
                 </td>
                 </tr>-->
-             </tbody>
+            </tbody>
         </table>
 </div>
 </body>

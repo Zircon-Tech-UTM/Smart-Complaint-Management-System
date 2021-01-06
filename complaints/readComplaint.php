@@ -1,7 +1,16 @@
 <?php 
-    require_once("complaintsBack/dbconfig.php");
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../../login/login.php');
+    }
 
-    $sql = "SELECT * FROM complaints ORDER BY complaintsID ASC;";
+    $sql = "SELECT * FROM complaints ORDER BY compID ASC;";
 
     $result  = mysqli_query($conn, $sql);
 
@@ -25,31 +34,34 @@
     <div class="container">
         <div class="row align-items-start">
             <div class="col-8"><h1 class="display-4">Complaints List</h1></div>
-            <div class="col-4"><a href="newComplaint.php" class="btn btn-primary btn-lg">Create New Complaints</a></div>
+            <div class="col-4"><a href="createComplaint.php" class="btn btn-primary btn-lg">Create New Complaints</a></div>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Complaint Type</th>
                     <th scope="col">Issue Date</th>
                     <th scope="col">Settle Date</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">followed by</th>
                 </tr>
                 <?php
+
                     while($row = mysqli_fetch_array($result)){
+                        $pDate = explode(" ", $row["proposedDate"]);
+                        $sDate = explode(" ", $row["setledDate"]);
+                        
                         echo"<tr>";
-                        echo "<th scope='row'>".$row["complaintsID"]."</th>";
-                        echo "<th>".$row["damage"]."</th>";
-                        echo "<th>".$row["pDate"]."</th>";
-                        echo "<th>".$row["sDate"]."</th>";
-                        echo "<th>".$row["status"]."</th>";
+                        echo "<th scope='row'>".$row["compID"]."</th>";
+                        echo "<th>".$pDate[0]."</th>";
+                        echo "<th>".$sDate[0]."</th>";
+                        echo "<th>".$row["c_status"]."</th>";
+                        echo "<th>".$row["followedBy"]."</th>";
                     ?>
                     <th>
-                        <a href="detailComplaint.php?id=<?php echo $row["complaintsID"]; ?>" class="btn btn-primary btn-sm">VIEW</a>
-                        <a href="modifyComplaint.php?id=<?php echo $row["complaintsID"]; ?>" class="btn btn-primary btn-sm">EDIT</a>
-                        <a href="deleteComplaint.php?id=<?php echo $row["complaintsID"]; ?>" class="btn btn-primary btn-sm"><strong>X</strong></a>
+                        <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm">VIEW</a>
+                        <a href="modifyComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm">EDIT</a>
+                        <a href="deleteComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm"><strong>X</strong></a>
                     </th>
                 <?php
                         echo"</tr>";

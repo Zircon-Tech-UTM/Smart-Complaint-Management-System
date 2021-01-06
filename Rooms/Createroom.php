@@ -1,7 +1,14 @@
 <?php
-
-include ('dbconnect.php');
-
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -50,12 +57,12 @@ include ('dbconnect.php');
                             echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
                     }
                     echo"</select>";
-                  ?>
+                ?>
             </div>
 
             <div class="form-group">
                 <label for="sel1">Block</label>
-                  <?php
+                <?php
                     $sql = "SELECT * FROM blocks";
                     $result = mysqli_query($conn, $sql);
                     
@@ -66,7 +73,7 @@ include ('dbconnect.php');
                         echo"<option value='".$row['block_no']."'>".$row['b_nameBI']."</option>";
                     }
                     echo"</select>";
-                  ?>
+                ?>
             </div>
     
             <!-- <div class="form-group"> 

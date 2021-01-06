@@ -1,11 +1,20 @@
 <?php
-include ('dbconnect.php');
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 
-$sql = "SELECT * FROM blocks
-        LEFT JOIN rooms
-        ON blocks.block_no = rooms.blok";
+    $sql = "SELECT * FROM blocks
+            LEFT JOIN rooms
+            ON blocks.block_no = rooms.blok";
 
-$result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>

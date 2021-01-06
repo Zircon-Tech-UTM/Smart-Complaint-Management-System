@@ -1,5 +1,14 @@
 <?php
-    include ('dbconnect.php');
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 
     $b_block_no = $_POST['block_no'];
     $b_nameBI = $_POST['nameBI'];

@@ -1,14 +1,29 @@
 <?php
-    require_once("complaintsBack\dbconfig.php");
+    require_once("../dbconfig.php");
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+    
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
 
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $sql = "SELECT * FROM complaints WHERE complaintsID=".$id.";";
+        $sql = "SELECT * FROM complaints, rooms, blocks 
+                WHERE complaints.c_roomID = rooms.r_roomID 
+                AND rooms.blok = blocks.block_no  
+                AND compID=".$id.";";
 
         $result = mysqli_query($conn, $sql);
 
         if ($result){
             $row = mysqli_fetch_array($result);
+
+            $pDate = explode(" ", $row["proposedDate"]);
+            $sDate = explode(" ", $row["setledDate"]);
 ?>          
 
 
@@ -24,22 +39,33 @@
 </head>
 <body>
     <div class="container">
-        <h1><strong>Complaints ID: </strong><?php echo $row["complaintsID"];?></h1>
-        <span>Building: </span><p><?php echo $row["buildingID"];?></p>
-        <span>Room: </span><p><?php echo $row["roomID"];?></p>
+        <h1><strong>Complaints ID: </strong><?php echo $row["compID"];?></h1>
+        <span>Building: </span><p><?php echo $row["blok"];?></p>
+        <span>Room: </span><p><?php echo $row["r_nameBI"];?></p>
 
         <ul class="list-inline">
-            <li class="list-inline-item"><p class="lead">Proposed Date: </p><p><?php echo $row["pDate"];?></p></li>
+            <li class="list-inline-item"><p class="lead">Proposed Date: </p><p><?php echo $pDate[0];?></p></li>
             <li class="list-inline-item"></li>
             <li class="list-inline-item">
-                <p class="lead">Settled Date: </p><p><?php if(empty($row["sDate"])){echo "-";} else {echo $row["sDate"];}?></p>
+                <p class="lead">Settled Date: </p><p><?php if(empty($sDate[0])){echo "-";} else {echo $sDate[0];}?></p>
             </li>
         </ul>
         
+        <p>
+            Status: 
+            <?php 
+                $sql2 = "SELECT * FROM status WHERE s_statusID = '".$row["c_status"]."'";
+
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_fetch_array($result2);
+
+                echo $row2["s_nameBI"];
+                
+            ?>
         
-        <p>Damage Type: <?php echo $row["damage"];?></p>
-        <p>Total: <?php echo $row["total"];?></p>
-        <p>Status: <?php echo $row["status"];?></p>
+        </p>
+
+        <p class="lead">Details: </p><p><?php echo $row['detail']; ?></p>
 
         <a href="modifyComplaint.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm">EDIT</a>
         <a href="deleteComplaint.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm">Delete</a>
@@ -57,7 +83,7 @@
 
     } else {
         echo "ERROR Occur! Will direct back to the same page in 5 seconds";
-        header("refresh: 6; location: readComplaint.php");
+        header("refresh: 5; location: readComplaint.php");
     }
     mysqli_close($conn);
 ?>
