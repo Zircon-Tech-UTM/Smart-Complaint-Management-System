@@ -98,7 +98,7 @@ INSERT INTO `categories` (`catID`, `cat_nameBI`, `cat_nameBM`) VALUES
 --
 
 CREATE TABLE `complaints` (
-  `compID` int(10) NOT NULL,
+  `compID` int(10) NOT NULL AUTO_INCREMENT,
   `c_userIC` varchar(12) DEFAULT NULL,
   `c_assetID` varchar(10) DEFAULT NULL,
   `c_roomID` varchar(10) DEFAULT NULL,
@@ -118,6 +118,28 @@ CREATE TABLE `complaints` (
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
 (1, '001005101332', 'NICT0001', NULL, NULL, '2020-12-30 23:33:37', 'meja sudah rosak', NULL, NULL, NULL, NULL),
 (2, '001005101332', 'ICT0001', NULL, NULL, '2020-12-30 23:33:37', 'lens missing', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grades`
+--
+
+CREATE TABLE `grades` (
+  `g_gradeID` varchar(5) NOT NULL,
+  `g_postBI` varchar(50) DEFAULT NULL,
+  `g_postBM` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`g_gradeID`, `g_postBI`, `g_postBM`) VALUES
+('DG41', 'Lecturer', 'Pensyarah'),
+('DG44', 'Lecturer', 'Pensyarah'),
+('FT19', 'Assistant Computer Technician', 'Juruteknik Komputer'),
+('JA29', 'Assistant Engineer', 'Penolong Jurutera');
 
 -- --------------------------------------------------------
 
@@ -184,25 +206,21 @@ CREATE TABLE `users` (
   `no_aduan` int(5) DEFAULT NULL,
   `u_img_path` varchar(50) DEFAULT NULL,
   `userType` varchar(2) NOT NULL CHECK (`userType` in ('1','2','3','4'))
+  `u_grade` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`) VALUES
-('001005101332', '123456', 'huiyou', 'Admin', 'Admin', 'lalalal', 'huiyou@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1'),
-('001005101333', '123456', 'Ahmad', 'PIC', 'PIC', 'lololol', 'Ahmad@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2'),
-('001005101334', '123456', 'Ali', 'PIC', 'PIC', 'lals', 'Ali@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2'),
-('001005101335', '123456', 'Mohamad', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'Mohamad@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3'),
-('001005101336', '123456', 'ABU', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'Abu@gmail.com', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4'),
-('001005101337', '123456', 'Muthu', 'PIC', 'PIC', 'lalsdsfsd', 'Muthu@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2');
-
---
--- Indexes for dumped tables
---
-
---
+INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`, `u_grade`) VALUES
+('001005101333', '123456', 'Ahmad', 'PIC', 'PIC', 'lololol', 'Ahmad@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
+('001005101334', '123456', 'Ali', 'PIC', 'PIC', 'lals', 'Ali@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
+('001005101335', '123456', 'Mohamad', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'Mohamad@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
+('001005101336', '123456', 'ABU', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'Abu@gmail.com', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
+('001005101337', '123456', 'Muthu', 'PIC', 'PIC', 'lalsdsfsd', 'Muthu@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
+('990105029068', '123456', 'jingyi', 'Admin', 'Admin', 'lalalal', 'jingyi@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1', 'DG44');
+                                        
 -- Indexes for table `assets`
 --
 ALTER TABLE `assets`
@@ -233,6 +251,12 @@ ALTER TABLE `complaints`
   ADD KEY `C_status_FK` (`c_status`),
   ADD KEY `C_follow_FK` (`followedBy`);
 
+                                        --
+-- Indexes for table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`g_gradeID`);
+
 --
 -- Indexes for table `rooms`
 --
@@ -251,7 +275,8 @@ ALTER TABLE `status`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`u_userIC`);
+  ADD PRIMARY KEY (`u_userIC`),
+  ADD KEY `u_grade_fk` (`u_grade`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -290,6 +315,12 @@ ALTER TABLE `complaints`
 ALTER TABLE `rooms`
   ADD CONSTRAINT `r_blok_FK` FOREIGN KEY (`blok`) REFERENCES `blocks` (`block_no`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `r_pic_FK` FOREIGN KEY (`PIC`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `u_grade_fk` FOREIGN KEY (`u_grade`) REFERENCES `grades` (`g_gradeID`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
