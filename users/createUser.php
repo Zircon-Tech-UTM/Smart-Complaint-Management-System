@@ -11,8 +11,8 @@
         header('location: ../login/login.php');
     }
 
-    include("../navbar/navbar1.php");
     include("UsersBack/createUserPro.php");
+    include("../navbar/navbar1.php");
      
 ?>
 
@@ -42,13 +42,13 @@
                 <div class ="row">
                     <div class="col-6">
                         <label for="fname" class="form-label">Full Name:</label>
-                        <input type="text" name="name" id="fname" class="form-control form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter Full Name" value="<?php echo $username; ?>">
+                        <input type="text" name="name" id="fname" class="form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter Full Name" value="<?php echo $username; ?>">
                         <span class="help-block"><?php echo $usernameErr;?></span>
                     </div>
 
                     <div class="col-6">
                         <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>">IC number:</label>
-                        <input type="text" name="IC" id="fic" class="form-control form-control <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter IC Number" value="<?php echo $IC; ?>">
+                        <input type="text" name="IC" id="fic" class="form-control <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter IC Number" value="<?php echo $IC; ?>">
                         <span class="help-block"><?php echo $ICErr;?></span>
                     </div>
                 </div><br>    
@@ -69,13 +69,13 @@
           <div class ="row">
               <div class="col-6 needs-validation">
                   <label for="pwd" class="form-label ">Password:</label>
-                  <input type="password" name="password" id="password" class="form-control form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $password; ?>">
+                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $password; ?>">
                   <span class="help-block"><?php echo $passwordErr;?></span>
               </div>
 
               <div class="col-6">
                   <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
+                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
                 <span class="help-block"><?php echo $confirm_passwordErr;?></span>
               </div>
           </div><br>
@@ -83,7 +83,7 @@
               <div class="row">
                 <div class="col-6">
                   <label for="position" class="form-label">Position Assigned:</label>
-                  <select name="position" id="position" class="form-select form-select mb-3 <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" aria-label="form-select example" value="<?php echo $positionBI; ?>">
+                  <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" aria-label="form-select example" value="<?php echo $positionBI; ?>">
 
                     <?php 
                     if($positionBI)
@@ -112,7 +112,8 @@
                   <span class="help-block"><?php echo $positionBIErr;?></span>
               </div>
             </div>
-                  
+              
+          
               <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
               <script>
                   $("#position").change(function() 
@@ -132,10 +133,11 @@
                   $("#position").trigger("change");
               </script>
 
+
         ` <div class="row">
             <div class="col-6">
             <label for="grades">Grade:</label>
-                  <select name ='grades'  class='form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> ' id='grades'value="<?php echo $grades; ?>">;
+                  <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades'value="<?php echo $grades; ?>">;
                   <option value="" selected>Choose a grade</option>;
               <?php 
                   $sql="SELECT * from grades";
@@ -180,7 +182,7 @@
         <div class="card-body">
             <div class="mb-3">
               <label for="faddr" class="form-label">Home Address:</label>
-              <input type="text" name="faddr" id="faddr" class="form-control form-control  <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter Home Address"value="<?php echo $addr; ?>">
+              <input type="text" name="faddr" id="faddr" class="form-control <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter Home Address"value="<?php echo $addr; ?>">
               <span class="help-block"><?php echo $addrErr;?></span>
             </div>
 
@@ -193,7 +195,7 @@
  
             <div class="col-6">
               <label for="femail" class="form-label">Email Address:</label>
-              <input type="text" name="femail" id="femail" class="form-control form-control  <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter email address" value="<?php echo $email; ?>">
+              <input type="text" name="femail" id="femail" class="form-control <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter email address" value="<?php echo $email; ?>">
               <span class="help-block"><?php echo $emailErr;?></span>
             </div>
           </div>

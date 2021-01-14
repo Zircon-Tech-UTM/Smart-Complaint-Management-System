@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
     if(empty($usernameErr)&&empty($emailErr)&&empty($ICErr)&&empty($contactErr)&&empty($passwordErr)
-      &&empty($confirm_passwordErr)&&empty($gradesErr)&&empty($positionErr)&&empty($addrErr))
+      &&empty($confirm_passwordErr)&&empty($gradesErr)&&empty($positionBIErr)&&empty($addrErr))
     {
           if($positionBI=="Admin")
           {
@@ -206,15 +206,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           date_default_timezone_set("Asia/Kuala_Lumpur");
           $rdate= date('Y-m-d H:i:s');  
 
-          $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')";
+         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')";
 
          
           $result = mysqli_query($conn, $sql);
 
-          if($result){
-              header("location: ../readUser.php");
+          if($result)
+          {
+              header("location: readUser.php");
               exit();
-          } else{
+          } 
+          else
+          {
               echo "ERROR: $conn->error";
           }
 
@@ -227,4 +230,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 ?>
 
 
+    
     

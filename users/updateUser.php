@@ -10,8 +10,7 @@
     {
         header('location: ../login/login.php');
     }
-
-    include("../navbar/navbar1.php");
+    
     if(isset($_GET['id']))
     {
         $id = $_GET['id'];
@@ -24,19 +23,26 @@
         } 
 
         $row = mysqli_fetch_array($result);
+
+    include("UsersBack/updateUserPro.php");
+    include("../navbar/navbar1.php");
      
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
     <title>Update User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-        <form action="UsersBack/updateUserPro.php?id=<?php echo $row["u_userIC"]; ?>" enctype="multipart/form-data" method="POST">
+        <form action="" method="POST">
           <!--<?php //echo htmlspecialchars($_SERVER["PHP_SELF"]);?>-->
           
 <div class="container-fluid">
@@ -50,15 +56,14 @@
                 <div class ="row">
                     <div class="col-6">
                         <label for="fname" class="form-label">Full Name:</label>
-                        <input type="text" name="name" id="fname" class="form-control form-control " placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>" required>
-                        <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>
-                        <span class="invalid-feedback"><?php echo $usernameErr;?></span>
+                        <input type="text" name="name" id="fname" class="form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?> " placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>">
+                        <span class="help-block"><?php echo $usernameErr;?></span>
                     </div>
 
                     <div class="col-6">
                         <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>">IC number:</label>
-                        <input type="text" name="IC" id="fic" class="form-control form-control <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter IC Number"value="<?php echo $row["u_userIC"]; ?>" required>
-                        <span class="invalid-feedback"required><?php echo $ICErr;?></span>
+                        <input type="text" name="IC" id="fic" class="form-control  <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter IC Number"value="<?php echo $row["u_userIC"]; ?>">
+                        <span class="help-block"required><?php echo $ICErr;?></span>
                     </div>
                 </div><br>    
 
@@ -78,20 +83,21 @@
           <div class ="row">
               <div class="col-6 needs-validation">
                   <label for="pwd" class="form-label ">Password:</label>
-                  <input type="password" name="password" id="password" class="form-control form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $row["pwd"]; ?>" required>
-                  <span class="invalid-feedback"><?php echo $passwordErr;?></span>
+                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $row["pwd"]; ?>" >
+                  <span class="help-block"><?php echo $passwordErr;?></span>
               </div>
 
               <div class="col-6">
                   <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();'value="<?php echo $row["pwd"]; ?>" required>  
+                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control  <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" onkeyup='check();'value="<?php echo $row["pwd"]; ?>">
+                <span class="help-block"><?php echo $confirm_passwordErr;?></span>  
               </div>
           </div><br>
 
               <div class="row">
                 <div class="col-6">
                   <label for="position" class="form-label">Position Assigned:</label>
-                  <select name="position" id="position" class="form-select form-select mb-3" aria-label="form-select example" value="<?php echo $row["postBI"]; ?>" required>
+                  <select name="position" id="position" class="form-control" aria-label="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row["postBI"]; ?>">
                       <option value="" selected>Choose a position</option>
                       <?php 
                         $temps = ["Admin", "PIC", "Assistant Computer Technician", "Assistant Engineer"];
@@ -104,6 +110,7 @@
                         }
                       ?>
                   </select>
+                  <span class="help-block"><?php echo $positionBIErr;?></span>
               </div>
                 
             </div>
@@ -129,11 +136,10 @@
         ` <div class="row">
             <div class="col-6">
             <label for="grades">Grade:</label>
+            <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades' >";
               <?php 
                   $sql1="SELECT * from grades";
                   $result1=mysqli_query($conn, $sql1);
-
-                  echo"<select name ='grades'  class='form-control' id='grades' >";
                   while ($row1=mysqli_fetch_array($result1))
                   {
                     if($row1['g_gradeID']==$row['u_grade'])
@@ -145,8 +151,9 @@
                         echo"<option value='".$row1['g_gradeID']."'>".$row1['g_gradeID']."</option>";
                     }
                   }
-                  echo"</select>";
               ?>
+            </select>;
+              <span class="help-block"><?php echo $gradesErr;?></span>
             </div>
             <div class="col-6">
                   <div class="form-label" id="PIC">
@@ -186,20 +193,21 @@
 
             <div class="mb-3">
               <label for="faddr" class="form-label">Home Address:</label>
-              <input type="text" name="faddr" id="faddr" class="form-control form-control" placeholder="Enter Home Address" value="<?php echo $row["address"]; ?>">
+              <input type="text" name="faddr" id="faddr" class="form-control <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter Home Address" value="<?php echo $row["address"]; ?>">
+              <span class="help-block"><?php echo $addrErr;?></span>
             </div>
 
              <div class="row">
                 <div class="col-6">
                   <label for="fcontactnum" class="form-label">Contact Number:</label>
-                  <input type="text" name="fcontactnum" id="fcontactnum" class="form-control  <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter contact number"  value="<?php echo $row["contact"]; ?>"required>
-                  <span class="invalid-feedback"><?php echo $contactErr;?></span>
+                  <input type="text" name="fcontactnum" id="fcontactnum" class="form-control  <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter contact number"  value="<?php echo $row["contact"]; ?>">
+                  <span class="help-block"><?php echo $contactErr;?></span>
                 </div>
      
                 <div class="col-6">
                   <label for="femail" class="form-label">Email Address:</label>
-                  <input type="text" name="femail" id="femail" class="form-control form-control  <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter email address"value="<?php echo $row["email"]; ?>"required>
-                  <span class="invalid-feedback"><?php echo $contactErr;?></span>
+                  <input type="text" name="femail" id="femail" class="form-control <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter email address"value="<?php echo $row["email"]; ?>">
+                  <span class="help-block"><?php echo $contactErr;?></span>
                 </div>
             </div>
  </div>
