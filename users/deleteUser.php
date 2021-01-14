@@ -6,7 +6,7 @@
         session_start();
     }
     
-    if(isset($_SESSION['u_userIC']) != session_id() )
+    if(isset($_SESSION['ic']) != session_id() )
     {
         header('location: ../login/login.php');
     }
@@ -20,14 +20,13 @@
 
         if ($result)
         {
-            header("location: readUser.php");
+            header("location: readUser.php?id=".$_SESSION['ic']."");
         } 
         else
         {
             echo "ERROR:  $conn->error";
-            header("refresh: 5; location: readUser.php");
+            header("refresh: 5; location: readUser.php?id=".$_SESSION['ic']."");
         }
-
     } 
     else 
     {
