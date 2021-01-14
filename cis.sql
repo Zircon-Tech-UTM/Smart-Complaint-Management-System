@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2021 at 07:49 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 14, 2021 at 11:39 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cis`
 --
+CREATE DATABASE IF NOT EXISTS `cis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cis`;
 
 -- --------------------------------------------------------
 
@@ -37,16 +39,19 @@ CREATE TABLE `assets` (
   `cost` decimal(6,2) NOT NULL,
   `amount` int(5) NOT NULL,
   `date_purchased` datetime DEFAULT NULL,
-  `a_img_path` varchar(50) DEFAULT NULL
+  `a_img_path` varchar(50) DEFAULT NULL,
+  `maintain` varchar(1) DEFAULT NULL,
+  `item` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assets`
 --
 
-INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`, `amount`, `date_purchased`, `a_img_path`) VALUES
-('ICT0001', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL),
-('NICT0001', 'Table', 'Meja', '2', 'BL2000001', 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL);
+INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`, `amount`, `date_purchased`, `a_img_path`, `maintain`, `item`) VALUES
+('ICT0001', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
+('ICT0002', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
+('NICT0001', 'Table', 'Meja', '2', 'BL2000001', 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL, '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,8 +119,9 @@ CREATE TABLE `complaints` (
 --
 
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
-(1, '990105029068', 'NICT0001', NULL, NULL, '2020-12-30 23:33:37', 'meja sudah rosak', NULL, NULL, NULL, NULL),
-(2, '990105029068', 'ICT0001', NULL, NULL, '2020-12-30 23:33:37', 'lens missing', NULL, NULL, NULL, NULL);
+(1, '990105029068', 'NICT0001', 'AL1000002', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
+(2, '990105029068', 'ICT0001', 'BL1000001', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
+(3, '990105029068', 'ICT0002', 'AL1000002', '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -289,7 +295,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
