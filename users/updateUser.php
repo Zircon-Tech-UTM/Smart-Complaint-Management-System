@@ -89,7 +89,7 @@
 
               <div class="col-6">
                   <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control  <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" onkeyup='check();'value="<?php echo $row["pwd"]; ?>">
+                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control  <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" onkeyup='check();'value="<?php echo $row["pwd"]; ?>">
                 <span class="help-block"><?php echo $confirm_passwordErr;?></span>  
               </div>
           </div><br>
@@ -200,7 +200,7 @@
              <div class="row">
                 <div class="col-6">
                   <label for="fcontactnum" class="form-label">Contact Number:</label>
-                  <input type="text" name="fcontactnum" id="fcontactnum" class="form-control  <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter contact number"  value="<?php echo $row["contact"]; ?>">
+                  <input type="text" name="fcontactnum" id="fcontactnum" class="form-control <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter contact number"  value="<?php echo $row["contact"]; ?>">
                   <span class="help-block"><?php echo $contactErr;?></span>
                 </div>
      

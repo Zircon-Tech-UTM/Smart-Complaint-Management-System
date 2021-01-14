@@ -85,6 +85,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
       $passwordErr = "Password must have at least 4 characters.";
   } 
+  elseif($_POST["password"]!=$_POST["confirm_password"])
+  {
+       $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
+  }
   else
   {
       $password = trim($_POST["password"]);
@@ -99,6 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
       $confirm_passwordErr = "Password must have at least 4 characters.";
   } 
+  elseif($_POST["password"]!=$_POST["confirm_password"])
+  {
+       $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
+  }
   else
   {
       $confirm_password = trim($_POST["confirm_password"]);

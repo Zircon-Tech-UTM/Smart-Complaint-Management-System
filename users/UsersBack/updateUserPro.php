@@ -74,6 +74,7 @@
         $IC = trim($_POST["IC"]);
       }
 
+
       if(empty(trim($_POST["password"])))
       {
           $passwordErr = "Changes failed. Pasword is required.";     
@@ -96,6 +97,10 @@
       {
           $confirm_passwordErr = "Changes failed. Password must have at least 4 characters.";
       } 
+      elseif($_POST["password"]!=$_POST["confirm_password"])
+      {
+           $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
+      }
       else
       {
           $confirm_password = trim($_POST["confirm_password"]);
