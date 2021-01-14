@@ -9,10 +9,16 @@
   {
       header('location: ../login/login.php');
   }
+  // include("../navbar/navbar1.php");
+  include("createprocess.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,32 +29,54 @@
 </head>
 <body>
   <h1>Create Asset</h1>
-    <div class="container">
-
-      <form action="createprocess.php" method="POST">
+    <div class="container">    
+      <form action="" method="POST">
 
         <div class="form-group">
           <label for="AsssetID">AssetID</label>
-          <input type="text" class="form-control" id="AsssetID" placeholder="Enter AssetID" name="assetID" >
+          <input type="text" class="form-control <?php echo (!empty($assetIDErr)) ? 'is-invalid' : ''; ?>" id="AsssetID" placeholder="Enter AssetID" name="assetID" value="<?php echo $assetID; ?>">
+          <span class="help-block"><?php echo $assetIDErr;?></span>
         </div>
 
         <div class="form-group">
           <label for="BI_Name">BI Name</label>
-          <input type="text" class="form-control" id="BI_Name" placeholder="Enter name in BI" name="nameBI" >
+          <input type="text" class="form-control <?php echo (!empty($nameBIErr)) ? 'is-invalid' : ''; ?>" id="BI_Name" placeholder="Enter name in BI" name="nameBI"  value="<?php echo $nameBI; ?>">
+           <span class="help-block"><?php echo $nameBIErr;?></span>
         </div>
             
         <div class="form-group">
           <label for="BM_Name">BM Name</label>
-          <input type="text" class="form-control" id="BM_Name" placeholder="Enter name in BM" name="nameBM" >
+          <input type="text" class="form-control <?php echo (!empty($nameBMErr)) ? 'is-invalid' : ''; ?>" id="BM_Name" placeholder="Enter name in BM" name="nameBM"  value="<?php echo $nameBM; ?>" >
+          <span class="help-block"><?php echo $nameBMErr;?></span>
         </div>
 
         <label>Category</label>
         <div class="radio">
-          <label><input type="radio" name="category" value="1" >ICT</label>
+          <label><input type="radio" id="1" name="category" value="1" >ICT</label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="category" value="2" >Non-ICT</label>
+          <label><input type="radio" id="2" name="category" value="2" >Non-ICT</label>
         </div>
+        <span class="help-block"><?php echo $categoryErr;?></span>
+
+          <!-- <script type="text/javascript">
+            function radioValidation(){
+
+                var category = document.getElementsByName('category');
+                var categoryValue = false;
+
+                for(var i=0; i<category.length;i++){
+                    if(category[i].checked == true){
+                        categoryValue = true;    
+                    }
+                }
+                if(!categoryValue){
+                    alert("Choose a category");
+                    return false;
+                }
+
+            }
+        </script> -->
 
         <div class="form-group">
           <label for="Description">Description</label>
@@ -57,12 +85,14 @@
         
         <div class="form-group">
           <label for="Cost">Cost</label>
-          <input type="text" class="form-control" id="Cost" placeholder="Enter cost" name="cost" >
+          <input type="text" class="form-control <?php echo (!empty($costErr)) ? 'is-invalid' : ''; ?>" id="Cost" placeholder="Enter cost" name="cost" value="<?php echo $cost; ?>" >
+          <span class="help-block"><?php echo $costErr;?></span>
         </div>
 
         <div class="form-group">
           <label for="Amount">Amount </label>
-          <input type="text" class="form-control" id="Amount " placeholder="Enter amount " name="amount" >
+          <input type="text" class="form-control <?php echo (!empty($date_purchasedErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="Enter amount " name="amount" value="<?php echo $date_purchased; ?>" >
+           <span class="help-block"><?php echo $date_purchasedErr;?></span>
         </div>
 
         <!-- <div class="form-group">
@@ -78,13 +108,15 @@
 
         <div class="form-group">
           <label for="Date_Purchased">Date purchased</label>
-          <input type="date" class="form-control" id="Date_Purchased" name="date_purchased" >
+          <input type="date" class="form-control <?php echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Date_Purchased" name="date_purchased" value="<?php echo $amount; ?>" >
+          <span class="help-block"><?php echo $amountErr;?></span>
         </div>
 
-        <button type="submit"  class="btn btn-success" value="Submit" name="">Submit</button>
+        <button type="submit"  class="btn btn-success" value="Submit" name="" >Submit</button>
         
       </form>
     </div>
 
 </body>
 </html>
+<!-- <?php include("../navbar/navbar2.php");?> -->

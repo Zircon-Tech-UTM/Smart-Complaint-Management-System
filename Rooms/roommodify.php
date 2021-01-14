@@ -6,7 +6,7 @@
         session_start();
     }
 
-    if(isset($_SESSION['u_userIC']) != session_id() )
+    if(isset($_SESSION['ic']) != session_id() )
     {
         header('location: ../login/login.php');
     }

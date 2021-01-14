@@ -9,7 +9,8 @@
     {
         header('location: ../login/login.php');
     }
-
+    // include("../navbar/navbar1.php");
+    
     $sql1 = "SELECT * FROM users WHERE u_userIC = '".$_SESSION['ic']."'";
     $result1 = mysqli_query($conn, $sql1);
     $row1 = mysqli_fetch_array($result1);
@@ -17,10 +18,16 @@
     $sql2 = "SELECT * FROM blocks";
     $result2 = mysqli_query($conn, $sql2);
 
+    include("complaintsBack/createPro.php");
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,19 +39,20 @@
 <body>
     <div class="container">
         <h1>Complaint Form</h1>
-        <form action="complaintsBack\createPro.php" method="POST">
+        <form action="" method="POST">
             
             <input type="hidden" name="u_userIC" id="complainantName" class="form-control form-control-lg" value="<?php echo $row1['u_userIC']; ?>">
 
             <div class="mb-3">
                 <label for="proposedDate" class="form-label">Date:</label>
-                <input type="date" name="date" id="proposedDate" class="form-control form-control-lg">
+                <input type="date" name="date" id="proposedDate" class="form-control form-control-lg <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"  value="<?php echo $date; ?>">
+                <span class="help-block"><?php echo $dateErr;?></span>
             </div>
 
             <div>
                 <label for="blocks" class="form-label">Blocks</label><br>
-                <select class="form-select" aria-label="Default select example" id="blocks" name="blocks">
-                    <option selected>Open this select menu</option>
+                <select class="form-select <?php echo (!empty($blocksErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="blocks" name="blocks" value="<?php echo $blocks; ?>">
+                    <option value="" selected>Open this select menu</option>
                     <?php
                         while ($row2 = mysqli_fetch_array($result2)){
                     ?>
@@ -53,20 +61,23 @@
                         }
                     ?>
                 </select>
+                <span class="help-block"><?php echo $blocksErr;?></span>
             </div><br>
 
             <div>
                 <label for="rooms" class="form-label">Rooms</label><br>
-                <select class="form-select" aria-label="Default select example" id="rooms" name="rooms">
-                    <option selected>Please Choose A Block</option>
+                <select class="form-select <?php echo (!empty($roomsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="rooms" name="rooms" value="<?php echo $rooms; ?>">
+                    <option value="" selected>Please Choose A Block</option>
                 </select>
+                <span class="help-block"><?php echo $roomsErr;?></span>
             </div><br>
 
             <div>
                 <label for="assets" class="form-label">Assets</label><br>
-                <select class="form-select" aria-label="Default select example" id="assets" name="assets">
-                    <option selected>Please Choose A Room</option>
+                <select class="form-select <?php echo (!empty($assetsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="assets" name="assets" value="<?php echo $assets; ?>">
+                    <option value="" selected>Please Choose A Room</option>
                 </select>
+                <span class="help-block"><?php echo $assetsErr;?></span>
             </div><br>
 
             <script type="text/javascript">
@@ -85,7 +96,7 @@
 
                             output = '';
 
-                            output+= `<option selected>Open this select menu</option>`;
+                            output+= `<option value=""  selected>Open this select menu</option>`;
                             for (var i in rooms){
                                 output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
                             }
@@ -111,7 +122,7 @@
 
                             output = '';
 
-                            output+= `<option selected>Open this select menu</option>`;
+                            output+= `<option value="" selected>Open this select menu</option>`;
                             for (var i in result){
                                 output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
                             }
@@ -127,7 +138,8 @@
 
             <div class="mb-3">
                 <label for="complainantDetail" class="form-label">Detail:</label>
-                <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg" placeholder="complainant's detail">
+                <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg <?php echo (!empty($detailErr)) ? 'is-invalid' : ''; ?>" placeholder="complainant's detail"  value="<?php echo $detail; ?>">
+                <span class="help-block"><?php echo $detailErr;?></span>
             </div>
 
             
@@ -141,3 +153,4 @@
     </div>
 </body>
 </html>
+<!-- <?php include("../navbar/navbar2.php");?> -->

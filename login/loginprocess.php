@@ -69,7 +69,7 @@
     }
     else                    //OtherUsers
     {
-      header("location: ../usersB/landing.php?id=".$fid."");
+      header("location: ../indexB.php");
     }
   }
   else             //User not found

@@ -5,14 +5,20 @@
         session_start();
     }
     
-    if(isset($_SESSION['u_userIC']) != session_id() )
+    if(isset($_SESSION['ic']) != session_id() )
     {
         header('location: ../login/login.php');
     }
+    // include("../navbar/navbar1.php");
+    include("createroomprocess.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,24 +30,29 @@
 <body>
     <h1>Create a new Room</h1>
     <div class="container">
-        <form method="POST" action="createroomprocess.php">
+        <form method="POST" action="">
             <div class="form-group">
                 <label for="roomID">Room ID</label>
-                        <input type="text" class="form-control" id="roomID" placeholder="Enter room ID" name="roomID" required="A room must have a unique ID">
+                        <input type="text" class="form-control <?php echo (!empty($r_roomIDErr)) ? 'is-invalid' : ''; ?>" id="roomID" placeholder="Enter room ID" name="roomID"  value="<?php echo $r_roomID; ?>">
+                        <span class="help-block"><?php echo $r_roomIDErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="name">Room's Name</label>
-                <input type="text" class="form-control" id="nameBI" placeholder="Enter name in English" name="nameBI" required="A room must have a name.">
+                <input type="text" class="form-control <?php echo (!empty($r_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI" value="<?php echo $r_nameBI; ?>">
+                 <span class="help-block"><?php echo $r_nameBIErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="nama">Nama Bilik</label>
-                <input type="text" class="form-control" id="nameBM" placeholder="Enter name in Malay" name="nameBM" required="A room must have a name.">
+                <input type="text" class="form-control <?php echo (!empty($r_nameBMErr)) ? 'is-invalid' : ''; ?>" id="nameBM" placeholder="Enter name in Malay" name="nameBM" value="<?php echo $r_nameBM; ?>">
+                <span class="help-block"><?php echo $r_nameBMErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="PIC">Person in charge's ID</label>
+            <select name='PIC' class="form-control <?php echo (!empty($r_PICErr)) ? 'is-invalid' : ''; ?>" id='PIC' value="<?php echo $r_PIC; ?>">";
+            <option selected disabled>PIC's name</option>";
                 <?php
                     $sql = "SELECT * FROM users 
                             LEFT OUTER JOIN rooms 
@@ -50,30 +61,30 @@
                             AND (rooms.PIC IS NULL)";
                     $result = mysqli_query($conn, $sql);
 
-                    echo"<select name='PIC' class='form-control' id='PIC'>";
-                    echo"<option selected disabled>PIC's name</option>";
                     while($row = mysqli_fetch_array($result))
                     {
                             echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
                     }
-                    echo"</select>";
                 ?>
+            </select>";
+            <span class="help-block"><?php echo $r_PICErr;?></span>
             </div>
 
             <div class="form-group">
                 <label for="sel1">Block</label>
+                <select name='block' class="form-control <?php echo (!empty($r_blockErr)) ? 'is-invalid' : ''; ?>" id='sel1' value ="<?php echo $r_block; ?>">";
+                <option selected disabled>Block</option>";
                 <?php
                     $sql = "SELECT * FROM blocks";
                     $result = mysqli_query($conn, $sql);
                     
-                    echo"<select name='block' class='form-control' id='sel1'>";
-                    echo"<option selected disabled>Block</option>";
                     while($row = mysqli_fetch_array($result))
                     {
                         echo"<option value='".$row['block_no']."'>".$row['b_nameBI']."</option>";
                     }
-                    echo"</select>";
                 ?>
+               </select>";
+               <span class="help-block"><?php echo $r_blockErr;?></span>
             </div>
     
             <!-- <div class="form-group"> 
@@ -90,3 +101,4 @@
 
 </body>
 </html>
+<!-- <?php include("../navbar/navbar2.php");?> -->

@@ -9,10 +9,17 @@
     {
         header('location: ../login/login.php');
     }
+    
+    // include("../navbar/navbar1.php");
+    include("createblockprocess.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Block</title>
@@ -22,30 +29,34 @@
 <body>
 <h1>Create a new Room</h1>
     <div class="container">
-        <form method="POST" action="createblockprocess.php">
+        <form method="POST" action="">
             <div class="form-group">
                 <label for="block_no">Block ID</label>
-                        <input type="text" class="form-control" id="block_no" placeholder="Enter block ID" name="block_no" required="A block must have a unique ID">
+                        <input type="text" class="form-control <?php echo (!empty($b_block_noErr)) ? 'is-invalid' : ''; ?>" id="block_no" placeholder="Enter block ID" name="block_no"  value="<?php echo $b_block_no; ?>">
+                        <span class="help-block"><?php echo $b_block_noErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="name">Block's Name</label>
-                <input type="text" class="form-control" id="nameBI" placeholder="Enter name in English" name="nameBI" required="A block must have a name.">
+                <input type="text" class="form-control <?php echo (!empty($b_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI" value="<?php echo $b_nameBI; ?>">
+                <span class="help-block"><?php echo $b_nameBIErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="nama">Nama Blok</label>
-                <input type="text" class="form-control" id="nameBM" placeholder="Enter name in Malay" name="nameBM" required="A block must have a name.">
+                <input type="text" class="form-control <?php echo (!empty($b_nameBMErr)) ? 'is-invalid' : ''; ?>" id="nameBM" placeholder="Enter name in Malay" name="nameBM" value="<?php echo $b_nameBM; ?>">
+                 <span class="help-block"><?php echo $b_nameBMErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="location">Location</label>
-                <select name = 'loc' class="form-select" aria-label="Disabled select example">
+                <select name = 'loc' class="form-select  <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Disabled select example"  value="<?php echo $b_loc; ?>">
                     <option selected disabled>Location</option>
                     <option value="1">Asrama</option>
                     <option value="2">Kolej</option>
                     <option value="3">Others</option>
-                </select>             
+                </select>      
+                 <span class="help-block"><?php echo$b_locErr;?></span>       
             </div>
 
 
@@ -57,3 +68,4 @@
 
 </body>
 </html>
+<!-- <?php include("../navbar/navbar2.php");?> -->
