@@ -48,11 +48,6 @@
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
-
-            <!-- <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-            <script src="../assets/js/script.min.js"></script> -->
         </nav>
 
         <div class="d-flex flex-column" id="content-wrapper">

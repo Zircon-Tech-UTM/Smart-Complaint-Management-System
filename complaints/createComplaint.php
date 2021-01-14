@@ -9,7 +9,7 @@
     {
         header('location: ../login/login.php');
     }
-    // include("../navbar/navbar1.php");
+    include("../navbar/navbar1.php");
     
     $sql1 = "SELECT * FROM users WHERE u_userIC = '".$_SESSION['ic']."'";
     $result1 = mysqli_query($conn, $sql1);
@@ -152,5 +152,5 @@
         </form>
     </div>
 </body>
-</html>
-<!-- <?php include("../navbar/navbar2.php");?> -->
+</html
+ <?php include("../navbar/navbar2.php");?> 

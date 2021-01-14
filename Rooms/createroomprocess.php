@@ -106,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             VALUES ('$r_roomID', '$r_PIC', '$r_nameBI', '$r_nameBM', '$r_block')";
 
     $result = mysqli_query($conn, $sql);
+
     if($result)
     {
         header ("Location: roomlist.php");
@@ -114,9 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         echo $conn->error;
     }
-    mysqli_close($conn);
+     mysqli_close($conn);
  }
-   
+  
 }
 ?>
 

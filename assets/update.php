@@ -20,6 +20,8 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 
+     include("updateprocess.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -35,22 +37,25 @@
 <body>
     <div class="container">
         <h2>Update Asset</h2>
-        <form action="updateprocess.php" method="POST">
+        <form action="" method="POST">
             <input type="hidden" name="assetID" value="<?php echo $row['a_assetID']; ?>">
 
             <div class="form-group">
                 <label for="AsssetID">AssetID</label>
-                <input type="text" class="form-control" id="AsssetID" placeholder="Enter AssetID" name="assetID" value="<?php echo $row['a_assetID']; ?>" >
+                <input type="text" class="form-control  <?php echo (!empty($assetIDErr)) ? 'is-invalid' : ''; ?>" id="AsssetID" placeholder="Enter AssetID" name="assetID" value="<?php echo $row['a_assetID']; ?>" >
+                <span class="help-block"><?php echo $assetIDErr;?></span>
             </div>
 
             <div class="form-group">
                 <label for="BI_Name">BI Name</label>
-                <input type="text" class="form-control" id="BI_Name" placeholder="Enter name in BI" name="nameBI" value="<?php echo $row['a_nameBI']; ?>" >
+                <input type="text" class="form-control <?php echo (!empty($nameBIErr)) ? 'is-invalid' : ''; ?>" id="BI_Name" placeholder="Enter name in BI" name="nameBI" value="<?php echo $row['a_nameBI']; ?>" >
+                 <span class="help-block"><?php echo $nameBIErr;?></span>
             </div>
 
             <div class="form-group">
                 <label for="BM_Name">BM Name</label>
-                <input type="text" class="form-control" id="BM_Name" placeholder="Enter name in BM" name="nameBM" value="<?php echo $row['a_nameBM']; ?>" >
+                <input type="text" class="form-control <?php echo (!empty($nameBMErr)) ? 'is-invalid' : ''; ?>" id="BM_Name" placeholder="Enter name in BM" name="nameBM" value="<?php echo $row['a_nameBM']; ?>" >
+                 <span class="help-block"><?php echo $nameBMErr;?></span>
             </div>
 
             
@@ -105,6 +110,7 @@
 
                     } // end of foreach()
                 ?>
+                <span class="help-block"><?php echo $categoryErr;?></span>
             </div>
 
             <div class="form-group">
@@ -114,12 +120,14 @@
             
             <div class="form-group">
                 <label for="Cost">Cost</label>
-                <input type="text" class="form-control" id="Cost" placeholder="Enter cost" name="cost" value="<?php echo $row['cost']; ?>" >
+                <input type="text" class="form-control  <?php echo (!empty($costErr)) ? 'is-invalid' : ''; ?>" id="Cost" placeholder="Enter cost" name="cost" value="<?php echo $row['cost']; ?>" >
+                <span class="help-block"><?php echo $costErr;?></span>
             </div>
 
             <div class="form-group">
                 <label for="Amount">Amount </label>
-                <input type="text" class="form-control" id="Amount " placeholder="Enter amount " name="amount" value="<?php echo $row['amount']; ?>" >
+                <input type="text" class="form-control  <?php echo (!empty($date_purchasedErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="Enter amount " name="amount" value="<?php echo $row['amount']; ?>" >
+                <span class="help-block"><?php echo $date_purchasedErr;?></span>
             </div>
             
             <!-- <div class="form-group">
@@ -169,7 +177,8 @@
 
             <div class="form-group">
                 <label for="Date_Purchased">Date purchased</label>
-                <input type="date" class="form-control" id="Date_Purchased" name="date_purchased" value="<?php echo $new_date; ?>" >
+                <input type="date" class="form-control <?php echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Date_Purchased" name="date_purchased" value="<?php echo $new_date; ?>" >
+                <span class="help-block"><?php echo $amountErr;?></span>
             </div>
             <br>
 

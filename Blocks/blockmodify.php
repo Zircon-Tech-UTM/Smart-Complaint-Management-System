@@ -22,10 +22,16 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 
+    include("blockmodifyprocess.php");
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.error {color: #FF0000;}
+.help-block{color:red;}
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,26 +43,29 @@
 <body>
 <h1>Edit Block</h1>
     <div class="container">
-        <form method="POST" action="blockmodifyprocess.php">
+        <form method="POST" action="">
             <div class="form-group">
             <label for="block_no">Block ID</label>
-                <input type="text" class="form-control" id="block_no" placeholder="Enter block ID" name="block" required="A block must have a unique ID" value = "<?php echo $row['block_no'];?>"disabled>
+                <input type="text" class="form-control <?php echo (!empty($b_block_noErr)) ? 'is-invalid' : ''; ?>" id="block_no" placeholder="Enter block ID" name="block" value = "<?php echo $row['block_no'];?>"disabled>
+                 <span class="help-block"><?php echo $b_block_noErr;?></span>
             </div>
             <input type="hidden" class="form-control" id="block_no" placeholder="Enter block ID" name="block" required="A block must have a unique ID" value = "<?php echo $row['block_no'];?>">
 
             <div class="form-group">
             <label for="name">Block's Name</label>
-                <input type="text" class="form-control" id="nameBI" placeholder="Enter name in English" name="nameBI" required="A block must have a name." value = "<?php echo $row['b_nameBI'];?>">
+                <input type="text" class="form-control <?php echo (!empty($b_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI"  value = "<?php echo $row['b_nameBI'];?>">
+                <span class="help-block"><?php echo $b_nameBIErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="nama">Nama Blok</label>
-                <input type="text" class="form-control" id="nameBM" placeholder="Enter name in Malay" name="nameBM" required="A block must have a name." value = "<?php echo $row['b_nameBM'];?>">
+                <input type="text" class="form-control <?php echo (!empty($b_nameBMErr)) ? 'is-invalid' : ''; ?>" id="nameBM" placeholder="Enter name in Malay" name="nameBM" value = "<?php echo $row['b_nameBM'];?>">
+                <span class="help-block"><?php echo $b_nameBMErr;?></span>
             </div>
 
             <div class="form-group">
             <label for="location">Location</label>
-                <select name = 'loc' class="form-select" aria-label="Default select example">
+                <select name = 'loc' class="form-select <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" value="<?php echo $b_loc; ?>">
                 <option selected disabled>Location</option>
                     <?php
                     $array = ['1','2', '3'];
@@ -100,6 +109,7 @@
                     
                     ?>
                 </select>             
+                <span class="help-block"><?php echo$b_locErr;?></span>       
             </div>
             <br>
 

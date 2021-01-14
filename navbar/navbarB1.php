@@ -1,3 +1,18 @@
+<?php
+    
+    $sql1 = "SELECT * FROM users WHERE u_userIC=".$_SESSION['ic'].";";
+
+    $result1 = mysqli_query($conn, $sql1);
+
+    if (!$result1)
+    {
+        echo "ERROR:  $conn->error";
+        header("refresh: 6; location: readUser.php");
+    } 
+
+    $row1 = mysqli_fetch_array($result1);
+?>
+
 <!DOCTYPE html>
 <html lang="en" style="opacity: 1;">
 <head>
@@ -15,7 +30,7 @@
 <body id="page-top">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="opacity: 1;filter: brightness(94%) contrast(114%);background: #0902d6;color: rgb(255,255,255);">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="../index.php?id=<?php echo $row["u_userIC"]; ?>">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="../indexB.php">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span>Management</span></div>
                 </a>
@@ -26,25 +41,20 @@
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-files-o"></i><span>Download And Print</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
-
-                <script src="../assets/js/jquery.min.js"></script>
-                <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-                <script src="../assets/js/script.min.js"></script>
-
             </div>
         </nav>
+
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content" style="margin: 2px;">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <h3 class="text-dark mb-0"><?php echo $row["postBI"];?> Home</h3>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2">
-                                    <?php echo $row["name"];?>
+                                    <?php echo $row1["name"];?>
+                                    
                                 </span><img class="border rounded-circle img-profile" src="../assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="../usersB/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Edit Profile</a>

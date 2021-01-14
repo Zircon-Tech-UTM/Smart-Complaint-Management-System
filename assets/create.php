@@ -51,14 +51,45 @@
         </div>
 
         <label>Category</label>
-        <div class="radio">
-          <label><input type="radio" id="1" name="category" value="1" >ICT</label>
+        <div class="radio ">
+          <!-- <label><input type="radio" id="1" name="category" value="1" >ICT</label>
         </div>
         <div class="radio">
           <label><input type="radio" id="2" name="category" value="2" >Non-ICT</label>
-        </div>
-        <span class="help-block"><?php echo $categoryErr;?></span>
+        </div> -->
+        
+        <?php
+                $array2 =['1','2'];
 
+                foreach($array2 as $arr2){
+                    if($arr2 == $category){
+                        echo "<label><input type='radio' name='category' value=".$arr2." checked >";
+                        if($arr2=='1'){
+                            echo "ICT";
+                            echo "</input></label>";
+                        }
+                        else{
+                            echo "Non-ICT";
+                            echo "</input></label>";
+                        }
+                        echo "<br>";
+                    }else {
+                        echo "<label><input type='radio' name='category' value=".$arr2." >";
+                        if($arr2=='1'){
+                            echo "ICT";
+                            echo "</input></label>";
+                        }
+                        else{
+                            echo "Non-ICT";
+
+                            echo "</input></label>";
+                        }
+                        echo "<br>";
+                    }  
+
+                    } // end of foreach()
+                ?>
+                <span class="help-block"><?php echo $categoryErr;?></span>
           <!-- <script type="text/javascript">
             function radioValidation(){
 
@@ -91,8 +122,8 @@
 
         <div class="form-group">
           <label for="Amount">Amount </label>
-          <input type="text" class="form-control <?php echo (!empty($date_purchasedErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="Enter amount " name="amount" value="<?php echo $date_purchased; ?>" >
-           <span class="help-block"><?php echo $date_purchasedErr;?></span>
+          <input type="text" class="form-control <?php echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="Enter amount " name="amount" value="<?php echo $amount; ?>" >
+           <span class="help-block"><?php echo $amountErr;?></span>
         </div>
 
         <!-- <div class="form-group">
@@ -108,8 +139,8 @@
 
         <div class="form-group">
           <label for="Date_Purchased">Date purchased</label>
-          <input type="date" class="form-control <?php echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Date_Purchased" name="date_purchased" value="<?php echo $amount; ?>" >
-          <span class="help-block"><?php echo $amountErr;?></span>
+          <input type="date" class="form-control <?php echo (!empty($date_purchasedErr)) ? 'is-invalid' : ''; ?>" id="Date_Purchased" name="date_purchased" value="<?php echo $date_purchased; ?>" >
+          <span class="help-block"><?php echo $date_purchasedErr;?></span>
         </div>
 
         <button type="submit"  class="btn btn-success" value="Submit" name="" >Submit</button>

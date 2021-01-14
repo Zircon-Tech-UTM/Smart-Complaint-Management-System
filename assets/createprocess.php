@@ -14,7 +14,7 @@
 	// $asset_condition = $_POST['asset_condition'];
 	//$img_path = $_POST['img_path'];
 
-	$assetID = "";
+	  $assetID = "";
     $nameBI = "";
     $nameBM = "";
     $category = "";
@@ -35,7 +35,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
 
-
+  $description=$_POST["description"];
 
   if (empty(trim(($_POST["assetID"])))) 
   {
@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $date_purchased = $_POST["date_purchased"];
   }
 
-	if(empty($assetIDErr)&&empty($nameBIErr)&&empty($nameBMErr)&&empty($categoryErr)&&empty($descriptionErr)&&empty($costErr)&&empty($amountErr)&&empty($asset_conditionErr)&&empty($date_purchasedErr) ){
+	if(empty($assetIDErr)&&empty($nameBIErr)&&empty($nameBMErr)&&empty($categoryErr)&&empty($costErr)&&empty($amountErr)&&empty($asset_conditionErr)&&empty($date_purchasedErr) ){
 		
 		
 		$SELECT = "SELECT a_assetID FROM assets WHERE a_assetID = ? Limit 1";
