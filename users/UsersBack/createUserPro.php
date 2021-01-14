@@ -113,19 +113,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   }
 
 
-
-  // $pos1="Admin";
-  // $pos2="PIC";
-  // $pos3="Assistant";
-
   if (empty(($_POST["position"]))) 
   {
     $positionBIErr = "Position is required.";
   } 
-  // elseif ((strpos($_POST["position"], $pos1)!=false)||(strpos($_POST["position"], $pos2)!=false)||(strpos($_POST["position"], $pos3)!=false)) 
-  // {
-  //   $positionBIErr = "Please choose a position";
-  // }
   else
   {
     $positionBI = $_POST["position"];
@@ -136,10 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     $gradesErr = "Grade is required.";
   } 
-  // elseif(preg_match('/[A-Za-z].*[0-9]/', $_POST["grades"]))
-  // {
-  //   $grades=$_POST["grades"];
-  // }
   else
   {
     $grades=$_POST["grades"];
@@ -214,7 +201,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           date_default_timezone_set("Asia/Kuala_Lumpur");
           $rdate= date('Y-m-d H:i:s');  
 
-         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')";
+         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')
+                INSERT INTO";
 
          
           $result = mysqli_query($conn, $sql);

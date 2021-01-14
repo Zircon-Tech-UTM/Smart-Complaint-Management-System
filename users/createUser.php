@@ -133,11 +133,10 @@
                   $("#position").trigger("change");
               </script>
 
-
         ` <div class="row">
             <div class="col-6">
             <label for="grades">Grade:</label>
-                  <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades'value="<?php echo $grades; ?>">;
+                  <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'value="<?php echo $grades; ?>">;
                   <option value="" selected>Choose a grade</option>;
               <?php 
                   $sql="SELECT * from grades";
@@ -166,7 +165,7 @@
                           echo"<option value='".$row['r_roomID']."'>".$row['r_nameBI']."</option>";
                         }
                     ?>
-                     </select>";
+                     </select>
                   </div>
               </div>
           </div><br>

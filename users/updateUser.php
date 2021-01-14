@@ -96,11 +96,11 @@
 
               <div class="row">
                 <div class="col-6">
-                  <label for="position" class="form-label">Position Assigned:</label>
-                  <select name="position" id="position" class="form-control" aria-label="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row["postBI"]; ?>">
+                  <label for="position">Position Assigned:</label>
+                  <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row["postBI"]; ?>">
                       <option value="" selected>Choose a position</option>
                       <?php 
-                        $temps = ["Admin", "PIC", "Assistant Computer Technician", "Assistant Engineer"];
+                        $temps = ["Admin", "PIC Of Room", "Assistant Computer Technician", "Assistant Engineer"];
                         foreach($temps as $temp){
                             if ($row["postBI"] == $temp){
                                 echo "<option value='$temp' selected>$temp</option> ";

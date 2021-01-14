@@ -44,7 +44,7 @@
                     <li class="nav-item"><a class="nav-link" href="../users/readUser.php"><i class="fas fa-user"></i><span>User Management</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../assets/main.php"><i class="fas fa-table"></i><span>Asset Managemnt</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../Rooms/roomlist.php"><i class="far fa-user-circle"></i><span>Room Management</span></a><a class="nav-link" href="../Blocks/blocklist.php"><i class="fa fa-building"></i><span>Block Management</span></a><a class="nav-link" href="#"><i class="fa fa-files-o"></i><span>Download And Print</span></a></li>
-                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="../grades/readGrade.php"><i class="fas fa-users-cog"></i><span>Grade Management</span></a>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
