@@ -10,17 +10,29 @@
 		header('location: ../login/login.php');
 	}
 
+    if (($_SESSION["userType"] != '1') and ($_SESSION["userType"] != '2')){
+        echo $_SESSION["userType"];
+        exit();
+    }
+
     if(isset($_GET['assetID']))
     {
         $assetID = $_GET['assetID'];
     }
 
-    $sql =  "DELETE FROM assets WHERE assetID=$assetID";
+    $sql = "SELECT * FROM assets
+    WHERE a_assetID = '$assetID'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+    unlink($row["a_img_path"]);
+
+    $sql =  "DELETE FROM assets WHERE a_assetID='$assetID'";
     $result = mysqli_query($conn, $sql);
 
     if($result)
     {
-        header ("Location: main.php");
+        ($_SESSION['userType'] == '2')? (header ("location: mainB.php")) : (header ("location: mainA.php?block=$block"));
     }
     else
     {
