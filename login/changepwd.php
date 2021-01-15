@@ -24,17 +24,11 @@
             exit();
         } 
         $row = mysqli_fetch_array($result);
-
-    include("changepwdprocess.php");
     
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<style>
-.error {color: #FF0000;}
-.help-block{color:red;}
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,85 +38,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container-fluid" style="width:1200px; margin:0 auto; height: 100%; line-height: 2.5em; position:relative; top:75px;">
+    <div class="container">
 
-        <form action="" method="POST">
+        <form action="changepwdprocess.php" method="POST">
             <h2>Reset Password: </h2>
-    <div class="col">
-        <div class="card shadow mb-3">
-            <div class="card-header py-3">
-                <p class="text-primary m-0 font-weight-bold">User Settings</p>
-            </div>
-            <div class="card-body">
-                <div class ="row">
-                    <div class="col-6">
-                        <label for="fname" class="form-label">Full Name:</label>
-                        <input type="text" name="name" id="fname" class="form-control form-control" placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>" readonly/>
-                    </div>
+            <div class ="row">
 
-                    <div class="col-6">
-                         <label for="fic" class="form-label">IC number:</label>
-                        <input type="text" name="IC" id="fic" class="form-control form-control" placeholder="Enter IC Number" value="<?php echo $row["u_userIC"]; ?>" readonly/>
-                    </div>
-                </div><br>    
+                <div class="col-6">
+                    <label for="fname" class="form-label">Full Name:</label>
+                    <input type="text" name="name" id="fname" class="form-control form-control" placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>" readonly/>
+                </div>
 
-          <script>
-              var check = function() {
-                if (document.getElementById('password').value ==
-                  document.getElementById('confirm_password').value) {
-                    document.getElementById('message').style.color = 'green';
-                    document.getElementById('message').innerHTML = '  (matching)';
-                } else {
-                  document.getElementById('message').style.color = 'red';
-                  document.getElementById('message').innerHTML = '  (not matching)';
+                <div class="col-6">
+                    <label for="fic" class="form-label">IC number:</label>
+                    <input type="text" name="IC" id="fic" class="form-control form-control" placeholder="Enter IC Number" value="<?php echo $row["u_userIC"]; ?>" readonly/>
+                </div>
+
+            </div><br>    
+
+            <script>
+                var check = function() {
+                    if (document.getElementById('password').value ==
+                        document.getElementById('confirm_password').value) {
+                            document.getElementById('message').style.color = 'green';
+                            document.getElementById('message').innerHTML = '  (matching)';
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById('message').innerHTML = '  (not matching)';
+                    }
                 }
-              }
+            </script>
 
-              function myFunction1() 
-              {
-                  var x = document.getElementById("password");
-                  if (x.type === "password") 
-                  {
-                    x.type = "text";
-                  } 
-                  else 
-                  {
-                    x.type = "password";
-                  }
-                }
-                function myFunction2() 
-              {
-                  var x = document.getElementById("confirm_password");
-                  if (x.type === "password") 
-                  {
-                    x.type = "text";
-                  } 
-                  else 
-                  {
-                    x.type = "password";
-                  }
-                }
-          </script>
+            <div class ="row">
+                <div class="col-6">
+                    <label for="pwd" class="form-label">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control form-control" placeholder="Enter password" required>
+                </div>
 
-          <div class ="row">
-              <div class="col-6">
-                  <label for="pwd" class="form-label ">New Password:</label>
-                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter new password" value="<?php echo $password; ?>">
-                  <span class="help-block"><?php echo $passwordErr;?></span>
-                  <input type="checkbox" onclick="myFunction1()"> Show Password
-              </div>
+                <div class="col-6">
+                    <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
+                    <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control form-control" onkeyup='check();' required/>  
+                </div>
+            </div><br>
 
-              <div class="col-6">
-                  <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
-                <span class="help-block"><?php echo $confirm_passwordErr;?></span>
-                <input type="checkbox" onclick="myFunction2()"> Show Password
-              </div>
-          </div><br>
-
-  </div>
-</div>
-  </div>
             <input type="hidden" value = "<?php echo $id ?>" name="ic">
 
             <input type="submit" name="submit" class="btn btn-primary" value="Save">

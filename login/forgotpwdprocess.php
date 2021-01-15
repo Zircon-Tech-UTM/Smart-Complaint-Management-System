@@ -10,6 +10,9 @@
   $sql = "SELECT * FROM users
       WHERE u_userIC = '$fid'";
 
+  //Check result
+  var_dump($result);
+
   //Execute SQL
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_array($result);
