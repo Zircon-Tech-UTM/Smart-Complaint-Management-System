@@ -7,7 +7,7 @@
     
     if(isset($_SESSION['u_userIC']) != session_id() )
     {
-        header('location: ../../login/login.php');
+        header('location: ../login/login.php');
     }
 
     $sql = "SELECT * FROM complaints JOIN users ON c_userIC = u_userIC ORDER BY compID ASC;";
@@ -44,7 +44,7 @@
                     <th scope="col">Issue Date</th>
                     <th scope="col">Settle Date</th>
                     <th scope="col">Status</th>
-                    <th scope="col">followed by</th>
+                    <th scope="col">Accept</th>
                 </tr>
                 <?php
 
@@ -57,12 +57,38 @@
                         echo "<th scope='row'>".$row["c_userIC"]." (".$row["postBI"].")</th>";
                         echo "<th>".$pDate[0]."</th>";
                         echo "<th>".$sDate[0]."</th>";
-                        echo "<th>".$row["c_status"]."</th>";
-                        echo "<th>".$row["followedBy"]."</th>";
-                    ?>
+                ?>
+                        <th>
+                <?php
+                        $sql2 = "SELECT * FROM status;";
+                        $result2 = mysqli_query($conn, $sql2);
+
+                        while($row2 = mysqli_fetch_array($result2)){
+                            if ($row['c_status'] == $row2['s_statusID'])
+                                echo $row2['s_nameBI'];
+                        }
+
+                ?>
+                        </th>
+                <?php
+                        echo "<th>
+                        <a href='complaintsBack\acceptPro.php?comp_id=".$row["compID"]."' class='btn btn-primary btn-sm'>Accept</a>
+                        </th>";
+                ?>
                     <th>
                         <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm">VIEW</a>
-                        <a href="modifyComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm">EDIT</a>
+
+                <?php
+                    if ($row['c_status'] == '2' && $row['followedBy'] == $_SESSION['ic']){
+                ?>
+                        <a href="updateStatus.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm" >UPDATE</a>
+                <?php
+                    }else{
+                ?>
+                        <a href="updateStatus.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm disabled" >UPDATE</a>
+                <?php
+                    }
+                ?>
                         <a href="deleteComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm"><strong>X</strong></a>
                     </th>
                 <?php

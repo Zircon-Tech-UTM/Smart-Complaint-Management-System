@@ -10,7 +10,11 @@
         header('location: ../../login/login.php');
     }
 
-    $sql = "SELECT * FROM complaints JOIN users ON c_userIC = u_userIC ORDER BY compID ASC;";
+    if ($_SESSION["userType"] != '2'){
+        exit();
+    }
+
+    $sql = "SELECT * FROM complaints JOIN users ON c_userIC = u_userIC JOIN rooms ON PIC = u_userIC WHERE u_userIC = '".$_SESSION['ic']."' ORDER BY compID ASC;";
 
     $result  = mysqli_query($conn, $sql);
 

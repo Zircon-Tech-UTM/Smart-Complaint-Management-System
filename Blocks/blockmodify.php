@@ -10,28 +10,28 @@
         header('location: ../login/login.php');
     }
 
+    if ($_SESSION["userType"] != '1'){
+        exit();
+    }
+
     if(isset($_GET['id']))
     {
         $bid = $_GET['id'];
+    }else if(isset($_POST['id']))
+    {
+        $bid = $_POST['id'];
     }
 
     $sql = "SELECT * FROM blocks
-            JOIN rooms
-            ON block_no = blok
             WHERE block_no = '$bid'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 
     include("blockmodifyprocess.php");
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<style>
-.error {color: #FF0000;}
-.help-block{color:red;}
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,20 +40,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 </head>
+<style>
+    .help-block{
+        color: red;
+    }
+</style>
 <body>
 <h1>Edit Block</h1>
     <div class="container">
-        <form method="POST" action="">
-            <div class="form-group">
-            <label for="block_no">Block ID</label>
-                <input type="text" class="form-control <?php echo (!empty($b_block_noErr)) ? 'is-invalid' : ''; ?>" id="block_no" placeholder="Enter block ID" name="block" value = "<?php echo $row['block_no'];?>"disabled>
-                 <span class="help-block"><?php echo $b_block_noErr;?></span>
-            </div>
-            <input type="hidden" class="form-control" id="block_no" placeholder="Enter block ID" name="block" required="A block must have a unique ID" value = "<?php echo $row['block_no'];?>">
+        <form method="POST" action="blockmodify.php?id=<?php echo $bid; ?>">
 
             <div class="form-group">
-            <label for="name">Block's Name</label>
-                <input type="text" class="form-control <?php echo (!empty($b_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI"  value = "<?php echo $row['b_nameBI'];?>">
+                <label for="block_no">Block ID</label>
+                <input type="text" class="form-control <?php echo (!empty($b_block_noErr)) ? 'is-invalid' : ''; ?>" id="block_no" placeholder="Enter block ID" name="block" value = "<?php echo $row['block_no'];?>"disabled>
+                <span class="help-block"><?php echo $b_block_noErr;?></span>
+            </div>
+            <input type="hidden" class="form-control" id="block_no" placeholder="Enter block ID" name="block" value = "<?php echo $row['block_no'];?>">
+            <input type="hidden" class="form-control" id="id" placeholder="Enter block ID" name="id" value = "<?php echo $row['block_no'];?>">
+
+            <div class="form-group">
+                <label for="name">Block's Name</label>
+                <input type="text" class="form-control <?php echo (!empty($b_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI" value = "<?php echo $row['b_nameBI'];?>">
                 <span class="help-block"><?php echo $b_nameBIErr;?></span>
             </div>
 
@@ -65,7 +72,7 @@
 
             <div class="form-group">
             <label for="location">Location</label>
-                <select name = 'loc' class="form-select <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" value="<?php echo $b_loc; ?>">
+                <select name = 'loc' class="form-select <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example">
                 <option selected disabled>Location</option>
                     <?php
                     $array = ['1','2', '3'];
@@ -108,12 +115,12 @@
                     }
                     
                     ?>
-                </select>             
-                <span class="help-block"><?php echo$b_locErr;?></span>       
+                </select>
+                <span class="help-block"><?php echo$b_locErr;?></span>             
             </div>
             <br>
 
-            <button type="submit" class="btn btn-default">Update</button>
+            <button type="submit" class="btn btn-default" onclick="return confirm('Do you want to save your changes?')">Update</button>
             <button type="reset" class="btn btn-warning">Reset to initial details</button>
 
 </body>

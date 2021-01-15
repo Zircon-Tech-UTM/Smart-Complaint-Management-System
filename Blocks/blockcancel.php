@@ -10,6 +10,12 @@
         header('location: ../login/login.php');
     }
 
+    if ($_SESSION["userType"] != '1'){
+        exit();
+    }
+
+    $bid;
+    
     if(isset($_GET['id']))
     {
         $bid = $_GET['id'];
@@ -17,6 +23,7 @@
 
     $sql = "DELETE FROM blocks
             WHERE block_no = '$bid'";
+
     $result = mysqli_query($conn, $sql);
 
     if($result)

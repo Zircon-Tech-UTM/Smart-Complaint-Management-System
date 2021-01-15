@@ -60,44 +60,14 @@
 
             <div>
                 <label for="blocks" class="form-label">Blocks</label><br>
-                <select class="form-select" aria-label="Default select example" id="blocks" name="blocks">
-                    <option>Open this select menu</option>
-                    <?php
-                        while ($row2 = mysqli_fetch_array($result2)){
-                            if ($row2['block_no'] == $row['blok']){
-                    ?>
-                            <option selected value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_nameBI']; ?></option>
-                    <?php
-                            }else{
-                    ?>
-                            <option value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_nameBI']; ?></option>
-                    <?php            
-                            }
-                        }
-                    ?>
-                </select>
+                <input type="text" class="form-control" value="<?php echo $row['b_nameBI']; ?>" disabled>
+                <input type="hidden" value="<?php echo $row['block_no']; ?>" name="blocks">
             </div><br>
 
             <div>
                 <label for="rooms" class="form-label">Rooms</label><br>
-                <select class="form-select" aria-label="Default select example" id="rooms" name="rooms">
-                    <option>Open this select menu</option>
-                    <?php
-                    $sql3 = "SELECT * FROM rooms WHERE blok = '".$row['blok']."';";
-                    $result3 = mysqli_query($conn, $sql3);
-                        while ($row3 = mysqli_fetch_array($result3)){
-                            if ($row3['blok'] == $row['blok']){
-                    ?>
-                            <option selected value="<?php echo $row3['r_roomID']; ?>"><?php echo $row3['r_nameBI']; ?></option>
-                    <?php
-                            }else{
-                    ?>
-                            <option value="<?php echo $row3['r_roomID']; ?>"><?php echo $row3['r_nameBI']; ?></option>
-                    <?php            
-                            }
-                        }
-                    ?>
-                </select>
+                <input type="text" class="form-control" value="<?php echo $row['r_nameBI']; ?>" disabled>
+                <input type="hidden" value="<?php echo $row['r_roomID']; ?>" name="rooms">
             </div><br>
 
             <div>
@@ -122,62 +92,7 @@
                 </select>
             </div><br>
 
-            <script type="text/javascript">
-                document.getElementById('blocks').addEventListener('change', loadRooms);
-                document.getElementById('rooms').addEventListener('change', loadAssets);
-
-                function loadRooms(){
-                    let block = document.getElementById('blocks').value;
-
-                    let xhr = new XMLHttpRequest();
-                    xhr.open('GET', `complaintsBack/rooms.php?blocks=${block}`, true);
-                    
-                    xhr.onreadystatechange = function(){
-                        if (this.status === 200 && this.readyState === 4){
-                            let rooms = JSON.parse(this.responseText);
-
-                            output = '';
-
-                            output+= `<option selected>Open this select menu</option>`;
-                            for (var i in rooms){
-                                output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
-                            }
-
-                            document.getElementById('rooms').innerHTML = output;
-                            loadAssets();
-                        }else if(this.status == 404){
-                            console.log('Fail');
-                        }
-                    }
-                    xhr.send();
-                }
-
-                function loadAssets(){
-                    let room = document.getElementById('rooms').value;
-
-                    let xhr = new XMLHttpRequest();
-                    xhr.open('GET', `complaintsBack/assets.php?rooms=${room}`, true);
-                    
-                    xhr.onreadystatechange = function(){
-                        if (this.status === 200 && this.readyState === 4){
-                            let result = JSON.parse(this.responseText);
-                            console.log(result);
-
-                            output = '';
-
-                            output+= `<option selected>Open this select menu</option>`;
-                            for (var i in result){
-                                output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
-                            }
-
-                            document.getElementById('assets').innerHTML = output;
-                        }else if(this.status == 404){
-                            console.log('Fail');
-                        }
-                    }
-                    xhr.send();
-                }
-            </script>
+            
 
             <div class="mb-3">
                 <label for="complainantDetail" class="form-label">Detail:</label>
