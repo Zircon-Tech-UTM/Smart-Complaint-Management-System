@@ -11,9 +11,20 @@
         header('location: ../login/login.php');
     }
 
+    if ($_SESSION["userType"] != '1'){
+        exit();
+    }
+
     if(isset($_GET['id']))
     {
         $id = $_GET['id'];
+
+        $sql = "SELECT * FROM users WHERE u_userIC=".$id.";";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+        unlink($row["u_img_path"]);
+
+
         $sql = "DELETE FROM users WHERE u_userIC='".$id."';";
 
         $result = mysqli_query($conn, $sql);
@@ -27,6 +38,7 @@
             echo "ERROR:  $conn->error";
             header("refresh: 5; location: readUser.php");
         }
+
     } 
     else 
     {

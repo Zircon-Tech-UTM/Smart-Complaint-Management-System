@@ -5,18 +5,30 @@
         session_start();
     }
     
-    if(isset($_SESSION['ic']) != session_id() )
+    if(isset($_SESSION['u_userIC']) != session_id() )
     {
         header('location: ../login/login.php');
     }
 
-    $sqlr = "SELECT * FROM rooms
-            JOIN blocks
-            ON rooms.blok = blocks.block_no
-            JOIN users
-            ON PIC = u_userIC";
-    $result = mysqli_query($conn, $sqlr);
+    if ($_SESSION["userType"] != '1'){
+        exit();
+    }
 
+    if (isset($_POST['blocks'])){
+        $sqlr = "SELECT * FROM rooms
+        JOIN blocks
+        ON rooms.blok = blocks.block_no
+        JOIN users
+        ON PIC = u_userIC
+        WHERE blok = '".$_POST['blocks']."'";
+    }else{
+        $sqlr = "SELECT * FROM rooms
+        JOIN blocks
+        ON rooms.blok = blocks.block_no
+        JOIN users
+        ON PIC = u_userIC";
+    }
+    $result = mysqli_query($conn, $sqlr);
 ?>
 
 <!DOCTYPE html>
@@ -30,63 +42,97 @@
 
 </head>
 <body>
-<div class="container-fluid">
-    <h2>Rooms in KVPJB</h2>
-    <a href = 'Createroom.php?' class = 'btn btn-warning'>Create</a>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Room ID</th>
-                    <th>Room name in English</th>
-                    <th>Room name in Malay</th>
-                    <th>Block</th>
-                    <th>Location</th>
-                    <th>PIC</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    while($row = mysqli_fetch_array($result))
-                    {
-                        echo "<tr>";
-                            echo "<td>".$row['r_roomID']."</td>";
-                            echo "<td>".$row['r_nameBI']."</td>";
-                            echo "<td>".$row['r_nameBM']."</td>";
-                            echo "<td>".$row['blok']."</td>";
-                            if($row['location'] =='1')
-                            {
-                                echo "<td>Asrama</td>";
+<div class="container">
+    <div class="row">
+
+        <div class="col-3">
+            <h2>Filter</h2>
+            <form action="" method="POST"> 
+                <label for="blocks" class="form-label">Blocks</label>
+                <select class="form-select" aria-label="Default select example" name="blocks">
+                    <option selected>Open this select menu</option>
+                    <?php
+                        $sql2 = "SELECT * FROM blocks";
+                        $result2 = mysqli_query($conn, $sql2);
+
+                        while($row2 = mysqli_fetch_array($result2)){
+                            if ($_POST['blocks'] == $row2['block_no']){
+                                echo "<option selected value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
+                            }else{
+                                echo "<option value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
                             }
-                            else if($row['location'] =='2')
-                            {
-                                echo "<td>Kolej</td>";
-                            }
-                            else if($row['location'] =='3')
-                            {
-                                echo "<td>Others</td>";
-                            }
-                            echo "<td>".$row['name']."</td>";
-                            // while()
-                            // {
-                            //     echo "<td>".$row['a_nameBI']."</td>";
-                            //     echo "<td>".$row['a_amount']."</td>";
-                            // }
-                            echo "<td>";
-                                echo "<a href = 'roommodify.php?id=".$row['r_roomID']."' class = 'btn btn-warning'>Modify</a>&nbsp";
-                                echo "<a href = 'roomcancel.php?id=".$row['r_roomID']."' class = 'btn btn-danger'>Cancel</a>";
-                            echo "</td>";
-                            echo "</tr>";                            
-                    }
-                ?>                            
-                <!-- <td>
-                <a href= 'roommodify.php?id=<?php echo $row['r_roomID'];?>' class='btn btn-warning'>Modify</a>
-                <a href= "deleteUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to delete this item')"><strong>X</strong></a>  
-                <a href= "roomcancel.php?id=<?php echo $row['r_roomID'];?>" class='btn btn-primary btn-sm' onclick="return confirm('Are you sure you want to delete this item')"><strong>Delete</strong></a>
-                </td>
-                </tr>-->
-            </tbody>
-        </table>
+                        }
+                    ?>
+                </select><br>
+                
+                <input type="submit" value="Apply Filter" class="btn btn-primary">
+                <a href="" class="btn btn-warning">Cancel</a>
+            </form>
+        </div>
+
+        <div class="col-9">
+            <h2>Rooms in KVPJB</h2>
+            <a href = 'Createroom.php?' class = 'btn btn-warning'>Create</a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Room ID</th>
+                        <th>Room name</th>
+                        <th>Nama Bilik</th>
+                        <th>Block</th>
+                        <th>PIC</th>
+                        <th>Assets</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        while($row = mysqli_fetch_array($result))
+                        {
+                            echo "<tr>";
+                                
+                    ?>                                
+                        <td><a href = "roomdetail.php?id=<?php echo $row['r_roomID'] ?>"><?php echo $row['r_roomID']; ?></a></td>
+
+                    <?php 
+                                echo "<td>".$row['r_nameBI']."</td>";
+                                echo "<td>".$row['r_nameBM']."</td>";
+                                echo "<td>".$row['blok']."</td>";
+                                // if($row['location'] =='1')
+                                // {
+                                //     echo "<td>Asrama</td>";
+                                // }
+                                // else if($row['location'] =='2')
+                                // {
+                                //     echo "<td>Kolej</td>";
+                                // }
+                                // else if($row['location'] =='3')
+                                // {
+                                //     echo "<td>Others</td>";
+                                // }
+
+                                echo "<td>";
+                                    echo "<a href = '../users/detailUser.php?id=".$row["u_userIC"]."'>".$row['name']."</a>&nbsp";
+                                echo "</td>";
+
+                                echo "<td>";
+                                    echo "<a href = 'roomassets.php?id=".$row["r_roomID"]."'>"."Link"."</a>&nbsp";
+                                echo "</td>";
+
+                                echo "<td>";
+                                    echo "<a href = 'roommodify.php?id=".$row['r_roomID']."' class = 'btn btn-warning'>Modify</a>&nbsp";
+                    ?>              
+                                <a href = "roomcancel.php?id=<?php echo $row['r_roomID'] ?>"  onclick="return confirm('Are you sure you want to delete this room?')" class = 'btn btn-danger'>X</a>
+                    <?php                
+                                echo "</td>";
+                                echo "</tr>";                            
+                        }
+                    ?>     
+                </tbody>
+            </table>        
+        </div>
+    </div>
+
 </div>
 </body>
 </html>
