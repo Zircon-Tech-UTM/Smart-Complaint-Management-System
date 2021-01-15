@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2021 at 07:49 AM
+-- Generation Time: Jan 15, 2021 at 02:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -46,7 +46,8 @@ CREATE TABLE `assets` (
 
 INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`, `amount`, `date_purchased`, `a_img_path`) VALUES
 ('ICT0001', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL),
-('NICT0001', 'Table', 'Meja', '2', 'BL2000001', 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL);
+('NICT0001', 'Table', 'Meja', '2', 'BL2000001', 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL),
+('ttt666', 'table', 'meja', '2', NULL, ' Broken', '7.00', 70, '2021-01-16 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,8 @@ CREATE TABLE `blocks` (
 
 INSERT INTO `blocks` (`block_no`, `b_nameBI`, `b_nameBM`, `location`) VALUES
 ('A', 'Block A', 'Blok A', '3'),
-('B', 'Block B', 'Blok B', '1');
+('B', 'Block B', 'Blok B', '1'),
+('yy', 'tu', 'tu', '1');
 
 -- --------------------------------------------------------
 
@@ -114,8 +116,8 @@ CREATE TABLE `complaints` (
 --
 
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
-(1, '990105029068', 'NICT0001', NULL, NULL, '2020-12-30 23:33:37', 'meja sudah rosak', NULL, NULL, NULL, NULL),
-(2, '990105029068', 'ICT0001', NULL, NULL, '2020-12-30 23:33:37', 'lens missing', NULL, NULL, NULL, NULL);
+(1, NULL, 'NICT0001', NULL, NULL, '2020-12-30 23:33:37', 'meja sudah rosak', NULL, NULL, NULL, NULL),
+(2, NULL, 'ICT0001', NULL, NULL, '2020-12-30 23:33:37', 'lens missing', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,8 +127,8 @@ INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_stat
 
 CREATE TABLE `grades` (
   `g_gradeID` varchar(5) NOT NULL,
-  `g_postBI` varchar(50) DEFAULT NULL,
-  `g_postBM` varchar(50) DEFAULT NULL
+  `g_postBI` varchar(50) NOT NULL,
+  `g_postBM` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -137,7 +139,8 @@ INSERT INTO `grades` (`g_gradeID`, `g_postBI`, `g_postBM`) VALUES
 ('DG41', 'Lecturer', 'Pensyarah'),
 ('DG44', 'Lecturer', 'Pensyarah'),
 ('FT19', 'Assistant Computer Technician', 'Juruteknik Komputer'),
-('JA29', 'Assistant Engineer', 'Penolong Jurutera');
+('JA30', 'Assistant Engineer', 'Penolong Jurutera'),
+('JA90', 'Adminy', 'Pentadbir');
 
 -- --------------------------------------------------------
 
@@ -159,9 +162,9 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`r_roomID`, `PIC`, `r_nameBI`, `r_nameBM`, `blok`, `r_img_path`) VALUES
-('AL1000002', '001005101333', 'Computer Lab 2', 'Makmal Komputer 2', 'A', NULL),
-('BL1000001', '001005101334', 'Classroom 1', 'Kelas 1', 'B', NULL),
-('BL2000001', '001005101337', 'Computer Lab 1', 'Makmal Komputer 1', 'B', NULL);
+('AL1000002', NULL, 'Computer Lab 2', 'Makmal Komputer 2', 'A', NULL),
+('BL1000001', NULL, 'Classroom 1', 'Kelas 1', 'B', NULL),
+('BL2000001', NULL, 'Computer Lab 1', 'Makmal Komputer 1', 'B', NULL);
 
 -- --------------------------------------------------------
 
@@ -193,7 +196,7 @@ INSERT INTO `status` (`s_statusID`, `s_nameBI`, `s_nameBM`) VALUES
 
 CREATE TABLE `users` (
   `u_userIC` varchar(12) NOT NULL,
-  `pwd` varchar(15) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `postBI` varchar(50) DEFAULT NULL,
   `postBM` varchar(50) DEFAULT NULL,
@@ -212,12 +215,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`, `u_grade`) VALUES
-('001005101333', '123456', 'Ahmad', 'PIC', 'PIC', 'lololol', 'Ahmad@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
-('001005101334', '123456', 'Ali', 'PIC', 'PIC', 'lals', 'Ali@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
-('001005101335', '123456', 'Mohamad', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'Mohamad@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
-('001005101336', '123456', 'ABU', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'Abu@gmail.com', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
-('001005101337', '123456', 'Muthu', 'PIC', 'PIC', 'lalsdsfsd', 'Muthu@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
-('990105029068', '123456', 'jingyi', 'Admin', 'Admin', 'lalalal', 'jingyi@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1', 'DG44');
+('000000000000', '1111', 'HAM JING YI', 'Admin', 'Pentadbir', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'jy@gmail.com', '0100000000', '2021-01-14 23:18:37', NULL, NULL, '1', 'DG41'),
+('000909090000', '$2y$10$WfQltfuXIwgTtj0BCH4OduV2oJLJLUME46HopKRy7jZ6w40dN0faO', 'kang', 'Admin', 'Pentadbir', ' 39, TAMAN NAKHODA, JALAN KUALA KEDAH,', 'hamjingyi99@gmail.com', '0123335555', '2021-01-15 14:56:36', NULL, NULL, '1', 'DG44'),
+('040217029998', '$2y$10$L/BiuL0Cxe7dVHl9/yj.seNOrYCDSJhI09AjF8GiDH3n7bNcqIOry', 'HAM zYI', 'PIC Of Room', 'PIC Makmal', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'lim@gmail.com', '0123335555', '2021-01-14 22:54:11', NULL, NULL, '2', 'DG41'),
+('123456789898', '$2y$10$91ekRNrxALAEaQ7pdRIBLe/V5ADqCGfGlRH.e4YVIxpLFg01LyrXK', 'ooi', 'Admin', 'Pentadbir', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'jy@gmail.com', '0124773940', '2021-01-15 14:57:40', NULL, NULL, '1', 'DG41'),
+('990105029068', '$2y$10$EiuAtCVBkeFzGdQkkgl8iu7.c.pV/njcdHTIa1.2VeTCh9RbpUZzy', 'Ham Jing Yi', 'Admin', 'Pentadbir', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'hamjingyi99@gmail.com', '0124773940', '2021-01-15 16:05:25', NULL, NULL, '1', 'DG41');
 
 --
 -- Indexes for dumped tables
@@ -289,7 +291,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
