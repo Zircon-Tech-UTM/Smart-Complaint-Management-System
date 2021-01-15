@@ -1,4 +1,3 @@
-
 <?php
     // include("../../dbconfig.php");
     // if(!session_id())//if session_id is not found
@@ -85,10 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
       $passwordErr = "Password must have at least 4 characters.";
   } 
-  elseif($_POST["password"]!=$_POST["confirm_password"])
-  {
-       $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
-  }
   else
   {
       $password = trim($_POST["password"]);
@@ -196,15 +191,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
               $positionBM="Penolong Jurutera";
           }
 
-
+          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
           date_default_timezone_set("Asia/Kuala_Lumpur");
           $rdate= date('Y-m-d H:i:s');  
 
-         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')
-                INSERT INTO";
-
-         
+         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade ) VALUES('".$IC."', '".$hashed_password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."');";
+              
           $result = mysqli_query($conn, $sql);
 
           if($result)

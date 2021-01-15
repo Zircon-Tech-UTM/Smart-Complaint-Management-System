@@ -6,7 +6,7 @@
         session_start();
     }
     
-    if(isset($_SESSION['ic']) != session_id() )
+    if(isset($_SESSION['u_userIC']) != session_id() )
     {
         header('location: ../login/login.php');
     }
@@ -65,34 +65,7 @@
                         <input type="text" name="IC" id="fic" class="form-control  <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="Enter IC Number"value="<?php echo $row["u_userIC"]; ?>">
                         <span class="help-block"required><?php echo $ICErr;?></span>
                     </div>
-                </div><br>    
-
-          <script>
-              var check = function() {
-                if (document.getElementById('password').value ==
-                  document.getElementById('confirm_password').value) {
-                    document.getElementById('message').style.color = 'green';
-                    document.getElementById('message').innerHTML = '  (matching)';
-                } else {
-                  document.getElementById('message').style.color = 'red';
-                  document.getElementById('message').innerHTML = '  (not matching)';
-                }
-              }
-          </script>
-
-          <div class ="row">
-              <div class="col-6 needs-validation">
-                  <label for="pwd" class="form-label ">Password:</label>
-                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $row["pwd"]; ?>" >
-                  <span class="help-block"><?php echo $passwordErr;?></span>
-              </div>
-
-              <div class="col-6">
-                  <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
-                <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control  <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" onkeyup='check();'value="<?php echo $row["pwd"]; ?>">
-                <span class="help-block"><?php echo $confirm_passwordErr;?></span>  
-              </div>
-          </div><br>
+                </div><br>
 
               <div class="row">
                 <div class="col-6">
@@ -133,7 +106,7 @@
                   $("#position").trigger("change");
               </script>
 
-        ` <div class="row">
+          <br><div class="row">
             <div class="col-6">
             <label for="grades">Grade:</label>
             <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades' >";
@@ -152,7 +125,7 @@
                     }
                   }
               ?>
-            </select>;
+            </select>
               <span class="help-block"><?php echo $gradesErr;?></span>
             </div>
             <div class="col-6">
@@ -213,7 +186,7 @@
  </div>
 </div><br>
           <input type="submit" text-align:center name="submit" class="btn btn-primary" value="Submit"/>
-          <input type="reset" name="clear" value="Clear"class="btn btn-warning">
+          <a href="../index.php" class="btn btn-warning">Cancel</a>
 </div>     
           
         </form>

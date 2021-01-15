@@ -26,6 +26,7 @@
         $row = mysqli_fetch_array($result);
 
     include("changepwdprocess.php");
+    include("../navbar/navbar1.php");
     
 ?>
 
@@ -44,7 +45,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container-fluid" style="width:1200px; margin:0 auto; height: 100%; line-height: 2.5em; position:relative; top:75px;">
+    <div class="container-fluid" style="width:1200px; margin:0 auto; height: 100%; line-height: 2.5em; position:relative; top:25px;">
 
         <form action="" method="POST">
             <h2>Reset Password: </h2>
@@ -54,21 +55,10 @@
                 <p class="text-primary m-0 font-weight-bold">User Settings</p>
             </div>
             <div class="card-body">
-                <div class ="row">
-                    <div class="col-6">
-                        <label for="fname" class="form-label">Full Name:</label>
-                        <input type="text" name="name" id="fname" class="form-control form-control" placeholder="Enter Full Name" value="<?php echo $row["name"]; ?>" readonly/>
-                    </div>
-
-                    <div class="col-6">
-                         <label for="fic" class="form-label">IC number:</label>
-                        <input type="text" name="IC" id="fic" class="form-control form-control" placeholder="Enter IC Number" value="<?php echo $row["u_userIC"]; ?>" readonly/>
-                    </div>
-                </div><br>    
 
           <script>
               var check = function() {
-                if (document.getElementById('password').value ==
+                if (document.getElementById('newpassword').value ==
                   document.getElementById('confirm_password').value) {
                     document.getElementById('message').style.color = 'green';
                     document.getElementById('message').innerHTML = '  (matching)';
@@ -77,10 +67,21 @@
                   document.getElementById('message').innerHTML = '  (not matching)';
                 }
               }
-
-              function myFunction1() 
+              function myFunction() 
               {
                   var x = document.getElementById("password");
+                  if (x.type === "password") 
+                  {
+                    x.type = "text";
+                  } 
+                  else 
+                  {
+                    x.type = "password";
+                  }
+                }
+              function myFunction1() 
+              {
+                  var x = document.getElementById("newpassword");
                   if (x.type === "password") 
                   {
                     x.type = "text";
@@ -104,11 +105,18 @@
                 }
           </script>
 
+            <div class="mb-3">
+                  <label for="pwd" class="form-label ">Current Password:</label>
+                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter current password" value="<?php echo $password; ?>">
+                  <span class="help-block"><?php echo $passwordErr;?></span>
+                  <input type="checkbox" onclick="myFunction()"> Show Password
+               </div>
+
           <div class ="row">
               <div class="col-6">
                   <label for="pwd" class="form-label ">New Password:</label>
-                  <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter new password" value="<?php echo $password; ?>">
-                  <span class="help-block"><?php echo $passwordErr;?></span>
+                  <input type="password" name="newpassword" id="newpassword" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter new password" value="<?php echo $newpassword; ?>">
+                  <span class="help-block"><?php echo $newpasswordErr;?></span>
                   <input type="checkbox" onclick="myFunction1()"> Show Password
               </div>
 
@@ -132,7 +140,4 @@
     </div>
 </body>
 </html>
-
-<?php
-}
-?>
+<?php include("../navbar/navbar2.php"); }?>

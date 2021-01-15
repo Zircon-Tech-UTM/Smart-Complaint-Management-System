@@ -35,48 +35,100 @@
     {
       $message="Invalid Login";
     }
-  }
 
-  //Retrieve data from login form
+
+
   $fid = $_POST['ic'];
   $fpwd = $_POST['pwd'];
 
-  //Get user based on login credentials
-  $sql = "SELECT * FROM users
-      WHERE u_userIC = '$fid' AND pwd = '$fpwd'";
 
-  //Check result
-  var_dump($result);
+   if (!empty($fid) || !empty($fpwd)) 
+   {
+        $sql = "SELECT * FROM users WHERE u_userIC = '$fid'";
 
-  //Execute SQL
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_array($result);
+        $result = mysqli_query($conn, $sql);
 
-  //Check existence of data
-  $count = mysqli_num_rows($result);
+        if(mysqli_num_rows($result) == 1)
+        {
+          while ($row = mysqli_fetch_assoc($result)) 
+          {
+            if (password_verify($fpwd, $row['pwd'])||($fpwd == $row['pwd'])) 
+            {
+                //Set session 
+                $_SESSION['u_userIC'] = session_id();// set session id
+                $_SESSION['ic'] = $fid;
 
-
-  //Check login 
-  if($count == 1)  //User found
-  {
-    //Set session 
-    $_SESSION['u_userIC'] = session_id();// set session id
-    $_SESSION['ic'] = $fid;
-
-    if($row['userType']=='1') //Admin
-    {
-      header("location: ../index.php");
+                if($row['userType']=='1') //Admin
+                {
+                  header("location: ../index.php");
+                }
+                else                    //OtherUsers
+                {
+                  header("location: ../indexB.php");
+                }
+            }
+            else
+            {
+                echo "IC number or Password is invalid";
+            }    
+          }
+        }
+        else
+        {
+          echo "No user found on this IC number.";
+        } 
     }
-    else                    //OtherUsers
+    else
     {
-      header("location: ../indexB.php");
+      echo'User not found. Please enter correct IC number and password.';
+      header("refresh: 2; location: login.php");
     }
   }
-  else             //User not found
-  {
-    echo'User not found';
-    header("refresh: 5; location: login.php");
-  }
+
+
+
+
+
+
+  // $isPasswordCorrect = password_verify($fpwd,$user["pwd"]);
+
+  // //Get user based on login credentials
+  // if($isPasswordCorrect)
+  // $sql = "SELECT * FROM users
+  //     WHERE u_userIC = '$fid' AND pwd = '$fpwd'";
+
+  // //Check result
+  // var_dump($result);
+
+  // //Execute SQL
+  // $result = mysqli_query($conn, $sql);
+  // $row = mysqli_fetch_array($result);
+
+  // //Check existence of data
+  // $count = mysqli_num_rows($result);
+
+
+  // //Check login 
+  // if($count == 1)  //User found
+  // {
+  //   //Set session 
+  //   $_SESSION['u_userIC'] = session_id();// set session id
+  //   $_SESSION['ic'] = $fid;
+
+  //   if($row['userType']=='1') //Admin
+  //   {
+  //     header("location: ../index.php");
+  //   }
+  //   else                    //OtherUsers
+  //   {
+  //     header("location: ../indexB.php");
+  //   }
+  // }
+  // else             //User not found
+  // {
+  //   echo'User not found. Please enter correct IC number and password.';
+  //   header("refresh: 2; location: login.php");
+  // }
   mysqli_close($conn);
 ?>
 

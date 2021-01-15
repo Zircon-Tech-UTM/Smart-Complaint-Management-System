@@ -10,14 +10,14 @@
     // }
     // include("../dbconfig.php");
 
-    $password = "";
-    $confirm_password = "";
+    // $password = "";
+    // $confirm_password = "";
     $addr = "";
     $contact = "";
     $email= "";
 
-    $passwordErr = "";
-    $confirm_passwordErr = "";
+    // $passwordErr = "";
+    // $confirm_passwordErr = "";
     $addrErr = "";
     $contactErr = "";
     $emailErr= "";
@@ -25,37 +25,37 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
 
-      if(empty(trim($_POST["password"])))
-      {
-          $passwordErr = "Changes failed. Pasword is required.";     
-      } 
-      elseif(strlen(trim($_POST["password"])) < 4)
-      {
-          $passwordErr = "Changes failed. Password must have at least 4 characters.";
-      } 
-      else
-      {
-          $password = trim($_POST["password"]);
-      }
+      // if(empty(trim($_POST["password"])))
+      // {
+      //     $passwordErr = "Changes failed. Pasword is required.";     
+      // } 
+      // elseif(strlen(trim($_POST["password"])) < 4)
+      // {
+      //     $passwordErr = "Changes failed. Password must have at least 4 characters.";
+      // } 
+      // else
+      // {
+      //     $password = trim($_POST["password"]);
+      // }
 
 
 
-      if(empty(trim($_POST["confirm_password"])))
-      {
-          $confirm_passwordErr = "Changes failed. Please confirm password.";     
-      } 
-      elseif(strlen(trim($_POST["confirm_password"])) < 4)
-      {
-          $confirm_passwordErr = "Changes failed. Password must have at least 4 characters.";
-      } 
-      elseif($_POST["password"]!=$_POST["confirm_password"])
-      {
-           $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
-      }
-      else
-      {
-          $confirm_password = trim($_POST["confirm_password"]);
-      }
+      // if(empty(trim($_POST["confirm_password"])))
+      // {
+      //     $confirm_passwordErr = "Changes failed. Please confirm password.";     
+      // } 
+      // elseif(strlen(trim($_POST["confirm_password"])) < 4)
+      // {
+      //     $confirm_passwordErr = "Changes failed. Password must have at least 4 characters.";
+      // } 
+      // elseif($_POST["password"]!=$_POST["confirm_password"])
+      // {
+      //      $confirm_passwordErr = "Changes failed. Password is not matching with the left field.";
+      // }
+      // else
+      // {
+      //     $confirm_password = trim($_POST["confirm_password"]);
+      // }
 
 
       if (empty(trim(($_POST["faddr"])))) 
@@ -95,11 +95,10 @@
         $email = trim($_POST["femail"]);
       }
 
-      if(empty($emailErr)&&empty($contactErr)&&empty($passwordErr)
-              &&empty($confirm_passwordErr)&&empty($addrErr))
+      if(empty($emailErr)&&empty($contactErr)&&empty($addrErr))
       {
         $sql = "UPDATE users
-            SET  pwd='".$password."',address='".$addr."', email='".$email."', contact= '".$contact."'
+            SET  address='".$addr."', email='".$email."', contact= '".$contact."'
             WHERE u_userIC=".$id."";
 
         echo '\n';

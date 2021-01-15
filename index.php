@@ -5,7 +5,7 @@
         session_start();
     }
     
-    if(isset($_SESSION['ic']) != session_id() )
+    if(isset($_SESSION['u_userIC']) != session_id() )
     {
         header('location: login/login.php');
     }
@@ -55,7 +55,7 @@
                     <li class="nav-item"><a class="nav-link" href="users/readUser.php"><i class="fas fa-user"></i><span>User Management</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="assets/main.php"><i class="fas fa-table"></i><span>Asset Managemnt</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="Rooms/roomlist.php"><i class="far fa-user-circle"></i><span>Room Management</span></a><a class="nav-link" href="Blocks/blocklist.php"><i class="fa fa-building"></i><span>Block Management</span></a><a class="nav-link" href="#"><i class="fa fa-files-o"></i><span>Download And Print</span></a></li>
-                    <li class="nav-item"></li>
+                    </li><li class="nav-item"><a class="nav-link" href="../grades/readGrade.php"><i class="fas fa-users-cog"></i><span>Grade Management</span></a>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -75,7 +75,7 @@
                                 </span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="users/updateUser.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Edit Profile</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        <a class="dropdown-item" href="users/changepwd.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Change Password</a>
                                     <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="login/logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
@@ -178,6 +178,19 @@
                                             <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"></div>
                                             <div class="text-white font-weight-bold h5 mb-0"></div>
                                             <img src="assets/img/print-outline.png"  style="width: 113px;height: 104px;padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif;text-align: center;color: rgb(0,0,0);"><strong>DOWNLOAD AND PRINT</strong><br></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4 mb-4">
+                            <div class="card text-white bg-white text-justify shadow border-left-warning py-2" style="height: 169px;">
+                                <a class="card-block stretched-link text-decoration-none" href="grades/readGrade.php" style="height: 169px;">
+                                    <div class="row align-items-center no-gutters" style="padding: -9px;">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"></div>
+                                            <div class="text-white font-weight-bold h5 mb-0"></div>
+                                            <img src="assets/img/grade.png"  style="width: 113px;height: 104px;padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif;text-align: center;color: rgb(0,0,0);"><strong>USER GRADE MANAGEMENT</strong><br></span>
                                         </div>
                                     </div>
                                 </a>

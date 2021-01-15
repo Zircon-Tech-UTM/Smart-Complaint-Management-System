@@ -64,6 +64,31 @@
                   document.getElementById('message').innerHTML = '  (not matching)';
                 }
               }
+
+              function myFunction1() 
+              {
+                  var x = document.getElementById("password");
+                  if (x.type === "password") 
+                  {
+                    x.type = "text";
+                  } 
+                  else 
+                  {
+                    x.type = "password";
+                  }
+                }
+                function myFunction2() 
+              {
+                  var x = document.getElementById("confirm_password");
+                  if (x.type === "password") 
+                  {
+                    x.type = "text";
+                  } 
+                  else 
+                  {
+                    x.type = "password";
+                  }
+                }
           </script>
 
           <div class ="row">
@@ -71,12 +96,14 @@
                   <label for="pwd" class="form-label ">Password:</label>
                   <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="Enter password" value="<?php echo $password; ?>">
                   <span class="help-block"><?php echo $passwordErr;?></span>
+                  <input type="checkbox" onclick="myFunction1()"> Show Password
               </div>
 
               <div class="col-6">
                   <label for="psw-repeat" class="form-label">Re-type Password:<span id='message'></span></label>  
                 <input type="password" id="confirm_password" placeholder="Retype Password" name="confirm_password" class="form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
                 <span class="help-block"><?php echo $confirm_passwordErr;?></span>
+                <input type="checkbox" onclick="myFunction2()"> Show Password
               </div>
           </div><br>
 
