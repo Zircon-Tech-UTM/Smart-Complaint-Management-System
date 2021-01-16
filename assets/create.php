@@ -9,7 +9,7 @@
   {
       header('location: ../login/login.php');
   }
-  // include("../navbar/navbar1.php");
+   //include("../navbar/navbar1.php");
   include("createprocess.php");
 ?>
 
