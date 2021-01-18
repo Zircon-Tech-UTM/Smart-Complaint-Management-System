@@ -259,6 +259,7 @@ $language['Status of non-ICT Complaints'] = 'Status of non-ICT Complaints';
 
 //YewChong
 $language["Need"] = "Need";
+$language["No Need"] = "No Need";
 
 
 ?>
