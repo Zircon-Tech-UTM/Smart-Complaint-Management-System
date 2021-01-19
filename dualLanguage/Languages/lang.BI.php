@@ -1,26 +1,14 @@
 <?php
-//under comment "Dashboard, same wif BM version
-
+// Dashboard 
 //$language[''] = '';
-
-//navbar1
-$language['Admin Home'] = 'Admin Home';
-$language['Admin Main Page'] = 'Admin Main Page';
-$language['ADMIN'] = 'ADMIN';
-
-$language['Edit Profile'] = 'Edit Profile';
-$language['Change Password'] = 'Change Password';
-$language['Logout'] = 'Logout';
-$language['MANAGEMENT'] = 'MANAGEMENT';
 $language['MY DASHBOARD'] = 'MY DASHBOARD';
 $language['COMPLAINTS MANAGEMENT'] = 'COMPLAINTS MANAGEMENT';
 $language['USER MANAGEMENT'] = 'USER MANAGEMENT';
 $language['ROOM MANAGEMENT'] = 'ROOM MANAGEMENT';
 $language['ASSETS MANAGEMENT'] = 'ASSETS MANAGEMENT';
 $language['BLOCK MANAGEMENT'] = 'BLOCK MANAGEMENT';
-$language['ASSET MANAGEMENT'] = 'ASSET MANAGEMENT';
 $language['DOWNLOAD AND PRINT'] = 'DOWNLOAD AND PRINT';
-$language['GRADE MANAGEMENT'] = 'GRADE MANAGEMENT';
+
 
 //CRUD
 $language['Action'] = 'Action';
@@ -47,17 +35,7 @@ $language['Rooms'] = 'Rooms';
 $language['Rooms in this block'] = 'Rooms in this block';
 $language['PIC'] = 'PIC';
 
-//Block 
-$language['Blocks in KVPJB'] = 'Blocks in KVPJB';
-$language['Update Block'] = 'Update Block';
-$language['Edit Block'] = 'Edit';
-$language['Block ID'] = 'Block ID';
-$language['Hostel'] = 'Hostel';
-$language['College'] = 'College';
-$language['Others'] = 'Others';
 
-$language['Create Block'] = 'Create Block';
-$language['Create a new Room']  = 'Create a new Room';
 
 //Login Form
 $language['Login Page'] = 'Login Page';
@@ -110,6 +88,19 @@ $language['Update Asset'] = 'Update Asset';
 $language['Reset'] = 'Reset';
 $language['Search'] = 'Search';
 
+//Block 
+$language['Blocks in KVPJB'] = 'Blocks in KVPJB';
+$language['Update_Block'] = 'Update Block';
+$language['Edit Block'] = 'Edit Block';
+$language['Block ID'] = 'Block ID';
+$language['Hostel'] = 'Hostel';
+$language['College'] = 'College';
+$language['Others'] = 'Others';
+
+$language['Create Block'] = 'Create Block';
+$language['Create a new Room']  = 'Create a new Room';
+
+
 //Complaint
 $language['No'] = 'No';
 $language['ZirconTech'] = 'ZirconTech';
@@ -146,6 +137,15 @@ $language['Check'] = 'Check';
 $language['Complaints Inventory System'] = 'Complaints Inventory System';
 
 $language['Back To Login Page'] = 'Back To Login Page';
+
+//navbar1
+$language['Admin Home'] = 'Admin Home';
+$language['Admin Main Page'] = 'Admin Main Page';
+$language['ADMIN'] = 'ADMIN';
+
+$language['Edit Profile'] = 'Edit Profile';
+$language['Settings'] = 'Settings';
+$language['Logout'] = 'Logout';
 
 //Profile
 $language['User Profile:'] = 'User Profile:';
@@ -243,33 +243,73 @@ $language['Detail is required.'] = 'Detail is required.';
 
 
 // Dashboard 
-// $language['NumberComp'] = 'NumberComp';
-// $language['NumberCompSolved'] = ' NumberCompSolved';
-// $language['NumberCompPend'] = 'NumberCompPend';
-// $language['num_User'] = 'num_User';
-$language['Number'] = 'Number';
+$language['NumberComp'] = 'NumberComp';
+$language['NumberCompSolved'] = ' NumberCompSolved';
+$language['NumberCompPend'] = 'NumberCompPend';
+$language['num_User'] = 'num_User';
+$language['number'] = 'number';
 $language["Assets's name"] = "Assets's name";
 $language['Number of Complaint'] = 'Number of Complaint';
 $language["Blocks' name"] = "Blocks' name";
-$language["Room's name"] = "Room's name";
+$language['Number of Complaint'] = 'Number of Complaint';
 $language['Status of non-ICT Complaints'] = 'Status of non-ICT Complaints';
-$language['Status of ICT Complaints'] = 'Status of ICT Complaints';
-$language['colourcard1'] = 'NEW COMPLAINTS IN PAST 7 DAYS';
-$language['colourcard2'] = 'COMPLAINTS SOLVED IN PAST 7 DAYS';
-$language['colourcard3'] = 'TOTAL COMPLAINTS PENDING';
-$language['table'] = 'TOTAL NUMBER OF USERS';
-$language['User'] = 'User';
-$language['bar1'] = 'ASSETS WITH MOST COMPLAINTS (TOP 10)';
-$language['bar2'] = 'ROOMS WITH MOST COMPLAINTS (TOP 5)';
-$language['bar3'] = 'BLOCKS WITH MOST COMPLAINTS (TOP 3)';
-$language['pie1'] = 'ICT COMPLAINTS OVERVIEW';
-$language['pie2'] = 'NON-ICT COMPLAINTS OVERVIEW';
-$language['Complaint Status'] = 'Complaint Status';
-$language['KVPJB Complaint Inventory System'] = 'KVPJB Complaint Inventory System';
+
+
+
 
 //YewChong
 $language["Need"] = "Need";
 $language["No Need"] = "No Need";
+
+
+
+//Ham Jing Yi
+//Login, forget password
+$language['Show Password:'] = ' Show Password';
+$language['Check IC'] = 'Check IC';
+$language['Check'] = 'Check';
+$language['Enter IC'] = 'Enter IC';
+$language['Enter Password'] = 'Enter Password';
+$language['User is found!'] = 'User is found!';
+$language['Reset Password:'] = 'Reset Password:';
+$language['User Settings'] = 'User Settings';
+$language['Enter Full Name'] = 'Enter Full Name';
+$language['New Password:'] = 'New Password:';
+$language['Enter New Password'] = 'Enter New Password';
+$language['Re-type Password'] = 'Re-type Password';
+$language['IC Number'] = 'IC Number';
+
+//navbars
+$language['Home'] = 'Home';
+$language['Management'] = 'Management';
+$language['Dashboard'] = 'Dashboard';
+$language['Complaint Management'] = 'Complaint Management';
+$language['User Management'] = 'User Management';
+$language['Asset Management'] = 'Asset Management';
+$language['Room Management'] = 'Room Management';
+$language['Block Management'] = 'Block Management';
+$language['Download and Print'] = 'Download and Print';
+$language['Grade Management'] = 'Grade Management';
+$language['Edit Profile'] = 'Edit Profile';
+$language['Change Password'] = 'Change Password';
+$language['Logout'] = 'Logout';
+$language['Index'] = 'Index';
+
+//users
+$language['Users List'] = 'Users List';
+$language['Create New User'] = 'Create New User';
+$language['Filter'] = 'Filter';
+$language['Open this select menu'] = 'Open this select menu';
+$language['Apply'] = 'Apply';
+$language['Positions'] = 'Positions';
+$language['Detail'] = 'Detail';
+$language['Delete'] = 'Delete';
+$language['Are you sure you want to delete this account?'] = 'Are you sure you want to delete this account?';
+$language['User Detail'] = 'User Detail';
+$language['Username/IC'] = 'Username/IC';
+$language['user image'] = 'User Image';
+
+
 
 
 ?>
