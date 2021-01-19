@@ -2,6 +2,7 @@
 // Dashboard 
 //$language[''] = '';
 $language['MY DASHBOARD'] = 'MY DASHBOARD';
+$language['DASHBOARD'] = 'MY DASHBOARD';
 $language['COMPLAINTS MANAGEMENT'] = 'COMPLAINTS MANAGEMENT';
 $language['USER MANAGEMENT'] = 'USER MANAGEMENT';
 $language['ROOM MANAGEMENT'] = 'ROOM MANAGEMENT';
