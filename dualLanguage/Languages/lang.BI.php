@@ -8,7 +8,7 @@ $language['ROOM MANAGEMENT'] = 'ROOM MANAGEMENT';
 $language['ASSETS MANAGEMENT'] = 'ASSETS MANAGEMENT';
 $language['BLOCK MANAGEMENT'] = 'BLOCK MANAGEMENT';
 $language['DOWNLOAD AND PRINT'] = 'DOWNLOAD AND PRINT';
-
+$language['no picture avaiable'] = 'no picture avaiable';
 
 //CRUD
 $language['Action'] = 'Action';
@@ -71,10 +71,16 @@ $language['Edit Room'] = 'Edit Room';
 $language['CREATE A NEW ROOM'] = 'CREATE A NEW ROOM';
 $language["ROOM'S DETAILS"] = "ROOM'S DETAILS";
 $language["Room's Image"] = "Room's Image";
+$language['CLICK HERE'] = 'CLICK HERE';
 
   //modify
 $language['Edit Room'] = 'Edit Room';
 $language['EDIT ROOM'] = 'EDIT ROM';
+
+    //roomdetail
+$language["Room's Information"] = "Room's Information";
+$language["Room's Name"] = "Room's Name";
+$language['Located in'] = 'Located in';
 //Block 
 
 $language['Blocks in KVPJB'] = 'Blocks in KVPJB';
