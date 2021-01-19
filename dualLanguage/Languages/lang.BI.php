@@ -81,6 +81,8 @@ $language['EDIT ROOM'] = 'EDIT ROM';
 $language["Room's Information"] = "Room's Information";
 $language["Room's Name"] = "Room's Name";
 $language['Located in'] = 'Located in';
+    //roomassets
+$language['Assets in'] = 'Assets in ';
 //Block 
 
 $language['Blocks in KVPJB'] = 'Blocks in KVPJB';
