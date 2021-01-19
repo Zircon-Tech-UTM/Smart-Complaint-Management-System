@@ -19,6 +19,9 @@ $language['Delete'] = 'Delete';
 $language['Cancel'] = 'Cancel';
 $language['Clear'] = 'Clear';
 $language['Submit'] = 'Submit';
+$language['Save'] = 'Save';
+$language['Reset'] = 'Reset';
+$language['Search'] = 'Search';
 
 //Complaints
 $language['Issue_Date'] = 'Issue Date';
@@ -50,7 +53,7 @@ $language["BLOCK'S DETAILS"] = "BLOCK'S DETAILS";
   //modify
 $language['Edit Block'] = 'Edit Block';
 $language['EDIT BLOCK'] = 'EDIT BLOCK';
-$language['Save'] = 'Save';
+
     //blockroom
 $language['Rooms in'] = 'Rooms in ';
 $language["Room's Name(English)"] = "Room's Name(English)";
@@ -68,6 +71,10 @@ $language['Edit Room'] = 'Edit Room';
 $language['CREATE A NEW ROOM'] = 'CREATE A NEW ROOM';
 $language["ROOM'S DETAILS"] = "ROOM'S DETAILS";
 $language["Room's Image"] = "Room's Image";
+
+  //modify
+$language['Edit Room'] = 'Edit Room';
+$language['EDIT ROOM'] = 'EDIT ROM';
 //Block 
 
 $language['Blocks in KVPJB'] = 'Blocks in KVPJB';
@@ -123,8 +130,7 @@ $language['Select a block before viewing the assets of that block'] = 'Select a 
 //Forms 
 $language['Asset Main_Page'] = 'Asset Main Page';
 $language['Update Asset'] = 'Update Asset';
-$language['Reset'] = 'Reset';
-$language['Search'] = 'Search';
+
 
 
 //Complaint
