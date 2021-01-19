@@ -161,7 +161,8 @@ $language['Open this select menu'] = 'Open this select menu';
 $language['Pending Complaints'] = 'Pending Complaints';
 $language['View Accepted Complaints'] = 'View Accepted Complaints';
 $language['search by proposer or follower name'] = 'search by proposer or follower name';
-
+$language['Accepted Complaints List'] = 'Accepted Complaints List';
+$language['All Complaints'] = 'All Complaints';
 //landing  
 
 $language['Landing Page'] = 'Landing Page';
