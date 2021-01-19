@@ -34,7 +34,6 @@ $language['Block Name(Malay)'] = 'Block Name(Malay)';
 $language['Location'] = 'Location';
 $language['Rooms'] = 'Rooms';
 $language["BLOCKS' LIST"] = "BLOCKS' LIST";
-$language['Action'] = 'Action';
 $language['New Block'] = 'New Block';
 $language['Hostel'] = 'Hostel';
 $language['College'] = 'College';
@@ -53,13 +52,13 @@ $language['EDIT BLOCK'] = 'EDIT BLOCK';
 $language['Save'] = 'Save';
     //blockroom
 $language['Rooms in'] = 'Rooms in ';
-$language['Room Name(English)'] = 'Room Name(English)';
-$language['Room Name(Malay)'] = 'Room Name(Malay)';
+$language["Room's Name(English)"] = "Room's Name(English)";
+$language["Room's Name(Malay)"] = "Room's Name(Malay)";
 
 //room
 $language["ROOMS' LIST"] = "ROOMS' LIST";
 $language['Room ID'] = 'Room ID';
-$language["Room's Name"] = "Room's Name";
+$language['Assets'] = 'Assets';
 $language["Person in charge's ID"] = "Person in charge's ID";
 $language['Rooms in KVPJB'] = 'Rooms in KVPJB';
 $language['Update Room'] = 'Update Room';
