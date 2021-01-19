@@ -308,7 +308,16 @@ $language['Are you sure you want to delete this account?'] = 'Are you sure you w
 $language['User Detail'] = 'User Detail';
 $language['Username/IC'] = 'Username/IC';
 $language['user image'] = 'User Image';
-
+$language['Grade:'] = 'Grade:';
+$language['Choose a grade'] = 'Choose a grade';
+$language['Choose a room'] = 'Choose a room';
+$language['Contact Settings'] = 'Contact Settings';
+$language['Contact Number:'] = 'Contact Number:';
+$language['Enter contact number'] = 'Enter contact number';
+$language['Home Address:'] = 'Home Address:';
+$language['Enter Home Address'] = 'Enter Home Address';
+$language['Enter email address'] ='Enter email address';
+$language['Clear'] = 'Clear';
 
 
 
