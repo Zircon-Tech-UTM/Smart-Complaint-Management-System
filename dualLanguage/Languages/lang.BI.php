@@ -51,8 +51,14 @@ $language['Clear'] = 'Clear';
 $language['Edit Block'] = 'Edit Block';
 $language['EDIT BLOCK'] = 'EDIT BLOCK';
 $language['Save'] = 'Save';
+    //blockroom
+$language['Rooms in'] = 'Rooms in ';
+$language['Room Name(English)'] = 'Room Name(English)';
+$language['Room Name(Malay)'] = 'Room Name(Malay)';
 
 //room
+$language["ROOMS' LIST"] = "ROOMS' LIST";
+$language['Room ID'] = 'Room ID';
 $language["Room's Name"] = "Room's Name";
 $language["Person in charge's ID"] = "Person in charge's ID";
 $language['Rooms in KVPJB'] = 'Rooms in KVPJB';
@@ -315,46 +321,6 @@ $language['Are you sure you want to delete this account?'] = 'Are you sure you w
 $language['User Detail'] = 'User Detail';
 $language['Username/IC'] = 'Username/IC';
 $language['user image'] = 'User Image';
-$language['Grade:'] = 'Grade:';
-$language['Choose a grade'] = 'Choose a grade';
-$language['Choose a room'] = 'Choose a room';
-$language['Contact Settings'] = 'Contact Settings';
-$language['Contact Number:'] = 'Contact Number:';
-$language['Enter contact number'] = 'Enter contact number';
-$language['Home Address:'] = 'Home Address:';
-$language['Enter Home Address'] = 'Enter Home Address';
-$language['Enter email address'] ='Enter email address';
-$language['Clear'] = 'Clear';
-
-$language['Name is required'] = 'Name is required';
-$language['Only letters and white space allowed'] = 'Only letters and white space allowed';
-$language['IC number is required'] = 'IC number is required';
-$language['Please enter 12 digit without - '] = 'Please enter 12 digit without - ';
-$language['Pasword is required.'] = 'Pasword is required.';
-$language['Password must have at least 4 characters.'] = 'Password must have at least 4 characters.';
-$language['Password is not matching with the left field.'] = 'Password is not matching with the left field.';
-$language['Please confirm password.'] = 'Please confirm password.';
-$language['Password must have at least 4 characters.'] = 'Password must have at least 4 characters.';
-$language['Password is not matching with the left field.'] = 'Password is not matching with the left field.';
-$language['Position is required.'] = 'Position is required.';
-$language['Grade is required.'] = 'Grade is required.';
-$language['Address is required.'] = 'Address is required.';
-$language['Contact number is required.'] = 'Contact number is required.';
-$language['Please enter correct format in digit without -'] = 'Please enter correct format in digit without -';
-$language['Email is required'] = 'Email is required';
-$language['Invalid email format'] = 'Invalid email format';
-
-$language['Changes failed. Name is required'] = 'Changes failed. Name is required';
-$language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
-$language['Changes failed. IC number is required'] = 'Changes failed. IC number is required';
-$language['Changes failed. Please enter 12 digit without - '] = 'Changes failed. Please enter 12 digit without - ';
-$language['Changes failed. Position is required.'] = 'Changes failed. Position is required.';
-$language['Changes failed. Grade is required.'] = 'Changes failed. Grade is required.';
-$language['Changes failed. Address is required.'] = 'Changes failed. Address is required.';
-$language['Changes failed. Contact number is required.'] = 'Changes failed. Contact number is required.';
-$language['Changes failed. Please enter correct format in digit without -'] = 'Changes failed. Please enter correct format in digit without -';
-$language['Changes failed. Email is required'] = 'Changes failed. Email is required';
-$language['Changes failed. Invalid email format'] = 'Changes failed. Invalid email format';
 
 
 
