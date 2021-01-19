@@ -304,6 +304,20 @@ $language['Accepted by'] = 'Accepted by';
 $language['Choose A Block'] = 'Choose A Block';
 $language['Choose A Room'] ='Choose A Room';
 $language['Choose A Category'] = 'Choose A Category' ; 
+$language['Complaint Detail'] = 'Complaint Detail';
+$language['Please Choose A Room'] = 'Please Choose A Room';
+$language['Complaint Image'] = 'Complaint Image';
+$language["Complainant's detail"] = "Complainant's detail";
+$language['ZirconTech'] = 'ZirconTech';
+$language['Zircon Tech'] = 'Zircon Tech';
+
+//detailcomplaint
+$language['Complaint ID'] = 'Complaint ID' ;
+$language['Building'] = 'Building' ; 
+$language['Room'] = 'Room';
+$language['Proposed Date'] = 'Proposed Date';
+$language['Detail'] = 'Detail';
+$language['Complaint Information'] = 'Complaint Information';
 
 
 //Ham Jing Yi
