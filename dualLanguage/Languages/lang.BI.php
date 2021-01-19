@@ -17,7 +17,8 @@ $language['View'] = 'View';
 $language['Edit'] = 'Edit';
 $language['Delete'] = 'Delete';
 $language['Cancel'] = 'Cancel';
-
+$language['Clear'] = 'Clear';
+$language['Submit'] = 'Submit';
 
 //Complaints
 $language['Issue_Date'] = 'Issue Date';
@@ -28,7 +29,7 @@ $language['Complaint List'] = 'Complaint List';
 
 
 //Blocks and Rooms
-$language['Blocks'] = 'Blocks';
+$language['Blocks'] = 'Block';
 $language['Block Name(English)'] = 'Block Name(English)';
 $language['Block Name(Malay)'] = 'Block Name(Malay)';
 $language['Location'] = 'Location';
@@ -45,7 +46,7 @@ $language['Rooms in this block'] = 'Rooms in this block';
 $language['Block ID'] = 'Block ID';
 $language['title'] = 'CREATE A NEW BLOCK';
 $language["BLOCK'S DETAILS"] = "BLOCK'S DETAILS";
-$language['Clear'] = 'Clear';
+
   //modify
 $language['Edit Block'] = 'Edit Block';
 $language['EDIT BLOCK'] = 'EDIT BLOCK';
@@ -57,12 +58,16 @@ $language["Room's Name(Malay)"] = "Room's Name(Malay)";
 
 //room
 $language["ROOMS' LIST"] = "ROOMS' LIST";
-$language['Room ID'] = 'Room ID';
+$language['Room ID'] = "Room's ID";
 $language['Assets'] = 'Assets';
 $language["Person in charge's ID"] = "Person in charge's ID";
 $language['Rooms in KVPJB'] = 'Rooms in KVPJB';
 $language['Update Room'] = 'Update Room';
 $language['Edit Room'] = 'Edit Room';
+    //create
+$language['CREATE A NEW ROOM'] = 'CREATE A NEW ROOM';
+$language["ROOM'S DETAILS"] = "ROOM'S DETAILS";
+$language["Room's Image"] = "Room's Image";
 //Block 
 
 $language['Blocks in KVPJB'] = 'Blocks in KVPJB';
@@ -116,7 +121,6 @@ $language['no picture avaiable'] = 'no picture avaiable';
 $language['Select a block before viewing the assets of that block'] = 'Select a block before viewing the assets of that block';
 //Process
 //Forms 
-$language['Submit'] = 'Submit';
 $language['Asset Main_Page'] = 'Asset Main Page';
 $language['Update Asset'] = 'Update Asset';
 $language['Reset'] = 'Reset';
