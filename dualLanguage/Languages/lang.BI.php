@@ -345,7 +345,7 @@ $language['Email is required'] = 'Email is required';
 $language['Invalid email format'] = 'Invalid email format';
 
 $language['Changes failed. Name is required'] = 'Changes failed. Name is required';
-$language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed'
+$language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
 $language['Changes failed. IC number is required'] = 'Changes failed. IC number is required';
 $language['Changes failed. Please enter 12 digit without - '] = 'Changes failed. Please enter 12 digit without - ';
 $language['Changes failed. Position is required.'] = 'Changes failed. Position is required.';
