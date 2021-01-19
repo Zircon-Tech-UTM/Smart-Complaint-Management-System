@@ -29,11 +29,40 @@ $language['Complaint List'] = 'Complaint List';
 
 //Blocks and Rooms
 $language['Blocks'] = 'Blocks';
-$language['Block Name'] = 'Block Name';
+$language['Block Name(English)'] = 'Block Name(English)';
+$language['Block Name(Malay)'] = 'Block Name(Malay)';
 $language['Location'] = 'Location';
 $language['Rooms'] = 'Rooms';
+$language["BLOCKS' LIST"] = "BLOCKS' LIST";
+$language['Action'] = 'Action';
+$language['New Block'] = 'New Block';
+$language['Hostel'] = 'Hostel';
+$language['College'] = 'College';
+$language['Others'] = 'Others';
+$language['New Room']  = 'New Room';
 $language['Rooms in this block'] = 'Rooms in this block';
-$language['PIC'] = 'PIC';
+
+    //create
+$language['Block ID'] = 'Block ID';
+$language['title'] = 'CREATE A NEW BLOCK';
+$language["BLOCK'S DETAILS"] = "BLOCK'S DETAILS";
+$language['Clear'] = 'Clear';
+  //modify
+$language['Edit Block'] = 'Edit Block';
+$language['EDIT BLOCK'] = 'EDIT BLOCK';
+$language['Save'] = 'Save';
+
+//room
+$language["Room's Name"] = "Room's Name";
+$language["Person in charge's ID"] = "Person in charge's ID";
+$language['Rooms in KVPJB'] = 'Rooms in KVPJB';
+$language['Update Room'] = 'Update Room';
+$language['Edit Room'] = 'Edit Room';
+//Block 
+
+$language['Blocks in KVPJB'] = 'Blocks in KVPJB';
+$language['Update_Block'] = 'Update Block';
+
 
 
 
@@ -88,18 +117,6 @@ $language['Update Asset'] = 'Update Asset';
 $language['Reset'] = 'Reset';
 $language['Search'] = 'Search';
 
-//Block 
-$language['Blocks in KVPJB'] = 'Blocks in KVPJB';
-$language['Update_Block'] = 'Update Block';
-$language['Edit Block'] = 'Edit Block';
-$language['Block ID'] = 'Block ID';
-$language['Hostel'] = 'Hostel';
-$language['College'] = 'College';
-$language['Others'] = 'Others';
-
-$language['Create Block'] = 'Create Block';
-$language['Create a new Room']  = 'Create a new Room';
-
 
 //Complaint
 $language['No'] = 'No';
@@ -152,16 +169,6 @@ $language['User Profile:'] = 'User Profile:';
 $language['Email Address:'] = 'Email Address:';
 $language['Landing For Other Users'] = 'Landing For Other Users';
 $language['View Profile'] = 'View Profile';
-
-
-//room
-$language["Room's Name"] = "Room's Name";
-$language["Person in charge's ID"] = "Person in charge's ID";
-$language['Rooms in KVPJB'] = 'Rooms in KVPJB';
-$language['Update Room'] = 'Update Room';
-$language['Edit Room'] = 'Edit Room';
-
-
 
 //users
 $language['User_Details'] = 'User Details';
@@ -308,16 +315,7 @@ $language['Are you sure you want to delete this account?'] = 'Are you sure you w
 $language['User Detail'] = 'User Detail';
 $language['Username/IC'] = 'Username/IC';
 $language['user image'] = 'User Image';
-$language['Grade:'] = 'Grade:';
-$language['Choose a grade'] = 'Choose a grade';
-$language['Choose a room'] = 'Choose a room';
-$language['Contact Settings'] = 'Contact Settings';
-$language['Contact Number:'] = 'Contact Number:';
-$language['Enter contact number'] = 'Enter contact number';
-$language['Home Address:'] = 'Home Address:';
-$language['Enter Home Address'] = 'Enter Home Address';
-$language['Enter email address'] ='Enter email address';
-$language['Clear'] = 'Clear';
+
 
 
 
