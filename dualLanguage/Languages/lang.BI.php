@@ -363,6 +363,7 @@ $language['Users List'] = 'Users List';
 $language['Create New User'] = 'Create New User';
 $language['Filter'] = 'Filter';
 $language['Open this select menu'] = 'Open this select menu';
+$language['Apply'] = 'Apply';
 $language['Positions'] = 'Positions';
 $language['Detail'] = 'Detail';
 $language['Delete'] = 'Delete';
@@ -411,6 +412,7 @@ $language['Changes failed. Contact number is required.'] = 'Changes failed. Cont
 $language['Changes failed. Please enter correct format in digit without -'] = 'Changes failed. Please enter correct format in digit without -';
 $language['Changes failed. Email is required'] = 'Changes failed. Email is required';
 $language['Changes failed. Invalid email format'] = 'Changes failed. Invalid email format';
+$language['Are you sure you want to edit this account?'] = 'Are you sure you want to edit this account?';
 
 //Grade
 $language['USER GRADE'] = 'USER GRADE';
@@ -437,7 +439,6 @@ $language['Changes failed. Position in English is required'] = 'Changes failed. 
 $language['Changes failed. Only letters and white space allowed']= 'Changes failed. Only letters and white space allowed';
 $language['Changes failed. Position in Malay is required'] = 'Changes failed. Position in Malay is required';
 $language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
-
 
 
 ?>
