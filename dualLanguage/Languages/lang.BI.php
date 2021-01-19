@@ -22,6 +22,8 @@ $language['Submit'] = 'Submit';
 $language['Save'] = 'Save';
 $language['Reset'] = 'Reset';
 $language['Search'] = 'Search';
+$language['Apply'] = 'Apply';
+$language['Accept'] = 'Accept'; 
 
 //Complaints
 $language['Issue_Date'] = 'Issue Date';
@@ -155,10 +157,10 @@ $language['Room:'] = 'Room:';
 $language['Proposed Date:'] = 'Proposed Date:';
 $language['Settled Date:'] = 'Settled Date:';
 
-$language['Please Choose A Block'] = 'Please Choose A Block';
-
 $language['Open this select menu'] = 'Open this select menu';
-
+$language['Pending Complaints'] = 'Pending Complaints';
+$language['View Accepted Complaints'] = 'View Accepted Complaints';
+$language['search by proposer or follower name'] = 'search by proposer or follower name';
 
 //landing  
 
@@ -282,7 +284,6 @@ $language["Assets's name"] = "Assets's name";
 $language['Number of Complaint'] = 'Number of Complaint';
 $language["Blocks' name"] = "Blocks' name";
 $language['Number of Complaint'] = 'Number of Complaint';
-$language['Status of non-ICT Complaints'] = 'Status of non-ICT Complaints';
 
 
 
@@ -347,7 +348,6 @@ $language['Users List'] = 'Users List';
 $language['Create New User'] = 'Create New User';
 $language['Filter'] = 'Filter';
 $language['Open this select menu'] = 'Open this select menu';
-$language['Apply'] = 'Apply';
 $language['Positions'] = 'Positions';
 $language['Detail'] = 'Detail';
 $language['Delete'] = 'Delete';
