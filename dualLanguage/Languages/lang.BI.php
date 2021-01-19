@@ -307,6 +307,8 @@ $language['Choose A Category'] = 'Choose A Category' ;
 //Ham Jing Yi
 //Login, forget password
 $language['Show Password:'] = ' Show Password';
+$language['Current Password:'] = 'Current Password:';
+$language['Enter current password'] = 'Enter current password';
 $language['Check IC'] = 'Check IC';
 $language['Check'] = 'Check';
 $language['Enter IC'] = 'Enter IC';
@@ -337,6 +339,10 @@ $language['Logout'] = 'Logout';
 $language['Index'] = 'Index';
 
 //users
+$language['Admin'] = 'Admin';
+$language['PIC Of Room'] = 'PIC Of Room';
+$language['Assistant Computer Technician'] = 'Assistant Computer Technician';
+$language['Assistant Engineer'] = 'Assistant Engineer';
 $language['Users List'] = 'Users List';
 $language['Create New User'] = 'Create New User';
 $language['Filter'] = 'Filter';
@@ -349,7 +355,73 @@ $language['Are you sure you want to delete this account?'] = 'Are you sure you w
 $language['User Detail'] = 'User Detail';
 $language['Username/IC'] = 'Username/IC';
 $language['user image'] = 'User Image';
+$language['Grade:'] = 'Grade:';
+$language['Choose a grade'] = 'Choose a grade';
+$language['Choose a room'] = 'Choose a room';
+$language['Contact Settings'] = 'Contact Settings';
+$language['Contact Number:'] = 'Contact Number:';
+$language['Enter contact number'] = 'Enter contact number';
+$language['Home Address:'] = 'Home Address:';
+$language['Enter Home Address'] = 'Enter Home Address';
+$language['Enter email address'] ='Enter email address';
+$language['Save'] = 'Save';
+$language['Clear'] = 'Clear';
 
+$language['Name is required'] = 'Name is required';
+$language['Only letters and white space allowed'] = 'Only letters and white space allowed';
+$language['IC number is required'] = 'IC number is required';
+$language['Please enter 12 digit without - '] = 'Please enter 12 digit without - ';
+$language['Pasword is required.'] = 'Pasword is required.';
+$language['Password must have at least 4 characters.'] = 'Password must have at least 4 characters.';
+$language['Password is not matching with the left field.'] = 'Password is not matching with the left field.';
+$language['Please confirm password.'] = 'Please confirm password.';
+$language['Password must have at least 4 characters.'] = 'Password must have at least 4 characters.';
+$language['Password is not matching with the left field.'] = 'Password is not matching with the left field.';
+$language['Position is required.'] = 'Position is required.';
+$language['Grade is required.'] = 'Grade is required.';
+$language['Address is required.'] = 'Address is required.';
+$language['Contact number is required.'] = 'Contact number is required.';
+$language['Please enter correct format in digit without -'] = 'Please enter correct format in digit without -';
+$language['Email is required'] = 'Email is required';
+$language['Invalid email format'] = 'Invalid email format';
+
+$language['Changes failed. Name is required'] = 'Changes failed. Name is required';
+$language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
+$language['Changes failed. IC number is required'] = 'Changes failed. IC number is required';
+$language['Changes failed. Please enter 12 digit without - '] = 'Changes failed. Please enter 12 digit without - ';
+$language['Changes failed. Position is required.'] = 'Changes failed. Position is required.';
+$language['Changes failed. Grade is required.'] = 'Changes failed. Grade is required.';
+$language['Changes failed. Address is required.'] = 'Changes failed. Address is required.';
+$language['Changes failed. Contact number is required.'] = 'Changes failed. Contact number is required.';
+$language['Changes failed. Please enter correct format in digit without -'] = 'Changes failed. Please enter correct format in digit without -';
+$language['Changes failed. Email is required'] = 'Changes failed. Email is required';
+$language['Changes failed. Invalid email format'] = 'Changes failed. Invalid email format';
+
+//Grade
+$language['USER GRADE'] = 'USER GRADE';
+$language['Grade Settings'] = 'Grade Settings';
+$language['Grade ID:'] = 'Grade ID:';
+$language['Grade ID'] = 'Grade ID';
+$language['Enter Grade ID'] = 'Enter Grade ID';
+$language['Enter Position in English'] = 'Enter Position in English';
+$language['Enter Position in Malay'] = 'Enter Position in Malay';
+$language['Grade List'] = 'Grade List';
+$language['GRADE LIST'] = 'GRADE LIST';
+$language['New Grade'] = 'New Grade';
+$language['Are you sure you want to delete this grade?'] = 'Are you sure you want to delete this grade?';
+$language['Do you want to save the changes?'] = 'Do you want to save the changes?';
+$language['Grade ID is required'] = 'Grade ID is required';
+$language['Only letters, number and white space are allowed'] = 'Only letters, number and white space are allowed';
+$language['Position in English is required'] = 'Position in English is required';
+$language['Only letters and white space allowed'] = 'Only letters and white space allowed';
+$language['Position in Malay is required'] = 'Position in Malay is required';
+$language['Only letters and white space allowed'] = 'Only letters and white space allowed';
+$language['Changes failed. Grade ID is required'] = 'Changes failed. Grade ID is required';
+$language['Changes failed. Only letters, number and white space are allowed']= 'Changes failed. Only letters, number and white space are allowed';
+$language['Changes failed. Position in English is required'] = 'Changes failed. Position in English is required';
+$language['Changes failed. Only letters and white space allowed']= 'Changes failed. Only letters and white space allowed';
+$language['Changes failed. Position in Malay is required'] = 'Changes failed. Position in Malay is required';
+$language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
 
 
 
