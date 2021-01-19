@@ -290,7 +290,18 @@ $language['Status of non-ICT Complaints'] = 'Status of non-ICT Complaints';
 //YewChong
 $language["Need"] = "Need";
 $language["No Need"] = "No Need";
-
+$language['Open menu'] = 'Open menu';
+$language['Asset Category'] = 'Asset Category';
+$language['All Complaints List'] ='All Complaints List' ;
+$language['New Complaint'] = 'New Complaint';
+$language['Assets'] = 'Assets';
+$language['Proposed By'] = 'Proposed By';
+$language['Issue Date'] = 'Issue Date';
+$language['Settled Date'] = 'Settled Date';
+$language['Accepted by'] = 'Accepted by';
+$language['Choose A Block'] = 'Choose A Block';
+$language['Choose A Room'] ='Choose A Room';
+$language['Choose A Category'] = 'Choose A Category' ; 
 
 
 //Ham Jing Yi
