@@ -457,7 +457,8 @@ $language['Current pasword is required'] = 'Kata Laluan Semasa Diperlukan';
 $language['Password must have at least 4 characters'] = 'Kata laluan mesti mengandungi sekurang-kurangnya 4 aksara';
 $language['Please confirm password'] = 'Masukkan semula kata laluan';
 $language['Grade Position:'] = 'Jawatan Gred:';
-
+$language['Position (BI):'] = 'Jawatan (BI):';
+$language['Position (BM):'] = 'Jawatan (BM):';
 
 
 ?>
