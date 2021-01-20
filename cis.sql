@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2021 at 04:42 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Jan 20, 2021 at 04:23 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,9 +117,9 @@ CREATE TABLE `complaints` (
 --
 
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
-(1, '990105029068', 'NICT0001', 'BL2000001', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
-(2, '990105029068', 'ICT0001', 'AL1000002', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
-(3, '990105029068', 'ICT0002', 'AL1000002', '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
+(1, NULL, 'NICT0001', 'BL2000001', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
+(2, NULL, 'ICT0001', 'AL1000002', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
+(3, NULL, 'ICT0002', 'AL1000002', '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ INSERT INTO `status` (`s_statusID`, `s_nameBI`, `s_nameBM`) VALUES
 
 CREATE TABLE `users` (
   `u_userIC` varchar(12) NOT NULL,
-  `pwd` varchar(15) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `postBI` varchar(50) DEFAULT NULL,
   `postBM` varchar(50) DEFAULT NULL,
@@ -217,12 +217,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`, `u_grade`) VALUES
-('001005101333', '123456', 'Lee Sze Yuan', 'PIC', 'PIC', 'lololol', 'lsyuan1029@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
-('001005101334', '123456', 'Lee Sze Yu', 'PIC', 'PIC', 'lals', 'momentumlee5@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
-('001005101335', '123456', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
-('001005101336', '123456', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
-('001005101337', '123456', 'Tee Hui You', 'PIC', 'PIC', 'lalsdsfsd', 'huiyou002013@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
-('990105029068', '123456', 'Ham Jing Yi', 'Admin', 'Admin', 'lalalal', 'hamjingyi99@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1', 'DG44');
+('001005101333', '$2y$10$MitShOcGWbMKX1Qsm4lxEOC98xq2phzBWRsbZTFsUfeTK/7/Ndi1a', 'Lee Sze Yuan', 'PIC Of Room', 'PIC Makmal', 'lololol', 'lsyuan1029@gmail.com', '0123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
+('001005101334', '$2y$10$XEWoyuVKmyGfhk.XXc1EyO5U8JE79hvpuS2W9BxO7oTBr6QMOA8gO', 'Lee Sze Yu', 'PIC Of Room', 'PIC Makmal', 'lals', 'momentumlee5@gmail.com', '0123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
+('001005101335', '$2y$10$B49BJAqqqerG65sdZk/9ce9xUTSmB53a0Is/.UUfz6eEL1j0iOVuW', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '0123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
+('001005101336', '$2y$10$HEuK2OfyIzSTnXurlujEY.WqyuzM07DNrT0ig1PK/N/Mwz0YSYrhi', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '0123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
+('001005101337', '$2y$10$CBF0nqD5Z5Ti8v05yRQda.P0POAW6eH6BNtCfLqPYpMu7TTih1WJe', 'Tee Hui You', 'PIC Of Room', 'PIC Makmal', 'lalsdsfsd', 'huiyou002013@gmail.com', '0123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
+('990105029068', '$2y$10$lrZgGnEWS4pAir5i4o/s7eh3Smeyp5YagLrYoMcaU6eGSszuc0AOG', 'Ham Jing Yi', 'Admin', 'Pentadbir', 'Alor Setar, Kedah.', 'hamjingyi99@gmail.com', '0124663976', '2020-12-23 21:33:04', NULL, NULL, '1', 'DG41');
 
 --
 -- Indexes for dumped tables
