@@ -339,6 +339,8 @@ $language['Complaint Information'] = 'Maklumat Aduan';
 //Ham Jing Yi
 //Login, forget password
 $language['Show Password:'] = ' Tunjuk Kata Laluan';
+$language['Current Password:'] = 'Kata Laluan Semasa:';
+$language['Enter current password'] = 'Masukkan kata laluan semasa';
 $language['Check IC'] = 'Semak IC';
 $language['Check'] = 'Semak';
 $language['Enter IC'] = 'Masukkan IC';
