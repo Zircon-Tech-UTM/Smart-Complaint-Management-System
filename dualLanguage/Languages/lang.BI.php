@@ -444,5 +444,7 @@ $language['Current pasword is required'] = 'Current pasword is required';
 $language['Password must have at least 4 characters'] = 'Password must have at least 4 characters';
 $language['Please confirm password'] = 'Please confirm password';
 $language['Grade Position:'] = 'Grade Position:';
+$language['Position (BI):'] = 'Position (BI):';
+$language['Position (BM):'] = 'Position (BM):';
 
 ?>
