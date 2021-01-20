@@ -446,5 +446,7 @@ $language['Please confirm password'] = 'Please confirm password';
 $language['Grade Position:'] = 'Grade Position:';
 $language['Position (BI):'] = 'Position (BI):';
 $language['Position (BM):'] = 'Position (BM):';
+$language['Create Grade'] = 'Create Grade';
+$language['Update User Grade'] = 'Update User Grade';
 
 ?>
