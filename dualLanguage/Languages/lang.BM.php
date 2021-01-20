@@ -459,7 +459,8 @@ $language['Please confirm password'] = 'Masukkan semula kata laluan';
 $language['Grade Position:'] = 'Jawatan Gred:';
 $language['Position (BI):'] = 'Jawatan (BI):';
 $language['Position (BM):'] = 'Jawatan (BM):';
-
+$language['Create Grade'] = 'Daftar Gred Baru';
+$language['Update User Grade'] = 'Kemaskini Gred';
 
 ?>
 
