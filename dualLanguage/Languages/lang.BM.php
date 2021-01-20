@@ -453,6 +453,10 @@ $language['Changes failed. Position in English is required'] = 'Perubahan gagal.
 $language['Changes failed. Only letters and white space allowed']= 'Perubahan gagal. Hanya huruf dan ruang putih yang dibenarkan.';
 $language['Changes failed. Position in Malay is required'] = 'Perubahan gagal. Jawatan dalam Bahasa Melayu diperlukan.';
 $language['Changes failed. Only letters and white space allowed'] = 'Perubahan gagal. Hanya huruf dan ruang putih yang dibenarkan.';
+$language['Current pasword is required'] = 'Kata Laluan Semasa Diperlukan';
+$language['Password must have at least 4 characters'] = 'Kata laluan mesti mengandungi sekurang-kurangnya 4 aksara';
+$language['Please confirm password'] = 'Masukkan semula kata laluan';
+$language['Grade Position:'] = 'Jawatan Gred:';
 
 
 
