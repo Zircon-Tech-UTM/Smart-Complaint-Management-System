@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2021 at 11:39 AM
+-- Generation Time: Jan 19, 2021 at 04:42 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cis`
 --
-CREATE DATABASE IF NOT EXISTS `cis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cis`;
 
 -- --------------------------------------------------------
 
@@ -119,8 +117,8 @@ CREATE TABLE `complaints` (
 --
 
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
-(1, '990105029068', 'NICT0001', 'AL1000002', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
-(2, '990105029068', 'ICT0001', 'BL1000001', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
+(1, '990105029068', 'NICT0001', 'BL2000001', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
+(2, '990105029068', 'ICT0001', 'AL1000002', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
 (3, '990105029068', 'ICT0002', 'AL1000002', '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -219,12 +217,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`, `u_grade`) VALUES
-('001005101333', '123456', 'Ahmad', 'PIC', 'PIC', 'lololol', 'Ahmad@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
-('001005101334', '123456', 'Ali', 'PIC', 'PIC', 'lals', 'Ali@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
-('001005101335', '123456', 'Mohamad', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'Mohamad@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
-('001005101336', '123456', 'ABU', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'Abu@gmail.com', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
-('001005101337', '123456', 'Muthu', 'PIC', 'PIC', 'lalsdsfsd', 'Muthu@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
-('990105029068', '123456', 'jingyi', 'Admin', 'Admin', 'lalalal', 'jingyi@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1', 'DG44');
+('001005101333', '123456', 'Lee Sze Yuan', 'PIC', 'PIC', 'lololol', 'lsyuan1029@gmail.com', '60123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
+('001005101334', '123456', 'Lee Sze Yu', 'PIC', 'PIC', 'lals', 'momentumlee5@gmail.com', '60123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
+('001005101335', '123456', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '60123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
+('001005101336', '123456', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '60123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
+('001005101337', '123456', 'Tee Hui You', 'PIC', 'PIC', 'lalsdsfsd', 'huiyou002013@gmail.com', '60123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
+('990105029068', '123456', 'Ham Jing Yi', 'Admin', 'Admin', 'lalalal', 'hamjingyi99@gmail.com', '601123861731', '2020-12-23 22:49:34', NULL, NULL, '1', 'DG44');
 
 --
 -- Indexes for dumped tables
