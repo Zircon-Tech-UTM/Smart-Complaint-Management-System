@@ -440,6 +440,9 @@ $language['Changes failed. Position in English is required'] = 'Changes failed. 
 $language['Changes failed. Only letters and white space allowed']= 'Changes failed. Only letters and white space allowed';
 $language['Changes failed. Position in Malay is required'] = 'Changes failed. Position in Malay is required';
 $language['Changes failed. Only letters and white space allowed'] = 'Changes failed. Only letters and white space allowed';
-
+$language['Current pasword is required'] = 'Current pasword is required';
+$language['Password must have at least 4 characters'] = 'Password must have at least 4 characters';
+$language['Please confirm password'] = 'Please confirm password';
+$language['Grade Position:'] = 'Grade Position:';
 
 ?>
