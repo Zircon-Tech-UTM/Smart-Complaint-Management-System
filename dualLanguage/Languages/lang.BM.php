@@ -356,6 +356,7 @@ $language['New Password:'] = 'Kata Laluan Baru:';
 $language['Enter New Password'] = 'Masukkan Kata Laluan Baru';
 $language['Re-type Password'] = 'Masukkan Semula Kata Laluan';
 $language['IC Number'] = 'Nombor IC';
+$language['Room Assigned:'] = 'Bilik Yang Ditugaskan:';
 
 //navbars
 $language['Home'] = 'Halaman';
