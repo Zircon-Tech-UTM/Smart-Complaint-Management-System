@@ -352,6 +352,7 @@ $language['New Password:'] = 'New Password:';
 $language['Enter New Password'] = 'Enter New Password';
 $language['Re-type Password'] = 'Re-type Password';
 $language['IC Number'] = 'IC Number';
+$language['Room Assigned:'] = 'Room Assigned:';
 
 //navbars
 $language['Home'] = 'Home';
