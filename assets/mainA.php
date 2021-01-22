@@ -50,11 +50,12 @@
   <div class="container-fluid">
 
     <div class="row align-items-start">
-      <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-primary m-0 font-weight-bold"><?php echo $language['Asset List']; ?></h1></div>
+      <div class="col-md-8 col-xl-8 mb-12"><h1 class="text m-0 font-weight-bold"><?php echo $language['Asset List']; ?></h1></div>
 
-      <div class="col-md-3 col-xl-3 mb-4"><a href="create.php" class="btn btn-primary btn-lg"><?php echo $language['New Asset']; ?></a></div>
-
-      <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()">Filter</button></div>
+      <div class="col-md-3 col-xl-3 mb-4">
+        <a href="create.php" class="btn btn-primary btn-lg"><?php echo $language['New Asset']; ?></a>&nbsp&nbsp
+        <button class="btn btn-success" onclick="hide()"><?php echo $language['Filter']; ?></button>
+      </div>
     </div>
 
     <script>
@@ -119,7 +120,7 @@
                             <!-- <td><?php echo $new_date; ?></td>   -->
                             <td>
                               <a href = 'update.php?assetID=<?php echo $row["a_assetID"]; ?>' class = 'btn btn-warning'><?php echo $language['Edit']; ?></a>&nbsp;
-                              <a href = 'delete.php?assetID=<?php echo $row["a_assetID"]; ?>' class = 'btn btn-danger' style="color: rgb(14,14,14);"  onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')">X</a>
+                              <a href = 'delete.php?assetID=<?php echo $row["a_assetID"]; ?>' class = 'btn btn-danger' style="color: rgb(14,14,14);"  onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')"><strong>X</strong></a>
                             </td>
 
                           </tr>
@@ -134,13 +135,12 @@
         </div>
 
         <div class="col-md-2 col-xl-3 mb-2" id="filter" style="display: none;">
-          <h3><?php echo $language['Filter']; ?></h3>
           <div class="card shadow">
             <div class="card-body">
               <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 
                   <form action="mainA.php" method="POST"> 
-                    <label for="blocks" class="form-label">blocks</label>
+                    <label for="blocks" class="form-label"><?php echo $language['Blocks']; ?></label>
                     <select class="form-select" aria-label="Default select example" name="blocks" id="blocks">
                         <option selected value=""><?php echo $language['Open this select menu']; ?></option>
                         <?php
@@ -149,9 +149,9 @@
 
                           while($row2 = mysqli_fetch_array($result2)){
                             if ($_POST['blocks'] == $row2['block_no']){
-                                  echo "<option selected value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
+                                  echo "<option selected value='".$row2['block_no']."'>".$row2["b_name".$_SESSION['language'].""]."</option>";
                             }else{
-                                echo "<option value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
+                                echo "<option value='".$row2['block_no']."'>".$row2["b_name".$_SESSION['language'].""]."</option>";
                             }
                           }
                         ?>
@@ -166,9 +166,9 @@
 
                           while($row2 = mysqli_fetch_array($result2)){
                             if ($_POST['rooms'] == $row2['r_roomID']){
-                                  echo "<option selected value='".$row2['r_roomID']."'>".$row2["r_nameBI"]."</option>";
+                                  echo "<option selected value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
                             }else{
-                                echo "<option value='".$row2['r_roomID']."'>".$row2["r_nameBI"]."</option>";
+                                echo "<option value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
                             }
                           }
                         ?>
@@ -187,11 +187,20 @@
                               if (this.status === 200 && this.readyState === 4){
                                   let rooms = JSON.parse(this.responseText);
 
+                                  let lang = "<?php echo $_SESSION["language"]; ?>";
+
                                   output = '';
 
-                                  output+= `<option value="" selected>Open this select menu</option>`;
-                                  for (var i in rooms){
-                                      output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                  if(lang ==='BI'){
+                                      output+= `<option value="" selected>Open this select menu</option>`;
+                                      for (var i in rooms){
+                                          output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                      }
+                                  }else{
+                                      output+= `<option value="" selected>Tunjuk Menu</option>`;
+                                      for (var i in rooms){
+                                          output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                      }
                                   }
                                   
                                   document.getElementById('rooms').innerHTML = output;
@@ -224,7 +233,7 @@
 
                     <input type="hidden" name="block" value="<?php echo $_POST["block"]; ?>">
                     
-                    <input type="submit" value="<?php echo $language['Filter']; ?>" class="btn btn-primary">
+                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
                     <a href="" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                   </form><br>
                 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

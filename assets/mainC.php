@@ -146,9 +146,9 @@
 
                           while($row2 = mysqli_fetch_array($result2)){
                             if ($_POST['blocks'] == $row2['block_no']){
-                                  echo "<option selected value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
+                                  echo "<option selected value='".$row2['block_no']."'>".$row2["b_name".$_SESSION["language"].""]."</option>";
                             }else{
-                                echo "<option value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
+                                echo "<option value='".$row2['block_no']."'>".$row2["b_name".$_SESSION["language"].""]."</option>";
                             }
                           }
                         ?>
@@ -157,6 +157,18 @@
                     <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label>
                     <select class="form-select" aria-label="Default select example" name="rooms" id="rooms">
                         <option selected value=""><?php echo $language['Open this select menu']; ?></option>
+                        <?php
+                          $sql2 = "SELECT * FROM rooms WHERE blok = '".$_POST["blocks"]."'";
+                          $result2 = mysqli_query($conn, $sql2);
+
+                          while($row2 = mysqli_fetch_array($result2)){
+                            if ($_POST['rooms'] == $row2['r_roomID']){
+                                  echo "<option selected value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
+                            }else{
+                                echo "<option value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
+                            }
+                          }
+                        ?>
                     </select><br>
 
                     <script type="text/javascript">
@@ -172,11 +184,21 @@
                               if (this.status === 200 && this.readyState === 4){
                                   let rooms = JSON.parse(this.responseText);
 
+
+                                  let lang = "<?php echo $_SESSION["language"]; ?>";
+
                                   output = '';
 
-                                  output+= `<option value="" selected>Open this select menu</option>`;
-                                  for (var i in rooms){
-                                      output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                  if(lang ==='BI'){
+                                      output+= `<option value="" selected>Open this select menu</option>`;
+                                      for (var i in rooms){
+                                          output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                      }
+                                  }else{
+                                      output+= `<option value="" selected>Tunjuk Pilihan-pilihan</option>`;
+                                      for (var i in rooms){
+                                          output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                      }
                                   }
                                   
                                   document.getElementById('rooms').innerHTML = output;

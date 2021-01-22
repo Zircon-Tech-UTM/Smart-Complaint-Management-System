@@ -56,15 +56,15 @@
                 <form action="createB.php" enctype="multipart/form-data" method="POST">
 
                     <div class="form-group">
-                        <label for="AsssetID"><?php echo $language['Asset ID']; ?></label>
-                        <input type="text" class="form-control <?php echo (!empty($assetIDErr)) ? 'is-invalid' : ''; ?>" id="AsssetID" placeholder="<?php echo $language['Enter AssetID']; ?>" name="assetID" value="<?php echo $assetID; ?>">
+                        <label for="AsssetID"><strong><?php echo $language['Asset ID']; ?></strong></label>
+                        <input type="text" class="form-control <?php echo (!empty($assetIDErr)) ? 'is-invalid' : ''; ?>" id="AsssetID" placeholder="<?php echo $language['Enter Asset ID']; ?>" name="assetID" value="<?php echo $assetID; ?>">
                         <span class="help-block"><?php echo $assetIDErr;?></span>
                     </div>
 
                   <div class="row">
                     <div class="col-md-5 col-xl-5 mb-12">
                     <div class="form-group">
-                        <label for="BI_Name"><?php echo $language['BI Name']; ?></label>
+                        <label for="BI_Name"><strong><?php echo $language['BI Name']; ?></strong></label>
                         <input type="text" class="form-control <?php echo (!empty($nameBIErr)) ? 'is-invalid' : ''; ?>" id="BI_Name" placeholder="<?php echo $language['Enter name in BI']; ?>" name="nameBI" value="<?php echo $nameBI; ?>">
                         <span class="help-block"><?php echo $nameBIErr;?></span>
                     </div>
@@ -73,7 +73,7 @@
                     <div class ="col-md-1 col-xl-1 mb-1"></div>
                     <div class="col-md-5 col-xl-5 mb-12">
                     <div class="form-group">
-                        <label for="BM_Name"><?php echo $language['BM Name']; ?></label>
+                        <label for="BM_Name"><strong><?php echo $language['BM Name']; ?></label>
                         <input type="text" class="form-control <?php echo (!empty($nameBMErr)) ? 'is-invalid' : ''; ?>" id="BM_Name" placeholder="<?php echo $language['Enter name in BM']; ?>" name="nameBM" value="<?php echo $nameBM; ?>">
                         <span class="help-block"><?php echo $nameBMErr;?></span>
                     </div>
@@ -83,7 +83,7 @@
                   <div class="row">
                     <div class="col-md-5 col-xl-5 mb-12">
                     <div>
-                        <label for="blocks" class="form-label"><?php echo $language['Blocks']; ?></label><br>
+                        <label for="blocks" class="form-label"><strong><?php echo $language['Blocks']; ?></strong></label><br>
                             <input type="text" class="form-control" value="<?php echo $row2['b_nameBI']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row2['block_no']; ?>" name="blocks">
                     </div>
@@ -92,7 +92,7 @@
                     <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                     <div class="col-md-5 col-xl-5 mb-12">
                     <div>
-                        <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label><br>
+                        <label for="rooms" class="form-label"><strong><?php echo $language['Rooms']; ?></strong></label><br>
                             <input type="text" class="form-control <?php echo (!empty($roomErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row2['r_nameBI']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row2['r_roomID']; ?>" name="rooms">
                             <span class="help-block"><?php echo $roomErr;?></span>
@@ -100,7 +100,7 @@
                     </div>
                   </div><br>
 
-                    <label><?php echo $language['Category']; ?></label>
+                    <label><?php echo $language['Category']; ?></strong></label>
                     <div class="radio">
                         <label><input type="radio" name="category" value="1" ><?php echo $language['ICT']; ?></label>
                     <!-- </div>
@@ -110,39 +110,39 @@
                     </div><br>
 
                     <div class="form-group">
-                        <label for="Description"><?php echo $language['Description']; ?></label>
+                        <label for="Description"><strong><?php echo $language['Description']; ?></strong></label>
                         <textarea  class="form-control" rows="5" id="Description" placeholder="<?php echo $language['Enter description']; ?> " name="description" ></textarea>
                     </div>
                     
                   <div class="row">
                     <div class="col-md-5 col-xl-5 mb-12">
                         <div class="form-group">
-                        <label for="Cost"><?php echo $language['Cost']; ?></label>
+                        <label for="Cost"><strong><?php echo $language['Cost']; ?></strong></label>
                         <input type="text" class="form-control <?php echo (!empty($costErr)) ? 'is-invalid' : ''; ?>" id="Cost" placeholder="<?php echo $language['Enter cost']; ?>" name="cost" value="<?php echo $cost; ?>">
                         <span class="help-block"><?php echo $costErr;?></span>
                         </div>
                     </div>
 
                     <div class ="col-md-1 col-xl-1 mb-1"></div>
-                    <div class="col-md-5 col-xl-5 mb-12">
+                    <!-- <div class="col-md-5 col-xl-5 mb-12">
                     <div class="form-group">
-                        <label for="Amount"><?php echo $language['Amount']; ?> </label>
-                        <input type="text" class="form-control <?php echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="<?php echo $language['Enter amount']; ?> " name="amount" value="<?php echo $amount; ?>">
-                        <span class="help-block"><?php echo $amountErr;?></span>
+                        <label for="Amount"><?php //echo $language['Amount']; ?> </label>
+                        <input type="text" class="form-control <?php //echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="<?php//echo $language['Enter amount']; ?> " name="amount" value="<?php //echo $amount; ?>">
+                        <span class="help-block"><?php //echo $amountErr;?></span>
                     </div>
-                    </div><br>
+                    </div><br> -->
                   </div>
 
                     <div class="form-group">
-                        <label for="Date_Purchased"><?php echo $language['Date purchased']; ?></label>
-                        <input type="date" class="form-control" id="Date_Purchased" name="date_purchased" >
+                        <label for="Date_Purchased"><strong><?php echo $language['Date Purchased']; ?></strong></label>
+                        <input type="date" class="form-control" id="Date_Purchased" name="date_purchased" max="<?php echo date("Y-m-d"); ?>">
                         <span class="help-block"><?php echo $date_purchasedErr;?></span>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label"><?php echo $language['Asset Image']; ?></label>
-                        <input class="input-group" type="file" name="image" onchange="readURL(this);" />
-                        <img id="blah" src="#" alt="<?php echo $language['asset image']; ?>" />
+                        <label class="control-label"><strong><?php echo $language['Asset Image']; ?></label>
+                        <input class="form-control" type="file" name="image" onchange="readURL(this);" />
+                        <img id="blah" src="#" alt="<?php echo $language['Asset Image']; ?>" />
                         <span class="help-block"><?php echo $errMSG;?></span>
                     </div>
                     <script>
@@ -167,6 +167,7 @@
 
                     <button type="submit"  class="btn btn-success" value="Submit" name=""><?php echo $language['Submit']; ?></button>
                     <button type="reset" name="clear" value="Clear"class="btn btn-warning"><?php echo $language['Clear']; ?></button>
+                    <a href="mainB.php" class="btn btn-danger float-right"><?php echo $language['Cancel']; ?></a>
               </div>    
                   </form>
     </div>

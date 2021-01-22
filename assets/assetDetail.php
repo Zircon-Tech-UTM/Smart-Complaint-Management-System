@@ -57,11 +57,15 @@
                 <table class="table my-0" id="dataTable">
                     <thead  style="color: rgb(0,0,0);">
                         <tr>
-                            <th><?php echo $language['Name:']; ?></th>
-                            <th><?php echo $row['a_nameBI']; ?></th>
+                            <th><strong><?php echo $language['Asset ID']; ?></strong></th>
+                            <th><?php echo $row["a_assetID"]; ?></th>
                         </tr>
                     </thead>
                     <tbody style="color: rgb(0,0,0);">
+                        <tr>
+                            <td><strong><?php echo $language['Name:']; ?></strong></td>
+                            <td><?php echo $row['a_nameBI']; ?></td>
+                        </tr>
                         <tr></tr>
                             <tr>
                                 <td><strong><?php echo $language['Category']; ?></strong></td>
@@ -83,10 +87,6 @@
                                         <td><?php echo $row["date_purchased"]; ?></td>
                                     </tr>
 
-                                    <tr>
-                                        <td><strong><?php echo $language['Asset ID']; ?></strong></td>
-                                        <td><?php echo $row["a_assetID"]; ?></td>
-                                    </tr>
 
                                     <tr>
                                         <td><strong><?php echo $language['Description']; ?></strong></td>
@@ -117,19 +117,20 @@
         </div>
     </div>
 
-        <div>
-        <a href="update.php?id=<?php echo $_GET['id'];?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
+        <div><br>
+        <a href="update.php?id=<?php echo $_GET['id'];?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
         <?php
         if ($_SESSION["userType"] == '1' or $_SESSION["userType"] == '2'){
         ?>
-        <a href="delete.php?id=<?php echo $_GET['id'];?>" style="color: rgb(14,14,14);" onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')" class="btn btn-danger btn-sm"><strong>X</strong></a>
+        <a href="delete.php?id=<?php echo $_GET['id'];?>" style="" onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')" class="btn btn-danger "><?php echo $language['Delete']; ?></a>
         <?php
             }else{
         ?>
-                <a href="delete.php?id=<?php echo $_GET['id'];?>" onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')" class="btn btn-danger btn-sm disabled"><strong>X</strong></a>
+                <a href="delete.php?id=<?php echo $_GET['id'];?>" onclick="return confirm('<?php echo $language['Are you sure you want to delete this assets?']; ?>')" class="btn btn-danger disabled"><?php echo $language['Delete']; ?></a>
         <?php
             }
         ?>
+        <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back']; ?></a>
         </div>
     </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top" ><i class="fas fa-angle-up"></i></a>

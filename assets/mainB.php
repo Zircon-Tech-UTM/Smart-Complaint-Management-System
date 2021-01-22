@@ -48,11 +48,11 @@
   <div class="container-fluid">
 
     <div class="row align-items-start">
-      <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-dark mb-4"><?php echo $language['Asset List']; ?></h1></div>
+      <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-dark mb-4 font-weight-bold"><?php echo $language['Asset List']; ?></h1></div>
 
       <div class="col-md-3 col-xl-3 mb-4"><a href="createB.php" class="btn btn-primary btn-lg"><?php echo $language['New Asset']; ?></a></div>
 
-      <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()">Filter</button></div>
+      <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()"><?php echo $language['Filter']; ?></button></div>
     </div>
 
     <script>
@@ -133,7 +133,6 @@
       </div>
 
       <div class="col-md-2 col-xl-3 mb-2"  id="filter" style="display: none;">
-          <h3><?php echo $language['Filter']; ?></h3>
 
           <div class="card shadow">
             <div class="card-body">
@@ -159,7 +158,7 @@
 
                     <input type="hidden" name="block" value="<?php echo $_POST["block"]; ?>">
                     
-                    <input type="submit" value="Apply Filter" class="btn btn-primary">
+                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
                     <a href="" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                 </form><br>
               </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
