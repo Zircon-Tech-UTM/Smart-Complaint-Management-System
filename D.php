@@ -48,6 +48,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>  -->
+
+    <link rel="icon" href="img/favicon.png" type="image/gif" >
 </head>
 <body>
     <div id="wrapper">
@@ -143,7 +145,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"></div>
-                                            <img src="assets/img/223712-200.png"  style="width: 113px;height: 104px;padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif;text-align: center;color: rgb(0,0,0);"><strong><?php echo $language['ASSET MANAGEMENT']; ?></strong><br></span>
+                                            <img src="assets/img/223712-200.png"  style="width: 113px;height: 104px;padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif;text-align: center;color: rgb(0,0,0);"><strong><?php echo $language['ASSETS MANAGEMENT']; ?></strong><br></span>
                                         </div>
                                     </div>
                                 </a>

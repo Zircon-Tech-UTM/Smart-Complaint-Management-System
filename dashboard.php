@@ -188,7 +188,7 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span><?php echo $language['MY DASHBOARD'];?></span></a><a class="nav-link" href="complaints\readComplaint.php"><i class="fas fa-user-circle"></i><span><?php echo $language['COMPLAINTS MANAGEMENT'];?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="users\readUser.php"><i class="fas fa-user"></i><span><?php echo $language['USER MANAGEMENT'];?></span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="assets\mainA.php"><i class="fas fa-table"></i><span><?php echo $language['ASSET MANAGEMENT'];?></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets\mainA.php"><i class="fas fa-table"></i><span><?php echo $language['ASSETS MANAGEMENT'];?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="Rooms\roomlist.php"><i class="far fa-user-circle"></i><span><?php echo $language['ROOM MANAGEMENT'];?></span></a><a class="nav-link" href="Blocks\blocklist.php"><i class="fa fa-building"></i><span><?php echo  $language['BLOCK MANAGEMENT'];?></span></a><a class="nav-link" href="pdfprint\printmenu.php"><i class="fa fa-files-o"></i><span><?php echo  $language['DOWNLOAD AND PRINT'];?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="grades/readGrade.php"><i class="fas fa-users-cog"></i><span ><?php echo $language['GRADE MANAGEMENT']; ?></span></a></li>
                 </ul>
@@ -239,7 +239,7 @@
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">                
-                        <h2><?php echo $language['KVPJB Complaint Inventory System'];?></h2>
+                        <h2 class="font-weight-bold"><?php echo $language['KVPJB Complaint Inventory System'];?></h2>
                         <h5><?php echo date("Y-m-d");?></h5>
                     </div>
                     <div class="row">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2021 at 04:23 PM
+-- Generation Time: Jan 22, 2021 at 06:00 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -47,9 +47,9 @@ CREATE TABLE `assets` (
 --
 
 INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`, `amount`, `date_purchased`, `a_img_path`, `maintain`, `item`) VALUES
-('ICT0001', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
-('ICT0002', 'Projector', 'Projektor', '1', 'AL1000002', 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
-('NICT0001', 'Table', 'Meja', '2', 'BL2000001', 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL, '2', NULL);
+('ICT0001', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
+('ICT0002', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
+('NICT0001', 'Table', 'Meja', '2', NULL, 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL, '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -117,9 +117,9 @@ CREATE TABLE `complaints` (
 --
 
 INSERT INTO `complaints` (`compID`, `c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`) VALUES
-(1, NULL, 'NICT0001', 'BL2000001', '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
-(2, NULL, 'ICT0001', 'AL1000002', '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
-(3, NULL, 'ICT0002', 'AL1000002', '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
+(1, NULL, 'NICT0001', NULL, '1', '2021-01-05 23:17:20', 'meja sudah rosak', '2021-01-07 23:23:30', NULL, NULL, NULL),
+(2, NULL, 'ICT0001', NULL, '3', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL),
+(3, NULL, 'ICT0002', NULL, '2', '2020-12-30 23:33:37', 'lens missing', '2021-01-01 23:33:12', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,6 +153,8 @@ INSERT INTO `grades` (`g_gradeID`, `g_postBI`, `g_postBM`) VALUES
 CREATE TABLE `rooms` (
   `r_roomID` varchar(10) NOT NULL,
   `PIC` varchar(12) DEFAULT NULL,
+  `PIC2` varchar(12) DEFAULT NULL,
+  `PIC3` varchar(12) DEFAULT NULL,
   `r_nameBI` varchar(50) NOT NULL,
   `r_nameBM` varchar(50) NOT NULL,
   `blok` varchar(2) DEFAULT NULL,
@@ -163,10 +165,10 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`r_roomID`, `PIC`, `r_nameBI`, `r_nameBM`, `blok`, `r_img_path`) VALUES
-('AL1000002', '001005101333', 'Computer Lab 2', 'Makmal Komputer 2', 'A', NULL),
-('BL1000001', '001005101334', 'Classroom 1', 'Kelas 1', 'B', NULL),
-('BL2000001', '001005101337', 'Computer Lab 1', 'Makmal Komputer 1', 'B', NULL);
+INSERT INTO `rooms` (`r_roomID`, `PIC`, `PIC2`, `PIC3`, `r_nameBI`, `r_nameBM`, `blok`, `r_img_path`) VALUES
+('AL1000002', '001005101333', NULL, NULL, 'Computer Lab 2', 'Makmal Komputer 2', 'A', NULL),
+('BL1000001', '001005101334', NULL, NULL, 'Classroom 1', 'Kelas 1', 'B', NULL),
+('BL2000001', '001005101337', NULL, NULL, 'Computer Lab 1', 'Makmal Komputer 1', 'B', NULL);
 
 -- --------------------------------------------------------
 
@@ -203,10 +205,9 @@ CREATE TABLE `users` (
   `postBI` varchar(50) DEFAULT NULL,
   `postBM` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
-  `email` varchar(30) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `contact` varchar(12) NOT NULL,
   `dateRegistered` datetime DEFAULT NULL,
-  `no_aduan` int(5) DEFAULT NULL,
   `u_img_path` varchar(50) DEFAULT NULL,
   `userType` varchar(2) NOT NULL CHECK (`userType` in ('1','2','3','4')),
   `u_grade` varchar(5) DEFAULT NULL
@@ -216,13 +217,15 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `no_aduan`, `u_img_path`, `userType`, `u_grade`) VALUES
-('001005101333', '$2y$10$MitShOcGWbMKX1Qsm4lxEOC98xq2phzBWRsbZTFsUfeTK/7/Ndi1a', 'Lee Sze Yuan', 'PIC Of Room', 'PIC Makmal', 'lololol', 'lsyuan1029@gmail.com', '0123456789', '2020-12-31 22:49:34', NULL, NULL, '2', 'FT19'),
-('001005101334', '$2y$10$XEWoyuVKmyGfhk.XXc1EyO5U8JE79hvpuS2W9BxO7oTBr6QMOA8gO', 'Lee Sze Yu', 'PIC Of Room', 'PIC Makmal', 'lals', 'momentumlee5@gmail.com', '0123456789', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG44'),
-('001005101335', '$2y$10$B49BJAqqqerG65sdZk/9ce9xUTSmB53a0Is/.UUfz6eEL1j0iOVuW', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '0123456799', '2020-12-23 22:49:34', NULL, NULL, '3', 'JA29'),
-('001005101336', '$2y$10$HEuK2OfyIzSTnXurlujEY.WqyuzM07DNrT0ig1PK/N/Mwz0YSYrhi', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '0123456788', '2020-12-23 22:49:34', NULL, NULL, '4', 'JA29'),
-('001005101337', '$2y$10$CBF0nqD5Z5Ti8v05yRQda.P0POAW6eH6BNtCfLqPYpMu7TTih1WJe', 'Tee Hui You', 'PIC Of Room', 'PIC Makmal', 'lalsdsfsd', 'huiyou002013@gmail.com', '0123456889', '2020-12-23 22:49:34', NULL, NULL, '2', 'DG41'),
-('990105029068', '$2y$10$lrZgGnEWS4pAir5i4o/s7eh3Smeyp5YagLrYoMcaU6eGSszuc0AOG', 'Ham Jing Yi', 'Admin', 'Pentadbir', 'Alor Setar, Kedah.', 'hamjingyi99@gmail.com', '0124663976', '2020-12-23 21:33:04', NULL, NULL, '1', 'DG41');
+INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `u_img_path`, `userType`, `u_grade`) VALUES
+('001005101333', '$2y$10$MitShOcGWbMKX1Qsm4lxEOC98xq2phzBWRsbZTFsUfeTK/7/Ndi1a', 'Lee Sze Yuan', 'PIC Of Room', 'PIC Makmal', 'lololol', 'lsyuan1029@gmail.com', '0123456789', '2020-12-31 22:49:34', NULL, '2', 'FT19'),
+('001005101334', '$2y$10$XEWoyuVKmyGfhk.XXc1EyO5U8JE79hvpuS2W9BxO7oTBr6QMOA8gO', 'Lee Sze Yu', 'PIC Of Room', 'PIC Makmal', 'lals', 'momentumlee5@gmail.com', '0123456789', '2020-12-23 22:49:34', NULL, '2', 'DG44'),
+('001005101335', '$2y$10$B49BJAqqqerG65sdZk/9ce9xUTSmB53a0Is/.UUfz6eEL1j0iOVuW', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '0123456799', '2020-12-23 22:49:34', NULL, '3', 'JA29'),
+('001005101336', '$2y$10$HEuK2OfyIzSTnXurlujEY.WqyuzM07DNrT0ig1PK/N/Mwz0YSYrhi', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '0123456788', '2020-12-23 22:49:34', NULL, '4', 'JA29'),
+('001005101337', '$2y$10$CBF0nqD5Z5Ti8v05yRQda.P0POAW6eH6BNtCfLqPYpMu7TTih1WJe', 'Tee Hui You', 'PIC Of Room', 'PIC Makmal', 'lalsdsfsd', 'huiyou002013@gmail.com', '0123456889', '2020-12-23 22:49:34', NULL, '2', 'DG41'),
+('001232079090', '$2y$10$nVLkTCgiOrztiRnd.Lkqqu.SZBzdZKKJLjVLlqsTo8Iwbjh25IuH.', 'Fatima Siti', 'Admin', 'Pentadbir', '27,ktdi', 'lim@gmail.com', '0100000000', '2021-01-22 11:34:46', 'images/724755.png', '1', 'DG44'),
+('990102089090', '$2y$10$RC9e.6V5VBbhxq3Y8GtRreNZCvEeK3mpXq/4RYMFDWrD1AWm4Q3gG', 'Fatima B', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'hamjingyi99@gmail.com', '0123335555', '2021-01-22 11:36:23', 'images/98543.', '3', 'DG41'),
+('990105029068', '$2y$10$lrZgGnEWS4pAir5i4o/s7eh3Smeyp5YagLrYoMcaU6eGSszuc0AOG', 'Ham Jing Yi', 'Admin', 'Pentadbir', 'Alor Setar, Kedah.', 'hamjingyi99@gmail.com', '0124663976', '2020-12-23 21:33:04', NULL, '1', 'DG41');
 
 --
 -- Indexes for dumped tables
@@ -271,7 +274,9 @@ ALTER TABLE `grades`
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`r_roomID`),
   ADD KEY `r_blok_FK` (`blok`),
-  ADD KEY `r_pic_FK` (`PIC`);
+  ADD KEY `r_pic_FK` (`PIC`),
+  ADD KEY `r_pic2_FK` (`PIC2`),
+  ADD KEY `r_pic3_FK` (`PIC3`);
 
 --
 -- Indexes for table `status`
@@ -322,6 +327,8 @@ ALTER TABLE `complaints`
 --
 ALTER TABLE `rooms`
   ADD CONSTRAINT `r_blok_FK` FOREIGN KEY (`blok`) REFERENCES `blocks` (`block_no`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `r_pic2_FK` FOREIGN KEY (`PIC2`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `r_pic3_FK` FOREIGN KEY (`PIC3`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `r_pic_FK` FOREIGN KEY (`PIC`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
