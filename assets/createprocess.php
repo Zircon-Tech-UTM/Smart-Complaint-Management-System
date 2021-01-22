@@ -1,4 +1,7 @@
 <?php 
+
+	require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+
 	$assetID = "";
 	$nameBI = "";
 	$nameBM = "";
@@ -27,11 +30,11 @@
 
 		if (empty(trim(($_POST["assetID"])))) 
 		{
-		$assetIDErr = "Asset ID is required";
+		$assetIDErr =  $language['Asset ID is required'];
 		} 
 		elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["assetID"])) 
 		{
-		$assetIDErr = "Only letters, number and white space are allowed";
+		$assetIDErr = $language['Only letters, number and white space are allowed'];
 		}
 		else
 		{
@@ -43,11 +46,11 @@
 
 		if (empty(trim(($_POST["nameBI"])))) 
 		{
-		$nameBIErr = "English asset name is required";
+		$nameBIErr = $language['English asset name is required']; 
 		} 
 		elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBI"])) 
 		{
-		$nameBIErr = "Only letters and white space allowed";
+		$nameBIErr = $language['Only letters and white space allowed']; 
 		}
 		else
 		{
@@ -59,11 +62,11 @@
 
 		if (empty(trim(($_POST["nameBM"])))) 
 		{
-		$nameBMErr = "Malay asset name is required";
+		$nameBMErr =  $language['Malay asset name is required'];
 		} 
 		elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBM"])) 
 		{
-		$nameBMErr = "Only letters and white space allowed";
+		$nameBMErr =  $language['Only letters and white space allowed']; 
 		}
 		else
 		{
@@ -75,7 +78,7 @@
 
 		if (!isset($_POST['category']))
 		{
-		$categoryErr = "Choose a category.";
+		$categoryErr =  $language['Choose a category.'];
 		} 
 		else
 		{
@@ -86,11 +89,11 @@
 
 		if (empty(trim(($_POST["cost"])))) 
 		{
-		$costErr = "Cost is required";
+		$costErr = $language['Cost is required']; 
 		} 
 		elseif (!preg_match("/^[0-9]+(\.[0-9]{2})?$/", $_POST["cost"])) 
 		{
-		$costErr = "Please enter valid cost.";
+		$costErr = $language['Please enter valid cost.'];
 		}
 		else
 		{
@@ -101,11 +104,11 @@
 
 		if (empty(trim(($_POST["amount"])))) 
 		{
-		$amountErr = "Amount is required";
+		$amountErr =  $language['Amount is required']; 
 		} 
 		elseif (!preg_match("/^[0-9]+$/", $_POST["amount"])) 
 		{
-		$amountErr = "Please enter valid amount.";
+		$amountErr =$language['Please enter valid amount.']; 
 		}
 		else
 		{
@@ -116,7 +119,7 @@
 
 		if (empty(($_POST["date_purchased"]))) 
 		{
-		$date_purchasedErr = "Choose a date.";
+		$date_purchasedErr =  $language['Choose a date'];
 		} 
 		else
 		{
@@ -125,7 +128,7 @@
 
 		if (empty(($_POST["rooms"]))) 
 		{
-		$roomErr = "Choose a rooms.";
+		$roomErr =  $language['Choose a rooms.']; 
 		} 
 		else
 		{
@@ -154,11 +157,11 @@
 		if(in_array($imgExt, $valid_extensions)){   
 			// Check file size '5MB'
 			if($imgSize > 5000000){
-				$errMSG = "Sorry, your file is too large.";
+				$errMSG =  $language['Sorry, your file is too large.']; 
 			}
 		}
 		else{
-			$errMSG = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  
+			$errMSG =  $language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.'];
 		}
 
 		if(empty($assetIDErr)&&empty($nameBIErr)&&empty($nameBMErr)&&empty($categoryErr)&&empty($costErr)&&empty($amountErr)&&empty($asset_conditionErr)&&empty($date_purchasedErr) &&empty($roomErr) ){

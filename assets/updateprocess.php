@@ -1,5 +1,6 @@
 <?php
-
+   // require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+   require_once("../dbconfig.php");   
     $assetID = "";
     $nameBI = "";
     $nameBM = "";
@@ -20,8 +21,6 @@
     $errMSG = "";
     $roomErr = "";
     
-    
-
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
@@ -30,11 +29,12 @@
 
         if (empty(trim(($_POST["assetID"])))) 
         {
-        $assetIDErr = "Changes Failed. Asset ID is required";
+        $assetIDErr =  $language['Changes Failed. Asset ID is required']; 
+        
         } 
         elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["assetID"])) 
         {
-        $assetIDErr = "Changes Failed. Only letters, number and white space are allowed";
+        $assetIDErr = $language['Changes Failed. Only letters, number and white space are allowed'];
         }
         else
         {
@@ -46,11 +46,11 @@
 
         if (empty(trim(($_POST["nameBI"])))) 
         {
-        $nameBIErr = "Changes Failed. English asset name is required";
+        $nameBIErr = $language['Changes Failed. English asset name is required'];
         } 
         elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBI"])) 
         {
-        $nameBIErr = "Changes Failed. Only letters and white space allowed";
+        $nameBIErr = $language['Changes Failed. Only letters and white space allowed'];
         }
         else
         {
@@ -62,11 +62,11 @@
 
         if (empty(trim(($_POST["nameBM"])))) 
         {
-        $nameBMErr = "Changes Failed. Malay asset name is required";
+        $nameBMErr = $language['Changes Failed. Malay asset name is required'];
         } 
         elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBM"])) 
         {
-        $nameBMErr = "Changes Failed. Only letters and white space allowed";
+        $nameBMErr = $language['Changes Failed. Only letters and white space allowed'];
         }
         else
         {
@@ -78,7 +78,7 @@
 
         if (!isset($_POST['category']))
         {
-        $categoryErr = "Changes Failed. Choose a category.";
+        $categoryErr = $language['Changes Failed. Choose a category.'];
         } 
         else
         {
@@ -89,7 +89,7 @@
 
         if (empty(trim(($_POST["cost"])))) 
         {
-        $costErr = "Changes Failed. Cost is required";
+        $costErr = $language['Changes Failed. Cost is required'];"";
         } 
         elseif (!preg_match("/^[0-9]+(\.[0-9]{2})?$/", $_POST["cost"])) 
         {
@@ -157,7 +157,7 @@
         if(in_array($imgExt, $valid_extensions)){   
             // Check file size '5MB'
             if($imgSize > 5000000){
-                $errMSG = "Sorry, your file is too large.";
+                $errMSG =  $language['Sorry, your file is too large.'];
             }
         }
         else{
