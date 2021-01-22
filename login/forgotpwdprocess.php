@@ -11,7 +11,7 @@
       WHERE u_userIC = '$fid'";
 
   //Check result
-  var_dump($result);
+  // var_dump($result);
 
   //Execute SQL
   $result = mysqli_query($conn, $sql);
@@ -34,7 +34,7 @@
   }
   else             //User not found
   {
-    echo'User not found';
+    $sqlErr = 'User not found';
     //header('location: login.php');
   }
   mysqli_close($conn);
@@ -45,8 +45,11 @@
 <html>
 <head>
 	<title>Complaints Inventory System</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 	<body>
+    <br><h1><?php echo $sqlErr; ?></h1>
 		<br><a href ="login.php">Back To Login Page</a>
 	</body>
 </html>

@@ -126,9 +126,13 @@
                                 ?>
                             </tbody>
                         </table>
+
                     </div>
+                    
                 </div>
+                
             </div>
+            <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back'];?></a>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>

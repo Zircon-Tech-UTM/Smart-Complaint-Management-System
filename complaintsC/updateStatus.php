@@ -212,11 +212,11 @@
                                                 }
                                             }else{
                                                 if ($_SESSION['language'] == 'BI'){
-                                                    echo '<option selected value="'.$row4['s_statusID'].'">'.$row4['s_nameBI'].'</option>';
+                                                    echo '<option value="'.$row4['s_statusID'].'">'.$row4['s_nameBI'].'</option>';
                                                 }else if ($_SESSION['language'] == 'BM'){
-                                                    echo '<option selected value="'.$row4['s_statusID'].'">'.$row4['s_nameBM'].'</option>';
+                                                    echo '<option value="'.$row4['s_statusID'].'">'.$row4['s_nameBM'].'</option>';
                                                 }else{
-                                                    echo '<option selected value="'.$row4['s_statusID'].'">'.$row4['s_nameBI'].'</option>';
+                                                    echo '<option value="'.$row4['s_statusID'].'">'.$row4['s_nameBI'].'</option>';
                                                 }
                                             }
                                         }
@@ -231,8 +231,9 @@
                                 <span class="help-block"><?php echo $actionErr;?></span>
                             </div>
 
-                            <input type="submit" class="btn btn-primary" onclick="return confirm('Do you want to save the chnages?')" value="<?php echo $language['Submit'];?>">
-                            <a href="acceptedComplaints.php" class="btn btn-primary"><?php echo $language['Cancel'];?></a>
+                            <input type="submit" class="btn btn-primary" onclick="return confirm('<?php echo $language['Do you want to save the chnages?']; ?>')" value="<?php echo $language['Submit'];?>">
+                            <input type="reset" class="btn btn-warning" value="<?php echo $language['Reset'];?>">
+                            <a href="acceptedComplaints.php" class="btn btn-danger float-right"><?php echo $language['Cancel'];?></a>
                         </form>
 
                     </div>

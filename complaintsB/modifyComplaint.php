@@ -32,6 +32,8 @@
 
         $sql2 = "SELECT * FROM blocks;";
         $result2 = mysqli_query($conn, $sql2);
+
+
         
         $sql4 = "SELECT * FROM assets WHERE a_roomID = '".$row['r_roomID']."';";
         $result4 = mysqli_query($conn, $sql4);
@@ -86,20 +88,20 @@
                         ?>
 
                         <div class="mb-3">
-                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['Date:']; ?></label>
+                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['Date']; ?></strong></label>
                             <input type="date" name="date" id="proposedDate" class="form-control form-control-lg" value="<?php echo $new_date; ?>">
                             <span class="help-block"><?php echo $dateErr;?></span>
                         </div>
 
                         <div>
-                            <label for="blocks" class="form-label">Blocks</label><br>
+                            <label for="blocks" class="form-label"><strong><?php echo $language['Blocks']; ?></strong></label><br>
                             <input type="text" class="form-control <?php echo (!empty($blocksErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row['b_nameBI']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row['block_no']; ?>" name="blocks">
                             <span class="help-block"><?php echo $blocksErr;?></span>
                         </div><br>
 
                         <div>
-                            <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label><br>
+                            <label for="rooms" class="form-label"><strong><?php echo $language['Rooms']; ?></strong></label><br>
                             <input type="text" class="form-control <?php echo (!empty($roomsErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row['r_nameBI']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row['r_roomID']; ?>" name="rooms">
                             <span class="help-block"><?php echo $roomsErr;?></span>
@@ -107,7 +109,7 @@
 
 
                         <div>
-                            <label for="assets" class="form-label"><?php echo $language['Assets']; ?></label><br>
+                            <label for="assets" class="form-label"><strong><?php echo $language['Assets']; ?></strong></label><br>
                             <select class="form-select <?php echo (!empty($assetsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="assets"  name="assets">
                             <option value="" selected>Open this select menu</option>
                                 <?php
@@ -129,14 +131,14 @@
 
 
                         <div class="mb-3">
-                            <label for="complainantDetail" class="form-label"><?php echo $language['Detail:']; ?></label>
+                            <label for="complainantDetail" class="form-label"><strong><?php echo $language['Detail']; ?></strong></label>
                             <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg <?php echo (!empty($detailErr)) ? 'is-invalid' : ''; ?>" placeholder="complainant's detail" value="<?php echo $row['detail']; ?>">
                             <span class="help-block"><?php echo $detailErr;?></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label form-label"><?php echo $language['Complaint Image']; ?></label>
-                            <input class="input-group" type="file" name="image" onchange="readURL(this);" />
+                            <label class="control-label form-label"><strong><?php echo $language['Complaint Image']; ?></strong></label>
+                            <input class="form-control" type="file" name="image" onchange="readURL(this);" />
                             <img id="blah" src="<?php echo "../complaints/".$row['c_img_path'];?>" alt="<?php echo $language['complaint image']; ?>" />
                             <span class="help-block"><?php echo $errMSG;?></span>
                         </div>
@@ -157,8 +159,11 @@
                             }
                         </script>
 
-                        <input type="submit" class="btn btn-primary" value="<?php echo $language['Submit']; ?>" onclick="return confirm('<?php echo $language['Do you want to save the chnages?']; ?>')">
-                        <a href="readComplaint.php" class="btn btn-primary"><?php echo $language['Cancel']; ?></a>
+                        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+
+                        <input type="submit" text-align:center name="submit" onclick="return confirm('<?php echo $language['Do you want to save the changes?']; ?>')" class="btn btn-primary" value="<?php echo $language['Save']; ?>"/>
+                        <input type="reset" name="clear" value="<?php echo $language['Reset']; ?>"class="btn btn-warning"> 
+                        <a href="readComplaint.php" class="btn btn-danger float-right" "><?php echo $language['Cancel']; ?></a>
                     </form>
                 </div>
 

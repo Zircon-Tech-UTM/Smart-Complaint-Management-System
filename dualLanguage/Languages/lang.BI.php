@@ -1,14 +1,14 @@
 <?php
 // Dashboard 
 //$language[''] = '';
-$language['MY DASHBOARD'] = 'MY DASHBOARD';
+$language['MY DASHBOARD'] = 'Dashboard';
 $language['DASHBOARD'] = 'MY DASHBOARD';
-$language['COMPLAINTS MANAGEMENT'] = 'COMPLAINTS MANAGEMENT';
-$language['USER MANAGEMENT'] = 'USER MANAGEMENT';
-$language['ROOM MANAGEMENT'] = 'ROOM MANAGEMENT';
-$language['ASSETS MANAGEMENT'] = 'ASSETS MANAGEMENT';
-$language['BLOCK MANAGEMENT'] = 'BLOCK MANAGEMENT';
-$language['DOWNLOAD AND PRINT'] = 'DOWNLOAD AND PRINT';
+$language['COMPLAINTS MANAGEMENT'] = 'Complaint Management';
+$language['USER MANAGEMENT'] = 'User Management';
+$language['ROOM MANAGEMENT'] = 'Room Management';
+$language['ASSETS MANAGEMENT'] = 'Asset Management';
+$language['BLOCK MANAGEMENT'] = 'Block Management';
+$language['DOWNLOAD AND PRINT'] = 'Download and Print';
 $language['no picture avaiable'] = 'no picture avaiable';
 
 //CRUD
@@ -108,7 +108,7 @@ $language['Filter'] = 'Filter';
 $language['Invalid Login'] = 'Invalid Login';
 
 //User 
-$language['User Information'] = 'User Information';
+$language['User Information'] = 'USER INFORMATION';
 $language['Full Name'] = 'Full Name';
 $language['Position'] = 'Position';
 $language['Grade'] = 'Grade';
@@ -116,7 +116,7 @@ $language['User IC'] = 'User IC';
 $language['Number Of Complaints'] = 'Number of Complaints';
 $language['Contact'] = 'Contact';
 $language['User List'] = 'User List';
-
+$language['Create New User'] = 'CREATE NEW USER';
 
 //Assets
 $language['New Asset'] = 'New Asset';
@@ -135,7 +135,7 @@ $language['ICT'] = 'ICT';
 $language['Non-ICT'] = 'Non-ICT';
 $language['Create Asset'] = 'Create Asset';
 $language['Are you sure you want to delete this assets?'] = 'Are you sure you want to delete this assets?';
-$language['Asset Information'] = 'Asset Information';
+$language['Asset Information'] = 'ASSET INFORMATION';
 $language['no picture avaiable'] = 'no picture avaiable';
 $language['Select a block before viewing the assets of that block'] = 'Select a block before viewing the assets of that block';
 //Process
@@ -148,10 +148,10 @@ $language['Update Asset'] = 'Update Asset';
 //Complaint
 $language['No'] = 'No';
 $language['ZirconTech'] = 'ZirconTech';
-$language['Complaint Form'] = 'Complaint Form';
-$language['Date:'] = 'Date:';
+$language['Complaint Form'] = 'COMPLAINT FORM';
+$language['Date'] = 'Date';
 $language['Blocks'] = 'Blocks';
-$language['Detail:'] = 'Detail:';
+$language['Detail'] = 'Detail';
 $language['Complaints ID:'] = 'Complaints ID:';
 $language['Building:'] = 'Building:';
 $language['Room:'] = 'Room:';
@@ -160,11 +160,11 @@ $language['Proposed Date:'] = 'Proposed Date:';
 $language['Settled Date:'] = 'Settled Date:';
 
 $language['Open this select menu'] = 'Open this select menu';
-$language['Pending Complaints'] = 'Pending Complaints';
+$language['Pending Complaints'] = 'PENDING COMPLAINTS';
 $language['View Accepted Complaints'] = 'View Accepted Complaints';
 $language['search by proposer or follower name'] = 'search by proposer or follower name';
-$language['Accepted Complaints List'] = 'Accepted Complaints List';
-$language['All Complaints'] = 'All Complaints';
+$language['Accepted Complaints List'] = 'ACCEPTED COMPLAINT LIST';
+$language['All Complaints'] = 'View All Comaplints';
 //landing  
 
 $language['Landing Page'] = 'Landing Page';
@@ -245,7 +245,7 @@ $language['8 characters'] = '8 characters';
 $language['capital (uppercase)'] = 'capital (uppercase)';
 $language['letter'] = 'letter';
 $language['number'] = 'number';
-$language['Asset List'] = 'Asset List';
+$language['Asset List'] = 'ASSETS LIST';
 
 
 
@@ -308,7 +308,7 @@ $language["Need"] = "Need";
 $language["No Need"] = "No Need";
 $language['Open menu'] = 'Open menu';
 $language['Asset Category'] = 'Asset Category';
-$language['All Complaints List'] ='All Complaints List' ;
+$language['All Complaints List'] ='ALL COMPLAINTS LIST' ;
 $language['New Complaint'] = 'New Complaint';
 $language['Assets'] = 'Assets';
 $language['Proposed By'] = 'Proposed By';
@@ -374,8 +374,8 @@ $language['Admin'] = 'Admin';
 $language['PIC Of Room'] = 'PIC Of Room';
 $language['Assistant Computer Technician'] = 'Assistant Computer Technician';
 $language['Assistant Engineer'] = 'Assistant Engineer';
-$language['Users List'] = 'Users List';
-$language['Create New User'] = 'Create New User';
+$language['Users List'] = 'USERS LIST';
+$language['New User'] = 'New User';
 $language['Filter'] = 'Filter';
 $language['Open this select menu'] = 'Open this select menu';
 $language['Apply'] = 'Apply';
@@ -461,17 +461,27 @@ $language['Changes failed. Only letters and white space allowed'] = 'Changes fai
 $language['Assets Settings'] = 'Assets Settings';
 $language['Date Purchased'] = 'Date Purchased';
 $language['Mantainance'] = 'Mantainance';
-$language['Asset Update'] = 'Asset Update';
+$language['Asset Update'] = 'ASSET UPDATE';
 $language['Asset Details'] = 'Asset Details';
 $language['ZirconTech'] = 'ZirconTech';
 $language['Complaints'] = 'Complaints';
 $language['ASSET MANAGEMENT'] = 'ASSET MANAGEMENT';
-$language['GRADE MANAGEMENT'] = 'GRADE MANAGEMENT';
+$language['GRADE MANAGEMENT'] = 'Grade Management';
 $language['Room Name(English)'] = 'Room Name(English)';
 $language['Room Name(Malay)'] = 'Room Name(Malay)';
 $language['Create Grade'] = 'Create Grade';
 $language['Enter AssetID'] = 'Enter AssetID';
 $language['complaint image'] = 'complaint image';
+$language['Back'] = 'Back';
+$language['type here...'] = 'type here...';
+$language["complaint image"] = "Complaint Image";
+$language['Are you sure to delete this room?'] = 'Are you sure to delete this room?';
+$language['Are you sure to delete this block?'] = 'Are you sure to delete this block?';
+$language["You are not assigned as PIC of any room yet"] = "You are not assigned as PIC of any room yet";
+$language['Are you sure you want to accept this request?'] = 'Are you sure you want to accept this request?';
+$language['Update'] = 'Update';
+$language['Update Complaint Status'] = 'UPDATE COMPLAINT STATUS';
+$language['Do you want to save the chnages?'] = 'Do you want to save the chnages?';
 
 //dashboard
 $language['MANAGEMENT'] = 'MANAGEMENT';
@@ -495,11 +505,11 @@ $language["Status of ICT Complaints"] = 'Status of ICT Complaints';
 $language['pie2'] = 'NON-ICT COMPLAINTS OVERVIEW';
 $language["Status of non-ICT Complaints"] = 'Status of non-ICT Complaints';
 
-$language['Update Complaint Status'] = 'Update Complaint Status';
-$language['Complaint Information'] = 'Complaint Information';
+$language['Update Complaint Status'] = 'UPDATE COMPLAINT STATUS';
+$language['Complaint Information'] = 'COMPLAINT INFORMATION';
 $language['Complaint ID'] = 'Complaint ID';
 $language['Update'] = 'Update'; 
-$language['Accepted Complaints List'] = 'List of Accepted Complaints';
+$language['Accepted Complaints List'] = 'ACCEPTED COMPLAINTS LIST';
 
 //ModifyComplaint complaintB
 $language['Save'] = 'Save';
@@ -507,6 +517,6 @@ $language['Save'] = 'Save';
 // readComplaint.php complaintB
 $language['Complaints List'] = 'Complaints List'; 
 $language['Create Complaint'] = 'Create Complaint';
-$language['Apply Filter'] = 'Apply Filter';
+$language['Apply'] = 'Apply';
 $language['Details:'] = 'Details:';
 ?>

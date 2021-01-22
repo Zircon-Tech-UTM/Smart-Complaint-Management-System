@@ -33,7 +33,7 @@
      <div class="container-fluid">
         <div class="row align-items-start">
             <div class="col-md-5 col-xl-10 mb-12"><h1 class="text-dark mb-4 font-weight-bold" style="font-size: 37px;text-align: center;"><?php echo $language['GRADE LIST']; ?></h1></div>
-            <div class="col-md-5 col-xl-2 mb-12 d-flex justify-content-center"><a href="createGrade.php" class="btn btn-primary btn-md" style="font-size=17px" ><?php echo $language['New Grade']; ?></a></div>
+            <div class="col-md-5 col-xl-2 mb-12 d-flex justify-content-center"><a href="createGrade.php" class="btn btn-primary" style="font-size=17px" ><?php echo $language['New Grade']; ?></a></div>
             <!-- type="button" style="width: 120px;height: 65px;margin: 0px;padding: 13px;" -->
         
         </div>
@@ -68,7 +68,7 @@
                     ?>
                     <th>
                        <a href="updateGrade.php?id=<?php echo $row["g_gradeID"]; ?>" class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit']; ?></a>
-                       <a href="deleteGrade.php?id=<?php echo $row["g_gradeID"]; ?>"  class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;background: #f15f51;" onclick="return confirm('<?php echo $language['Are you sure you want to delete this grade?']; ?>')"><strong>X</strong></a>
+                       <a href="deleteGrade.php?id=<?php echo $row["g_gradeID"]; ?>"  class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;" onclick="return confirm('<?php echo $language['Are you sure you want to delete this grade?']; ?>')"><strong>X</strong></a>
                     </th>
                 <?php
                         echo"</tr>";

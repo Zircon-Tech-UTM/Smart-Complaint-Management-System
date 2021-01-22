@@ -26,7 +26,7 @@
 </style>
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <title><?php echo $language['Create New User']; ?></title>
+    <title><?php echo $language['New User']; ?></title>
 </head>
 <body id="page-top">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="POST">
@@ -41,14 +41,14 @@
             <div class="card-body">
                 <div class ="row">
                     <div class="col-md-5 col-xl-5 mb-12">
-                        <label for="fname" class="form-label"><?php echo $language['Full Name:']; ?></label>
+                        <label for="fname" class="form-label"><strong><?php echo $language['Full Name:']; ?></strong></label>
                         <input type="text" name="name" id="fname" class="form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter Full Name']; ?>" value="<?php echo $username; ?>">
                         <span class="help-block"><?php echo $usernameErr;?></span>
                     </div>
 
                     <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                     <div class="col-md-5 col-xl-5 mb-12">
-                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['IC number:']; ?></label>
+                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['IC number:']; ?></strong></label>
                         <input type="text" name="IC" id="fic" class="form-control <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter IC']; ?>" value="<?php echo $IC; ?>">
                         <span class="help-block"><?php echo $ICErr;?></span>
                     </div>
@@ -94,7 +94,7 @@
 
           <div class ="row">
               <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="pwd" class="form-label "><?php echo $language['Password:']; ?></label>
+                  <label for="pwd" class="form-label "><strong><?php echo $language['Password:']; ?></strong></label>
                   <input type="password" name="password" id="password" class="form-control <?php echo (!empty($passwordErr)) ? 'is-invalid' : ''; ?>" title="Enter at least 4 characters." placeholder="<?php echo $language['Enter Password']; ?>" value="<?php echo $password; ?>">
                   <span class="help-block"><?php echo $passwordErr;?></span>
                   <input type="checkbox" onclick="myFunction1()"><?php echo $language['Show Password:']; ?>
@@ -102,7 +102,7 @@
 
               <div class ="col-md-1 col-xl-1 mb-1"><br></div>
               <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="psw-repeat" class="form-label"><?php echo $language['Re-type Password']; ?>:<span id='message'></span></label>  
+                  <label for="psw-repeat" class="form-label"><strong><?php echo $language['Re-type Password']; ?>:</strong><span id='message'></span></label>  
                 <input type="password" id="confirm_password" placeholder="<?php echo $language['Re-type Password']; ?>" name="confirm_password" class="form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
                 <span class="help-block"><?php echo $confirm_passwordErr;?></span>
                 <input type="checkbox" onclick="myFunction2()"> <?php echo $language['Show Password:']; ?>
@@ -111,7 +111,7 @@
 
               <div class="row">
                 <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="position" class="form-label"><?php echo $language['Position Assigned:']; ?></label>
+                  <label for="position" class="form-label"><strong><?php echo $language['Position Assigned:']; ?></strong></label>
                   <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" aria-label="form-select example" value="<?php echo $positionBI; ?>">
 
                     <?php 
@@ -164,7 +164,7 @@
 
           <div class="row">
             <div class="col-md-5 col-xl-5 mb-12">
-            <label for="grades"><?php echo $language['Grade:']; ?></label>
+            <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
                   <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'value="<?php echo $grades; ?>">;
                   <option value="" selected><?php echo $language['Choose a grade']; ?></option>;
               <?php 
@@ -172,7 +172,7 @@
                   $result=mysqli_query($conn, $sql);
                   while ($row=mysqli_fetch_array($result))
                   {
-                    echo"<option value='".$row['g_gradeID']."'>".$row['g_gradeID']."</option>";
+                    echo"<option value='".$row['g_gradeID']."'>".$row['g_post'.$_SESSION["language"].'']."(".$row['g_gradeID'].")</option>";
                   }
 
               ?>
@@ -205,10 +205,10 @@
                   </div>
               </div>
           </div><br> -->
-          
+                          <br><br>
                     <div class="form-group">
-                        <label class="control-label"><?php echo $language['user image']; ?></label>
-                        <input class="input-group <?php echo (!empty($errMSG)) ? 'is-invalid' : ''; ?>" type="file" name="image" onchange="readURL(this);" />
+                        <label class="control-label"><strong><?php echo $language['user image']; ?></strong></label>
+                        <input class="form-control <?php echo (!empty($errMSG)) ? 'is-invalid' : ''; ?>" type="file" name="image" onchange="readURL(this);" />
                         <img id="blah" src="#" alt="<?php echo $language['user image']; ?>" />
                         <span class="help-block"><?php echo $errMSG;?></span>
                     </div>
@@ -236,21 +236,21 @@
                   </div>
                       <div class="card-body">
                           <div class="mb-3">
-                            <label for="faddr" class="form-label"><?php echo $language['Home Address:']; ?></label>
+                            <label for="faddr" class="form-label"><strong><?php echo $language['Home Address:']; ?></strong></label>
                             <input type="text" name="faddr" id="faddr" class="form-control <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter Home Address']; ?>"value="<?php echo $addr; ?>">
                             <span class="help-block"><?php echo $addrErr;?></span>
                           </div>
 
                         <div class="row">
                           <div class="col-md-5 col-xl-5 mb-12">
-                            <label for="fcontactnum" class="form-label"><?php echo $language['Contact Number:']; ?></label>
+                            <label for="fcontactnum" class="form-label"><strong><?php echo $language['Contact Number:']; ?></strong></label>
                             <input type="text" name="fcontactnum" id="fcontactnum" class="form-control  <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter contact number']; ?>" value="<?php echo $contact; ?>">
                             <span class="help-block"><?php echo $contactErr;?></span>
                           </div>
                           
                           <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                           <div class="col-md-5 col-xl-5 mb-12">
-                            <label for="femail" class="form-label"><?php echo $language['Email Address:']; ?></label>
+                            <label for="femail" class="form-label"><strong><?php echo $language['Email Address:']; ?></strong></label>
                             <input type="text" name="femail" id="femail" class="form-control <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter email address']; ?>" value="<?php echo $email; ?>">
                             <span class="help-block"><?php echo $emailErr;?></span>
                           </div>

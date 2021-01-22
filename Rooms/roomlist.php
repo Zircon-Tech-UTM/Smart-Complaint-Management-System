@@ -108,7 +108,7 @@
             </div>
             <div class="col-md-5 col-lg-5 col-xl-3 mb-12 d-flex justify-content-center">                         
                 <input type="submit" value="<?php echo $language['Apply'];?>" class="btn btn-primary">&nbsp      
-                <a href="" class="btn btn-warning"><?php echo $language['Reset'];?></a>             
+                <a href="" class="btn btn-warning"><?php echo $language['Cancel'];?></a>             
             </div>
         </div>
         </form><br>
@@ -151,7 +151,7 @@
                             ?>
                                         <td>
                                         <a href = 'roommodify.php?id=<?php echo $rowr['r_roomID'];?>' class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit'];?></a>              
-                                        <a href = "roomcancel.php?id=<?php echo $rowr['r_roomID']; ?>" class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;background: #f15f51;" onclick="return confirm('Are you sure to delete this room?')"><strong>X</strong></a>
+                                        <a href = "roomcancel.php?id=<?php echo $rowr['r_roomID']; ?>" class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;" onclick="return confirm('<?php echo $language['Are you sure to delete this room?']; ?>')"><strong>X</strong></a>
                             <?php                
                                         echo "</td>";
                                         echo "</tr>";                            

@@ -14,7 +14,7 @@
         exit();
     }
 
-    $bid;
+    $bid ='';
     if(isset($_GET['id']))
     {
         $bid = $_GET['id'];
@@ -35,6 +35,10 @@
     $result2 = mysqli_query($conn, $sql2);
     $row2 = mysqli_fetch_array($result2);
 
+    $sql3 = "SELECT * FROM blocks WHERE block_no = '$bid'";
+    $result3 = mysqli_query($conn, $sql3);
+    $row3 = mysqli_fetch_array($result3);
+
     include("../navbar/navbar1.php");
     require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 ?>
@@ -47,11 +51,11 @@
     <title>
         <?php
         if ($_SESSION['language'] == 'BI'){
-            echo $language['Rooms in'], $row2['b_nameBI'];
+            echo $language['Rooms in'], $row3['b_nameBI'];
         }else if ($_SESSION['language'] == 'BM'){
-            echo $language['Rooms in'], $row2['b_nameBM'];
+            echo $language['Rooms in'], $row3['b_nameBM'];
         }else{
-            echo $language['Rooms in'], $row2['b_nameBI'];
+            echo $language['Rooms in'], $row3['b_nameBI'];
         }
         ?>
     </title>
@@ -82,14 +86,14 @@
             <h3 class="text m-0 font-weight-bold" style="font-size: 40px;text-align: center;">
                 <?php
                     if ($_SESSION['language'] == 'BI'){
-                        echo $language['Rooms in'], $row2['b_nameBI'];
+                        echo $language['Rooms in'], $row3['b_nameBI'];
                     }else if ($_SESSION['language'] == 'BM'){
-                        echo $language['Rooms in'], $row2['b_nameBM'];
+                        echo $language['Rooms in'], $row3['b_nameBM'];
                     }else{
-                        echo $language['Rooms in'], $row2['b_nameBI'];
+                        echo $language['Rooms in'], $row3['b_nameBI'];
                     }
                 ?>
-            </h3>
+            </h3><br>
             <div class="card shadow mb-3">
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -143,6 +147,7 @@
                     </div>
                 </div>
             </div>
+            <a href="#" onclick="history.go(-1)" class="btn btn-dark float-right"><?php echo $language["Back"]; ?></a>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>

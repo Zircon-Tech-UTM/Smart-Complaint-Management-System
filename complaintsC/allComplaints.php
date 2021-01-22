@@ -74,7 +74,7 @@
             <div class="col-md-8 col-xl-8 mb-6"><h1 class="text-dark mb-4"><?php echo $language['Pending Complaints'];?></h1></div>
             <div class="col-md-3 col-xl-3 mb-4"><a href="acceptedComplaints.php" class="btn btn-primary btn-lg"><?php echo $language['View Accepted Complaints'];?></a></div>
 
-            <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-primary" onclick="hide()"><?php echo $language['Filter'];?></button></div>
+            <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()"><?php echo $language['Filter'];?></button></div>
         </div>
 
         <script>
@@ -96,7 +96,7 @@
 
                             <form action="allComplaints.php" method="POST">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="<?php echo $language['search by proposer or follower name'];?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
+                                    <input type="text" class="form-control" placeholder="<?php echo $language['type here...'];?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
                                     <button type="submit" class="btn btn-outline-info" type="button" id="button-addon2" style="font-size: 13px;"><?php echo $language['Search'];?></button>
                                 </div>
                             </form>
@@ -156,10 +156,10 @@
                                             </th>
                                             
                                             <th>
-                                            <a href='complaintsBack\acceptPro.php?comp_id=<?php echo $row["compID"]; ?>' class='btn btn-primary btn-sm' onclick="return confirm('Are you sure you want to accept this request?')"><?php echo $language['Accept'];?></a>
+                                            <a href='complaintsBack\acceptPro.php?comp_id=<?php echo $row["compID"]; ?>' class='btn btn-success' onclick="return confirm('Are you sure you want to accept this request?')"><?php echo $language['Accept'];?></a>
                                             </th>
                                         <th>
-                                            <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-primary btn-sm"><?php echo $language['View'];?></a>
+                                            <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-info"><?php echo $language['View'];?></a>
                                         </th>
                                     <?php
                                             echo"</tr>";
@@ -176,7 +176,6 @@
             </div>
 
             <div class="col-md-3 col-xl-3 mb-3" id="filter"  style="display: none;">
-                <h2><?php echo $language['Filter'];?></h2>
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -201,11 +200,11 @@
                                                 }
                                             }else{
                                                 if ($_SESSION['language'] == 'BI'){
-                                                    echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
+                                                    echo "<option value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
                                                 }else if ($_SESSION['language'] == 'BM'){
-                                                    echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBM"]."</option>";
+                                                    echo "<option value='".$row3['block_no']."'>".$row3["b_nameBM"]."</option>";
                                                 }else{
-                                                    echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
+                                                    echo "<option value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
                                                 }
                                             }
                                         }
@@ -253,12 +252,22 @@
                                         if (this.status === 200 && this.readyState === 4){
                                             let rooms = JSON.parse(this.responseText);
 
-                                            output = '';
+                                            let lang = "<?php echo $_SESSION["language"]; ?>";
 
-                                            output+= `<option value="" selected>Open this select menu</option>`;
-                                            for (var i in rooms){
-                                                output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                            output = '';
+                                            
+                                            if (lang === "BI"){
+                                                output+= `<option value="" selected>Open this select menu</option>`;
+                                                for (var i in rooms){
+                                                    output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                }
+                                            }else{
+                                                output+= `<option value="" selected>Tunjuk menu</option>`;
+                                                for (var i in rooms){
+                                                    output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                                }
                                             }
+                                            
                                             
                                             document.getElementById('rooms').innerHTML = output;
                                             

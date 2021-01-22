@@ -18,6 +18,11 @@
     $result2 = mysqli_query($conn, $sql2);
     $row2 = mysqli_fetch_array($result2);
 
+    if (!$row2){
+        include("notallow.php");
+        exit();
+    }
+
     $sql3 = "SELECT * FROM assets WHERE a_roomID = '".$row2['r_roomID']."'";
     $result3 = mysqli_query($conn, $sql3);
 
@@ -61,27 +66,27 @@
                         <input type="hidden" name="u_userIC" id="complainantName" class="form-control form-control-lg" value="<?php echo  $row1['u_userIC']; ?>">
 
                         <div class="mb-3">
-                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['Date:']; ?></label>
+                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['Date']; ?></strong></label>
                             <input type="date" name="date" id="proposedDate" class="form-control form-control-lg" value="<?php echo $date; ?>">
                             <span class="help-block"><?php echo $dateErr;?></span>
                         </div>
 
                         <div>
-                            <label for="blocks" class="form-label"><?php echo $language['Blocks']; ?></label><br>
-                            <input type="text" class="form-control <?php echo (!empty($blocksErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row2['b_nameBI']; ?>" disabled>
+                            <label for="blocks" class="form-label"><strong><?php echo $language['Blocks']; ?></strong></label><br>
+                            <input type="text" class="form-control <?php echo (!empty($blocksErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row2['b_name'.$_SESSION["language"].'']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row2['block_no']; ?>" name="blocks">
                             <span class="help-block"><?php echo $blocksErr;?></span>
                         </div><br>
 
                         <div>
-                            <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label><br>
-                            <input type="text" class="form-control <?php echo (!empty($roomsErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row2['r_nameBI']; ?>" disabled>
+                            <label for="rooms" class="form-label"><strong><?php echo $language['Rooms']; ?></strong><br>
+                            <input type="text" class="form-control <?php echo (!empty($roomsErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row2['r_name'.$_SESSION["language"].'']; ?>" disabled>
                             <input type="hidden" value="<?php echo $row2['r_roomID']; ?>" name="rooms">
                             <span class="help-block"><?php echo $roomsErr;?></span>
                         </div><br>
 
                         <div>
-                            <label for="assets" class="form-label"><?php echo $language['Assets']; ?></label><br>
+                            <label for="assets" class="form-label"><strong><?php echo $language['Assets']; ?></strong></label><br>
                             <select class="form-select <?php echo (!empty($assetsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="assets" name="assets">
                                 <option value="" selected><?php echo $language['Open menu']; ?></option>
                                 <?php
@@ -96,15 +101,15 @@
                         </div><br>
 
                         <div class="mb-3">
-                            <label for="complainantDetail" class="form-label"><?php echo $language['Detail:']; ?></label>
+                            <label for="complainantDetail" class="form-label"><strong><?php echo $language['Detail']; ?></strong></label>
                             <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg <?php echo (!empty($detailErr)) ? 'is-invalid' : ''; ?>" placeholder="complainant's detail" value="<?php echo $detail; ?>">
                             <span class="help-block"><?php echo $detailErr;?></span>
                         </div>
             
                         <div class="form-group">
-                            <label class="control-label form-label"><?php echo $language['Complaint Image']; ?></label>
-                            <input class="input-group" type="file" name="image" onchange="readURL(this);" />
-                            <img id="blah" src="#" alt="room image" />
+                            <label class="control-label form-label"><strong><?php echo $language['Complaint Image']; ?></label>
+                            <input class="form-control" type="file" name="image" onchange="readURL(this);" />
+                            <img id="blah" src="#" alt="<?php echo $language["complaint image"]; ?>" />
                             <span class="help-block"><?php echo $errMSG;?></span>
                         </div>
                         <script>
@@ -130,8 +135,10 @@
             
 
             
-            <input type="submit" class="btn btn-primary" value="<?php echo $language['Submit']; ?>">
-            <a href="readComplaint.php" class="btn btn-primary"><?php echo $language['Cancel']; ?></a>
+            <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+
+            <input type="submit" class="btn btn-primary" value="<?php echo $language['Submit']; ?>">            <input type="reset" name="clear" value="<?php echo $language['Clear']; ?>"class="btn btn-warning"> 
+            <a href="readComplaint.php" class="btn btn-danger float-right"><?php echo $language['Cancel']; ?></a>
         </form>
     </div>
 

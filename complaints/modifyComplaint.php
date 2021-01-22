@@ -87,13 +87,13 @@
                         ?>
 
                         <div class="mb-3">
-                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['Date:']; ?></label>
-                            <input type="date" name="date" id="proposedDate" class="form-control form-control-lg" value="<?php echo $new_date; ?>">
+                            <label for="proposedDate" class="form-label <?php echo (!empty($dateErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['Date']; ?></strong></label>
+                            <input type="date" name="date" id="proposedDate" class="form-control form-control-lg" value="<?php echo $new_date; ?>" max="<?php echo date("Y-m-d"); ?>">
                             <span class="help-block"><?php echo $dateErr;?></span>
                         </div>
 
                         <div>
-                            <label for="blocks" class="form-label"><?php echo $language['Blocks']; ?></label><br>
+                            <label for="blocks" class="form-label"><strong><?php echo $language['Blocks']; ?></strong></label><br>
                             <select class="form-select <?php echo (!empty($blocksErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="blocks" name="blocks">
                                 <option><?php echo $language['Open this select menu']; ?></option>
                                 <?php
@@ -136,7 +136,7 @@
                         </div><br>
 
                         <div>
-                            <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label><br>
+                            <label for="rooms" class="form-label"><strong><?php echo $language['Rooms']; ?></strong></label><br>
                             <select class="form-select <?php echo (!empty($roomsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="rooms" name="rooms">
                                 <option><?php echo $language['Open this select menu']; ?></option>
                                 <?php
@@ -182,18 +182,18 @@
                         </div><br>
 
                         <div>
-                            <label for="assets" class="form-label"><?php echo $language['Assets']; ?></label><br>
+                            <label for="assets" class="form-label"><strong><?php echo $language['Assets']; ?></strong></label><br>
                             <select class="form-select <?php echo (!empty($assetsErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example" id="assets"  name="assets">
                                 <option>Open this select menu</option>
                                 <?php
                                     while ($row4 = mysqli_fetch_array($result4)){
                                          if ($row4['a_assetID'] == $row['c_assetID']){
                                 ?>
-                                         <option selected value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_nameBI']; ?></option> 
+                                         <option selected value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_name'.$_SESSION["language"].'']; ?></option> 
                                 <?php
                                          }else{
                                 ?>
-                                        <option value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_nameBI']; ?></option>
+                                        <option value="<?php echo $row4['a_assetID']; ?>"><?php echo $row4['a_name'.$_SESSION["language"].'']; ?></option>
                                 <?php            
                                          }
                                     }
@@ -215,13 +215,21 @@
                                 xhr.onreadystatechange = function(){
                                     if (this.status === 200 && this.readyState === 4){
                                         let rooms = JSON.parse(this.responseText);
+                                        let lang = "<?php echo $_SESSION["language"]; ?>";
 
-                                        output = '';
-
-                                        output+= `<option selected>Open this select menu</option>`;
-                                        for (var i in rooms){
-                                            output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
-                                        }
+                                            output = '';
+                                            
+                                            if (lang === 'BI'){
+                                                output+= `<option selected>Open this select menu</option>`;
+                                                for (var i in rooms){
+                                                    output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                }
+                                            }else{
+                                                output+= `<option selected>Tunjuk menu</option>`;
+                                                for (var i in rooms){
+                                                    output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                                }
+                                            }
 
                                         document.getElementById('rooms').innerHTML = output;
                                         loadAssets();
@@ -243,11 +251,20 @@
                                         let result = JSON.parse(this.responseText);
                                         console.log(result);
 
-                                        output = '';
+                                        let lang2 = "<?php echo $_SESSION["language"]; ?>";
 
-                                        output+= `<option selected>Open this select menu</option>`;
-                                        for (var i in result){
-                                            output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
+                                        output = '';
+                                        
+                                        if (lang2 === 'BI'){
+                                            output+= `<option selected>Open this select menu</option>`;
+                                            for (var i in result){
+                                                output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBI}</option>`;
+                                            }
+                                        }else{
+                                            output+= `<option selected>Tunjuk Menu</option>`;
+                                            for (var i in result){
+                                                output+= `<option value="${result[i].a_assetID}">${result[i].a_nameBM}</option>`;
+                                            }
                                         }
 
                                         document.getElementById('assets').innerHTML = output;
@@ -260,15 +277,15 @@
                         </script>
 
                         <div class="mb-3">
-                            <label for="complainantDetail" class="form-label"><?php echo $language['Detail:']; ?></label>
+                            <label for="complainantDetail" class="form-label"><strong><?php echo $language['Detail']; ?></strong></label>
                             <input type="text" name="detail" id="complainantDetail" class="form-control form-control-lg <?php echo (!empty($detailErr)) ? 'is-invalid' : ''; ?>" placeholder="complainant's detail" value="<?php echo $row['detail']; ?>">
                             <span class="help-block"><?php echo $detailErr;?></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label form-label"><?php echo $language['Complaint Image']; ?></label>
-                            <input class="input-group" type="file" name="image" onchange="readURL(this);" />
-                            <img id="blah" src="<?php echo $row['c_img_path'];?>" alt="room image" />
+                            <label class="form-label form-label"><strong><?php echo $language['Complaint Image']; ?></strong></label>
+                            <input class="form-control" type="file" name="image" onchange="readURL(this);" />
+                            <img id="blah" src="<?php echo $row['c_img_path'];?>" alt="<?php echo $language["complaint image"]; ?>" />
                             <span class="help-block"><?php echo $errMSG;?></span>
                         </div>
                         <script>

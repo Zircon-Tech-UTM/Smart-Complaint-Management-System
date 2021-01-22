@@ -64,12 +64,13 @@
     <div class="container-fluid">
 
         <div class="row align-items-start">
-            <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-primary m-0 font-weight-bold" ><?php echo $language['All Complaints List']; ?></h1></div>
+            <div class="col-md-8 col-xl-8 mb-12"><h1 class="text m-0 font-weight-bold" ><?php echo $language['All Complaints']; ?></h1></div>
             <!-- style = "text-align: center;" -->
             <!-- <div class="col-md-8 col-xl-8 mb-6"><h1 class="text-dark mb-4">All Complaints List</h1></div> -->
-            <div class="col-md-3 col-xl-3 mb-4"><a href="createComplaint.php" class="btn btn-primary btn-lg"><?php echo $language['New Complaint']; ?></a></div>
-
-            <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()"><?php echo $language['Filter']; ?></button></div>
+            <div class="col-md-3 col-xl-3 mb-4">
+                <a href="createComplaint.php" class="btn btn-primary btn-lg"><?php echo $language['New Complaint']; ?></a>&nbsp&nbsp&nbsp
+                <button class="btn btn-success" onclick="hide()"><?php echo $language['Filter']; ?></button>
+            </div>
         </div>
 
         <script>
@@ -91,8 +92,8 @@
 
                             <form action="readComplaint.php" method="POST">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="search by proposer or follower name" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
-                                    <button type="submit" class="btn btn-outline-secondary" type="button" id="button-addon2" style="font-size: 13px;"><?php echo $language['Search']; ?></button>
+                                    <input type="text" class="form-control" placeholder="<?php echo $language['type here...']; ?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
+                                    <button type="submit" class="btn btn-outline-dark" type="button" id="button-addon2" style="font-size: 13px;"><?php echo $language['Search']; ?></button>
                                 </div>
                             </form>
 
@@ -119,17 +120,17 @@
                                             echo"<tr>";
                                             echo "<th scope='row'>".$row["compID"]."</th>";
 
-                                            echo "<td scope='row'><a href='../assets/assetDetail.php?id=".$row["a_assetID"]."'>".$row["a_nameBI"]."</a></td>";
+                                            echo "<td scope='row'><a href='../assets/assetDetail.php?id=".$row["a_assetID"]."'>".$row["a_name".$_SESSION["language"].""]."</a></td>";
 
-                                            echo "<td scope='row'><a href='../Rooms/roomdetail.php?id=".$row["c_roomID"]."'>".$row["r_nameBI"]."</a></td>";
+                                            echo "<td scope='row'><a href='../Rooms/roomdetail.php?id=".$row["c_roomID"]."'>".$row["r_name".$_SESSION["language"].""]."</a></td>";
 
-                                            echo "<td scope='row'><a href='../users/detailUser.php?id=".$row["c_userIC"]."'>".$row["name"]." (".$row["postBI"].")</a></td>";
+                                            echo "<td scope='row'><a href='../users/detailUser.php?id=".$row["c_userIC"]."'>".$row["name"]." (".$row["post".$_SESSION["language"].""].")</a></td>";
 
                                             echo "<td>".$pDate[0]."</td>";
 
                                             echo (!empty($sDate[0]))? "<td>".$sDate[0]."</td>": "<td>-</td>";
 
-                                            echo "<td>".$row["s_nameBI"]."</td>";
+                                            echo "<td>".$row["s_name".$_SESSION["language"].""]."</td>";
 
                                             $sql4 = "SELECT * FROM users WHERE u_userIC = '".$row["followedBy"]."'";
                                             $result4 = mysqli_query($conn, $sql4);
@@ -138,7 +139,7 @@
                                             echo (!empty($row4["name"]))? "<td><a href='../users/detailUser.php?id=".$row["followedBy"]."'>".$row4["name"]."</a></td>" : "<td>-</td>";
                                         ?>
                                         <td>
-                                            <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-info btn-sm"><?php echo $language['View']; ?></a>
+                                            <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-info btn-sm"><?php echo $language['Detail']; ?></a>
                                             <a href="modifyComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
                                             <a href="deleteComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-danger btn-sm"  style="color: rgb(14,14,14);" onclick="return confirm('<?php echo $language['Are you sure to delete this complaint?']; ?>')" ><strong>X</strong></a>
                                         </td>
@@ -154,10 +155,49 @@
                         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
                     </div>
                 </div>
+                
+                <?php
+
+                    if (isset($_GET['pageno'])) {
+                        $pageno = $_GET['pageno'];
+                    } else {
+                        $pageno = 1;
+                    }
+                    $no_of_records_per_page = 10;
+                    $offset = ($pageno-1) * $no_of_records_per_page;
+
+                    $conn=mysqli_connect("localhost","my_user","my_password","my_db");
+                    // Check connection
+                    if (mysqli_connect_errno()){
+                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                        die();
+                    }
+
+                    $total_pages_sql = "SELECT COUNT(*) FROM table";
+                    $result = mysqli_query($conn,$total_pages_sql);
+                    $total_rows = mysqli_fetch_array($result)[0];
+                    $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+                    $sql = "SELECT * FROM table LIMIT $offset, $no_of_records_per_page";
+                    $res_data = mysqli_query($conn,$sql);
+                    while($row = mysqli_fetch_array($res_data)){
+                        //here goes the data
+                    }
+                    mysqli_close($conn);
+                    ?>
+                    <ul class="pagination">
+                    <li><a href="?pageno=1">First</a></li>
+                    <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+                    </li>
+                    <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+                    </li>
+                    <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+                    </ul>
             </div>
 
             <div class="col-md-2 col-xl-3 mb-2" id="filter" style="display: none;">
-                <h2>Filter</h2>
                 <div class="card shadow">
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -187,11 +227,11 @@
 
                                                 }else{
                                                     if ($_SESSION['language'] == 'BI'){
-                                                        echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
+                                                        echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
                                                     }else if ($_SESSION['language'] == 'BM'){
-                                                        echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
+                                                        echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
                                                     }else{
-                                                        echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
+                                                        echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
                                                     }                                                    
 
                                                 }
@@ -298,11 +338,20 @@
                                             if (this.status === 200 && this.readyState === 4){
                                                 let rooms = JSON.parse(this.responseText);
 
+                                                let lang = "<?php echo $_SESSION["language"]; ?>";
+
                                                 output = '';
 
-                                                output+= `<option value="" selected>Open this select menu</option>`;
-                                                for (var i in rooms){
-                                                    output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                if(lang ==='BI'){
+                                                    output+= `<option value="" selected>Open this select menu</option>`;
+                                                    for (var i in rooms){
+                                                        output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                    }
+                                                }else{
+                                                    output+= `<option value="" selected>Tunjuk Menu</option>`;
+                                                    for (var i in rooms){
+                                                        output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                                    }
                                                 }
                                                 
                                                 document.getElementById('rooms').innerHTML = output;
@@ -351,7 +400,7 @@
                                         ?>
                                     </select><br>
                                             
-                                    <input type="submit" value="Apply Filter" class="btn btn-primary">
+                                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
                                     <a href="readComplaint.php" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                                 </form>
 

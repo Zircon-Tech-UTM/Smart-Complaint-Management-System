@@ -54,7 +54,7 @@
 
                         <table class="table my-0" id="dataTable">
 
-                            <img src="<?php echo $row["c_img_path"];?>" class="img-thumbnail" alt="complaint image"><br><br>
+                            <img src="<?php echo $row["c_img_path"];?>" class="img-thumbnail" alt="<?php echo $language["complaint image"]; ?>"><br><br>
 
                             <thead style="color: rgb(0,0,0);">
                                 <tr>
@@ -108,8 +108,9 @@
                 </div>
             </div><br>
 
-            <a href="modifyComplaint.php?id=<?php echo $id; ?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
-            <a href="deleteComplaint.php?id=<?php echo $id; ?>" onclick="return confirm('Are you sure to delete this complaint?')" class="btn btn-danger btn-sm"><?php echo $language['Delete']; ?></a>
+            <a href="modifyComplaint.php?id=<?php echo $id; ?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
+            <a href="deleteComplaint.php?id=<?php echo $id; ?>" onclick="return confirm('<?php echo $language['Are you sure to delete this complaint?']; ?>')" class="btn btn-danger"><?php echo $language['Delete']; ?></a>
+            <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back']; ?></a>
             <br><br>
         </div>
     </div>

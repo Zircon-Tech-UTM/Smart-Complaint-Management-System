@@ -85,7 +85,7 @@
             <div class="col-md-8 col-xl-8 mb-6"><h1 class="text-dark mb-4"><?php echo $language['Accepted Complaints List'];?></h1></div>
             <div class="col-md-3 col-xl-3 mb-4"><a href="allComplaints.php" class="btn btn-primary btn-lg"><?php echo $language['All Complaints'];?></a></div>
 
-            <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-primary" onclick="hide()"><?php echo $language['Filter'];?></button></div>
+            <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()"><?php echo $language['Filter'];?></button></div>
         </div>
 
         <script>
@@ -147,8 +147,6 @@
                                                 echo "<td scope='row'>".$row["name"]." (".$row["postBI"].")</td>";    
                                             }
 
-                                            echo "<td scope='row'>".$row["r_nameBI"]."</td>";
-                                            echo "<td scope='row'>".$row["name"]." (".$row["postBI"].")</td>";
 
                                             echo "<td>".$pDate[0]."</td>";
                                             echo (!empty($pDate[0]))? "<td>".$pDate[0]."</td>": "<td>-</td>";
@@ -194,7 +192,6 @@
             
 
             <div class="col-md-3 col-xl-3 mb-3" id="filter"  style="display: none;">
-                <h2><?php echo $language['Filter'];?></h2>
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -216,11 +213,11 @@
                                                         }
                                                     }else{
                                                         if ($_SESSION['language'] == 'BI'){
-                                                            echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
+                                                            echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
                                                         }else if ($_SESSION['language'] == 'BM'){
-                                                            echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
+                                                            echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBM"]."</option>";
                                                         }else{
-                                                            echo "<option selected value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
+                                                            echo "<option value='".$row2['s_statusID']."'>".$row2["s_nameBI"]."</option>";
                                                         }
                                                     }
                                                 }
@@ -242,11 +239,11 @@
                                                         }
                                                     }else{
                                                         if ($_SESSION['language'] == 'BI'){
-                                                            echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
+                                                            echo "<option value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
                                                         }else if ($_SESSION['language'] == 'BM'){
-                                                            echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBM"]."</option>";
+                                                            echo "<option value='".$row3['block_no']."'>".$row3["b_nameBM"]."</option>";
                                                         }else{
-                                                            echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
+                                                            echo "<option value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
                                                         }
                                                     }
                                                 }
@@ -271,11 +268,11 @@
                                                             }
                                                         }else{
                                                             if ($_SESSION['language'] == 'BI'){
-                                                                echo '<option selected value="'.$row4['r_roomID'].'">'.$row4['r_nameBI']."</option>";
+                                                                echo '<option value="'.$row4['r_roomID'].'">'.$row4['r_nameBI']."</option>";
                                                             }else if ($_SESSION['language'] == 'BM'){
-                                                                echo '<option selected value="'.$row4['r_roomID'].'">'.$row4['r_nameBM']."</option>";
+                                                                echo '<option= value="'.$row4['r_roomID'].'">'.$row4['r_nameBM']."</option>";
                                                             }else{
-                                                                echo '<option selected value="'.$row4['r_roomID'].'">'.$row4['r_nameBI']."</option>";
+                                                                echo '<option= value="'.$row4['r_roomID'].'">'.$row4['r_nameBI']."</option>";
                                                             }
                                                         }
                                                     }
@@ -296,12 +293,20 @@
                                             xhr.onreadystatechange = function(){
                                                 if (this.status === 200 && this.readyState === 4){
                                                     let rooms = JSON.parse(this.responseText);
+                                                    let lang = "<?php echo $_SESSION["language"]; ?>";
 
                                                     output = '';
 
-                                                    output+= `<option value="" selected>Open this select menu</option>`;
-                                                    for (var i in rooms){
-                                                        output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                    if (lang === "BI"){
+                                                        output+= `<option value="" selected>Open this select menu</option>`;
+                                                        for (var i in rooms){
+                                                            output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                                        }
+                                                    }else{
+                                                        output+= `<option value="" selected>Tunjuk menu</option>`;
+                                                        for (var i in rooms){
+                                                            output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                                        }
                                                     }
                                                     
                                                     document.getElementById('rooms').innerHTML = output;

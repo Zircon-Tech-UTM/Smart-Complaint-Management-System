@@ -109,20 +109,18 @@
                                 </tr>
                                 <tr>
                                     <td><strong><?php echo $language['Assets'] ;?></strong></td>
-                                    <td><a href="roomassets.php?id=<?php echo $row["r_roomID"]; ?>"><?php echo $language['CLICK HERE']; ?></a></td>
+                                    <td><a href="../assets/mainB.php?id=<?php echo $row["r_roomID"]; ?>"><?php echo $language['CLICK HERE']; ?></a></td>
                                 </tr>
                                 <tr></tr>
                                 <tr>
                                     <td><strong><?php echo $language['PIC Of Room'];?></strong></td>
-                                    <td><a href="../users/detailUser.php?id=<?php echo $row["u_userIC"]; ?>"><strong><?php echo $row['name']; ?></strong></a></td>
+                                    <td><a href="../profile/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><strong><?php echo $row['name']; ?></strong></a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <a href="roommodify.php?id=<?php echo $row["r_roomID"];?>" class="btn btn-warning"><?php echo $language['Edit'];?></a>
-            <a href="roomcancel.php?id=<?php echo $row["r_roomID"];?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this room?')"><?php echo $language['Delete'];?></a>
             <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back'];?></a>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

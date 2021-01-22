@@ -53,14 +53,14 @@
             <div class="card-body">
                 <div class ="row">
                     <div class="col-md-5 col-xl-5 mb-12">
-                        <label for="fname" class="form-label"><?php echo $language['Full Name:']; ?></label>
+                        <label for="fname" class="form-label"><strong><?php echo $language['Full Name:']; ?></strong></label>
                         <input type="text" name="name" id="fname" class="form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?> " placeholder="<?php echo $language['Enter Full Name']; ?>" value="<?php echo $row["name"]; ?>">
                         <span class="help-block"><?php echo $usernameErr;?></span>
                     </div>
 
                     <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                     <div class="col-md-5 col-xl-5 mb-12">
-                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['IC number:']; ?></label>
+                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['IC number:']; ?></strong></label>
                         <input type="text" name="IC" id="fic" class="form-control  <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter IC']; ?>"value="<?php echo $row["u_userIC"]; ?>">
                         <span class="help-block"required><?php echo $ICErr;?></span>
                     </div>
@@ -68,7 +68,7 @@
 
               <div class="row">
                 <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="position"><?php echo $language['Position Assigned:']; ?></label>
+                  <label for="position"><strong><?php echo $language['Position Assigned:']; ?></strong></label>
                   <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row["postBI"]; ?>">
                       <option value="" selected><?php echo $language['Choose a position']; ?></option>
                       <?php 
@@ -110,7 +110,7 @@
 
           <br><div class="row">
             <div class="col-md-5 col-xl-5 mb-12">
-            <label for="grades"><?php echo $language['Grade:']; ?></label>
+            <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
             <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades' >";
               <?php 
                   $sql1="SELECT * from grades";
@@ -119,11 +119,11 @@
                   {
                     if($row1['g_gradeID']==$row['u_grade'])
                     {
-                        echo"<option selected='selected' value='".$row1['g_gradeID']."'>".$row1['g_gradeID']."</option>";
+                        echo"<option selected='selected' value='".$row1['g_gradeID']."'>".$row1['g_post'.$_SESSION["language"].'']."-".$row1['g_gradeID']."</option>";
                     }
                     else
                     {
-                        echo"<option value='".$row1['g_gradeID']."'>".$row1['g_gradeID']."</option>";
+                        echo"<option value='".$row1['g_gradeID']."'>".$row1['g_post'.$_SESSION["language"].'']."-".$row1['g_gradeID']."</option>";
                     }
                   }
               ?>
@@ -158,12 +158,12 @@
               </div>
           </div><br> -->
 
-                <!-- <div class="form-group">
-                    <label class="control-label"><?php echo $language['user image']; ?></label>
-                    <input class="input-group <?php echo (!empty($errMSG)) ? 'is-invalid' : ''; ?>" type="file" name="image" onchange="readURL(this);" />
+                <div class="form-group">
+                    <label class="control-label"><strong><?php echo $language['user image']; ?></strong></label>
+                    <input class="form-control <?php echo (!empty($errMSG)) ? 'is-invalid' : ''; ?>" type="file" name="image" onchange="readURL(this);" />
                     <img id="blah" src="<?php echo $row["u_img_path"];?>" alt="<?php echo $language['user image']; ?>" />
                     <span class="help-block"><?php echo $errMSG;?></span>
-                </div> -->
+                </div>
                 <script>
                 function readURL(input) {
                     if (input.files && input.files[0]) {
@@ -189,21 +189,21 @@
                   <div class="card-body">
 
             <div class="mb-3">
-              <label for="faddr" class="form-label"><?php echo $language['Home Address:']; ?></label>
+              <label for="faddr" class="form-label"><strong><?php echo $language['Home Address:']; ?></strong></label>
               <input type="text" name="faddr" id="faddr" class="form-control <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter Home Address']; ?>" value="<?php echo $row["address"]; ?>">
               <span class="help-block"><?php echo $addrErr;?></span>
             </div>
 
              <div class="row">
                 <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="fcontactnum" class="form-label"><?php echo $language['Contact Number:']; ?></label>
+                  <label for="fcontactnum" class="form-label"><strong><?php echo $language['Contact Number:']; ?></strong></label>
                   <input type="text" name="fcontactnum" id="fcontactnum" class="form-control <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter contact number']; ?>"  value="<?php echo $row["contact"]; ?>">
                   <span class="help-block"><?php echo $contactErr;?></span>
                 </div>
                 
                 <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                 <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="femail" class="form-label"><?php echo $language['Email Address:']; ?></label>
+                  <label for="femail" class="form-label"><strong><?php echo $language['Email Address:']; ?></strong></label>
                   <input type="text" name="femail" id="femail" class="form-control <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter email address']; ?>"value="<?php echo $row["email"]; ?>">
                   <span class="help-block"><?php echo $contactErr;?></span>
                 </div>

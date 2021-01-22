@@ -100,7 +100,7 @@
                                     echo "<td>";
                         ?>
                                     <a href = 'blockmodify.php?id=<?php echo $row['block_no'];?>' class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit'];?></a>&nbsp
-                                    <a href = 'blockcancel.php?id=<?php echo $row['block_no']; ?>' class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14); background: #f15f51;" onclick="return confirm('Are you sure to delete this block?')"><strong>X</strong></a>
+                                    <a href = 'blockcancel.php?id=<?php echo $row['block_no']; ?>' class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14); " onclick="return confirm('<?php echo $language['Are you sure to delete this block?'];?>')"><strong>X</strong></a>
                         <?php
                                 echo "</td>";
                                 echo "</tr>"; 

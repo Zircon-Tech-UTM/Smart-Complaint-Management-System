@@ -156,7 +156,7 @@
                     </div>
                 </div>
             </div><br>
-            <a href="deleteComplaint.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm"><?php echo $language['Delete'];?></a>
+            <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back'];?></a>
         </div>
     </div>
 </body>

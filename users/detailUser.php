@@ -110,8 +110,9 @@
                             </div>
                         </div>
                     </div>
-                    <a href="updateUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
-                    <a href="deleteUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-danger btn-sm"><?php echo $language['Delete']; ?></a>
+                    <a href="updateUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
+                    <a href="deleteUser.php?id=<?php echo $row["u_userIC"];?>" onclick="return confirm('<?php echo $language['Are you sure you want to delete this account?']; ?>')" class="btn btn-danger"><?php echo $language['Delete']; ?></a>
+                    <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back']; ?></a>
                 </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>

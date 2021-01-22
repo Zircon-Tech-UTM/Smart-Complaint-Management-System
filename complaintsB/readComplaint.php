@@ -54,7 +54,7 @@
 <div class="container-fluid">
 
         <div class="row align-items-start">
-            <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-primary m-0 font-weight-bold" ><?php echo $language['All Complaints List']; ?></h1></div>
+            <div class="col-md-8 col-xl-8 mb-12"><h1 class="text m-0 font-weight-bold" ><?php echo $language['All Complaints']; ?></h1></div>
             <!-- style = "text-align: center;" -->
             <!-- <div class="col-md-8 col-xl-8 mb-6"><h1 class="text-dark mb-4">All Complaints List</h1></div> -->
             <div class="col-md-3 col-xl-3 mb-4"><a href="createComplaint.php" class="btn btn-primary btn-lg"><?php echo $language['New Complaint']; ?></a></div>
@@ -81,8 +81,8 @@
 
                             <form action="readComplaint.php" method="POST">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="search by proposer or follower name" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
-                                    <button type="submit" class="btn btn-outline-secondary" type="button" id="button-addon2"><?php echo $language['Search']; ?></button>
+                                    <input type="text" class="form-control" placeholder="<?php echo $language["type here..."]; ?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
+                                    <button type="submit" class="btn btn-outline-dark" type="button" id="button-addon2" style="font-size: 13px;"><?php echo $language['Search']; ?></button>
                                 </div>
                             </form>
 
@@ -202,7 +202,7 @@
                                             ?>
                                         </select><br>
                                                 
-                                        <input type="submit" value="<?php echo $language['Apply Filter']; ?>" class="btn btn-primary">
+                                        <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
                                         <a href="readComplaint.php" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                                 </form>
 

@@ -106,13 +106,13 @@
                         <div class="card-body">
                             <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
-                                    <label for="block_no"><?php echo $language['Block ID'];?></label>
+                                    <label for="block_no"><strong><?php echo $language['Block ID'];?></strong></label>
                                     <input type="text" class="form-control <?php echo (!empty($b_block_noErr)) ? 'is-invalid' : ''; ?>" id="block_no" placeholder="Enter block ID" name="block_no">
                                     <span class="help-block"><?php echo $b_block_noErr;?></span>
                                 </div>
                                 <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                                 <div class="col-md-5 col-xl-5 mb-12">
-                                    <label for="location"><?php echo $language['Location'];?></label><br>
+                                    <label for="location"><strong><?php echo $language['Location'];?></strong></label><br>
                                     <select name = 'loc' class="form-control <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Disabled select example">
                                         <option selected disabled>Location</option>";
                                         <option value="1"><?php echo $language['Hostel'];?></option>
@@ -125,13 +125,14 @@
                             <br>
                             <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
-                                    <label for="name"><?php echo $language['Block Name(English)'];?></label>
+                                    <label for="name"><strong><?php echo $language['Block Name(English)'];?></strong></label>
                                     <input type="text" class="form-control <?php echo (!empty($b_nameBIErr)) ? 'is-invalid' : ''; ?>" id="nameBI" placeholder="Enter name in English" name="nameBI">
                                     <span class="help-block"><?php echo $b_nameBIErr;?></span>
                                 </div>
+
                                 <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                                 <div class="col-md-5 col-xl-5 mb-12">
-                                    <label for="nama"><?php echo $language['Block Name(Malay)'];?></label>
+                                    <label for="nama"><strong><?php echo $language['Block Name(Malay)'];?></strong></label>
                                     <input type="text" class="form-control <?php echo (!empty($b_nameBMErr)) ? 'is-invalid' : ''; ?>" id="nameBM" placeholder="Enter name in Malay" name="nameBM">
                                     <span class="help-block"><?php echo $b_nameBMErr;?></span>
                                 </div>

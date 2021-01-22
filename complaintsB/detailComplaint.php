@@ -14,9 +14,9 @@
     require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $sql = "SELECT * FROM complaints, rooms, blocks 
+        $sql = "SELECT * FROM complaints, rooms, blocks, assets, status, users 
                 WHERE complaints.c_roomID = rooms.r_roomID 
-                AND rooms.blok = blocks.block_no  
+                AND rooms.blok = blocks.block_no AND complaints.c_assetID = assets.a_assetID AND complaints.c_status = status.s_statusID AND complaints.c_userIC = users.u_userIC
                 AND compID=".$id.";";
 
         $result = mysqli_query($conn, $sql);
@@ -49,39 +49,74 @@
 </style>
 <body>
     <div class="container">
-        <h1><strong><?php echo $language['Complaints ID:']; ?> </strong><?php echo $row["compID"];?></h1>
+    <div class="container-fluid float-left">
+            <h3 class="text-dark mb-4" style="font-size: 40px;"><strong><?php echo $language['Complaint Information']; ?></strong></h3>
 
-        <img src="<?php echo "../complaints/".$row["c_img_path"];?>" alt="image"><br>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 
-        <span><?php echo $language['Building:']; ?> </span><p><?php echo $row["blok"];?></p>
-        <span><?php echo $language['Room:']; ?> </span><p><?php echo $row["r_nameBI"];?></p>
+                        <table class="table my-0" id="dataTable">
 
-        <ul class="list-inline">
-            <li class="list-inline-item"><p class="lead"><?php echo $language['Proposed Date:']; ?></p><p><?php echo $pDate[0];?></p></li>
-            <li class="list-inline-item"></li>
-            <li class="list-inline-item">
-                <p class="lead"><?php echo $language['Settled Date:']; ?> </p><p><?php if(empty($sDate[0])){echo "-";} else {echo $sDate[0];}?></p>
-            </li>
-        </ul>
-        
-        <p>
-            Status: 
-            <?php 
-                $sql2 = "SELECT * FROM status WHERE s_statusID = '".$row["c_status"]."'";
+                            <img src="<?php echo $row["c_img_path"];?>" class="img-thumbnail" alt="<?php echo $language["complaint image"]; ?>"><br><br>
 
-                $result2 = mysqli_query($conn, $sql2);
-                $row2 = mysqli_fetch_array($result2);
+                            <thead style="color: rgb(0,0,0);">
+                                <tr>
+                                    <th><?php echo $language['Complaint ID']; ?></th>
+                                    <th><?php echo $row["compID"];?></th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody style="color: rgb(0,0,0);">
+                                <tr>
+                                    <td><strong><?php echo $language['Proposed By']; ?></strong></td>
+                                    <td><a href="../profile/editprofile.php?id=<?php echo $row["c_userIC"]; ?>"><?php echo $row["name"];?></a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><?php echo $language['Assets']; ?></strong></td>
+                                    <td><a href="../assets/assetDetail.php?id=<?php echo $row["c_assetID"]; ?>"><?php echo $row["a_nameBI"];?></a></td>
+                                </tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr>
+                                    <td><strong><?php echo $language['Building']; ?></strong></td>
+                                    <td><?php echo $row["b_nameBI"];?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><?php echo $language['Room']; ?></strong></td>
+                                    <td><a href="../complaintsB/roomdetail.php?id=<?php echo $row["c_roomID"]; ?>"><?php echo $row["r_nameBI"];?></a></td>
+                                </tr>
 
-                echo $row2["s_nameBI"];
-                
-            ?>
-        
-        </p>
+                                <tr>
+                                    <td><strong><?php echo $language['Proposed Date']; ?></strong></td>
+                                    <td><?php echo $pDate[0];?></td>
+                                </tr>
 
-        <p class="lead"><?php echo $language['Details:']; ?> </p><p><?php echo $row['detail']; ?></p>
+                                <tr>
+                                    <td><strong><?php echo $language['Settled Date']; ?></strong></td>
+                                    <td><?php if(empty($sDate[0])){echo "-";} else {echo $sDate[0];}?></td>
+                                </tr>
 
-        <a href="modifyComplaint.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm"><?php echo $language['Edit']; ?></a>
-        <a href="deleteComplaint.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm"><?php echo $language['Delete']; ?></a>
+                                <tr>
+                                    <td><strong><?php echo $language['Status']; ?></strong></td>
+                                    <td><?php echo $row["s_nameBI"];?></td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong><?php echo $language['Detail']; ?></strong></td>
+                                    <td><?php echo $row["detail"];?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><br>
+
+            <a href="modifyComplaint.php?id=<?php echo $id; ?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
+            <a href="deleteComplaint.php?id=<?php echo $id; ?>" onclick="return confirm('<?php echo $language['Are you sure to delete this complaint?']; ?>')" class="btn btn-danger"><?php echo $language['Delete']; ?></a>
+            <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back']; ?></a>
+            <br><br>
+        </div>
     </div>
 </body>
 </html>
@@ -98,5 +133,6 @@
         echo "ERROR Occur! Will direct back to the same page in 5 seconds";
         header("refresh: 5; location: readComplaint.php");
     }
+    include("../navbar/navbar2.php");
     mysqli_close($conn);
 ?>

@@ -39,8 +39,8 @@
      <div class="container-fluid">
 
         <div class="row align-items-start">
-            <div class="col-9"><h1 class="text-dark mb-4"><?php echo $language['Users List']; ?></h1></div>
-            <div class="col-3"><a href="createUser.php" class="btn btn-primary btn-lg"><?php echo $language['Create New User']; ?></a></div>
+            <div class="col-9"><h1 class="text-dark mb-4 font-weight-bold"><?php echo $language['Users List']; ?></h1></div>
+            <div class="col-3"><a href="createUser.php" class="btn btn-primary btn-lg"><?php echo $language['New User']; ?></a></div>
         </div>
 
             <!-- <div class="row">
@@ -49,12 +49,15 @@
                     <form action="" method="POST"> 
                     <label for="position" class="form-label"><?php echo $language['Positions']; ?></label>
                 <div class="row">
-                <div class="col-3">
+                <div class="col-md-5 col-lg-5 col-xl-3 mb-12">
                     <select class="form-select" aria-label="Default select example" name="position">
                         <option value=""><?php echo $language['Open this select menu']; ?></option>
                         <?php
                             $values = [1,2,3,4];
-                            $positions = ['Admin','PIC', 'Assistant Computer Technician', 'Assistant Engineer'];
+                            if ($_SESSION["language"] == 'BI')
+                                $positions = ['Admin','PIC', 'Assistant Computer Technician', 'Assistant Engineer'];
+                            else
+                                $positions = ['Admin','PIC', 'Penolong Juruteknik Komputer', 'Penolong Jurutera'];
 
                             foreach($values as $value){
                                 if ($_POST['position'] == $value){
@@ -66,8 +69,8 @@
                         ?>
                     </select>
                 </div>
-                <div class="col-3">
-                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
+                <div class="col-md-5 col-lg-5 col-xl-3 mb-12 d-flex justify-content-center">
+                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">&nbsp
                     <a href="" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                 </div>
                 </form><br>
@@ -91,23 +94,23 @@
                     while($row = mysqli_fetch_array($result))
                     {
                         echo"<tr>";
-                        echo "<th scope='row'>".$num."</th>";
-                        echo "<th>".$row["name"]."</th>";
-                        echo "<th>".$row["u_userIC"]."</th>";
+                        echo "<td scope='row'>".$num."</td>";
+                        echo "<td>".$row["name"]."</td>";
+                        echo "<td>".$row["u_userIC"]."</td>";
 
                         if ($_SESSION['language'] == 'BI'){
-                           echo "<th>".$row['postBI']."</th>";
+                           echo "<td>".$row['postBI']."</td>";
                         }else if ($_SESSION['language'] == 'BM'){
-                            echo "<th>".$row['postBM']."</th>";
+                            echo "<td>".$row['postBM']."</td>";
                         }else{
-                            echo "<th>".$row['postBM']."</th>";
+                            echo "<td>".$row['postBM']."</td>";
                         }
 
-                        echo "<th>".$row["contact"]."</th>";
+                        echo "<td>".$row["contact"]."</td>";
                         $num++;
                     ?>
                     <th>
-                        <a href="detailUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-primary btn-sm" style="font-size: 17px"><?php echo $language['Detail']; ?></a>
+                        <a href="detailUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-info btn-sm" style="font-size: 17px"><?php echo $language['Detail']; ?></a>
                         <a href="updateUser.php?id=<?php echo $row["u_userIC"]; ?>" class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit']; ?></a>
 
                         <?php
@@ -118,7 +121,7 @@
                             }
                             else{
                         ?>
-                                <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>"  class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;background: #f15f51;" onclick="return confirm('<?php echo $language['Are you sure you want to delete this account?']; ?>')"><strong>X</strong></a>
+                                <a href="deleteUser.php?id=<?php echo $row["u_userIC"]; ?>"  class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;" onclick="return confirm('<?php echo $language['Are you sure you want to delete this account?']; ?>')"><strong>X</strong></a>
                         <?php
                             }
                         ?>
