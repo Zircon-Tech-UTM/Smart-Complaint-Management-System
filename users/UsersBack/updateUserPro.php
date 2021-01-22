@@ -150,7 +150,7 @@
           {
               $userType="1";
               $positionBM="Pentadbir";
-              $positionBI=="Admin";
+              $positionBI="Admin";
           }
           else if($positionBI=="PIC Of Room")
           {
@@ -161,7 +161,7 @@
           {
               $userType="2";
               $positionBM="PIC Makmal";
-              $positionBI=="PIC Of Room";
+              $positionBI="PIC Of Room";
           }
           else if($positionBI=="Assistant Computer Technician")
           {
@@ -172,7 +172,7 @@
           {
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
-              $positionBI=="Assistant Computer Technician";
+              $positionBI="Assistant Computer Technician";
           }
           else if($positionBI=="Assistant Engineer")
           {
@@ -183,10 +183,9 @@
           {
               $userType="4";
               $positionBM="Penolong Jurutera";
-              $positionBI=="Assistant Engineer";
+              $positionBI="Assistant Engineer";
           }
 
-            
                 date_default_timezone_set("Asia/Kuala_Lumpur");
                 $rdate= date('Y-m-d H:i:s');  
 
@@ -202,9 +201,9 @@
                         WHERE u_userIC='".$id."';";
                 }
 
-            
+               
                 $result = mysqli_query($conn, $sql);
-
+               
                 if($result)
                 {
                     unlink($_SESSION["remove"]);

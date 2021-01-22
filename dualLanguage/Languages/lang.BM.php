@@ -492,5 +492,6 @@ $language['Are you sure you want to accept this request?'] = 'Adakah anda pasti 
 $language['Update'] = 'Kemaskini';
 $language['Update Complaint Status'] = 'KEMASKINI STATUS ADUAN';
 $language['Do you want to save the chnages?'] = 'Adakah anda pasti simpan perubahan ini?';
+$language['Grade Position:'] = 'Gred Pangkat:';
 ?>
 

@@ -186,7 +186,7 @@
           {
               $userType="1";
               $positionBM="Pentadbir";
-              $positionBI=="Admin";
+              $positionBI="Admin";
           }
           else if($positionBI=="PIC Of Room")
           {
@@ -197,7 +197,7 @@
           {
               $userType="2";
               $positionBM="PIC Makmal";
-              $positionBI=="PIC Of Room";
+              $positionBI="PIC Of Room";
           }
           else if($positionBI=="Assistant Computer Technician")
           {
@@ -208,7 +208,7 @@
           {
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
-              $positionBI=="Assistant Computer Technician";
+              $positionBI="Assistant Computer Technician";
           }
           else if($positionBI=="Assistant Engineer")
           {
@@ -219,10 +219,9 @@
           {
               $userType="4";
               $positionBM="Penolong Jurutera";
-              $positionBI=="Assistant Engineer";
+              $positionBI="Assistant Engineer";
           }
           
-
           $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
           date_default_timezone_set("Asia/Kuala_Lumpur");
@@ -232,7 +231,6 @@
 
         $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade, u_img_path ) VALUES('".$IC."', '".$hashed_password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."', '".$path."')";
 
-        
           $result = mysqli_query($conn, $sql);
 
           if($result)

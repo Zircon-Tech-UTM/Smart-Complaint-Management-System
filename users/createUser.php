@@ -28,7 +28,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title><?php echo $language['New User']; ?></title>
 </head>
-<body id="page-top">
+<body>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="POST">
           
 <div class="container-fluid">
@@ -102,7 +102,7 @@
 
               <div class ="col-md-1 col-xl-1 mb-1"><br></div>
               <div class="col-md-5 col-xl-5 mb-12">
-                  <label for="psw-repeat" class="form-label"><strong><?php echo $language['Re-type Password']; ?>:</strong><span id='message'></span></label>  
+                  <label for="psw-repeat" class="form-label"><strong><?php echo $language['Re-type Password']; ?></strong>:<span id='message'></span></label>  
                 <input type="password" id="confirm_password" placeholder="<?php echo $language['Re-type Password']; ?>" name="confirm_password" class="form-control <?php echo (!empty($confirm_passwordErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>"onkeyup='check();'>  
                 <span class="help-block"><?php echo $confirm_passwordErr;?></span>
                 <input type="checkbox" onclick="myFunction2()"> <?php echo $language['Show Password:']; ?>
@@ -140,72 +140,26 @@
                   </select>
                   <span class="help-block"><?php echo $positionBIErr;?></span><br>
               </div>
-            </div>
-              
-          
-              <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
-              <script>
-                  $("#position").change(function() 
-                  {
-                    if ($(this).val() == "PIC Of Room") 
-                    {
-                      $('#PIC').show();
-                      $('#roomName').attr('required', '');
-                      $('#roomName').attr('data-error', 'This field is required.');
-                    } else 
-                    {
-                      $('#PIC').hide();
-                      $('#roomName').removeAttr('required');
-                      $('#roomName').removeAttr('data-error');
-                    }
-                  });
-                  $("#position").trigger("change");
-              </script>
 
-          <div class="row">
-            <div class="col-md-5 col-xl-5 mb-12">
-            <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
-                  <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'value="<?php echo $grades; ?>">;
-                  <option value="" selected><?php echo $language['Choose a grade']; ?></option>;
-              <?php 
-                  $sql="SELECT * from grades";
-                  $result=mysqli_query($conn, $sql);
-                  while ($row=mysqli_fetch_array($result))
-                  {
-                    echo"<option value='".$row['g_gradeID']."'>".$row['g_post'.$_SESSION["language"].'']."(".$row['g_gradeID'].")</option>";
-                  }
-
-              ?>
-              </select>
-              <span class="help-block"><?php echo $gradesErr;?></span>
-            </div>
-
-            <!-- <div class ="col-md-1 col-xl-1 mb-1"><br></div>
-            <div class="col-md-5 col-xl-5 mb-12">
-                  <div class="form-label" id="PIC">
-                    <label for="roomName" ><?php echo $language['Room Managed:']; ?></label>
-                    <select name ='nameBI'  class='form-control' id='roomName'>;
-                    <option value="" selected><?php echo $language['Choose a room']; ?></option>
+                <div class ="col-md-1 col-xl-1 mb-1"></div>
+                  <div class="col-md-5 col-xl-5 mb-12">
+                  <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
+                        <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'value="<?php echo $grades; ?>">;
+                        <option value="" selected><?php echo $language['Choose a grade']; ?></option>;
                     <?php 
-                        // $sql="SELECT * from rooms";
-                        // $result=mysqli_query($conn, $sql);
+                        $sql="SELECT * from grades";
+                        $result=mysqli_query($conn, $sql);
+                        while ($row=mysqli_fetch_array($result))
+                        {
+                          echo"<option value='".$row['g_gradeID']."'>".$row['g_gradeID']."</option>";
+                        }
 
-                        // while ($row=mysqli_fetch_array($result))
-                        // {
-                        //   if ($_SESSION['language'] == 'BI'){
-                        //       echo"<option value='".$row['r_roomID']."'>".$row['r_nameBI']."</option>";
-                        //   }else if ($_SESSION['language'] == 'BM'){
-                        //       echo"<option value='".$row['r_roomID']."'>".$row['r_nameBM']."</option>";
-                        //   }else{
-                        //       echo"<option value='".$row['r_roomID']."'>".$row['r_nameBM']."</option>";
-                        //   }
-                        // }
                     ?>
                      </select>
+                     <span class="help-block"><?php echo $gradesErr;?></span>
                   </div>
-              </div>
-          </div><br> -->
-                          <br><br>
+            </div><br>
+ 
                     <div class="form-group">
                         <label class="control-label"><strong><?php echo $language['user image']; ?></strong></label>
                         <input class="form-control <?php echo (!empty($errMSG)) ? 'is-invalid' : ''; ?>" type="file" name="image" onchange="readURL(this);" />
@@ -258,7 +212,6 @@
                       </div>
                   </div>
                 </div>
-          <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
           <br>
           <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Submit']; ?>"/>
           <input type="reset" name="clear" value="<?php echo $language['Clear']; ?>"class="btn btn-warning">

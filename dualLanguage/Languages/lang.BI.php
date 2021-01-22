@@ -482,6 +482,7 @@ $language['Are you sure you want to accept this request?'] = 'Are you sure you w
 $language['Update'] = 'Update';
 $language['Update Complaint Status'] = 'UPDATE COMPLAINT STATUS';
 $language['Do you want to save the chnages?'] = 'Do you want to save the chnages?';
+$language['Grade Position:'] = 'Grade Position:';
 
 //dashboard
 $language['MANAGEMENT'] = 'MANAGEMENT';

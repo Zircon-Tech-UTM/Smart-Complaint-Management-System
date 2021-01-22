@@ -16,9 +16,7 @@
     {
         $id = $_GET['id'];
         $sql = "SELECT * FROM users WHERE u_userIC=".$id.";";
-
         $result = mysqli_query($conn, $sql);
-
         if (!$result){echo "ERROR:  $conn->error";
             header("refresh: 6; location: readUser.php");
         } 
@@ -72,7 +70,7 @@
                   <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" value="<?php echo $row["postBI"]; ?>">
                       <option value="" selected><?php echo $language['Choose a position']; ?></option>
                       <?php 
-                        $temps = [$language['Admin'], $language['PIC'], $language['Assistant Computer Technician'], $language['Assistant Engineer']];
+                        $temps = [$language['Admin'], $language['PIC Of Room'], $language['Assistant Computer Technician'], $language['Assistant Engineer']];
                         foreach($temps as $temp){
                             if ($row["postBI"] == $temp){
                                 echo "<option value='$temp' selected>$temp</option> ";
@@ -86,77 +84,30 @@
                       ?>
                   </select>
                   <span class="help-block"><?php echo $positionBIErr;?></span>
-              </div>
-                
-            </div>
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
-              <script>
-                  $("#position").change(function() 
-                  {
-                    if ($(this).val() == "PIC") 
-                    {
-                      $('#PIC').show();
-                      $('#roomName').attr('required', '');
-                      $('#roomName').attr('data-error', 'This field is required.');
-                    } else 
-                    {
-                      $('#PIC').hide();
-                      $('#roomName').removeAttr('required');
-                      $('#roomName').removeAttr('data-error');
-                    }
-                  });
-                  $("#position").trigger("change");
-              </script>
-
-          <br><div class="row">
-            <div class="col-md-5 col-xl-5 mb-12">
-            <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
-            <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " id='grades' >";
-              <?php 
-                  $sql1="SELECT * from grades";
-                  $result1=mysqli_query($conn, $sql1);
-                  while ($row1=mysqli_fetch_array($result1))
-                  {
-                    if($row1['g_gradeID']==$row['u_grade'])
-                    {
-                        echo"<option selected='selected' value='".$row1['g_gradeID']."'>".$row1['g_post'.$_SESSION["language"].'']."-".$row1['g_gradeID']."</option>";
-                    }
-                    else
-                    {
-                        echo"<option value='".$row1['g_gradeID']."'>".$row1['g_post'.$_SESSION["language"].'']."-".$row1['g_gradeID']."</option>";
-                    }
-                  }
-              ?>
-            </select>
-              <span class="help-block"><?php echo $gradesErr;?></span>
-            </div>
-
-            <!-- <div class ="col-md-1 col-xl-1 mb-1"><br></div>
-            <div class="col-md-5 col-xl-5 mb-12">
-                  <div class="form-label" id="PIC">
-                    <label for="roomName"><?php echo $language['Room Managed:']; ?></label>
-                    <select name ='nameBI'  class='form-control' id='roomName'>;
-                      <option selected disabled> <?php echo $language['Choose a room'] ?></option>;
+                </div>
+                <div class ="col-md-1 col-xl-1 mb-1"></div>
+                <div class="col-md-5 col-xl-5 mb-12">
+                  <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
+                  <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> "  id="grades" value="<?php echo $row["u_grade"]; ?>" >";
                     <?php 
-                        // $sql2="SELECT * from rooms";
-                        // $result2=mysqli_query($conn, $sql2);
-                        
-                        // while ($row2=mysqli_fetch_array($result2))
-                        // {
-                        //     if($row2['PIC']==$row['u_userIC'])
-                        //     {
-                        //         echo"<option selected='selected' value='".$row2['r_roomID']."'>".$row2['r_nameBI']."</option>";
-                        //     }
-                        //     else
-                        //     {
-                        //         echo"<option value='".$row2['r_roomID']."'>".$row2['r_nameBI']."</option>";
-                        //     }
-                        // }
+                        $sql1="SELECT * from grades";
+                        $result1=mysqli_query($conn, $sql1);
+                        while ($row1=mysqli_fetch_array($result1))
+                        {
+                          if($row1['g_gradeID']==$row['u_grade'])
+                          {
+                              echo"<option selected='selected' value='".$row1['g_gradeID']."'>".$row1['g_gradeID']."</option>";
+                          }
+                          else
+                          {
+                              echo"<option value='".$row1['g_gradeID']."'>".$row1['g_gradeID']."</option>";
+                          }
+                        }
                     ?>
                   </select>
-                  </div>
-              </div>
-          </div><br> -->
+                    <span class="help-block"><?php echo $gradesErr;?></span>
+               </div>
+            </div>
 
                 <div class="form-group">
                     <label class="control-label"><strong><?php echo $language['user image']; ?></strong></label>
@@ -210,11 +161,11 @@
             </div>
  </div>
 </div><br>
-
-</div>     
-          <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Submit']; ?>"/>
+          <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Save']; ?>"/>
           <input type="reset" name="clear" value="<?php echo $language['Clear']; ?>"class="btn btn-warning">
           <a href="readUser.php" class="btn btn-danger float-right"><?php echo $language['Cancel']; ?></a>
+</div>     
+          
         </form>
     </div>
 
