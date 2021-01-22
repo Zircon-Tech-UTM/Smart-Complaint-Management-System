@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2021 at 06:00 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 22, 2021 at 11:54 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `cis`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `maintainance` ()  BEGIN
+    CREATE TEMPORARY TABLE temp
+    (
+        `c_userIC` varchar(12) DEFAULT '000000000000',
+        `c_assetID` varchar(10) DEFAULT NULL,
+        `c_roomID` varchar(10) DEFAULT NULL,
+        `c_status` varchar(2) DEFAULT '1',
+        `proposedDate` datetime NOT NULL DEFAULT sysdate(),
+        `detail` text DEFAULT 'Biweekly Maintainance',
+        `setledDate` datetime DEFAULT NULL,
+        `action_desc` text DEFAULT NULL,
+        `followedBy` varchar(12) DEFAULT NULL,
+        `c_img_path` varchar(50) DEFAULT NULL
+    );
+
+    INSERT INTO temp (`c_assetID`, `c_roomID`)
+    SELECT a_assetID, a_roomID
+    FROM assets
+    WHERE a_nameBI LIKE "%Air Conditioner"
+    OR a_nameBM LIKE "Penghawa Dingin";
+
+    INSERT INTO complaints (`c_userIC`, `c_assetID`, `c_roomID`, `c_status`, `proposedDate`, `detail`, `setledDate`, `action_desc`, `followedBy`, `c_img_path`)
+    SELECT * FROM temp;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -138,11 +169,33 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`g_gradeID`, `g_postBI`, `g_postBM`) VALUES
+('AA00', 'DEFAULT', 'AM'),
 ('DG41', 'Lecturer', 'Pensyarah'),
 ('DG44', 'Lecturer', 'Pensyarah'),
 ('FT19', 'Assistant Computer Technician', 'Juruteknik Komputer'),
 ('JA29', 'Assistant Engineer', 'Penolong Jurutera'),
 ('JA90', 'Admin', 'Pentadbir');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pcomplaints`
+--
+
+CREATE TABLE `pcomplaints` (
+  `compID` int(10) NOT NULL,
+  `c_name` varchar(50) NOT NULL,
+  `c_userIC` varchar(12) DEFAULT NULL,
+  `c_assetID` varchar(10) DEFAULT NULL,
+  `c_roomID` varchar(10) DEFAULT NULL,
+  `c_status` varchar(2) DEFAULT '1',
+  `proposedDate` datetime NOT NULL DEFAULT sysdate(),
+  `detail` text DEFAULT NULL,
+  `setledDate` datetime DEFAULT NULL,
+  `action_desc` text DEFAULT NULL,
+  `followedBy` varchar(12) DEFAULT NULL,
+  `c_img_path` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -218,13 +271,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `u_img_path`, `userType`, `u_grade`) VALUES
+('000000000000', '$2y$10$8yk9S55XIpannjPPst1u/uNEuscOxXsntyAz39gQJJU12rsrS0KJm', 'SYSTEM', 'Admin', 'Pentadbir', ' Jalan Tun Abdul Razak Susur 7 80350 Johor Bahru, Johor Malaysia', 'kvdagang@gmail.com', '07-237 4378', '2021-01-22 18:34:31', NULL, '1', 'AA00'),
 ('001005101333', '$2y$10$MitShOcGWbMKX1Qsm4lxEOC98xq2phzBWRsbZTFsUfeTK/7/Ndi1a', 'Lee Sze Yuan', 'PIC Of Room', 'PIC Makmal', 'lololol', 'lsyuan1029@gmail.com', '0123456789', '2020-12-31 22:49:34', NULL, '2', 'FT19'),
 ('001005101334', '$2y$10$XEWoyuVKmyGfhk.XXc1EyO5U8JE79hvpuS2W9BxO7oTBr6QMOA8gO', 'Lee Sze Yu', 'PIC Of Room', 'PIC Makmal', 'lals', 'momentumlee5@gmail.com', '0123456789', '2020-12-23 22:49:34', NULL, '2', 'DG44'),
 ('001005101335', '$2y$10$B49BJAqqqerG65sdZk/9ce9xUTSmB53a0Is/.UUfz6eEL1j0iOVuW', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '0123456799', '2020-12-23 22:49:34', NULL, '3', 'JA29'),
 ('001005101336', '$2y$10$HEuK2OfyIzSTnXurlujEY.WqyuzM07DNrT0ig1PK/N/Mwz0YSYrhi', 'Lee Sze Sing', 'Assistant Engineer', 'Penolong Jurutera', '16,jln nali.', 'leeszeyuan@graduate.utm.my', '0123456788', '2020-12-23 22:49:34', NULL, '4', 'JA29'),
 ('001005101337', '$2y$10$CBF0nqD5Z5Ti8v05yRQda.P0POAW6eH6BNtCfLqPYpMu7TTih1WJe', 'Tee Hui You', 'PIC Of Room', 'PIC Makmal', 'lalsdsfsd', 'huiyou002013@gmail.com', '0123456889', '2020-12-23 22:49:34', NULL, '2', 'DG41'),
-('001232079090', '$2y$10$nVLkTCgiOrztiRnd.Lkqqu.SZBzdZKKJLjVLlqsTo8Iwbjh25IuH.', 'Fatima Siti', 'Admin', 'Pentadbir', '27,ktdi', 'lim@gmail.com', '0100000000', '2021-01-22 11:34:46', 'images/724755.png', '1', 'DG44'),
-('990102089090', '$2y$10$RC9e.6V5VBbhxq3Y8GtRreNZCvEeK3mpXq/4RYMFDWrD1AWm4Q3gG', 'Fatima B', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', ' 39, taman nakhoda, jalan kuala kedah,06600 alor setar, kedah.', 'hamjingyi99@gmail.com', '0123335555', '2021-01-22 11:36:23', 'images/98543.', '3', 'DG41'),
 ('990105029068', '$2y$10$lrZgGnEWS4pAir5i4o/s7eh3Smeyp5YagLrYoMcaU6eGSszuc0AOG', 'Ham Jing Yi', 'Admin', 'Pentadbir', 'Alor Setar, Kedah.', 'hamjingyi99@gmail.com', '0124663976', '2020-12-23 21:33:04', NULL, '1', 'DG41');
 
 --
@@ -269,6 +321,16 @@ ALTER TABLE `grades`
   ADD PRIMARY KEY (`g_gradeID`);
 
 --
+-- Indexes for table `pcomplaints`
+--
+ALTER TABLE `pcomplaints`
+  ADD PRIMARY KEY (`compID`),
+  ADD KEY `P_asset_FK` (`c_assetID`),
+  ADD KEY `P_room_FK` (`c_roomID`),
+  ADD KEY `P_status_FK` (`c_status`),
+  ADD KEY `P_follow_FK` (`followedBy`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -302,6 +364,12 @@ ALTER TABLE `complaints`
   MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `pcomplaints`
+--
+ALTER TABLE `pcomplaints`
+  MODIFY `compID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -323,6 +391,15 @@ ALTER TABLE `complaints`
   ADD CONSTRAINT `C_user_FK` FOREIGN KEY (`c_userIC`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
+-- Constraints for table `pcomplaints`
+--
+ALTER TABLE `pcomplaints`
+  ADD CONSTRAINT `P_asset_FK` FOREIGN KEY (`c_assetID`) REFERENCES `assets` (`a_assetID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `P_follow_FK` FOREIGN KEY (`followedBy`) REFERENCES `users` (`u_userIC`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `P_room_FK` FOREIGN KEY (`c_roomID`) REFERENCES `rooms` (`r_roomID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `P_status_FK` FOREIGN KEY (`c_status`) REFERENCES `status` (`s_statusID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
 -- Constraints for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -336,6 +413,14 @@ ALTER TABLE `rooms`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `u_grade_fk` FOREIGN KEY (`u_grade`) REFERENCES `grades` (`g_gradeID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `maintainance` ON SCHEDULE EVERY 2 WEEK STARTS '2021-01-26 08:00:00' ON COMPLETION PRESERVE ENABLE DO CALL maintainance()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
