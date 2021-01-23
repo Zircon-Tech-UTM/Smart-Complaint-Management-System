@@ -168,7 +168,7 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`g_gradeID`, `g_postBI`, `g_postBM`) VALUES
-('AA00', 'DEFAULT', 'AM'),
+('0000', 'DEFAULT', 'AM'),
 ('DG41', 'Lecturer', 'Pensyarah'),
 ('DG44', 'Lecturer', 'Pensyarah'),
 ('FT19', 'Assistant Computer Technician', 'Juruteknik Komputer'),
@@ -270,7 +270,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_userIC`, `pwd`, `name`, `postBI`, `postBM`, `address`, `email`, `contact`, `dateRegistered`, `u_img_path`, `userType`, `u_grade`) VALUES
-('000000000000', '$2y$10$8yk9S55XIpannjPPst1u/uNEuscOxXsntyAz39gQJJU12rsrS0KJm', 'SYSTEM', 'Admin', 'Pentadbir', ' Jalan Tun Abdul Razak Susur 7 80350 Johor Bahru, Johor Malaysia', 'kvdagang@gmail.com', '07-237 4378', '2021-01-22 18:34:31', NULL, '1', 'AA00'),
+('000000000000', '$2y$10$8yk9S55XIpannjPPst1u/uNEuscOxXsntyAz39gQJJU12rsrS0KJm', 'SYSTEM', 'Admin', 'Pentadbir', ' Jalan Tun Abdul Razak Susur 7 80350 Johor Bahru, Johor Malaysia', 'kvdagang@gmail.com', '07-237 4378', '2021-01-22 18:34:31', NULL, '1', '0000'),
 ('001005101333', '$2y$10$MitShOcGWbMKX1Qsm4lxEOC98xq2phzBWRsbZTFsUfeTK/7/Ndi1a', 'Lee Sze Yuan', 'PIC Of Room', 'PIC Makmal', 'lololol', 'lsyuan1029@gmail.com', '0123456789', '2020-12-31 22:49:34', NULL, '2', 'FT19'),
 ('001005101334', '$2y$10$XEWoyuVKmyGfhk.XXc1EyO5U8JE79hvpuS2W9BxO7oTBr6QMOA8gO', 'Lee Sze Yu', 'PIC Of Room', 'PIC Makmal', 'lals', 'momentumlee5@gmail.com', '0123456789', '2020-12-23 22:49:34', NULL, '2', 'DG44'),
 ('001005101335', '$2y$10$B49BJAqqqerG65sdZk/9ce9xUTSmB53a0Is/.UUfz6eEL1j0iOVuW', 'Loh Yew Chong', 'Assistant Computer Technician', 'Penolong Juruteknik Komputer', 'lalalalala', 'lohchong2207@gmail.com', '0123456799', '2020-12-23 22:49:34', NULL, '3', 'JA29'),
