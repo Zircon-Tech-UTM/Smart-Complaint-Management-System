@@ -193,7 +193,7 @@ $language['Settings'] = 'Settings';
 $language['Logout'] = 'Logout';
 
 //Profile
-$language['User Profile:'] = 'User Profile:';
+$language['User Profile'] = 'USER PROFILE';
 $language['Email Address:'] = 'Email Address:';
 $language['Landing For Other Users'] = 'Landing For Other Users';
 $language['View Profile'] = 'View Profile';
@@ -486,6 +486,11 @@ $language['Do you want to save the chnages?'] = 'Do you want to save the chnages
 $language['Grade Position:'] = 'Grade Position:';
 $language["asset in this room"] = "asset in this room";
 $language["File"] = "File";
+$language["Block ID is required"] = "Block ID is required";
+$language["English block name is required"] = "English block name is required";
+$language["Malay block name is required"] = "Malay block name is required";
+$language["Choose a location"] = "Choose a location";
+$language['No images.'] = 'No images.';
 
 //dashboard
 $language['MANAGEMENT'] = 'MANAGEMENT';
@@ -523,4 +528,28 @@ $language['Complaints List'] = 'Complaints List';
 $language['Create Complaint'] = 'Create Complaint';
 $language['Apply'] = 'Apply';
 $language['Details:'] = 'Details:';
+
+//23/1 Ham Jing Yi
+$language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.']  ='Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
+$language['Sorry, your file is too large.'] = 'Sorry, your file is too large.';
+$language['Please Choose A Block'] = 'Pilih blok.';
+$language['Asset ID is required'] = 'Asset ID is required';
+$language['English asset name is required'] = 'English asset name is required';
+$language['Malay asset name is required'] = 'Malay asset name is required';
+$language['Choose a block.'] = 'Choose a block.';
+$language['Choose a category.']  ='Choose a category.';
+$language['Cost is required'] = 'Cost is required.';
+$language['Choose a date'] = 'Choose a date.';
+
+$language['Room ID is required'] = 'Room ID is required';
+$language['English room name is required.'] = 'English room name is required';
+$language['You cannot assign 1 PIC to 2 positions.'] = 'You cannot assign 1 PIC to 2 positions.';
+$language['Malay room name is required.'] = 'Malay room name is required.';
+
+// 23/1 7.40pm
+$language['Assistant Computer Technician Home'] = "Assistant Computer Technician's Home";
+$language['Assistant Engineer'] = "Assistant Engineer's Home";
+$language['type here...'] = 'Type here...';
+$language['Previous'] = '<- Previous';
+$language['Next'] = 'Next ->';
 ?>

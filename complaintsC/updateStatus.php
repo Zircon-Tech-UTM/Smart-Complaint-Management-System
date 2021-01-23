@@ -46,8 +46,12 @@
     $result4 = mysqli_query($conn, $sql4);
 
     include("complaintsBack\updatePro.php");
-    include("../navbar/navbarC.php");
-?>
+    if ($_SESSION["userType"] == '3'){
+        include("../navbar/navbarC.php");
+      }elseif ($_SESSION["userType"] == '4'){
+        include("../navbar/navbarD.php");
+      }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -182,7 +186,8 @@
         
         <hr>
 
-        <div class="container-fluid float-left">
+
+        <div class="container-fluid float-left">        <br><br>
             <h4 class="text-dark mb-4" style="font-size: 40px;"><strong><?php echo $language['Update Complaint Status'];?></strong></h4>
 
             <div class="card shadow">
@@ -238,7 +243,7 @@
                             <div class="form-group">
                                 <label class="control-label form-label"><strong><?php echo $language['File']; ?></strong></label>
                                 <input class="form-control" type="file" name="image" onchange="readURL(this);" />
-                                <img id="blah" src="#" alt="<?php echo $language["File"]; ?>" />
+                                <img id="blah" src="<?php echo $row['action_path'];?>" alt="<?php echo $language["File"]; ?>" />
                                 <?php 
                                     $a = $row["action_path"];
 

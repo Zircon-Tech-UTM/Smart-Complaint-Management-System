@@ -39,9 +39,10 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 
+
+    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     include("blockmodifyprocess.php");
     include ('..\navbar\navbar1.php');
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 
 ?>
 
@@ -124,12 +125,12 @@
                                     <span class="help-block"><?php echo $b_block_noErr;?></span>
                                 </div>
                                 <input type="hidden" class="form-control" id="block_no" placeholder="Enter block ID" name="block" value = "<?php echo $row['block_no'];?>">
-                                <input type="hidden" class="form-control" id="id" placeholder="Enter block ID" name="id" value = "<?php echo $row['block_no'];?>">
+
                                 <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                                 <div class="col-md-5 col-xl-5 mb-12">
                                     <label for="location"><?php echo $language['Location'];?></label>
                                     <select name = 'loc' class="form-select <?php echo (!empty($b_locErr)) ? 'is-invalid' : ''; ?>" aria-label="Default select example">
-                                    <option selected disabled>Location</option>
+                                    <option selected>Location</option>
                                         <?php
                                         $array = ['1','2', '3'];
                                         foreach($array as $arr)
@@ -191,7 +192,7 @@
                             <br>
                         </div><br>    
                     </div>                        
-                    <input type="submit" text-align:center name="submit" onclick="return confirm('Do you want to save the changes?')" class="btn btn-primary" value="<?php echo $language['Save'];?>"/>
+                    <input type="submit" text-align:center name="submit" onclick="return confirm('<?php echo $language['Do you want to save the changes?']; ?>')" class="btn btn-primary" value="<?php echo $language['Save'];?>"/>
                     <input type="reset" name="clear" value="<?php echo $language['Reset'];?>"class="btn btn-warning"> 
                     <a href="blocklist.php" class="btn btn-danger float-right"><?php echo $language['Cancel'];?></a>       
                 </div>                    
@@ -200,4 +201,16 @@
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <br>
+    <?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+        mysqli_close($conn);
+    ?>
 <?php include ('..\navbar\navbar2.php');?>

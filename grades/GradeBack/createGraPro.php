@@ -7,6 +7,7 @@
     $gradeIDErr= "";
     $positionBIErr = "";
     $positionBMErr = "";
+    $sqlErr = "";
     
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -16,10 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     $gradeIDErr = $language['Grade ID is required'];
   } 
-  elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["gradeID"])) 
-  {
-    $gradeIDErr = $language['Only letters, number and white space are allowed'];
-  }
   else
   {
     $gradeID = trim($_POST["gradeID"]);
@@ -30,10 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     $positionBIErr = $language['Position in English is required'];
   } 
-  elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["positionBI"])) 
-  {
-    $positionBIErr = $language['Only letters and white space allowed'];
-  }
   else
   {
     $positionBI = trim($_POST["positionBI"]);
@@ -44,10 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     $positionBMErr = $language['Position in Malay is required'];
   } 
-  elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["positionBM"])) 
-  {
-    $positionBMErr = $language['Only letters and white space allowed'];
-  }
   else
   {
     $positionBM = trim($_POST["positionBM"]);
@@ -68,10 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
           } 
           else
           {
-              echo "ERROR: $conn->error";
+              $sqlErr = $conn->error;
           }
 
-          mysqli_close($conn);
+          // mysqli_close($conn);
     }
 }
 

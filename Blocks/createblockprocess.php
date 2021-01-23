@@ -9,17 +9,14 @@
     $b_nameBIErr = "";
     $b_nameBMErr = "";
     $b_locErr = "";
+    $sqlErr = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
         if (empty(trim(($_POST["block_no"])))) 
         {
-            $b_block_noErr = "Block ID is required";
+            $b_block_noErr = $language["Block ID is required"];
         } 
-        elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["block_no"])) 
-        {
-            $b_block_noErr = "Only letters, number and white space are allowed";
-        }
         else
         {
             $b_block_no = trim($_POST["block_no"]);
@@ -28,12 +25,8 @@
 
         if (empty(trim(($_POST["nameBI"])))) 
         {
-            $b_nameBIErr = "English block name is required";
+            $b_nameBIErr = $language["English block name is required"];
         } 
-        elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBI"])) 
-        {
-            $b_nameBIErr = "Only letters and white space allowed";
-        }
         else
         {
             $b_nameBI = trim($_POST["nameBI"]);
@@ -42,12 +35,8 @@
 
         if (empty(trim(($_POST["nameBM"])))) 
         {
-            $b_nameBMErr = "Malay block name is required";
+            $b_nameBMErr = $language["Malay block name is required"];
         } 
-        elseif (!preg_match("/^[a-zA-Z-' ]*$/",$_POST["nameBM"])) 
-        {
-            $b_nameBMErr = "Only letters and white space allowed";
-        }
         else
         {
             $b_nameBM = trim($_POST["nameBM"]);
@@ -56,7 +45,7 @@
     
         if (empty(($_POST["loc"]))) 
         {
-            $b_locErr = "Choose a location.";
+            $b_locErr = $language["Choose a location"];
         } 
         else
         {
@@ -75,9 +64,9 @@
             }
             else
             {
-                echo $conn->error;
+                $sqlErr = $conn->error;
             }
-            mysqli_close($conn);
+            
         }
     }
 ?>

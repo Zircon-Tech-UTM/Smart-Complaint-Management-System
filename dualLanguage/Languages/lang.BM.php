@@ -90,7 +90,7 @@ $language['EDIT BLOCK'] = 'KEMASKINI BLOK';
     //blockroom
 $language['Rooms in'] = 'Bilik Dalam ';
 $language["Room's Name(English)"] = "Nama Bilik(Bahasa Inggeris)";
-$language["Room's Name(Malay)"] = "Nama Bilik(Bahasa English)";
+$language["Room's Name(Malay)"] = "Nama Bilik(Bahasa Melayu)";
 
 
 //room
@@ -476,6 +476,7 @@ $language["complaint image"] = "Gambar Aduan";
 $language['Asset List'] = 'SENARAI ASET';
 $language['New Asset'] = 'ASET BARU';
 $language['Assets Settings'] = 'Tetapan Aset';
+$language['Asset Details'] = 'Maklumat Aset';
 $language['Enter Asset ID'] = 'Masukkan ID Aset';
 $language['Enter name in BI'] = 'Name Aset dalam Bahasa Inggeris';
 $language['Enter name in BM'] = 'Name Aset dalam Bahasa Malaysia';
@@ -496,11 +497,55 @@ $language['Do you want to save the chnages?'] = 'Adakah anda pasti simpan peruba
 $language['Grade Position:'] = 'Gred Pangkat:';
 $language["asset in this room"] = "aset bilik ini";
 $language["File"] = "Fail";
+$language["Block ID is required"] = "ID blok diperlukan";
+$language["English block name is required"] = "Nama blok Inggeris diperlukan";
+$language["Malay block name is required"] = "Nama blok Melayu diperlukan";
+$language["Choose a location"] = "Pilih lokasi";
+$language['No images.'] = 'Tiada Gambar.';
 
 //23/1 Ham Jing Yi
 $language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.']  ='Maaf, hanya format JPG, JPEG, PNG & GIF yang dibenarkan.';
 $language['Please Choose A Block'] = 'Pilih blok.';
 $language['Choose a date'] = 'Pilih tarikh.';
 $language['Choose a rooms.'] = 'Pilih bilik.';
+
+//23/1 Ham Jing Yi
+$language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.']  ='Maaf, hanya format JPG, JPEG, PNG & GIF yang dibenarkan.';
+$language['Sorry, your file is too large.'] = 'Maaf, fail anda terlalu besar.';
+$language['Please Choose A Block'] = 'Pilih blok.';
+$language['Choose a date'] = 'Pilih tarikh.';
+$language['Choose a rooms.'] = 'Pilih bilik.';
+$language['Asset ID is required'] = 'No Siri Aset diperlukan.';
+$language['English asset name is required'] = 'Nama asset dalam Bahasa Inggeris diperlukan.';
+$language['Malay asset name is required'] = 'Nama asset dalam Bahasa Melayu diperlukan.';
+$language['Choose a block'] = 'Pilih blok.';
+$language['Choose a category']  ='Pilih kategori.';
+$language['Cost is required'] = 'Pilih kos.';
+$language['Room ID is required'] = 'Nombor siri bilik diperlukan.';
+$language['English room name is required.'] = 'Nama bilik dalam Bahasa English diperlukan.';
+$language['You cannot assign 1 PIC to 2 positions.'] = 'Seorang PIC tidak boleh ditugaskan kepada 2 jawatan.';
+$language['Malay room name is required.'] = 'Nama bilik dalam Bahasa Melayu diperlukan.';
+
+// 23/1 7.40pm
+$language['Assistant Computer Technician Home'] = 'Halaman Penolong Juruteknik Komputer';
+$language['Assistant Engineer'] = 'Halaman Penolong Jurutera';
+$language['View Accepted Complaints'] = 'Semak aduan yang diuruskan';
+$language['Filter'] = 'Saringan';
+$language['type here...'] = 'Taip di sini...';
+$language['Previous'] = '<- Sebelum ini';
+$language['Next'] = 'Seterusnya ->';
+$language['Open this select menu'] = 'Paparkan Pilihan';
+$language['Choose a date'] = 'Pilih Tarikh';
+$language['Choose a block'] = 'Pilih Blok';
+$language['Choose a room'] = 'Pilih bilik';
+$language['Choose an asset'] = 'Pilih aset';
+$language['Choose a location'] = 'Pilih Lokasi';
+$language['Choose a name'] = 'Pilih nama';
+$language['Choose a block'] = 'Pilih blok';
+$language['Choose a category'] = 'Pilih kategori';
+$language['Cost is required'] = 'Harga diperlukan';
+$language['Description'] = 'Butiran';
+$language['BI Name'] = 'Nama aset (BI)';
+$language['BM Name'] = 'Nama aset (BM)';
 ?>
 

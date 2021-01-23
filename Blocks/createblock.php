@@ -26,9 +26,11 @@
 
     $row1 = mysqli_fetch_array($result1);
 
+    
+    
+    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     include("createblockprocess.php");
     include ('..\navbar\navbar1.php');
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 ?>
 
 <!DOCTYPE html>
@@ -149,4 +151,16 @@
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <br>
+    <?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+        mysqli_close($conn);
+    ?>
 <?php include ('..\navbar\navbar2.php');?>

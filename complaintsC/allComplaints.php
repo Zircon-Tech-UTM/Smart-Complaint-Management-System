@@ -45,8 +45,12 @@
         exit();
     }
 
-    include("../navbar/navbarC.php");
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");?>
+    if ($_SESSION["userType"] == '3'){
+        include("../navbar/navbarC.php");
+      }elseif ($_SESSION["userType"] == '4'){
+        include("../navbar/navbarD.php");
+      }
+        require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +194,7 @@
                                 </thead>
                             </table>
 
-                        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+                        </div>
                     </div>
                 </div>
                 <nav aria-label="Page navigation news">
@@ -206,7 +210,7 @@
                                                                 }else{
                                                                     echo "1";
                                                                 }
-                                                    ?>">Previous</a></li>
+                                                    ?>"><?php echo $language['Previous'];?></a></li>
                                 <?php
                                     for ($i = 1 ; $i <= $numOfPages ; $i++){ 
                                 ?>
@@ -227,7 +231,7 @@
                                                                                 echo "2";
                                                                             }
                                                                             
-                                                                    ?>">Next</a>
+                                                                    ?>"><?php echo $language['Next'];?></a>
                                 </li>
             </ul>
         </nav>
@@ -343,7 +347,7 @@
                                 <a href="allComplaints.php" class="btn btn-warning"><?php echo $language['Cancel'];?></a>
                             </form>
 
-                        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

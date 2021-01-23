@@ -10,8 +10,12 @@
         header('location: ../login/login.php');
     }
 
-    include("../navbar/navbarC.php");
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+    if ($_SESSION["userType"] == '3'){
+        include("../navbar/navbarC.php");
+      }elseif ($_SESSION["userType"] == '4'){
+        include("../navbar/navbarD.php");
+      }
+        require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 
     $sql = "SELECT * FROM complaints JOIN users ON c_userIC = u_userIC JOIN assets ON c_assetID = a_assetID JOIN rooms ON r_roomID = c_roomID JOIN status ON c_status = s_statusID JOIN categories ON a_category = catID WHERE s_statusID <> '1' AND followedBy = '".$_SESSION['ic']."'";
 
@@ -224,7 +228,7 @@
                                                                 }else{
                                                                     echo "1";
                                                                 }
-                                                    ?>">Previous</a></li>
+                                                    ?>"><?php echo $language['Previous'];?></a></li>
                                 <?php
                                     for ($i = 1 ; $i <= $numOfPages ; $i++){ 
                                 ?>
@@ -245,7 +249,7 @@
                                                                                 echo "2";
                                                                             }
                                                                             
-                                                                    ?>">Next</a>
+                                                                    ?>"><?php echo $language['Next'];?></a>
                                 </li>
             </ul>
         </nav>

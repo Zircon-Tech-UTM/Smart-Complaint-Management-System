@@ -82,6 +82,17 @@
 </form>
 </body>
 </html>
+<?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+    ?>
 <?php include("../navbar/navbar2.php"); } ?>
 
 
