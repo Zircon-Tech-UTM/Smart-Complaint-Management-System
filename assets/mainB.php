@@ -6,7 +6,7 @@
 	}
     
     
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+  require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 	if(isset($_SESSION['u_userIC']) != session_id() )
 	{
 		header('location: ../login/login.php');
@@ -23,7 +23,7 @@
           ON assets.a_roomID = rooms.r_roomID 
           WHERE a_category LIKE '%".$_GET['category']."%'
           AND PIC = '".$_SESSION["ic"]."';";
-    $parameter.= "category=".$_GET['category'];
+          $parameter.= "category=".$_GET['category'];
   }else{
       $sql = "SELECT * FROM assets JOIN rooms 
               ON assets.a_roomID = rooms.r_roomID
@@ -115,7 +115,7 @@
                             if($counter >= $initItemNum && $counter <= $finalItemNum){
                       ?>
                               <tr>
-                                <td><a href="assetDetail.php?id=<?php echo $row["a_assetID"]; ?>"><?php echo $row["a_assetID"]; ?></a></td>  
+                                <td><a href="assetDetailB.php?id=<?php echo $row["a_assetID"]; ?>"><?php echo $row["a_assetID"]; ?></a></td>  
                                 <td><?php echo $row["a_nameBI"]; ?></td>  
                                 <td><?php echo $row["a_nameBM"]; ?></td>  
                                 <td> 

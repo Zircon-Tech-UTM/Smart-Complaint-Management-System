@@ -132,7 +132,7 @@
     </div>
 
         <div><br>
-        <a href="update.php?assetID=<?php echo $_GET['id'];?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
+        <a href="updateB.php?assetID=<?php echo $_GET['id'];?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
         <?php
         if ($_SESSION["userType"] == '1' or $_SESSION["userType"] == '2'){
         ?>

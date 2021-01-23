@@ -6,7 +6,6 @@
     $nameBM = "";
     $category = "";
     $cost = "";
-    $amount = "";
     $date_purchased = "";
     $room = "";
 
@@ -16,10 +15,10 @@
     $nameBMErr = "";
     $categoryErr = "";
     $costErr = "";
-    $amountErr = "";
     $date_purchasedErr = "";
     $errMSG = "";
     $roomErr = "";
+    $sqlErr = "";
     
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -101,22 +100,6 @@
         }
 
 
-
-        if (empty(trim(($_POST["amount"])))) 
-        {
-        $amountErr = "Changes Failed. Amount is required";
-        } 
-        elseif (!preg_match("/^[0-9]+$/", $_POST["amount"])) 
-        {
-        $amountErr = "Changes Failed. Please enter valid amount.";
-        }
-        else
-        {
-        $amount = trim($_POST["amount"]);
-        }
-
-
-
         if (empty(($_POST["date_purchased"]))) 
         {
         $date_purchasedErr = "Changes Failed. Choose a date.";
@@ -165,13 +148,18 @@
         }
 
         //insert into database
-        if(empty($assetIDErr)&&empty($nameBIErr)&&empty($nameBMErr)&&empty($categoryErr)&&empty($costErr)&&empty($amountErr)&&empty($asset_conditionErr)&&empty($date_purchasedErr) &&empty($roomErr) )
+        if(empty($assetIDErr)&&empty($nameBIErr)&&empty($nameBMErr)&&empty($categoryErr)&&empty($costErr)&&empty($asset_conditionErr)&&empty($date_purchasedErr) &&empty($roomErr) )
         {
             $path = $upload_dir.$pic;
-            if ($imgExt== "")
-                $sql = "UPDATE assets SET a_assetID='$assetID' ,a_nameBI='$nameBI',a_nameBM='$nameBM',a_category='$category' ,description='$description' ,cost='$cost' ,amount='$amount' ,date_purchased='$date_purchased', a_roomID='$room' WHERE a_assetID= '$assetID'";
-            else
-                $sql = "UPDATE assets SET a_assetID='$assetID' ,a_nameBI='$nameBI',a_nameBM='$nameBM',a_category='$category' ,description='$description' ,cost='$cost' ,amount='$amount' ,date_purchased='$date_purchased', a_roomID='$room', a_img_path = '$path' WHERE a_assetID= '$assetID'";
+            
+            if ($imgExt== ""){
+                $sql = "UPDATE assets SET a_assetID='$assetID' ,a_nameBI='$nameBI',a_nameBM='$nameBM',a_category='$category' ,description='$description' ,cost='$cost' ,date_purchased='$date_purchased', a_roomID='$room' WHERE a_assetID= '$assetID'";
+                $_SESSION["remove"] = "";
+            }
+            else{
+                $sql = "UPDATE assets SET a_assetID='$assetID' ,a_nameBI='$nameBI',a_nameBM='$nameBM',a_category='$category' ,description='$description' ,cost='$cost' ,date_purchased='$date_purchased', a_roomID='$room', a_img_path = '$path' WHERE a_assetID= '$assetID'";
+            }
+                
 
 
             $result = mysqli_query($conn, $sql);
@@ -179,17 +167,19 @@
 
         if($result)
         {
-            unlink($_SESSION["remove"]);
-            move_uploaded_file($tmp_dir, $upload_dir.$pic);
+            if ($imgExt){
+                unlink($_SESSION["remove"]);
+                move_uploaded_file($tmp_dir, $upload_dir.$pic);
+            }
+            
 
             ($_SESSION['userType'] == '2')? (header ("location: mainB.php")) : (header ("location: mainA.php?block=$block"));
         }
         else
         {
-            echo $conn->error;
+            $sqlErr = $conn->error;
             ($_SESSION['userType'] == '2')? (header ("refresh: 5; location: mainB.php")) : (header ("refresh: 5; location: mainA.php?block=$block"));
         }
-        mysqli_close($conn);
     }
 
 ?>

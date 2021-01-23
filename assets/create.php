@@ -80,9 +80,16 @@ img{width: 200px; height: 200px;}
                                 $result2 = mysqli_query($conn, $sql2);
 
                                 while ($row2 = mysqli_fetch_array($result2)){
+                                  if ($block == $row2['b_name'.$_SESSION['language'].'']){
+                            ?>
+                                    <option value="<?php echo $row2['block_no']; ?>" selected><?php echo $row2['b_name'.$_SESSION['language'].'']; ?></option>
+                            <?php
+
+                                  }else{
                             ?>
                                     <option value="<?php echo $row2['block_no']; ?>"><?php echo $row2['b_name'.$_SESSION['language'].'']; ?></option>
-                            <?php
+                            <?php        
+                                  }
                                 }
                             ?>
                         </select>
@@ -243,4 +250,16 @@ img{width: 200px; height: 200px;}
 
 </body>
 </html>
+<?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+        mysqli_close($conn);
+?>
 <?php include("../navbar/navbar2.php");?>

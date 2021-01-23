@@ -21,6 +21,7 @@
 	$date_purchasedErr = "";
 	$errMSG = "";
 	$roomErr = "";
+	$sqlErr = "";
 
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -145,7 +146,12 @@
 			
 			
 			$SELECT = "SELECT a_assetID FROM assets WHERE a_assetID = ? Limit 1";
-			$INSERT = "INSERT assets(a_assetID,a_nameBI,a_nameBM,a_category,description,cost,amount,date_purchased,a_roomID, a_img_path) VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+			if ($imgExt)
+				$INSERT = "INSERT assets(a_assetID,a_nameBI,a_nameBM,a_category,description,cost,date_purchased,a_roomID, a_img_path) VALUES(?,?,?,?,?,?,?,?,?)";
+			else{
+				$INSERT = "INSERT assets(a_assetID,a_nameBI,a_nameBM,a_category,description,cost,date_purchased,a_roomID) VALUES(?,?,?,?,?,?,?,?)";
+			}
 			//Prepare statement
 			$stmt = $conn->prepare($SELECT);
 			$stmt->bind_param("s",$assetID); // s- string
@@ -157,18 +163,27 @@
 			if($rnum==0){
 				$stmt->close();
 				$stmt = $conn->prepare($INSERT);
-				$stmt->bind_param('sssssiisss',$assetID,$nameBI,$nameBM,$category,$description,$cost,$amount,$date_purchased, $room, $path);
-				$stmt->execute();
-				move_uploaded_file($tmp_dir, $upload_dir.$pic);
+
+				if ($imgExt)
+					$stmt->bind_param('sssssisss',$assetID,$nameBI,$nameBM,$category,$description,$cost,$date_purchased, $room, $path);
+				else	
+					$stmt->bind_param('sssssiss',$assetID,$nameBI,$nameBM,$category,$description,$cost,$date_purchased, $room);
+
+
+				if ($stmt->execute()){
+					move_uploaded_file($tmp_dir, $upload_dir.$pic);
+				}else{
+					$sqlErr = $stmt->error;
+				}
+					
 				// echo "New Record inserted successfully";
 				($_SESSION['userType'] == '2')? (header ("location: mainB.php")) : (header ("location: mainA.php?block=$block"));
 
 			}else {
-				echo "The asset id already available";
+				$sqlErr = $stmt->error;
 				($_SESSION['userType'] == '2')? (header ("refresh: 5; location: mainB.php")) : (header ("refresh: 5; location: mainA.php?block=$block"));
 			}
 			$stmt->close();
-			$conn->close();
 		} 
 	}
 

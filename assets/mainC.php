@@ -11,7 +11,12 @@
 	{
 		header('location: ../login/login.php');
   }
-  include("../navbar/navbarC.php");
+  if ($_SESSION["userType"] == '3'){
+    include("../navbar/navbarC.php");
+  }elseif ($_SESSION["userType"] == '4'){
+    include("../navbar/navbarD.php");
+  }
+  
   require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 
   $parameter = "";
@@ -57,7 +62,7 @@
     <div class="row align-items-start">
       <div class="col-md-8 col-xl-8 mb-12"><h1 class="text-primary m-0 font-weight-bold"><?php echo $language['Asset List']; ?></h1></div>
 
-      <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()">Filter</button></div>
+      <div class="col-md-1 col-xl-1 mb-2"><button class="btn btn-success" onclick="hide()"><?php echo $language['Filter'];?></button></div>
     </div>
 
     <script>
@@ -152,7 +157,7 @@
                                         
                         </thead>
                     </table> 
-                </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>     
+                </div>
             </div>
           </div>
           <!-- Pager -->
@@ -169,7 +174,7 @@
                                                                 }else{
                                                                     echo "1";
                                                                 }
-                                                    ?>">Previous</a></li>
+                                                    ?>"><?php echo $language['Previous'];?></a></li>
                                 <?php
                                     for ($i = 1 ; $i <= $numOfPages ; $i++){ 
                                 ?>
@@ -190,7 +195,7 @@
                                                                                 echo "2";
                                                                             }
                                                                             
-                                                                    ?>">Next</a>
+                                                                    ?>"><?php echo $language['Next'];?></a>
                                 </li>
             </ul>
         </nav>
@@ -300,7 +305,7 @@
                     <input type="submit" value="<?php echo $language['Filter']; ?>" class="btn btn-primary">
                     <a href="" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
                   </form><br>
-                </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+                </div>
               </div>
             </div>
         </div>

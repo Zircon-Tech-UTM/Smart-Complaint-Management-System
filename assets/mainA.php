@@ -16,7 +16,7 @@
 
   $parameter = "";
 
-  $sql = "SELECT * FROM assets JOIN rooms ON assets.a_roomID = rooms.r_roomID JOIN blocks ON blok=block_no JOIN categories ON a_category = catID";
+  $sql = "SELECT * FROM assets LEFT JOIN rooms ON assets.a_roomID = rooms.r_roomID LEFT JOIN blocks ON blok=block_no LEFT JOIN categories ON a_category = catID";
 
   if (isset($_GET["blocks"])){
     $sql .= " AND blok LIKE '%".$_GET["blocks"]."%'";
@@ -173,7 +173,7 @@
                                                                 }else{
                                                                     echo "1";
                                                                 }
-                                                    ?>">Previous</a></li>
+                                                    ?>"><?php echo $language['Previous'];?></a></li>
                                 <?php
                                     for ($i = 1 ; $i <= $numOfPages ; $i++){ 
                                 ?>
@@ -194,7 +194,7 @@
                                                                                 echo "2";
                                                                             }
                                                                             
-                                                                    ?>">Next</a>
+                                                                    ?>"><?php echo $language['Next'];?></a>
                                 </li>
             </ul>
         </nav>

@@ -29,9 +29,11 @@
     if (isset($row["a_img_path"]))
             $_SESSION["remove"] = $row["a_img_path"];
 
-    require_once("../navbar/navbar1.php");
+    
     require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     require_once("updateprocess.php");
+
+    require_once("../navbar/navbar1.php");
 
 ?>
 
@@ -250,54 +252,8 @@ img{width: 200px; height: 200px;}
                                         </div>
                                 
                                         <div class ="col-md-1 col-xl-1 mb-1"></div>
-                                            <!-- <div class="col-md-5 col-xl-5 mb-12">
-                                            <div class="form-group">
-                                                <label for="Amount"><strong><?php //echo $language['Amount']; ?> </strong></label>
-                                                <input type="text" class="form-control <?php //echo (!empty($amountErr)) ? 'is-invalid' : ''; ?>" id="Amount " placeholder="<?php //echo $language['Enter amount']; ?> " name="amount" value="<?php //echo $row['amount']; ?>" >
-                                                <span class="help-block"><?php //echo $amountErr;?></span>
-                                            </div>
-                                        </div> -->
-                                </div>
 
-                                <!-- <div class="form-group">
-                                    <label for="Condition">Condition</label>
-                                    <select name = 'asset_condition' class="form-select" aria-label="Default select example">
-                                        <option selected disabled>Select Condition</option>
-                                            <?php
-                                                // $array = ['1','2'];
-                                                // foreach($array as $arr)
-                                                // {
-                                                //     if($arr == $row['asset_condition'])
-                                                //     {
-                                                //         echo"<option selected = 'selected' value=".$arr.">";
-                                                //         if($arr == '1')
-                                                //         {
-                                                //             echo "Good";
-                                                //         }
-                                                //         else
-                                                //         {
-                                                //             echo "Bad";
-                                                //         }
-                                                //         echo "</option>";
-                                                //     }
-                                                //     else
-                                                //     {
-                                                //         echo"<option value=".$arr.">";
-                                                //         if($arr == '1')
-                                                //         {
-                                                //             echo "Good";
-                                                //         }
-                                                //         else
-                                                //         {
-                                                //             echo "Bad";
-                                                //         }
-                                                //         echo "</option>";
-                                                //     }
-                                                // }
-                                            
-                                            ?>
-                                    </select>             
-                                </div> -->
+                                </div>
 
                                 <?php
                                     $datetime = strtotime($row['date_purchased']);
@@ -349,4 +305,16 @@ img{width: 200px; height: 200px;}
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </body>
 </html>
+<?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+        mysqli_close($conn);
+?>
 <?php include("../navbar/navbar2.php");?>
