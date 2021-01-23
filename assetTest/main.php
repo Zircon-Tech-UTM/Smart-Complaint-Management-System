@@ -1,0 +1,258 @@
+<?php  
+  //require_once("../dualLanguage/language.php");
+
+    require_once("../dbconfig.php"); 
+    if(!session_id())//if session_id is not found
+    {
+        session_start();
+    }
+        
+    if(isset($_SESSION['u_userIC']) != session_id() )
+    {
+        header('location: ../login/login.php');
+    }
+    include("../navbar/navbar1.php");
+    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+
+    $sql = "SELECT `a_nameBI`,`a_nameBM`, `a_category`, `cat_nameBI`, 
+                    `cat_nameBM`,`a_roomID`, `r_nameBI`, `r_nameBM`,
+                    `description`,`cost`,count(`a_nameBI`)as amount,
+                    `date_purchased`, `blok`, `b_nameBI`, `b_nameBM` from assets 
+                    JOIN categories ON a_category = catID 
+                    JOIN rooms ON a_roomID = r_roomID 
+                    JOIN blocks ON blok = block_no";
+
+    if (isset($_POST["blocks"])){
+        $sql .= " AND blok LIKE '%".$_POST["blocks"]."%'";
+    }
+
+    if (isset($_POST["rooms"])){
+        $sql .= " AND r_roomID LIKE '%".$_POST["rooms"]."%'";
+    }
+
+    if (isset($_POST["category"])){
+        $sql .= " AND a_category LIKE '%".$_POST["category"]."%'";
+    }
+
+    $sql .= " GROUP BY LOWER(`a_nameBI`),  LOWER(`a_roomID`);";
+
+
+    $results = mysqli_query($conn, $sql); 
+
+    if (!$results)
+    {
+        echo "ERROR:  $conn->error";
+        header("refresh: 6; location: readUser.php");
+    } 
+    
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo $language['Create Asset']; ?></title>
+</head>
+<body>
+  <div class="container-fluid">
+
+    <div class="row align-items-start">
+      <div class="col-md-8 col-xl-8 mb-12"><h1 class="text m-0 font-weight-bold"><?php echo $language['Asset List']; ?></h1></div>
+
+      <div class="col-md-3 col-xl-3 mb-4">
+        <!-- <a href="create.php" class="btn btn-primary btn-lg"><?php echo $language['New Asset']; ?></a>&nbsp&nbsp -->
+        <button class="btn btn-success" onclick="hide()"><?php echo $language['Filter']; ?></button>
+      </div>
+    </div>
+
+    <script>
+        function hide() {
+            var x = document.getElementById("filter");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    <div class = "row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-body">
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                    <table class="table" id="dataTable">
+                        <thead>
+                          <tr>
+
+                            <th><?php echo $language['No']; ?></th>
+                            <th><?php echo $language['BI Name']; ?></th>
+                            <th><?php echo $language['BM Name']; ?></th>
+                            <th><?php echo $language['Category']; ?></th>
+                            <th><?php echo $language['Cost']; ?></th>
+                            <th><?php echo $language['Rooms']; ?></th>
+                            <th><?php echo $language['Amount']; ?></th>
+                            <th colspan="2"><?php echo $language['Action']; ?></th>
+                          </tr>
+
+                        <?php 
+                            $i=1;
+                          while ($row = mysqli_fetch_array($results)) { 
+                        ?>
+                          <tr>
+                            <td><?php echo $i; ?></td> 
+                            <td><?php echo $row["a_name".$_SESSION["language"].""]; ?></td>  
+                            <td><?php echo $row["a_name".$_SESSION["language"].""]; ?></td>  
+                            <td> 
+                              <?php 
+                                if($row["a_category"] == 1){
+                                  echo $language['ICT'];
+                      
+                                }else{
+                                  echo $language['Non-ICT']; 
+
+                                } 
+                              ?>
+                            </td> 
+
+                            <td><?php echo $row["cost"]; ?></td>  
+
+                            <td><?php echo $row["r_nameBI"]; ?></td>  
+
+                            <?php
+                              $datetime = strtotime($row['date_purchased']);
+                              $new_date = date('Y-m-d', $datetime);
+                            ?>
+
+
+                            <td><?php echo $row["amount"]; ?></td>  
+                            <td>
+                                <a href="roomasset.php?id=<?php echo $row["a_roomID"]; ?>" class="btn btn-primary"><?php echo $language["asset in this room"]; ?></a>
+                            </td>
+
+                          </tr>
+
+                        <?php $i++; } ?>   
+                                        
+                        </thead>
+                    </table> 
+                </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>     
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-xl-3 mb-2" id="filter" style="display: none;">
+          <div class="card shadow">
+            <div class="card-body">
+              <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+
+                  <form action="main.php" method="POST"> 
+                    <label for="blocks" class="form-label"><?php echo $language['Blocks']; ?></label>
+                    <select class="form-select" aria-label="Default select example" name="blocks" id="blocks">
+                        <option selected value=""><?php echo $language['Open this select menu']; ?></option>
+                        <?php
+                          $sql2 = "SELECT * FROM blocks";
+                          $result2 = mysqli_query($conn, $sql2);
+
+                          while($row2 = mysqli_fetch_array($result2)){
+                            if ($_POST['blocks'] == $row2['block_no']){
+                                  echo "<option selected value='".$row2['block_no']."'>".$row2["b_name".$_SESSION['language'].""]."</option>";
+                            }else{
+                                echo "<option value='".$row2['block_no']."'>".$row2["b_name".$_SESSION['language'].""]."</option>";
+                            }
+                          }
+                        ?>
+                    </select><br>
+
+                    <label for="rooms" class="form-label"><?php echo $language['Rooms']; ?></label>
+                    <select class="form-select" aria-label="Default select example" name="rooms" id="rooms">
+                        <option selected value=""><?php echo $language['Open this select menu']; ?></option>
+                        <?php
+                          $sql2 = "SELECT * FROM rooms WHERE blok = '".$_POST["blocks"]."'";
+                            $result2 = mysqli_query($conn, $sql2);
+
+                            while($row2 = mysqli_fetch_array($result2)){
+                                if ($_POST['rooms'] == $row2['r_roomID']){
+                                    echo "<option selected value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
+                                }else{
+                                    echo "<option value='".$row2['r_roomID']."'>".$row2["r_name".$_SESSION['language'].""]."</option>";
+                                }
+                            }
+                        ?>
+                    </select><br>
+
+                    <script type="text/javascript">
+                    document.getElementById('blocks').addEventListener('change', loadRooms);
+
+                    function loadRooms(){
+                        let block = document.getElementById('blocks').value;
+
+                        let xhr = new XMLHttpRequest();
+                        xhr.open('GET', `assetsBack/rooms.php?blocks=${block}`, true);
+                        
+                        xhr.onreadystatechange = function(){
+                            if (this.status === 200 && this.readyState === 4){
+                                let rooms = JSON.parse(this.responseText);
+
+                                let lang = "<?php echo $_SESSION["language"]; ?>";
+
+                                output = '';
+
+                                if(lang ==='BI'){
+                                    output+= `<option value="" selected>Open this select menu</option>`;
+                                    for (var i in rooms){
+                                        output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBI}</option>`;
+                                    }
+                                }else{
+                                    output+= `<option value="" selected>Tunjuk Menu</option>`;
+                                    for (var i in rooms){
+                                        output+= `<option value="${rooms[i].r_roomID}">${rooms[i].r_nameBM}</option>`;
+                                    }
+                                }
+                                
+                                document.getElementById('rooms').innerHTML = output;
+                            
+                            }else if(this.status == 404){
+                                console.log('Fail');
+                            }
+                        }
+                        xhr.send();
+                    }
+                    </script>
+
+                    <label for="category" class="form-label"><?php echo $language['Category']; ?></label>
+                    <select class="form-select" aria-label="Default select example" name="category">
+                    <option selected value=''><?php echo $language['Open this select menu']; ?></option>          
+                      <?php
+                            $values = [1, 2];
+                    
+                            $arr = [$language['ICT'], $language['Non-ICT']];
+
+                            foreach($values as $value){
+                                if ($_POST['category'] == $value){
+                                    echo "<option selected value='".$value."'>".$arr[$value-1]."</option>";
+                                }else{
+                                    echo "<option value='".$value."'>".$arr[$value-1]."</option>";
+                                }
+                            }
+                        ?>
+                    </select><br>
+
+                    <input type="hidden" name="block" value="<?php echo $_POST["block"]; ?>">
+                    
+                    <input type="submit" value="<?php echo $language['Apply']; ?>" class="btn btn-primary">
+                    <a href="" class="btn btn-warning"><?php echo $language['Cancel']; ?></a>
+                  </form><br>
+                </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+              </div>
+            </div>
+        </div>
+    </div>
+          
+  </div>
+
+</body>
+</html>
+<?php
+  include("../navbar/navbar2.php");
+?>
