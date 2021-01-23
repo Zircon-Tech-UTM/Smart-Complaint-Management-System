@@ -496,5 +496,11 @@ $language['Do you want to save the chnages?'] = 'Adakah anda pasti simpan peruba
 $language['Grade Position:'] = 'Gred Pangkat:';
 $language["asset in this room"] = "aset bilik ini";
 $language["File"] = "Fail";
+
+//23/1 Ham Jing Yi
+$language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.']  ='Maaf, hanya format JPG, JPEG, PNG & GIF yang dibenarkan.';
+$language['Please Choose A Block'] = 'Pilih blok.';
+$language['Choose a date'] = 'Pilih tarikh.';
+$language['Choose a rooms.'] = 'Pilih bilik.';
 ?>
 
