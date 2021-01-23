@@ -50,11 +50,11 @@
 <body>
 
     <div>&nbsp;
-       <a href="login.php?lang=BI" 
+       <a href="changepwd.php?lang=BI&id=<?php echo $row["u_userIC"]; ?>" 
        <?php if($lang == 'BI'){?>
             style="color: #ff9900;" 
        <?php } ?>>BI</a> |
-        <a href="login.php?lang=BM"
+        <a href="changepwd.php?lang=BM&id=<?php echo $row["u_userIC"]; ?>"
         <?php $lang; 
             if($lang == 'BM'){?> 
             style="color: #ff9900;"

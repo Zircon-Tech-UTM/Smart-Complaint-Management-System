@@ -112,7 +112,10 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2">
                                     <?php echo $row["name"];?>
-                                </span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
+
+                                    <?php $default = "assets/img/avatars/avatar5.png";?>
+                                    <?php $profile = "users/".$row["u_img_path"]; ?>
+                                </span><img class="border rounded-circle img-profile" src="<?php echo (isset($row["u_img_path"]))? $profile: $default; ?>">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="usersB/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
                                         <a class="dropdown-item" href="users/changepwd.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Change Password']; ?></a>

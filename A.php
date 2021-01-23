@@ -112,7 +112,10 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2">
                                     <?php echo $row["name"];?>
-                                </span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
+
+                                    <?php $default = "assets/img/avatars/avatar5.png";?>
+                                    <?php $profile = "users/".$row["u_img_path"]; ?>
+                                </span><img class="border rounded-circle img-profile" src="<?php echo (isset($row["u_img_path"]))? $profile: $default; ?>">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="users/updateUser.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
                                         <a class="dropdown-item" href="users/changepwd.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Change Password']; ?></a>
@@ -158,7 +161,7 @@
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"></div>
                                             <div class="row no-gutters align-items-center"></div>&nbsp;
-                                            <img src="assets/img/img_382262.png"  style=" width: 59px;height: 100px;padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif; text-align: center; color: rgb(0,0,0);"><strong><?php echo $language['USER MANAGEMENT']; ?></strong></span>
+                                            <img src="assets/img/img_382262.png"  style=" width: 100px; height: 104px; padding: -52px;margin: 5px;"><span class="text-center text-dark" style="width: -4px;font-size: 20px;font-family: Nunito, sans-serif; text-align: center; color: rgb(0,0,0);"><strong><?php echo $language['USER MANAGEMENT']; ?></strong></span>
                                         </div>
                                     </div>
                                 </a>

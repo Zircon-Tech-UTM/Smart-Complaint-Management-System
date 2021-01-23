@@ -42,6 +42,7 @@
 
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="../A.php"><i class="fas fa-home"></i><span><?php echo $language['Home']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../dashboard.php"><i class="fas fa-tachometer-alt"></i><span><?php echo $language['Dashboard']; ?></span></a><a class="nav-link" href="../complaints/readComplaint.php"><i class="fas fa-user-circle"></i><span><?php echo $language['Complaint Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../users/readUser.php"><i class="fas fa-user"></i><span><?php echo $language['User Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../assets/mainA.php"><i class="fas fa-table"></i><span><?php echo $language['Asset Management']; ?></span></a></li>
@@ -81,8 +82,10 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2">
                                     <?php echo $row1["name"];?>
-                                    
-                                </span><img class="border rounded-circle img-profile" src="../assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
+
+                                    <?php $default = "../assets/img/avatars/avatar5.png";?>
+                                    <?php $profile = "../users/".$row1["u_img_path"]; ?>
+                                </span><img class="border rounded-circle img-profile" src="<?php echo (isset($row1["u_img_path"]))? $profile: $default; ?>">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="../users/updateUser.php?id=<?php echo $row1["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
                                         <a class="dropdown-item" href="../users/changepwd.php?id=<?php echo $row1["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Change Password']; ?></a>

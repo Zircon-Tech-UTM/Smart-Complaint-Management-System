@@ -162,7 +162,7 @@
  </div>
 </div><br>
           <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Save']; ?>"/>
-          <input type="reset" name="clear" value="<?php echo $language['Clear']; ?>"class="btn btn-warning">
+          <input type="reset" name="Reset" value="<?php echo $language['Reset']; ?>"class="btn btn-warning">
           <a href="readUser.php" class="btn btn-danger float-right"><?php echo $language['Cancel']; ?></a>
 </div>     
           

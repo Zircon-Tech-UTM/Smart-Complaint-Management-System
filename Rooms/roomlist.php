@@ -27,13 +27,17 @@
 
     $row1 = mysqli_fetch_array($result1);
 
-    if (isset($_POST['blocks'])){
+    $parameter = "";
+
+    if (isset($_GET['blocks'])){
         $sqlr = "SELECT * FROM rooms
         JOIN blocks
         ON rooms.blok = blocks.block_no
         JOIN users
         ON PIC = u_userIC
-        WHERE blok LIKE '%".$_POST['blocks']."%'";
+        WHERE blok LIKE '%".$_GET['blocks']."%'";
+
+    $parameter.= "blocks=".$_GET['blocks'];
     }else{
         $sqlr = "SELECT * FROM rooms
         JOIN blocks
@@ -74,7 +78,7 @@
         </div>
         <br>
         <h3><?php echo $language['Filter'];?></h3>
-        <form action="" method="POST"> 
+        <form action="" method="GET"> 
         <label for="blocks" class="form-label"><?php echo $language['Blocks'];?></label>
         <div class = "row">
             <div class="col-md-5 col-lg-5 col-xl-3 mb-12">                
@@ -85,7 +89,7 @@
                             $result2 = mysqli_query($conn, $sql2);
 
                             while($row2 = mysqli_fetch_array($result2)){
-                                if ($_POST['blocks'] == $row2['block_no']){
+                                if ($_GET['blocks'] == $row2['block_no']){
                                     if ($_SESSION['language'] == 'BI'){
                                         echo "<option selected value='".$row2['block_no']."'>".$row2["b_nameBI"]."</option>";
                                     }else if ($_SESSION['language'] == 'BM'){
@@ -108,7 +112,7 @@
             </div>
             <div class="col-md-5 col-lg-5 col-xl-3 mb-12 d-flex justify-content-center">                         
                 <input type="submit" value="<?php echo $language['Apply'];?>" class="btn btn-primary">&nbsp      
-                <a href="" class="btn btn-warning"><?php echo $language['Cancel'];?></a>             
+                <a href="?" class="btn btn-warning"><?php echo $language['Cancel'];?></a>             
             </div>
         </div>
         </form><br>
@@ -129,32 +133,52 @@
                         </thead>
                         <tbody>
                             <?php
-                                while($rowr = mysqli_fetch_array($resultr))
-                                {
-                                    echo "<tr>";
-                                        
+                                if(isset($_GET["page"])){
+                                    $pageNum = $_GET["page"] - 1;
+                                }else{
+                                    $pageNum = 1 - 1;
+                                }
+
+
+                                $initItemNum = 5 * $pageNum + 1;
+                                $finalItemNum = 5* $pageNum + 5;
+
+                                $numOfRows = mysqli_num_rows($resultr);
+                                $numOfPages = ceil($numOfRows / 5);
+                                $counter = 0;
+                                $counter = 0;
+                                if ($numOfRows > 0) {
+
+                                    while($rowr = mysqli_fetch_array($resultr))
+                                    {
+                                        $counter++;
+                                        if($counter >= $initItemNum && $counter <= $finalItemNum){
+                                            echo "<tr>";
+                                                
                             ?>                                
-                                <td><?php echo $rowr['r_roomID']; ?></a></td>
+                                        <td><?php echo $rowr['r_roomID']; ?></a></td>
 
-                            <?php 
-                                        echo "<td><a href = 'roomdetail.php?id=".$rowr['r_roomID']."'>".$rowr['r_nameBI']."</a></td>";
-                                        echo "<td>".$rowr['r_nameBM']."</td>";
-                                        echo "<td>".$rowr['blok']."</td>";
+                                            <?php 
+                                                echo "<td><a href = 'roomdetail.php?id=".$rowr['r_roomID']."'>".$rowr['r_nameBI']."</a></td>";
+                                                echo "<td>".$rowr['r_nameBM']."</td>";
+                                                echo "<td>".$rowr['blok']."</td>";
 
-                                        echo "<td>";
-                                            echo "<a href = '../users/detailUser.php?id=".$rowr["u_userIC"]."'>".$rowr['name']."</a>&nbsp";
-                                        echo "</td>";
+                                                echo "<td>";
+                                                    echo "<a href = '../users/detailUser.php?id=".$rowr["u_userIC"]."'>".$rowr['name']."</a>&nbsp";
+                                                echo "</td>";
 
-                                        echo "<td>";
-                                            echo "<a href = 'roomassets.php?id=".$rowr["r_roomID"]."'>"."Link"."</a>&nbsp";
-                                        echo "</td>";
-                            ?>
-                                        <td>
-                                        <a href = 'roommodify.php?id=<?php echo $rowr['r_roomID'];?>' class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit'];?></a>              
-                                        <a href = "roomcancel.php?id=<?php echo $rowr['r_roomID']; ?>" class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;" onclick="return confirm('<?php echo $language['Are you sure to delete this room?']; ?>')"><strong>X</strong></a>
+                                                echo "<td>";
+                                                    echo "<a href = 'roomassets.php?id=".$rowr["r_roomID"]."'>"."Link"."</a>&nbsp";
+                                                echo "</td>";
+                                            ?>
+                                                <td>
+                                                <a href = 'roommodify.php?id=<?php echo $rowr['r_roomID'];?>' class="btn btn-warning btn-sm" type="button" style="color: rgb(6,6,6);font-size: 17px;"><?php echo $language['Edit'];?></a>              
+                                                <a href = "roomcancel.php?id=<?php echo $rowr['r_roomID']; ?>" class="btn btn-danger btn-sm" type="button" style="color: rgb(14,14,14);font-size: 17px;" onclick="return confirm('<?php echo $language['Are you sure to delete this room?']; ?>')"><strong>X</strong></a>
                             <?php                
-                                        echo "</td>";
-                                        echo "</tr>";                            
+                                                echo "</td>";
+                                                echo "</tr>";
+                                        }                            
+                                    }
                                 }
                             ?>     
                         </tbody>
@@ -162,6 +186,44 @@
                 </div>        
             </div>      
         </div>
+        <nav aria-label="Page navigation news">
+            <ul class="pagination justify-content-end flex-wrap">
+                <li class="page-item <?php if ($_GET['page'] == 1 || !isset($_GET['page'])) 
+                                                echo "disabled"; ?>">
+
+                    <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php if (isset($_GET['page'])){
+                                                                if ($_GET["page"] == 1)
+                                                                    echo  $_GET["page"];
+                                                                else 
+                                                                    echo  $_GET["page"] - 1;
+                                                                }else{
+                                                                    echo "1";
+                                                                }
+                                                    ?>">Previous</a></li>
+                                <?php
+                                    for ($i = 1 ; $i <= $numOfPages ; $i++){ 
+                                ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
+                                <?php
+                                    }
+                                ?>
+                                <li class="page-item <?php if($_GET['page'] == $numOfPages)
+                                                        echo "disabled"; ?>">
+                                    <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php if (isset($_GET['page'])){
+                                                                                if($_GET["page"] + 1 > $numOfPages)
+                                                                                    echo  $_GET["page"];
+                                                                                else 
+                                                                                    echo  $_GET["page"]+1;
+                                                                            }else{
+                                                                                echo "2";
+                                                                            }
+                                                                            
+                                                                    ?>">Next</a>
+                                </li>
+            </ul>
+        </nav>
     <div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 <?php include ('..\navbar\navbar2.php');?>

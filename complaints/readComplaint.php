@@ -13,28 +13,35 @@
 
     $sql = "SELECT * FROM complaints JOIN users ON c_userIC = u_userIC JOIN rooms ON c_roomID=r_roomID JOIN status ON c_status = s_statusID JOIN assets ON a_assetID = c_assetID JOIN blocks on blok=block_no JOIN categories ON a_category = catID";
 
-    if (isset($_POST["status"])){
-        $sql .= " WHERE c_status LIKE '%".$_POST["status"]."%'";
+    $parameter = "";
+
+    if (isset($_GET["status"])){
+        $sql .= " WHERE c_status LIKE '%".$_GET["status"]."%'";
+        $parameter.= "status=".$_GET['status'];
     }
 
-    if (isset($_POST["blocks"])){
-        $sql .= " AND blok LIKE '%".$_POST["blocks"]."%'";
+    if (isset($_GET["blocks"])){
+        $sql .= " AND blok LIKE '%".$_GET["blocks"]."%'";
+        $parameter.= "&blocks=".$_GET['blocks'];
     }
 
-    if (isset($_POST["rooms"])){
-        $sql .= " AND r_roomID LIKE '%".$_POST["rooms"]."%'";
+    if (isset($_GET["rooms"])){
+        $sql .= " AND r_roomID LIKE '%".$_GET["rooms"]."%'";
+        $parameter.= "&rooms=".$_GET['rooms'];
     }
 
-    if (isset($_POST["category"])){
-        $sql .= " AND a_category LIKE '%".$_POST["category"]."%'";
+    if (isset($_GET["category"])){
+        $sql .= " AND a_category LIKE '%".$_GET["category"]."%'";
+        $parameter.= "&category=".$_GET['category'];
     }
 
     
 
-    if (isset($_POST["name"])){
-        $sql .= " AND (name LIKE '%".$_POST["name"]."%' or postBI LIKE '%".$_POST["name"]."%' or postBM LIKE '%".$_POST["name"]."%' or a_nameBI LIKE '%".$_POST["name"]."%' or a_nameBM LIKE '%".$_POST["name"]."%' or cat_nameBM LIKE '%".$_POST["name"]."%' or cat_nameBI LIKE '%".$_POST["name"]."%' or r_nameBM LIKE '%".$_POST["name"]."%' or r_nameBI LIKE '%".$_POST["name"]."%')";
+    if (isset($_GET["name"])){
+        $sql .= " AND (name LIKE '%".$_GET["name"]."%' or postBI LIKE '%".$_GET["name"]."%' or postBM LIKE '%".$_GET["name"]."%' or a_nameBI LIKE '%".$_GET["name"]."%' or a_nameBM LIKE '%".$_GET["name"]."%' or cat_nameBM LIKE '%".$_GET["name"]."%' or cat_nameBI LIKE '%".$_GET["name"]."%' or r_nameBM LIKE '%".$_GET["name"]."%' or r_nameBI LIKE '%".$_GET["name"]."%')";
+        $parameter.= "&name=".$_GET['name'];
     }else{
-        $_POST["name"] = "";
+        $_GET["name"] = "";
     }
 
     $sql .= " ORDER BY compID ASC;";
@@ -90,9 +97,9 @@
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 
-                            <form action="readComplaint.php" method="POST">
+                            <form action="readComplaint.php" method="GET">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="<?php echo $language['type here...']; ?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_POST["name"]; ?>">
+                                    <input type="text" class="form-control" placeholder="<?php echo $language['type here...']; ?>" aria-label="Recipient's username" aria-describedby="button-addon2" name = "name" value="<?php echo $_GET["name"]; ?>">
                                     <button type="submit" class="btn btn-outline-dark" type="button" id="button-addon2" style="font-size: 13px;"><?php echo $language['Search']; ?></button>
                                 </div>
                             </form>
@@ -112,42 +119,58 @@
 
                                     </tr>
                                     <?php
-
-                                        while($row = mysqli_fetch_array($result)){
-                                            $pDate = explode(" ", $row["proposedDate"]);
-                                            $sDate = explode(" ", $row["setledDate"]);
-                                            
-                                            echo"<tr>";
-                                            echo "<th scope='row'>".$row["compID"]."</th>";
-
-                                            echo "<td scope='row'><a href='../assets/assetDetail.php?id=".$row["a_assetID"]."'>".$row["a_name".$_SESSION["language"].""]."</a></td>";
-
-                                            echo "<td scope='row'><a href='../Rooms/roomdetail.php?id=".$row["c_roomID"]."'>".$row["r_name".$_SESSION["language"].""]."</a></td>";
-
-                                            echo "<td scope='row'><a href='../users/detailUser.php?id=".$row["c_userIC"]."'>".$row["name"]." (".$row["post".$_SESSION["language"].""].")</a></td>";
-
-                                            echo "<td>".$pDate[0]."</td>";
-
-                                            echo (!empty($sDate[0]))? "<td>".$sDate[0]."</td>": "<td>-</td>";
-
-                                            echo "<td>".$row["s_name".$_SESSION["language"].""]."</td>";
-
-                                            $sql4 = "SELECT * FROM users WHERE u_userIC = '".$row["followedBy"]."'";
-                                            $result4 = mysqli_query($conn, $sql4);
-                                            $row4 = mysqli_fetch_array($result4);
-
-                                            echo (!empty($row4["name"]))? "<td><a href='../users/detailUser.php?id=".$row["followedBy"]."'>".$row4["name"]."</a></td>" : "<td>-</td>";
-                                        ?>
-                                        <td>
-                                            <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-info btn-sm"><?php echo $language['Detail']; ?></a>
-                                            <a href="modifyComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
-                                            <a href="deleteComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-danger btn-sm"  style="color: rgb(14,14,14);" onclick="return confirm('<?php echo $language['Are you sure to delete this complaint?']; ?>')" ><strong>X</strong></a>
-                                        </td>
-                                    <?php
-                                            echo"</tr>";
+                                        if(isset($_GET["page"])){
+                                            $pageNum = $_GET["page"] - 1;
+                                        }else{
+                                            $pageNum = 1 - 1;
                                         }
 
-                                        
+
+                                        $initItemNum = 5 * $pageNum + 1;
+                                        $finalItemNum = 5* $pageNum + 5;
+
+                                        $numOfRows = mysqli_num_rows($result);
+                                        $numOfPages = ceil($numOfRows / 5);
+                                        $counter = 0;
+
+                                        if ($numOfRows > 0) {
+                                            while($row = mysqli_fetch_array($result)){
+                                                $counter++;
+                                                if($counter >= $initItemNum && $counter <= $finalItemNum){
+                                                    $pDate = explode(" ", $row["proposedDate"]);
+                                                    $sDate = explode(" ", $row["setledDate"]);
+                                                    
+                                                    echo"<tr>";
+                                                    echo "<th scope='row'>".$row["compID"]."</th>";
+
+                                                    echo "<td scope='row'><a href='../assets/assetDetail.php?id=".$row["a_assetID"]."'>".$row["a_name".$_SESSION["language"].""]."</a></td>";
+
+                                                    echo "<td scope='row'><a href='../Rooms/roomdetail.php?id=".$row["c_roomID"]."'>".$row["r_name".$_SESSION["language"].""]."</a></td>";
+
+                                                    echo "<td scope='row'><a href='../users/detailUser.php?id=".$row["c_userIC"]."'>".$row["name"]." (".$row["post".$_SESSION["language"].""].")</a></td>";
+
+                                                    echo "<td>".$pDate[0]."</td>";
+
+                                                    echo (!empty($sDate[0]))? "<td>".$sDate[0]."</td>": "<td>-</td>";
+
+                                                    echo "<td>".$row["s_name".$_SESSION["language"].""]."</td>";
+
+                                                    $sql4 = "SELECT * FROM users WHERE u_userIC = '".$row["followedBy"]."'";
+                                                    $result4 = mysqli_query($conn, $sql4);
+                                                    $row4 = mysqli_fetch_array($result4);
+
+                                                    echo (!empty($row4["name"]))? "<td><a href='../users/detailUser.php?id=".$row["followedBy"]."'>".$row4["name"]."</a></td>" : "<td>-</td>";
+                                        ?>
+                                                    <td>
+                                                        <a href="detailComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-info btn-sm"><?php echo $language['Detail']; ?></a>
+                                                        <a href="modifyComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-warning btn-sm"><?php echo $language['Edit']; ?></a>
+                                                        <a href="deleteComplaint.php?id=<?php echo $row["compID"]; ?>" class="btn btn-danger btn-sm"  style="color: rgb(14,14,14);" onclick="return confirm('<?php echo $language['Are you sure to delete this complaint?']; ?>')" ><strong>X</strong></a>
+                                                    </td>
+                                    <?php
+                                            echo"</tr>";
+                                            }
+                                        }
+                                    }
                                     ?>
                                 </thead>
                             </table>
@@ -155,46 +178,46 @@
                         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
                     </div>
                 </div>
-                
-                <?php
+                <!-- Pager -->
+        <nav aria-label="Page navigation news">
+            <ul class="pagination justify-content-end flex-wrap">
+                <li class="page-item <?php if ($_GET['page'] == 1 || !isset($_GET['page'])) 
+                                                echo "disabled"; ?>">
 
-                    if (isset($_GET['pageno'])) {
-                        $pageno = $_GET['pageno'];
-                    } else {
-                        $pageno = 1;
-                    }
-                    $no_of_records_per_page = 10;
-                    $offset = ($pageno-1) * $no_of_records_per_page;
+                    <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php if (isset($_GET['page'])){
+                                                                if ($_GET["page"] == 1)
+                                                                    echo  $_GET["page"];
+                                                                else 
+                                                                    echo  $_GET["page"] - 1;
+                                                                }else{
+                                                                    echo "1";
+                                                                }
+                                                    ?>">Previous</a></li>
+                                <?php
+                                    for ($i = 1 ; $i <= $numOfPages ; $i++){ 
+                                ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
+                                <?php
+                                    }
+                                ?>
+                                <li class="page-item <?php if($_GET['page'] == $numOfPages)
+                                                        echo "disabled"; ?>">
+                                    <a class="page-link" href="<?php echo (!empty($parameter))? "?".$parameter."&" : '?'; ?>page=<?php if (isset($_GET['page'])){
+                                                                                if($_GET["page"] + 1 > $numOfPages)
+                                                                                    echo  $_GET["page"];
+                                                                                else 
+                                                                                    echo  $_GET["page"]+1;
+                                                                            }else{
+                                                                                echo "2";
+                                                                            }
+                                                                            
+                                                                    ?>">Next</a>
+                                </li>
+            </ul>
+        </nav>
 
-                    $conn=mysqli_connect("localhost","my_user","my_password","my_db");
-                    // Check connection
-                    if (mysqli_connect_errno()){
-                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                        die();
-                    }
-
-                    $total_pages_sql = "SELECT COUNT(*) FROM table";
-                    $result = mysqli_query($conn,$total_pages_sql);
-                    $total_rows = mysqli_fetch_array($result)[0];
-                    $total_pages = ceil($total_rows / $no_of_records_per_page);
-
-                    $sql = "SELECT * FROM table LIMIT $offset, $no_of_records_per_page";
-                    $res_data = mysqli_query($conn,$sql);
-                    while($row = mysqli_fetch_array($res_data)){
-                        //here goes the data
-                    }
-                    mysqli_close($conn);
-                    ?>
-                    <ul class="pagination">
-                    <li><a href="?pageno=1">First</a></li>
-                    <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
-                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
-                    </li>
-                    <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
-                    </li>
-                    <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
-                    </ul>
             </div>
 
             <div class="col-md-2 col-xl-3 mb-2" id="filter" style="display: none;">
@@ -202,7 +225,7 @@
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 
-                                <form action="readComplaint.php" method="POST"> 
+                                <form action="readComplaint.php" method="GET"> 
 
                                     <label for="status" class="form-label"><?php echo $language['Status']; ?></label>
                                     <select class="form-select" aria-label="Default select example" name="status">
@@ -212,7 +235,7 @@
                                             $result2 = mysqli_query($conn, $sql2);
 
                                             while($row2 = mysqli_fetch_array($result2)){
-                                                if ($_POST['status'] == $row2['s_statusID']){
+                                                if ($_GET['status'] == $row2['s_statusID']){
                                                     
 
                                                     if ($_SESSION['language'] == 'BI'){
@@ -247,7 +270,7 @@
                                             $result3 = mysqli_query($conn, $sql3);
 
                                             while($row3 = mysqli_fetch_array($result3)){
-                                                if ($_POST['blocks'] == $row3['block_no']){
+                                                if ($_GET['blocks'] == $row3['block_no']){
 
                                                     if ($_SESSION['language'] == 'BI'){
                                                         echo "<option selected value='".$row3['block_no']."'>".$row3["b_nameBI"]."</option>";
@@ -277,12 +300,12 @@
                                         <select class="form-select" aria-label="Default select example" id="rooms" name="rooms">
                                             <option value="" selected><?php echo $language['Choose A Block']; ?></option>
                                             <?php
-                                            if(isset($_POST["rooms"])){
-                                                $sql3 = "SELECT * FROM rooms WHERE blok = '".$_POST['blocks']."';";
+                                            if(isset($_GET["rooms"])){
+                                                $sql3 = "SELECT * FROM rooms WHERE blok = '".$_GET['blocks']."';";
                                                 $result3 = mysqli_query($conn, $sql3);
                                                     while ($row3 = mysqli_fetch_array($result3)){
                                                         
-                                                        if ($row3['r_roomID'] == $_POST['rooms']){
+                                                        if ($row3['r_roomID'] == $_GET['rooms']){
                                                 ?>
                                                             <option selected value="<?php echo $row3['r_roomID']; ?>">
                                                             
@@ -376,19 +399,19 @@
                                             while($row2 = mysqli_fetch_array($result2)){
 
                                                 if ($_SESSION['language'] == 'BI'){
-                                                    if ($_POST['category'] == $row2['catID']){
+                                                    if ($_GET['category'] == $row2['catID']){
                                                         echo "<option selected value='".$row2['catID']."'>".$row2["cat_nameBI"]."</option>";
                                                     }else{
                                                         echo "<option value='".$row2['catID']."'>".$row2["cat_nameBI"]."</option>";
                                                     }
                                                 }else if ($_SESSION['language'] == 'BM'){
-                                                    if ($_POST['category'] == $row2['catID']){
+                                                    if ($_GET['category'] == $row2['catID']){
                                                         echo "<option selected value='".$row2['catID']."'>".$row2["cat_nameBM"]."</option>";
                                                     }else{
                                                         echo "<option value='".$row2['catID']."'>".$row2["cat_nameBM"]."</option>";
                                                     }
                                                 }else{
-                                                    if ($_POST['category'] == $row2['catID']){
+                                                    if ($_GET['category'] == $row2['catID']){
                                                         echo "<option selected value='".$row2['catID']."'>".$row2["cat_nameBM"]."</option>";
                                                     }else{
                                                         echo "<option value='".$row2['catID']."'>".$row2["cat_nameBM"]."</option>";

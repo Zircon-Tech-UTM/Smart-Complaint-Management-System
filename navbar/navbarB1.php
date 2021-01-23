@@ -42,6 +42,7 @@
 
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="../B.php"><i class="fas fa-home"></i><span><?php echo $language['Home']; ?></span></a></li>
                     <li class="nav-item"></a><a class="nav-link" href="../complaintsB/readComplaint.php"><i class="fas fa-user-circle"></i><span><?php echo $language['Complaint Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../assets/mainB.php"><i class="fa fa-files-o"></i><span><?php echo $language['Asset Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../pdfprint/printmenu.php"><i class="fa fa-files-o"></i><span><?php echo $language['Download and Print']; ?></span></a></li>
@@ -79,7 +80,9 @@
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2">
                                     <?php echo $row1["name"];?>
                                     
-                                </span><img class="border rounded-circle img-profile" src="../assets/img/avatars/avatar5.png">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
+                                    <?php $default = "../assets/img/avatars/avatar5.png";?>
+                                    <?php $profile = "../users/".$row1["u_img_path"]; ?>
+                                </span><img class="border rounded-circle img-profile" src="<?php echo (isset($row1["u_img_path"]))? $profile: $default; ?>">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="../profile/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
                                         <a class="dropdown-item" href="../users/changepwd.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Change Password']; ?></a>

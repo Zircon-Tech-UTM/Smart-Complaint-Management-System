@@ -239,4 +239,15 @@
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <br>
+    <?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+    ?>
 <?php include ('..\navbar\navbar2.php');?>

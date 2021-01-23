@@ -184,6 +184,50 @@
                                 </div>
                             </div>
                             <br>
+
+                            <div class ="row">
+                                <div class="col-md-5 col-xl-5 mb-12">
+                                    <label for="PIC2"><strong><?php echo $language['PIC Of Room'];?> 2</strong></label>
+                                    <select name='PIC2' class='form-control <?php echo (!empty($PIC2Err)) ? 'is-invalid' : ''; ?>' id='PIC2' value="<?php echo $r_PIC2; ?>">
+                                    <option selected disabled>PIC's name</option>
+                                    <?php 
+                                        $sql = "SELECT * FROM users 
+                                                LEFT OUTER JOIN rooms 
+                                                ON (users.u_userIC = rooms.PIC) 
+                                                WHERE userType = '2' 
+                                                AND (rooms.PIC IS NULL)";
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                                echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                        }
+                                    ?>
+                                    </select>
+                                    <span class="help-block"><?php echo $r_PIC2Err; ?></span>
+                                </div>
+
+                                <div class ="col-md-1 col-xl-1 mb-1"><br></div>
+                                <div class="col-md-5 col-xl-5 mb-12">
+                                <label for="PIC3"><strong><?php echo $language['PIC Of Room'];?> 3</strong></label>
+                                    <select name='PIC3' class='form-control <?php echo (!empty($PIC3Err)) ? 'is-invalid' : ''; ?>' id='PIC3' value="<?php echo $r_PIC3; ?>">
+                                    <option selected disabled>PIC's name</option>
+                                    <?php 
+                                        $sql = "SELECT * FROM users 
+                                                LEFT OUTER JOIN rooms 
+                                                ON (users.u_userIC = rooms.PIC) 
+                                                WHERE userType = '2' 
+                                                AND (rooms.PIC IS NULL)";
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                                echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                        }
+                                    ?>
+                                    </select>
+                                    <span class="help-block"><?php echo $r_PIC3Err; ?></span>
+                                </div>
+                            </div>
+                            <br>
                             <script>
                                 function readURL(input) {
                                     if (input.files && input.files[0]) {
@@ -211,4 +255,15 @@
         </form>
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    <?php
+        if (!empty($sqlErr)){
+    ?>
+        <script>
+            let error = "<?php echo $sqlErr; ?>";
+            alert(error);
+        </script>
+    <?php
+    
+        }
+    ?>
 <?php include ('..\navbar\navbar2.php');?>

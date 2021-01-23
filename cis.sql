@@ -205,9 +205,9 @@ CREATE TABLE `pcomplaints` (
 
 CREATE TABLE `rooms` (
   `r_roomID` varchar(10) NOT NULL,
-  `PIC` varchar(12) DEFAULT NULL,
-  `PIC2` varchar(12) DEFAULT NULL,
-  `PIC3` varchar(12) DEFAULT NULL,
+  `PIC` varchar(12) DEFAULT NULL UNIQUE,
+  `PIC2` varchar(12) DEFAULT NULL UNIQUE,
+  `PIC3` varchar(12) DEFAULT NULL UNIQUE,
   `r_nameBI` varchar(50) NOT NULL,
   `r_nameBM` varchar(50) NOT NULL,
   `blok` varchar(2) DEFAULT NULL,

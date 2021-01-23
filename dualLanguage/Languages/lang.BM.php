@@ -494,5 +494,7 @@ $language['Update'] = 'Kemaskini';
 $language['Update Complaint Status'] = 'KEMASKINI STATUS ADUAN';
 $language['Do you want to save the chnages?'] = 'Adakah anda pasti simpan perubahan ini?';
 $language['Grade Position:'] = 'Gred Pangkat:';
+$language["asset in this room"] = "aset bilik ini";
+$language["File"] = "Fail";
 ?>
 

@@ -47,6 +47,9 @@ u<?php
                 $_SESSION['language'] ="BI";
                 $_SESSION['userType'] = $row['userType'];
 
+                //filter
+                $_SESSION['position'] = "";
+
                 if($row['userType']=='1') //Admin
                 {
                   header("location: ../A.php");

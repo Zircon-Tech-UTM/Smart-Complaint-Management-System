@@ -22,10 +22,6 @@
         {
             $r_roomIDErr = "Room ID is required";
         } 
-        elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["roomID"])) 
-        {
-            $r_roomIDErr = "Only letters, number and white space are allowed";
-        }
         else
         {
             $r_roomID = trim($_POST["roomID"]);
@@ -132,12 +128,13 @@
             if($result)
             {
                 unlink($_SESSION["remove"]);
-                move_uploaded_file($tmp_dir, $upload_dir.$pic);
+                if($imgExt)
+                    move_uploaded_file($tmp_dir, $upload_dir.$pic);
                 header ("Location: roomlist.php");
             }
             else
             {
-                echo $conn->error;
+                $sqlErr = $conn->error;
             }
             mysqli_close($conn);
         }

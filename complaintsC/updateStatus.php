@@ -15,7 +15,7 @@
         $id = $_GET['id'];
     }
 
-    include("../navbar/navbarC.php");
+    
     require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 
     $sql = "SELECT * FROM complaints, rooms, blocks, assets, status, categories 
@@ -35,6 +35,9 @@
 
     $row = mysqli_fetch_array($result);
 
+    if (isset($row["action_path"]))
+        $_SESSION["remove"] = $row["action_path"];
+
     $pDate = explode(" ", $row["proposedDate"]);
     $sDate = explode(" ", $row["setledDate"]);
     
@@ -43,6 +46,7 @@
     $result4 = mysqli_query($conn, $sql4);
 
     include("complaintsBack\updatePro.php");
+    include("../navbar/navbarC.php");
 ?>
 
 <!DOCTYPE html>
@@ -185,7 +189,7 @@
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
 
-                        <form action="updateStatus.php?id=<?php echo $_GET["id"]; ?>" method="POST">
+                        <form action="updateStatus.php?id=<?php echo $_GET["id"]; ?>" enctype="multipart/form-data" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['compID']; ?>">
 
                             <input type="hidden" name="u_userIC" id="complainantName" class="form-control form-control-lg" value="<?php echo $row['followedBy']; ?>">
@@ -230,6 +234,36 @@
                                 <input type="text" name="action" id="actionDetail" class="form-control form-control-lg <?php echo (!empty($actionErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Action'];?>" value="<?php echo isset($row['action_desc'])? $row['action_desc']: ""; ?>">
                                 <span class="help-block"><?php echo $actionErr;?></span>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label form-label"><strong><?php echo $language['File']; ?></strong></label>
+                                <input class="form-control" type="file" name="image" onchange="readURL(this);" />
+                                <img id="blah" src="#" alt="<?php echo $language["File"]; ?>" />
+                                <?php 
+                                    $a = $row["action_path"];
+
+                                    if (strpos($a, 'pdf') !== false) {
+                                        echo "<a href='".$row['action_path']."' target='_blank' >'".$language["File"]."'</a>";
+                                    }
+                                ?>
+                                <span class="help-block"><?php echo $errMSG;?></span>
+                            </div>
+                            <script>
+                                function readURL(input) {
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e) {
+                                            $('#blah')
+                                                .attr('src', e.target.result)
+                                                .width(150)
+                                                .height(200);
+                                        };
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+                            </script>
 
                             <input type="submit" class="btn btn-primary" onclick="return confirm('<?php echo $language['Do you want to save the chnages?']; ?>')" value="<?php echo $language['Submit'];?>">
                             <input type="reset" class="btn btn-warning" value="<?php echo $language['Reset'];?>">

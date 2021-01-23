@@ -164,7 +164,7 @@ $language['Pending Complaints'] = 'PENDING COMPLAINTS';
 $language['View Accepted Complaints'] = 'View Accepted Complaints';
 $language['search by proposer or follower name'] = 'search by proposer or follower name';
 $language['Accepted Complaints List'] = 'ACCEPTED COMPLAINT LIST';
-$language['All Complaints'] = 'View All Comaplints';
+$language['All Complaints'] = 'View All Complaints';
 //landing  
 
 $language['Landing Page'] = 'Landing Page';
@@ -484,6 +484,8 @@ $language['Update'] = 'Update';
 $language['Update Complaint Status'] = 'UPDATE COMPLAINT STATUS';
 $language['Do you want to save the chnages?'] = 'Do you want to save the chnages?';
 $language['Grade Position:'] = 'Grade Position:';
+$language["asset in this room"] = "asset in this room";
+$language["File"] = "File";
 
 //dashboard
 $language['MANAGEMENT'] = 'MANAGEMENT';

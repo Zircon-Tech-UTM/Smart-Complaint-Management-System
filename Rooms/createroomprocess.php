@@ -23,10 +23,6 @@
         {
             $r_roomIDErr = "Room ID is required";
         } 
-        elseif (!preg_match("/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/",$_POST["roomID"])) 
-        {
-            $r_roomIDErr = "Only letters, number and white space are allowed";
-        }
         else
         {
             $r_roomID = trim($_POST["roomID"]);
@@ -111,14 +107,20 @@
             //insert into database
             $path = $upload_dir.$pic;
 
-            $sql = "INSERT INTO rooms(r_roomID, PIC, r_nameBI, r_nameBM, blok, r_img_path)
-                    VALUES ('$r_roomID', '$r_PIC', '$r_nameBI', '$r_nameBM', '$r_block', '$path')";
+            if ($imgExt== ""){
+                $sql = "INSERT INTO rooms(r_roomID, PIC, r_nameBI, r_nameBM, blok)
+                VALUES ('$r_roomID', '$r_PIC', '$r_nameBI', '$r_nameBM', '$r_block')";
+            }else{
+                $sql = "INSERT INTO rooms(r_roomID, PIC, r_nameBI, r_nameBM, blok, r_img_path)
+                VALUES ('$r_roomID', '$r_PIC', '$r_nameBI', '$r_nameBM', '$r_block', '$path')";
+            }
 
             $result = mysqli_query($conn, $sql);
 
             if($result)
             {
-                move_uploaded_file($tmp_dir, $upload_dir.$pic);
+                if($imgExt)
+                    move_uploaded_file($tmp_dir, $upload_dir.$pic);
                 header ("Location: roomlist.php");
             }
             else
@@ -129,8 +131,4 @@
         }
     
     }
-    // if(isset($errMSG))
-    //     exit();
 ?>
-
-<!-- Direct user to page that displaylist of rooms-->

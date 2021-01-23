@@ -42,6 +42,7 @@
 
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="../C.php"><i class="fas fa-home"></i><span><?php echo $language['Home']; ?></span></a></li>
                     <li class="nav-item"></a><a class="nav-link" href="../complaintsC/allComplaints.php"><i class="fas fa-user-circle"></i><span><?php echo $language['Complaint Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../assets/mainC.php"><i class="fa fa-files-o"></i><span><?php echo $language['Asset Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="../pdfprint/printmenu.php"><i class="fa fa-files-o"></i><span><?php echo $language['Download and Print']; ?></span></a></li>
