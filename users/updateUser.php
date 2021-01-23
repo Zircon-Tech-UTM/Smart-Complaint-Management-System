@@ -23,6 +23,10 @@
 
         $row = mysqli_fetch_array($result);
 
+        if (isset($row["u_img_path"]))
+          $_SESSION["remove"] = $row["u_img_path"];
+      
+
     require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     include("UsersBack/updateUserPro.php");
     include("../navbar/navbar1.php");
@@ -161,7 +165,7 @@
             </div>
  </div>
 </div><br>
-          <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Save']; ?>"/>
+          <input type="submit" text-align:center name="submit" onclick="return confirm('<?php echo $language['Do you want to save the changes?'] ?>')" class="btn btn-primary" value="<?php echo $language['Save'];?>"/>
           <input type="reset" name="Reset" value="<?php echo $language['Reset']; ?>"class="btn btn-warning">
           <a href="readUser.php" class="btn btn-danger float-right"><?php echo $language['Cancel']; ?></a>
 </div>     

@@ -105,8 +105,8 @@
                                     while($row = mysqli_fetch_array($result))
                                     {
                                         echo "<tr>";
-                                            echo "<td>".$row['a_assetID']."</td>";
-                                            echo "<td><a href='../assets/assetDetail.php?id=".$row['a_assetID']."'>".$row['a_nameBI']."</a></td>";
+                                            echo "<td><a href='../assets/assetDetail.php?id=".$row['a_assetID']."'>".$row['a_assetID']."</a></td>";
+                                            echo "<td>".$row['a_nameBI']."</td>";
                                             echo "<td>".$row['a_nameBM']."</td>";
 
                                             if ($row['a_category'] == '1'){

@@ -112,31 +112,20 @@
               <div class="row">
                 <div class="col-md-5 col-xl-5 mb-12">
                   <label for="position" class="form-label"><strong><?php echo $language['Position Assigned:']; ?></strong></label>
-                  <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" aria-label="form-select example" value="<?php echo $positionBI; ?>">
+                  <select name="position" id="position" class="form-control <?php echo (!empty($positionBIErr)) ? 'is-invalid' : ''; ?>" aria-label="form-select example">
 
                     <?php 
-                    if($positionBI)
-                    {
-
-                        $temps = [$language['Admin'], $language['PIC'], $language['Assistant Computer Technician'], $language['Assistant Engineer']];
+                        $temps = [$language['Admin'], $language['PIC Of Room'], $language['Assistant Computer Technician'], $language['Assistant Engineer']];
                         foreach($temps as $temp){
                             if ($positionBI == $temp){
                                 echo "<option value='$temp' selected>$temp</option> ";
                             }
+                            else
+                            {
+                                echo "<option value='$temp'>$temp</option> ";
+                            }
                         }
-                      
-                    }
-                    else
-                    {
                       ?>
-                      <option value=""selected><?php echo $language['Choose a position']; ?></option>
-                      <option value="<?php echo $language['Admin']; ?>"><?php echo $language['Admin']; ?></option>
-                      <option value="<?php echo $language['PIC Of Room']; ?>"><?php echo $language['PIC Of Room']; ?></option> 
-                      <option value="<?php echo $language['Assistant Computer Technician']; ?>"><?php echo $language['Assistant Computer Technician']; ?></option> 
-                      <option value="<?php echo $language['Assistant Engineer']; ?>"><?php echo $language['Assistant Engineer']; ?></option>
-                    <?php } 
-                    ?>
-                    
                   </select>
                   <span class="help-block"><?php echo $positionBIErr;?></span><br>
               </div>
@@ -144,14 +133,22 @@
                 <div class ="col-md-1 col-xl-1 mb-1"></div>
                   <div class="col-md-5 col-xl-5 mb-12">
                   <label for="grades"><strong><?php echo $language['Grade:']; ?></strong></label>
-                        <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'value="<?php echo $grades; ?>">;
+                        <select name ='grades'  class="form-control <?php echo (!empty($gradesErr)) ? 'is-invalid' : ''; ?> " aria-label="form-select example" id='grades'>;
                         <option value="" selected><?php echo $language['Choose a grade']; ?></option>;
                     <?php 
                         $sql="SELECT * from grades";
                         $result=mysqli_query($conn, $sql);
                         while ($row=mysqli_fetch_array($result))
                         {
-                          echo"<option value='".$row['g_gradeID']."'>".$row['g_gradeID']."</option>";
+                        
+                          if($grades == $row['g_gradeID'])
+                          {
+                              echo"<option selected='selected' value='".$row['g_gradeID']."'>".$row['g_gradeID']."</option>";
+                          }
+                          else
+                          {
+                              echo"<option value='".$row['g_gradeID']."'>".$row['g_gradeID']."</option>";
+                          }
                         }
 
                     ?>

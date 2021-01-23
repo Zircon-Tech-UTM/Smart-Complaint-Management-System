@@ -1,4 +1,4 @@
-u<?php
+<?php
     require_once("..\dbconfig.php");
     if(!session_id())//if session_id is not found
     {
@@ -75,26 +75,6 @@ u<?php
                                                     }?>
                                             </td>
                                         </tr>
-
-                                        <?php if ($row['postBI']=="PIC Of Room"||$row['postBI']=="PIC"||$row['postBM']=="PIC Makmal") { ?>
-                                            <tr>
-                                            <td><strong><?php echo $language['Room Assigned:']; ?></strong></td>
-                                            <td><?php if ($_SESSION['language'] == 'BI'){
-                                                       echo $row1['r_nameBI'];
-                                                       echo ", Block ";
-                                                       echo $row1['blok'];
-                                                    }else if ($_SESSION['language'] == 'BM'){
-                                                        echo $row1['r_nameBM'];
-                                                        echo ", Blok ";
-                                                        echo $row1['blok'];
-                                                    }else{
-                                                        echo $row1['r_nameBM'];
-                                                        echo ", Blok ";
-                                                        echo $row1['blok'];
-                                                    }?>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
                                         <tr>
                                             <td><strong><?php echo $language['Registered Date:']; ?></strong></td>
                                             <td><?php echo $row["dateRegistered"];?></td>
@@ -140,7 +120,7 @@ u<?php
                         </div>
                     </div>
                     <a href="updateUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-warning"><?php echo $language['Edit']; ?></a>
-                    <a href="deleteUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-danger" onclick="return confirm('<?php echo  $language['Are you sure to delete this account?']; ?>')" ><?php echo $language['Delete']; ?></a>
+                    <a href="deleteUser.php?id=<?php echo $row["u_userIC"];?>" class="btn btn-danger" onclick="return confirm('<?php echo  $language['Are you sure you want to delete this account?']; ?>')" ><?php echo $language['Delete']; ?></a>
                     <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back']; ?></a>
                 </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

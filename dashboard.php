@@ -162,6 +162,7 @@
             border-left: none;
         }
     </style>
+    <link rel="icon" href="img/favicon.png" type="image/gif" >
 </head>
 
 <body id="page-top" style="background: var(--cyan);">

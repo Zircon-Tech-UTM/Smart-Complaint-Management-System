@@ -74,17 +74,7 @@
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <h3 class="text-dark mb-0">
-                            <?php 
-
-                                if ($_SESSION['language'] == 'BI'){
-                                   echo $row["postBI"];
-                                }else if ($_SESSION['language'] == 'BM'){
-                                    echo $row["postBM"];
-                                }else{
-                                    echo $row["postBM"];
-                                }
-                            ?>
-                            &nbsp;<?php echo $language['Home']; ?></h3>
+                            &nbsp;<?php echo $language['Assistant Engineer']; ?></h3>
 
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
 
@@ -117,7 +107,7 @@
                                     <?php $profile = "users/".$row["u_img_path"]; ?>
                                 </span><img class="border rounded-circle img-profile" src="<?php echo (isset($row["u_img_path"]))? $profile: $default; ?>">&nbsp;&nbsp;<i class="icon ion-android-settings"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
-                                        <a class="dropdown-item" href="usersB/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
+                                        <a class="dropdown-item" href="profile/editprofile.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Edit Profile']; ?></a>
                                         <a class="dropdown-item" href="users/changepwd.php?id=<?php echo $row["u_userIC"]; ?>"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Change Password']; ?></a>
                                     <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="login/logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;<?php echo $language['Logout']; ?></a>

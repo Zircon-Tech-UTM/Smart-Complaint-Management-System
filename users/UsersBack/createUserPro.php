@@ -124,7 +124,7 @@
     } 
     elseif (!preg_match('/^[0-9]{10,11}$/',$_POST["fcontactnum"])) 
     {
-    $contactErr = $language['Please enter correct format in digit without -'];
+    $contactErr = $language['Please enter correct format in digit. For example 01XXXXXXXX'];
     }
     else
     {
@@ -166,11 +166,11 @@
     if(in_array($imgExt, $valid_extensions)){   
         // Check file size '5MB'
         if($imgSize > 5000000){
-            $errMSG = "Sorry, your file is too large.";
+            $errMSG = $language['Sorry, your file is too large.'];
         }
     }
     else{
-        $errMSG = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  
+        $errMSG = $language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.'];  
     }
 
 
@@ -182,7 +182,7 @@
               $userType="1";
               $positionBM="Pentadbir";
           }
-          if($positionBI=="Pentadbir")
+          elseif($positionBI=="Pentadbir")
           {
               $userType="1";
               $positionBM="Pentadbir";
@@ -204,7 +204,7 @@
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
           }
-          else if($positionBI=="Penolong Komputer Juruteknik")
+          else if($positionBI=="Penolong Juruteknik Komputer")
           {
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
@@ -229,13 +229,22 @@
 
           $path = $path;
 
-        $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade, u_img_path ) VALUES('".$IC."', '".$hashed_password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."', '".$path."')";
+          if($imgExt)
+          {
+            $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade, u_img_path ) VALUES('".$IC."', '".$hashed_password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."', '".$path."')";
+          }
+          else
+          {
+            $sql = "INSERT INTO users (u_userIC, pwd, name, postBI, postBM, address, email, contact, userType, dateRegistered, u_grade) VALUES('".$IC."', '".$hashed_password."','".$username."','".$positionBI."', '".$positionBM."',' ".$addr."', '".$email."','".$contact."', '".$userType."', '".$rdate."', '".$grades."')";
+          }
+
 
           $result = mysqli_query($conn, $sql);
 
           if($result)
           {
-              move_uploaded_file($tmp_dir, $upload_dir.$pic);
+              if($imgExt)
+                move_uploaded_file($tmp_dir, $upload_dir.$pic);
               header("location: readUser.php");
               exit();
           } 

@@ -26,9 +26,10 @@
 
     $row1 = mysqli_fetch_array($result1);
 
+    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     include ("createroomprocess.php");
     include ('..\navbar\navbar1.php');
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
+
 ?>
 
 <!DOCTYPE html>
@@ -49,37 +50,14 @@
   padding: 10px 35px;
   font-size: 18px;
 }
-
-/* Add a green text color and a checkmark when the requirements are right */
-.valid {
-  color: green;
+.help-block{
+    color: red;
 }
 
-.valid:before {
-  position: relative;
-  left: -35px;
-  content: "✔";
+img{
+    width: 200px;
+    height: 200px;
 }
-
-/* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
-  color: red;
-}
-
-.invalid:before {
-  position: relative;
-  left: -35px;
-  content: "✖";
-}
-
-  .help-block{
-        color: red;
-    }
-
-    img{
-        width: 200px;
-        height: 200px;
-    }
 </style>
     <meta charset="UTF-8">
     <title><?php echo $language['CREATE A NEW ROOM'];?></title>
@@ -102,7 +80,7 @@
 
     <div class="container">
         <h1 class="text m-0 font-weight-bold" style = "text-align: center;"><?php echo $language['CREATE A NEW ROOM'];?></h1><hr>
-        <form method="POST" enctype="multipart/form-data" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">          
+        <form method="POST" enctype="multipart/form-data" action="createroom.php">          
             <div class="container-fluid">
                 <div class="col">
                     <div class="card shadow mb-3">
@@ -110,6 +88,7 @@
                             <p class="text-primary m-0 font-weight-bold"><?php echo $language["ROOM'S DETAILS"];?></p>
                         </div>
                         <div class="card-body">
+
                             <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
                                     <label for="roomID"><strong><?php echo $language['Room ID'];?></strong></label>
@@ -124,6 +103,7 @@
                                     <span class="help-block"><?php echo $errMSG;?></span>
                                 </div>
                             </div>
+
                             <br>
                             <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
@@ -139,11 +119,12 @@
                                 </div>
                             </div>
                             <br>
+
                             <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
                                     <label for="PIC"><strong><?php echo $language['PIC Of Room'];?></strong></label>
                                     <select name='PIC' class='form-control <?php echo (!empty($r_PICErr)) ? 'is-invalid' : ''; ?>' id='PIC' value="<?php echo $r_PIC; ?>">
-                                    <option selected disabled>PIC's name</option>
+                                    <option selected value=""><?php echo $language['PIC Of Room'];?></option>
                                     <?php 
                                         $sql = "SELECT * FROM users 
                                                 LEFT OUTER JOIN rooms 
@@ -159,6 +140,8 @@
                                     </select>
                                     <span class="help-block"><?php echo $r_PICErr; ?></span>
                                 </div>
+
+
                                 <div class ="col-md-1 col-xl-1 mb-1"><br></div>
                                 <div class="col-md-5 col-xl-5 mb-12">
                                     <label for="sel1"><strong><?php echo $language['Blocks'];?></strong></label>
@@ -184,12 +167,11 @@
                                 </div>
                             </div>
                             <br>
-
-                            <div class ="row">
+                              <div class ="row">
                                 <div class="col-md-5 col-xl-5 mb-12">
                                     <label for="PIC2"><strong><?php echo $language['PIC Of Room'];?> 2</strong></label>
                                     <select name='PIC2' class='form-control <?php echo (!empty($PIC2Err)) ? 'is-invalid' : ''; ?>' id='PIC2' value="<?php echo $r_PIC2; ?>">
-                                    <option selected disabled>PIC's name</option>
+                                    <option selected value=""><?php echo $language['PIC Of Room'];?></option>
                                     <?php 
                                         $sql = "SELECT * FROM users 
                                                 LEFT OUTER JOIN rooms 
@@ -199,7 +181,7 @@
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_array($result))
                                         {
-                                                echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                            echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
                                         }
                                     ?>
                                     </select>
@@ -210,7 +192,7 @@
                                 <div class="col-md-5 col-xl-5 mb-12">
                                 <label for="PIC3"><strong><?php echo $language['PIC Of Room'];?> 3</strong></label>
                                     <select name='PIC3' class='form-control <?php echo (!empty($PIC3Err)) ? 'is-invalid' : ''; ?>' id='PIC3' value="<?php echo $r_PIC3; ?>">
-                                    <option selected disabled>PIC's name</option>
+                                    <option selected value=""><?php echo $language['PIC Of Room'];?></option>
                                     <?php 
                                         $sql = "SELECT * FROM users 
                                                 LEFT OUTER JOIN rooms 
@@ -220,14 +202,14 @@
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_array($result))
                                         {
-                                                echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                            echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
                                         }
                                     ?>
                                     </select>
                                     <span class="help-block"><?php echo $r_PIC3Err; ?></span>
                                 </div>
                             </div>
-                            <br>
+
                             <script>
                                 function readURL(input) {
                                     if (input.files && input.files[0]) {
@@ -265,5 +247,6 @@
     <?php
     
         }
+        mysqli_close($conn);
     ?>
 <?php include ('..\navbar\navbar2.php');?>

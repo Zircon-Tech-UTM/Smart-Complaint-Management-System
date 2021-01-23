@@ -80,10 +80,12 @@
       if(empty($emailErr)&&empty($contactErr)&&empty($addrErr))
       {
 
-        if ($imgExt== "")
-                $sql = "UPDATE users
-                    SET  address='".$addr."', email='".$email."', contact= '".$contact."'
-                    WHERE u_userIC='".$_SESSION["ic"]."'";
+        if ($imgExt== ""){
+          $sql = "UPDATE users
+          SET  address='".$addr."', email='".$email."', contact= '".$contact."'
+          WHERE u_userIC='".$_SESSION["ic"]."'";
+          $_SESSION["remove"] == "";
+        }
         else
             $sql = "UPDATE users
                 SET  address='".$addr."', email='".$email."', contact= '".$contact."', u_img_path = '".$path."'
@@ -95,22 +97,24 @@
 
          if($result)
             {
-                move_uploaded_file($tmp_dir, "../users/".$upload_dir.$pic);
-                unlink($_SESSION["remove"]);
+              if ($imgExt)
+                  move_uploaded_file($tmp_dir, "../users/".$upload_dir.$pic);
 
-                if ($_SESSION['userType'] == '2')
-                    header("location: ../B.php");
-                else if ($_SESSION['userType'] == '3')
-                    header("location: ../C.php");
-                else    
-                    header("location: ../D.php");
+              unlink("../users/".$_SESSION["remove"]);
+
+              if ($_SESSION['userType'] == '2')
+                  header("location: ../B.php");
+              else if ($_SESSION['userType'] == '3')
+                  header("location: ../C.php");
+              else    
+                  header("location: ../D.php");
             } 
             else
             {
                 $sqlErr = $conn->error;
             }
 
-            mysqli_close($conn);
+            
 
         }
     }

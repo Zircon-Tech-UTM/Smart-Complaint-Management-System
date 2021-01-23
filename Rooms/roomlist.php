@@ -33,7 +33,7 @@
         $sqlr = "SELECT * FROM rooms
         JOIN blocks
         ON rooms.blok = blocks.block_no
-        JOIN users
+        LEFT JOIN users
         ON PIC = u_userIC
         WHERE blok LIKE '%".$_GET['blocks']."%'";
 
@@ -42,7 +42,7 @@
         $sqlr = "SELECT * FROM rooms
         JOIN blocks
         ON rooms.blok = blocks.block_no
-        JOIN users
+        LEFT JOIN users
         ON PIC = u_userIC";
     }
     $resultr = mysqli_query($conn, $sqlr);
@@ -168,7 +168,7 @@
                                                 echo "</td>";
 
                                                 echo "<td>";
-                                                    echo "<a href = 'roomassets.php?id=".$rowr["r_roomID"]."'>"."Link"."</a>&nbsp";
+                                                    echo "<a href = 'roomassets.php?id=".$rowr["r_roomID"]."'>".$language["asset in this room"]."</a>&nbsp";
                                                 echo "</td>";
                                             ?>
                                                 <td>
@@ -199,7 +199,7 @@
                                                                 }else{
                                                                     echo "1";
                                                                 }
-                                                    ?>">Previous</a></li>
+                                                    ?>"><?php echo $language['Previous'];?></a></li>
                                 <?php
                                     for ($i = 1 ; $i <= $numOfPages ; $i++){ 
                                 ?>
@@ -220,7 +220,7 @@
                                                                                 echo "2";
                                                                             }
                                                                             
-                                                                    ?>">Next</a>
+                                                                    ?>"><?php echo $language['Next'];?></a>
                                 </li>
             </ul>
         </nav>

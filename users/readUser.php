@@ -68,9 +68,9 @@
                                 <?php
                                     $values = [1,2,3,4];
                                     if ($_SESSION["language"] == 'BI')
-                                        $positions = ['Admin','PIC', 'Assistant Computer Technician', 'Assistant Engineer'];
+                                        $positions = ['Admin','PIC Of Room', 'Assistant Computer Technician', 'Assistant Engineer'];
                                     else
-                                        $positions = ['Admin','PIC', 'Penolong Juruteknik Komputer', 'Penolong Jurutera'];
+                                        $positions = ['Admin','PIC Makmal', 'Penolong Juruteknik Komputer', 'Penolong Jurutera'];
 
                                     foreach($values as $value){
                                         if ($_GET['position'] == $value){

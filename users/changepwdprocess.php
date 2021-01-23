@@ -14,11 +14,11 @@
     {
       if(empty(trim($_POST["password"])))
       {
-          $passwordErr = "Current pasword is required.";     
+          $passwordErr = $language['Current pasword is required'];   
       } 
       elseif(strlen(trim($_POST["password"])) < 4)
       {
-          $passwordErr = "Password must have at least 4 characters.";
+          $passwordErr = $language['Password must have at least 4 characters'];
       } 
       else
       {
@@ -28,11 +28,11 @@
 
       if(empty(trim($_POST["newpassword"])))
       {
-          $newpasswordErr = "Pasword is required.";     
+          $newpasswordErr = $language['Pasword is required.'];   
       } 
       elseif(strlen(trim($_POST["newpassword"])) < 4)
       {
-          $newpasswordErr = "Password must have at least 4 characters.";
+          $newpasswordErr = $language['Password must have at least 4 characters'];
       } 
       else
       {
@@ -43,26 +43,31 @@
 
       if(empty(trim($_POST["confirm_password"])))
       {
-          $confirm_passwordErr = "Please confirm password.";     
-      } 
+          $confirm_passwordErr = $language['Please confirm password'];
+      }
       elseif(strlen(trim($_POST["confirm_password"])) < 4)
       {
-          $confirm_passwordErr = "Password must have at least 4 characters.";
+          $confirm_passwordErr = $language['Password must have at least 4 characters'];
       } 
       elseif($_POST["newpassword"]!=$_POST["confirm_password"])
       {
-           $confirm_passwordErr = "Changes failed. Password is not matching.";
+           $confirm_passwordErr = $language['Changes failed. Password is not matching'];
       }
       else
       {
           $confirm_password = trim($_POST["confirm_password"]);
       }
 
+      $IC = $_POST['ic'];
 
-
-      if(empty($passwordErr)&&empty($confirm_passwordErr)&&empty($newpasswordErr)&&(password_verify($password, $row['pwd'])||($password == $row['pwd'])))
+      if (!password_verify($password, $row['pwd'])) 
       {
-        $IC = $_POST['ic'];
+        echo '<script>alert("Current password incorrect. Try again.")</script>';
+      }
+
+      if(empty($passwordErr)&&empty($confirm_passwordErr)&&empty($newpasswordErr)&&((password_verify($password, $row['pwd']))||$password== $row['pwd']))
+      {
+        
         $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
 
         $sql = "UPDATE users
@@ -99,5 +104,10 @@
 
         mysqli_close($conn);
       }
+      else
+      {
+          echo '<script>alert("Error occurs. Try again.")</script>';
+      }
+
     }
 ?>

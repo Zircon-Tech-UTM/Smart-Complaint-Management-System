@@ -66,7 +66,6 @@ CREATE TABLE `assets` (
   `a_roomID` varchar(10) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `cost` decimal(6,2) NOT NULL,
-  `amount` int(5) NOT NULL,
   `date_purchased` datetime DEFAULT NULL,
   `a_img_path` varchar(50) DEFAULT NULL,
   `maintain` varchar(1) DEFAULT NULL,
@@ -77,10 +76,10 @@ CREATE TABLE `assets` (
 -- Dumping data for table `assets`
 --
 
-INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`, `amount`, `date_purchased`, `a_img_path`, `maintain`, `item`) VALUES
-('ICT0001', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
-('ICT0002', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', 10, '2020-12-24 22:42:56', NULL, '2', NULL),
-('NICT0001', 'Table', 'Meja', '2', NULL, 'Jiushi meja lo', '100.00', 1000, '2020-12-24 22:42:56', NULL, '2', NULL);
+INSERT INTO `assets` (`a_assetID`, `a_nameBI`, `a_nameBM`, `a_category`, `a_roomID`, `description`, `cost`,  `date_purchased`, `a_img_path`, `maintain`, `item`) VALUES
+('ICT0001', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', '2020-12-24 22:42:56', NULL, '2', NULL),
+('ICT0002', 'Projector', 'Projektor', '1', NULL, 'Gt a lens', '100.00', '2020-12-24 22:42:56', NULL, '2', NULL),
+('NICT0001', 'Table', 'Meja', '2', NULL, 'Jiushi meja lo', '100.00', '2020-12-24 22:42:56', NULL, '2', NULL);
 
 -- --------------------------------------------------------
 

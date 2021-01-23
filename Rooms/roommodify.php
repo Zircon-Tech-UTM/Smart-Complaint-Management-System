@@ -28,7 +28,7 @@
     $row1 = mysqli_fetch_array($result1);
 
     $sql = "SELECT * FROM rooms
-            JOIN users
+            LEFT JOIN users
             ON PIC = u_userIC
             WHERE r_roomID = '$rid'";
     $result = mysqli_query($conn, $sql);
@@ -37,9 +37,9 @@
     if (isset($row["r_img_path"]))
         $_SESSION["remove"] = $row["r_img_path"];
 
+    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
     include("roommodifyprocess.php");
     include ('..\navbar\navbar1.php');
-    require_once("../dualLanguage/Languages/lang." . $_SESSION['language'] . ".php");
 ?>
 
 <!DOCTYPE html>
@@ -61,36 +61,14 @@
   font-size: 18px;
 }
 
-/* Add a green text color and a checkmark when the requirements are right */
-.valid {
-  color: green;
+.help-block{
+    color: red;
 }
 
-.valid:before {
-  position: relative;
-  left: -35px;
-  content: "✔";
+img{
+    width: 200px;
+    height: 200px;
 }
-
-/* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
-  color: red;
-}
-
-.invalid:before {
-  position: relative;
-  left: -35px;
-  content: "✖";
-}
-
-  .help-block{
-        color: red;
-    }
-
-    img{
-        width: 200px;
-        height: 200px;
-    }
 </style>
     <meta charset="UTF-8">
     <title><?php echo $language['Edit Room'];?></title>
@@ -226,18 +204,59 @@
                                     </select>
                                     <span class="help-block"><?php echo $r_blockErr;?></span>
                                 </div>
+                            </div><br>
+                            <div class ="row">
+                                <div class="col-md-5 col-xl-5 mb-12">
+                                    <label for="PIC2"><strong><?php echo $language['PIC Of Room'];?> 2</strong></label>
+                                    <select name='PIC2' class='form-control <?php echo (!empty($PIC2Err)) ? 'is-invalid' : ''; ?>' id='PIC2' value="<?php echo $r_PIC2; ?>">
+                                    <option selected disabled>PIC's name</option>
+                                    <?php 
+                                        $sql = "SELECT * FROM users 
+                                                LEFT OUTER JOIN rooms 
+                                                ON (users.u_userIC = rooms.PIC) 
+                                                WHERE userType = '2' 
+                                                AND (rooms.PIC IS NULL)";
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                            echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                        }
+                                    ?>
+                                    </select>
+                                    <span class="help-block"><?php echo $r_PIC2Err; ?></span>
+                                </div>
+
+                                <div class ="col-md-1 col-xl-1 mb-1"><br></div>
+                                <div class="col-md-5 col-xl-5 mb-12">
+                                <label for="PIC3"><strong><?php echo $language['PIC Of Room'];?> 3</strong></label>
+                                    <select name='PIC3' class='form-control <?php echo (!empty($PIC3Err)) ? 'is-invalid' : ''; ?>' id='PIC3' value="<?php echo $r_PIC3; ?>">
+                                    <option selected disabled><?php echo $language['PIC Of Room'];?></option>
+                                    <?php 
+                                        $sql = "SELECT * FROM users 
+                                                LEFT OUTER JOIN rooms 
+                                                ON (users.u_userIC = rooms.PIC) 
+                                                WHERE userType = '2' 
+                                                AND (rooms.PIC IS NULL)";
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_array($result))
+                                        {
+                                            echo"<option value='".$row['u_userIC']."'>".$row['name']."</option>";
+                                        }
+                                    ?>
+                                    </select>
+                                    <span class="help-block"><?php echo $r_PIC3Err; ?></span>
+                                </div>
                             </div>
                             <br>
                         </div><br>    
                     </div>                        
-                    <input type="submit" text-align:center name="submit" onclick="return confirm('Do you want to save the changes?')" class="btn btn-primary" value="<?php echo $language['Save'];?>"/>
+                    <input type="submit" text-align:center name="submit" onclick="return confirm('<?php echo $language['Do you want to save the changes?']; ?>')" class="btn btn-primary" value="<?php echo $language['Save'];?>"/>
                     <input type="reset" name="clear" value="<?php echo $language['Reset'];?>"class="btn btn-warning"> 
                     <a href="roomlist.php" class="btn btn-danger float-right"><?php echo $language['Cancel'];?></a>       
                 </div>                    
             </div>                 
         </form>
     </div>
-    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <br>
     <?php
         if (!empty($sqlErr)){
@@ -249,5 +268,6 @@
     <?php
     
         }
+        mysqli_close($conn);
     ?>
 <?php include ('..\navbar\navbar2.php');?>

@@ -2,6 +2,8 @@
     $username = "";
     $IC = "";
     $positionBI = "";
+    $positionBM = "";
+    $userType = "";
     $grades= "";
     $addr="";
     $contact = "";
@@ -85,7 +87,7 @@
         } 
         elseif (!preg_match('/^[0-9]{10,11}$/',$_POST["fcontactnum"])) 
         {
-        $contactErr = $language['Changes failed. Please enter correct format in digit without -'];
+        $contactErr = $language['Changes failed. Please enter correct format in digit. For example 01XXXXXXXX'];
         }
         else
         {
@@ -127,15 +129,15 @@
         if(in_array($imgExt, $valid_extensions)){   
             // Check file size '5MB'
             if($imgSize > 5000000){
-                $errMSG = "Sorry, your file is too large.";
+                $errMSG = $language['Sorry, your file is too large.'];
             }
         }
         else{
-            $errMSG = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  
+            $errMSG = $language['Sorry, only JPG, JPEG, PNG & GIF files are allowed.'];
         }
 
         if ($_FILES['image']['name'] == "")
-            $errMSG = "No images."; 
+            $errMSG =  $language['No images.']; 
 
 
         if(empty($usernameErr)&&empty($emailErr)&&empty($ICErr)&&empty($contactErr)&&empty($passwordErr)
@@ -168,7 +170,7 @@
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
           }
-          else if($positionBI=="Penolong Komputer Juruteknik")
+          else if($positionBI=="Penolong Juruteknik Komputer")
           {
               $userType="3";
               $positionBM="Penolong Juruteknik Komputer";
@@ -192,22 +194,26 @@
                 $path = $path;
 
                 if ($imgExt== "")
+                {
                     $sql = "UPDATE users
                         SET  u_userIC='".$IC."' ,name='".$username."', postBI='".$positionBI."',postBM='".$positionBM."', address='".$addr."', email='".$email."', contact= '".$contact."',  userType='".$userType."',  u_grade='".$grades."'
                         WHERE u_userIC='".$id."';";
+                }
                 else{
                     $sql = "UPDATE users
                         SET  u_userIC='".$IC."', name='".$username."', postBI='".$positionBI."',postBM='".$positionBM."', address='".$addr."', email='".$email."', contact= '".$contact."',  userType='".$userType."',  u_grade='".$grades."', u_img_path = '".$path."' 
                         WHERE u_userIC='".$id."';";
                 }
 
-               
                 $result = mysqli_query($conn, $sql);
                
                 if($result)
                 {
-                    unlink($_SESSION["remove"]);
-                    move_uploaded_file($tmp_dir, $upload_dir.$pic);
+                  if($imgExt)
+                  {
+                      unlink($_SESSION["remove"]);
+                      move_uploaded_file($tmp_dir, $upload_dir.$pic);
+                  }
                     header("location: readUser.php");
                     exit();
                 } 
@@ -215,8 +221,6 @@
                 {
                     echo "ERROR: $conn->error";
                 }
-
-                mysqli_close($conn);
         }
     }
 ?>

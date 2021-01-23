@@ -19,9 +19,9 @@
     }
 
     $sql = "SELECT * FROM rooms
-        JOIN blocks
+        LEFT JOIN blocks
         ON rooms.blok = blocks.block_no
-        JOIN users
+        LEFT JOIN users
         ON PIC = u_userIC
         WHERE r_roomID = '".$rid."'";
 
@@ -122,7 +122,7 @@
                 </div>
             </div>
             <a href="roommodify.php?id=<?php echo $row["r_roomID"];?>" class="btn btn-warning"><?php echo $language['Edit'];?></a>
-            <a href="roomcancel.php?id=<?php echo $row["r_roomID"];?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this room?')"><?php echo $language['Delete'];?></a>
+            <a href="roomcancel.php?id=<?php echo $row["r_roomID"];?>" class="btn btn-danger" onclick="return confirm('<?php echo $language['Are you sure to delete this room?']; ?>')"><?php echo $language['Delete'];?></a>
             <a href="#" class="btn btn-dark float-right" onclick="history.go(-1)"><?php echo $language['Back'];?></a>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

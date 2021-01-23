@@ -63,7 +63,7 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span><?php echo $language['Dashboard']; ?></span></a><a class="nav-link" href="complaints/readComplaint.php"><i class="fas fa-user-circle"></i><span><?php echo $language['Complaint Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="users/readUser.php"><i class="fas fa-user"></i><span><?php echo $language['User Management']; ?></span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="assets/selectblock.php"><i class="fas fa-table"></i><span><?php echo $language['Asset Management']; ?></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/mainA.php"><i class="fas fa-table"></i><span><?php echo $language['Asset Management']; ?></span></a></li>
                     <li class="nav-item"><a class="nav-link" href="Rooms/roomlist.php"><i class="far fa-user-circle"></i><span><?php echo $language['Room Management']; ?></span></a><a class="nav-link" href="Blocks/blocklist.php"><i class="fa fa-building"></i><span><?php echo $language['Block Management']; ?></span></a><a class="nav-link" href="pdfprint/printmenu.php"><i class="fa fa-files-o"></i><span><?php echo $language['Download and Print']; ?></span></a></li>
                     </li><li class="nav-item"><a class="nav-link" href="grades/readGrade.php"><i class="fas fa-users-cog"></i><span><?php echo $language['Grade Management']; ?></span></a>
                 </ul>

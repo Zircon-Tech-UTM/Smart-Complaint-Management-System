@@ -33,6 +33,7 @@
       exit();
     } 
     $row = mysqli_fetch_array($result);
+    
     if (isset($row["u_img_path"]))
       $_SESSION["remove"] = $row["u_img_path"];
 
@@ -69,19 +70,19 @@
             <div class="card-body">
                 <div class ="row">
                     <div class="col-6">
-                        <label for="fname" class="form-label"><?php echo $language['Full Name:']; ?></label>
+                        <label for="fname" class="form-label"><strong><?php echo $language['Full Name:']; ?></strong></label>
                         <input type="text" name="name" id="fname" class="form-control" placeholder="<?php echo $language['Enter Full Name']; ?>" value="<?php echo $row["name"]; ?>" readonly>
                     </div>
 
                     <div class="col-6">
-                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><?php echo $language['IC number:']; ?></label>
+                        <label for="fic" class="form-label <?php echo (!empty($ICErr)) ? 'is-invalid' : ''; ?>"><strong><?php echo $language['IC number:']; ?></strong></label>
                         <input type="text" name="IC" id="fic" class="form-control" placeholder="<?php echo $language['Enter IC']; ?>"value="<?php echo $row["u_userIC"]; ?>"readonly>
                     </div>
                 </div><br>    
 
           <div class="form-group">
-                    <label for="upload" class="form-label"><?php echo $language['user image']; ?>:</label><br>
-                    <input class="input-group" type="file" name="image" onchange="readURL(this);" />
+                    <label for="upload" class="form-label"><strong><?php echo $language['user image']; ?>:</strong></label><br>
+                    <input class="form-control" type="file" name="image" onchange="readURL(this);" />
                     <img src="<?php echo "../users/".$row["u_img_path"]; ?>" id="blah" alt="<?php echo $language['user image']; ?>">
                   </div><br>
                   <script>
@@ -110,29 +111,30 @@
                   <div class="card-body">
 
             <div class="mb-3">
-              <label for="faddr" class="form-label"><?php echo $language['Home Address:']; ?></label>
+              <label for="faddr" class="form-label"><strong><?php echo $language['Home Address:']; ?></strong></label>
               <input type="text" name="faddr" id="faddr" class="form-control <?php echo (!empty($addrErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter Home Address']; ?>" value="<?php echo $row["address"]; ?>">
               <span class="help-block"><?php echo $addrErr;?></span>
             </div>
 
              <div class="row">
                 <div class="col-6">
-                  <label for="fcontactnum" class="form-label"><?php echo $language['Contact Number:']; ?></label>
+                  <label for="fcontactnum" class="form-label"><strong><?php echo $language['Contact Number:']; ?></strong></label>
                   <input type="text" name="fcontactnum" id="fcontactnum" class="form-control <?php echo (!empty($contactErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter contact number']; ?>"  value="<?php echo $row["contact"]; ?>">
                   <span class="help-block"><?php echo $contactErr;?></span>
                 </div>
      
                 <div class="col-6">
-                  <label for="femail" class="form-label"><?php echo $language['Email Address:']; ?></label>
+                  <label for="femail" class="form-label"><strong><?php echo $language['Email Address:']; ?></strong></label>
                   <input type="text" name="femail" id="femail" class="form-control <?php echo (!empty($emailErr)) ? 'is-invalid' : ''; ?>" placeholder="<?php echo $language['Enter email address']; ?>" value="<?php echo $row["email"]; ?>">
                   <span class="help-block"><?php echo $emailErr;?></span>
                 </div>
             </div>
  </div>
 </div><br>
-          <input type="submit" name="submit" class="btn btn-primary" value="Save" onclick="return confirm(<?php echo $language['Do you want to save the changes?']; ?>)"/>
+          <input type="submit" name="submit" class="btn btn-primary" value="<?php echo $language['Save'];?>" onclick="return confirm('<?php echo $language['Do you want to save the changes?']; ?>')"/>
+          <input type="reset" name="clear" value="<?php echo $language['Reset'];?>"class="btn btn-warning">
 
-          <a href="javascript:history.go(-1)"  class="btn btn-info" ><?php echo $language['Cancel']; ?></a>
+          <a href="javascript:history.go(-1)"  class="btn btn-dark float-right" ><?php echo $language['Back']; ?></a>
 </div>     
           
       </form>
@@ -148,6 +150,7 @@
       </script>
     <?php
       }
+      mysqli_close($conn);
     ?>
 </body>
 </html>
